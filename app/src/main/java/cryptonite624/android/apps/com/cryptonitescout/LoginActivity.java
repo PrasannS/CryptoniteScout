@@ -3,6 +3,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -31,6 +32,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -190,6 +193,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
         */
+        Intent intent1 = new Intent(this,DataEntryActivity.class);
+        startActivity(intent1);
+
+
 
     }
 

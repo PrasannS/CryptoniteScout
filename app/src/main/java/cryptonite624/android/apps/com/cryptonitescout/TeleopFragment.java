@@ -24,6 +24,8 @@ public class TeleopFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    OnTeleopReadListener teleopReadListener;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -61,8 +63,8 @@ public class TeleopFragment extends Fragment {
         }
     }
 
-    public interface OnAutonReadListener{
-        public void OnAutonRead(String message);
+    public interface OnTeleopReadListener{
+        public void OnTeleopRead(String message);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class TeleopFragment extends Fragment {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            autonReadListener = (AutonFragment.OnAutonReadListener) activity;
+            teleopReadListener = (TeleopFragment.OnTeleopReadListener) activity;
         }catch(ClassCastException e){
             throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
         }

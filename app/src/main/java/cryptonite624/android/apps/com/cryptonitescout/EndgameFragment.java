@@ -19,20 +19,14 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class EndgameFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public int temp;
 
     private OnFragmentInteractionListener mListener;
 
     public EndgameFragment() {
         // Required empty public constructor
     }
+    OnEndgameReadListener endgameReadListener;
 
     /**
      * Use this factory method to create a new instance of
@@ -42,7 +36,8 @@ public class EndgameFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment EndgameFragment.
      */
-    // TODO: Rename and change types and number of parameters
+    //
+    /*TODO: Rename and change types and number of parameters
     public static EndgameFragment newInstance(String param1, String param2) {
         EndgameFragment fragment = new EndgameFragment();
         Bundle args = new Bundle();
@@ -60,9 +55,9 @@ public class EndgameFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
-    public interface OnAutonReadListener{
-        public void OnAutonRead(String message);
+*/
+    public interface OnEndgameReadListener{
+        public void OnEndgameRead(String message);
     }
 
     @Override
@@ -84,7 +79,7 @@ public class EndgameFragment extends Fragment {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            autonReadListener = (AutonFragment.OnAutonReadListener) activity;
+            endgameReadListener = (EndgameFragment.OnEndgameReadListener)activity;
         }catch(ClassCastException e){
             throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
         }
