@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -25,6 +27,7 @@ import android.widget.Button;
 public class PregameFragment extends Fragment {
     //setup all of your buttons and class variables here
     public Button toAuton;
+    public EditText matchNum;
     public String message;
 
     OnPregameReadListener pregameReadListener;
@@ -69,6 +72,10 @@ public class PregameFragment extends Fragment {
                 pregameReadListener.OnPregameRead(message);
             }
         });
+
+
+
+        matchNum = (EditText) view.findViewById(R.id.matchnum);
 
 
         return view;

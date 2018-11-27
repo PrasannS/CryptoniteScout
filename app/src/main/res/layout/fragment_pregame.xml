@@ -38,7 +38,7 @@
                 android:text="Match #"
                 android:textSize="40sp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/matchnum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -54,7 +54,7 @@
                 android:text="Team #"
                 android:textSize="40sp"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/teamnum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

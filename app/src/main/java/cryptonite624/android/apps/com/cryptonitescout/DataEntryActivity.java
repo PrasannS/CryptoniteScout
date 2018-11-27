@@ -40,7 +40,27 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void OnAutonRead(String message) {
+        switch(message){
+            case "toPrematch":
+                if(findViewById(R.id.fragmentcontainer)!=null){
+                    PregameFragment pregameFragment= new PregameFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontainer,pregameFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
 
+            case "toTeleop":
+                if(findViewById(R.id.fragmentcontainer)!=null){
+                    TeleopFragment teleopFragment= new TeleopFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontainer,teleopFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+        }
     }
 
     @Override
@@ -52,9 +72,9 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentcontainer,autonFragment,null);
                     fragmentTransaction.commit();
-
                 }
                 break;
+
             default:
 
         }
@@ -62,11 +82,44 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void OnTeleopRead(String message) {
+        switch (message){
+            case "toAuton":
+                if(findViewById(R.id.fragmentcontainer)!=null){
+                    AutonFragment autonFragment = new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontainer,autonFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
 
+            case "toEndgame":
+                if(findViewById(R.id.fragmentcontainer)!=null){
+                    EndgameFragment endgameFragment= new EndgameFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontainer,endgameFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+
+        }
     }
 
     @Override
     public void OnEndgameRead(String message) {
+        switch(message){
+            case "toTeleop":
+                if(findViewById(R.id.fragmentcontainer)!=null){
+                    TeleopFragment teleopFragment= new TeleopFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontainer,teleopFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+        }
 
     }
 }
