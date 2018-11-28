@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +29,7 @@ public class TeleopFragment extends Fragment {
     OnTeleopReadListener teleopReadListener;
 
     public Button toAuton;
+    public TeleopEntry teleopEntry;
     public Button toEndgame;
     public String message;
 
@@ -68,6 +71,8 @@ public class TeleopFragment extends Fragment {
 
     public interface OnTeleopReadListener{
         public void OnTeleopRead(String message);
+
+        public void LoadTeleopData(TeleopEntry t);
     }
 
     @Override

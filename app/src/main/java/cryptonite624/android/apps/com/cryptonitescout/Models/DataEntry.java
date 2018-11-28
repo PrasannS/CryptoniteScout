@@ -2,7 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 public class DataEntry {
 
-    public String teamnum;
+    public int teamnum;
     public boolean baseline;
     public int [] ownswitchcubes = new int[4];
     public int [] opponentswitchcubes = new int[4];
@@ -13,12 +13,13 @@ public class DataEntry {
     public DataEntry(){
 
     }
-    public DataEntry(String tn){
+    public DataEntry(int tn){
         teamnum = tn;
     }
 
-    public void setTeamnum(String tn){
+    public void setTeamnum(int tn){
         teamnum = tn;
     }
+
 
 }

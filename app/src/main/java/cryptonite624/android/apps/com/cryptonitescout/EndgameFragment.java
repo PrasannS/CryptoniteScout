@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,7 @@ public class EndgameFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     public Button toTeleop;
     public String message;
+    public EndgameEntry endgameEntry = new EndgameEntry();
 
 
     OnEndgameReadListener endgameReadListener;
@@ -40,6 +43,8 @@ public class EndgameFragment extends Fragment {
 
     public interface OnEndgameReadListener{
         public void OnEndgameRead(String message);
+
+        public void LoadEndgameData(EndgameEntry e);
     }
 
     @Override

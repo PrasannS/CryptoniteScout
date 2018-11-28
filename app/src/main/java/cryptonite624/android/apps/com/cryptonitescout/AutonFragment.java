@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +32,7 @@ public class AutonFragment extends Fragment {
 
     public Button toPrematch;
     public Button toTeleop;
+    public AutonEntry autonEntry = new AutonEntry();
     private String message;
 
 
@@ -79,6 +83,8 @@ public class AutonFragment extends Fragment {
 
     public interface OnAutonReadListener{
         public void OnAutonRead(String message);
+
+        public void LoadAutonData(AutonEntry a);
     }
 
     @Override
@@ -92,6 +98,7 @@ public class AutonFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 message = "toPrematch";
+
                 autonReadListener.OnAutonRead(message);
             }
         });

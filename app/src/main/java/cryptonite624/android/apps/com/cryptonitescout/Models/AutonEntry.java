@@ -15,6 +15,10 @@ public class AutonEntry extends DataEntry {
     public AutonEntry(){
         super();
     }
+
+    public AutonEntry(int tn){
+        super.setTeamnum(tn);
+}
      public void setTeamNum(String tn){
         super.setTeamnum(tn);
      }
@@ -33,7 +37,6 @@ public class AutonEntry extends DataEntry {
         AutonScaleCubes = Integer.parseInt(split[3]);
         AutonScaleCubes = Integer.parseInt(split[4]);
         StartingPosition = Integer.parseInt(split[5]);
-
     }
 
 
