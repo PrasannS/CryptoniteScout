@@ -8,5 +8,18 @@ public class EndgameEntry extends DataEntry {
     public boolean techFouls;
     public String endgameComments;
 
+    public EndgameEntry(){super();}
+    public EndgameEntry(int tn){super.setTeamnum(tn);}
 
+    public String toString(){
+        return "" + climb + ",,," + climbSupported + ",,," + techFouls + ",,," + endgameComments;
+    }
+
+    public void endgameParse(String str){
+        String[] split = str.split(",,,");
+        climb = Integer.parseInt(split[0]);
+        climbSupported = Integer.parseInt(split[1]);
+        techFouls = Boolean.parseBoolean(split[2]);
+        endgameComments = split[3];
+    }
 }
