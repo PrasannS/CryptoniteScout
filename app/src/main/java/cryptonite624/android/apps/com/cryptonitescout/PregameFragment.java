@@ -32,7 +32,7 @@ public class PregameFragment extends Fragment {
     public EditText matchNum;
     public String message;
     public EditText teamNum;
-    public PregameEntry pregameEntry;
+    public PregameEntry pregameEntry = new PregameEntry();
 
     OnPregameReadListener pregameReadListener;
 

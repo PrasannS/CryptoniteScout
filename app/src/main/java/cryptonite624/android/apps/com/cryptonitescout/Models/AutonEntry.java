@@ -4,4 +4,10 @@ public class AutonEntry extends DataEntry {
     public AutonEntry(){
         super();
     }
+
+    public AutonEntry(int tn){
+        super.setTeamnum(tn);
+    }
+
+
 }
