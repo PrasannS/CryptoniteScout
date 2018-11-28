@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,7 @@ public class PregameFragment extends Fragment {
     public Button toAuton;
     public EditText matchNum;
     public String message;
+    public EditText teamNum;
 
     OnPregameReadListener pregameReadListener;
 
@@ -76,7 +79,7 @@ public class PregameFragment extends Fragment {
 
 
         matchNum = (EditText) view.findViewById(R.id.matchnum);
-
+        teamNum = (EditText) view.findViewById(R.id.teamnum);
 
         return view;
     }
