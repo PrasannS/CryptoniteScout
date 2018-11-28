@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
@@ -78,6 +79,11 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
             default:
 
         }
+    }
+
+    @Override
+    public void LoadPregameData(PregameEntry p) {
+        p.setTeamnum("");
     }
 
     @Override

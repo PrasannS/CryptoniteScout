@@ -32,6 +32,7 @@ public class PregameFragment extends Fragment {
     public EditText matchNum;
     public String message;
     public EditText teamNum;
+    public PregameEntry pregameEntry;
 
     OnPregameReadListener pregameReadListener;
 
@@ -58,6 +59,8 @@ public class PregameFragment extends Fragment {
 
     public interface OnPregameReadListener{
         public void OnPregameRead(String message);
+
+        public void LoadPregameData(PregameEntry p);
     }
 
     @Override
@@ -73,6 +76,9 @@ public class PregameFragment extends Fragment {
             public void onClick(View view) {
                 message = "toAuton";
                 pregameReadListener.OnPregameRead(message);
+
+                pregameEntry = new PregameEntry();
+
             }
         });
 
@@ -80,6 +86,7 @@ public class PregameFragment extends Fragment {
 
         matchNum = (EditText) view.findViewById(R.id.matchnum);
         teamNum = (EditText) view.findViewById(R.id.teamnum);
+
 
         return view;
     }
