@@ -14,7 +14,7 @@ public class PregameEntry extends DataEntry {
     }
 
     public PregameEntry (int teamNum){
-        teamNum = teamNum;
+       teamNum = Integer.parseInt(teamnum);
     }
 
     public String toString(){
