@@ -17,9 +17,10 @@ public class CryptoniteScoutDAO {
 
     private String[] allColumns = {
             "ID",
-            "FinalDataEntryName",
-            "FinalDataEntryString",
-            "FinalDataEntryInfo"
+            "Pregame",
+            "Teleop",
+            "Endgame",
+            "Auton"
     };
 
     public CryptoniteScoutDAO(Context context){
@@ -42,14 +43,16 @@ public class CryptoniteScoutDAO {
         return "Prasann is an amazing person.";
     }
 
-    public void addFinalDataEntry(FinalDataEntry m, String name){
+    public void addFinalDataEntry(FinalDataEntry m){
 
         ContentValues values = new ContentValues();
         String id = java.util.UUID.randomUUID().toString();
         values.put("ID",id);
-        values.put("FinalDataEntryName",name);
-        values.put("FinalDataEntryString",m.toString());
-        values.put("FinalDataEntryInfo",getInfo(name));
+        values.put("Auton",m.autonEntry.toString());
+        values.put("Teleop",m.teleopEntry.toString());
+        values.put("Pregame",m.pregameEntry.toString());
+        values.put("Endgame",m.endgameEntry.toString());
+
         long insertID = database.insert(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, null, values);
     }
 
@@ -63,31 +66,12 @@ public class CryptoniteScoutDAO {
 
     private FinalDataEntry cursorToFinalDataEntry(Cursor cursor) {
         FinalDataEntry m = new FinalDataEntry();
-        m.info = cursor.getString(cursor.getColumnIndex("FinalDataEntryInfo"));
-        m.name= cursor.getString(cursor.getColumnIndex("FinalDataEntryName"));
-        m.equationString = cursor.getString(cursor.getColumnIndex("FinalDataEntryString"));
+        m.endgameEntry.endgameParse(cursor.getString(cursor.getColumnIndex("Endgame")));
+        m.autonEntry.AutonParse(cursor.getString(cursor.getColumnIndex("Auton")));
+        m.teleopEntry.teleopParse(cursor.getString(cursor.getColumnIndex("Teleop")));
+        m.pregameEntry.PregameParse(cursor.getString(cursor.getColumnIndex("Pregame")));
 
         return m;
     }
 
-    // check if a record exists so it won't insert the next time you run this code
-    public boolean checkIfExists(String objectName){
-
-        boolean recordExists = false;
-
-        database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT " + allColumns[0] + " FROM " + dbHelper.FINALDE_TABLE_NAME + " WHERE " + allColumns[1] + " = '" + objectName + "'", null);
-
-        if(cursor!=null) {
-
-            if(cursor.getCount()>0) {
-                recordExists = true;
-            }
-        }
-
-        cursor.close();
-        database.close();
-
-        return recordExists;
-    }
 }

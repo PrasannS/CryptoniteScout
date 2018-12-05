@@ -32,9 +32,9 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         }
     }
 
-    public String getteam(){
+    public int getteam(){
         //this is just placeholder code I will replace it with actual data loading stuff when I learn how
-        return "624";
+        return 624;
     }
 
     //All the override methods are the implementations of the fragment interfaces which allow for the communication between the fragment and the activity
