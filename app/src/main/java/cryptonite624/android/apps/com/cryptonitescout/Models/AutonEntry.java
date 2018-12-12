@@ -20,7 +20,7 @@ public class AutonEntry extends DataEntry {
     public AutonEntry(int tn){
         super.setTeamnum(tn);
 }
-     public void setTeamNum(String tn){
+     public void setTeamNum(int tn){
         super.setTeamnum(tn);
      }
 
