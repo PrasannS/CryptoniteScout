@@ -8,6 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 
 
 /**
@@ -24,12 +29,16 @@ public class AutonFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     //class variable that is transferred to dataentry class
+
+    public Button toPrematch;
+    public Button toTeleop;
+    public AutonEntry autonEntry = new AutonEntry();
     private String message;
 
 
     //this is the object upon which data transfer is done
 
-    private OnAutonReadListener autonReadListener;
+    OnAutonReadListener autonReadListener;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,13 +83,36 @@ public class AutonFragment extends Fragment {
 
     public interface OnAutonReadListener{
         public void OnAutonRead(String message);
+
+        public void LoadAutonData(AutonEntry a);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_auton, container, false);
+        View view =  inflater.inflate(R.layout.fragment_auton, container, false);
+
+        toPrematch = (Button)view.findViewById(R.id.auton_prematch);
+        toPrematch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toPrematch";
+
+                autonReadListener.OnAutonRead(message);
+            }
+        });
+
+        toTeleop = (Button)view.findViewById(R.id.auton_teleop);
+        toTeleop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toTeleop";
+                autonReadListener.OnAutonRead(message);
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
