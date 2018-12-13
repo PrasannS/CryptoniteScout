@@ -14,21 +14,23 @@ public class AutonEntry extends DataEntry {
 
     public AutonEntry(){
         super();
+        autonEntry = new AutonEntry();
     }
 
     public AutonEntry(int tn){
         super.setTeamnum(tn);
 }
-     public void setTeamNum(String tn){
+     public void setTeamNum(int tn){
         super.setTeamnum(tn);
      }
 
-     AutonEntry autonEntry = new AutonEntry();
+     public AutonEntry autonEntry;
 
     public String toString() {
-        return ""+baslineCrossed+",,,"+AutoSwitchAttempt+",,,"+AutonNotes+",,,"+AutonSwitchCubes+",,,"+AutonScaleCubes+",,,"+StartingPosition;
+        return ""+baslineCrossed+",,,"+AutoSwitchAttempt+",,,"+AutonNotes+",,,"+AutonSwitchCubes+",,,"
+                +AutonScaleCubes+",,,"+StartingPosition;
     }
-    
+
     public void AutonParse (String str) {
         String [] split = str.split(",,,");
         baslineCrossed = Boolean.parseBoolean(split[0]);

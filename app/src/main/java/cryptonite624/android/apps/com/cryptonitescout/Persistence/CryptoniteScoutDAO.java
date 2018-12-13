@@ -51,7 +51,7 @@ public class CryptoniteScoutDAO {
         values.put("FinalDataEntryString",m.toString());
         values.put("FinalDataEntryInfo",getInfo(name));
         long insertID = database.insert(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, null, values);
-    }
+    }/*
 
     public FinalDataEntry getFinalDataEntry(String name){
         Cursor cursor = database.query(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, allColumns, "FinalDataEntryName" + " = " + "\""+ name+"\"", null, null, null, null );
@@ -59,7 +59,7 @@ public class CryptoniteScoutDAO {
         FinalDataEntry newE = cursorToFinalDataEntry(cursor);
         cursor.close();
         return newE;
-    }
+    }*//*
 
     private FinalDataEntry cursorToFinalDataEntry(Cursor cursor) {
         FinalDataEntry m = new FinalDataEntry();
@@ -68,7 +68,7 @@ public class CryptoniteScoutDAO {
         m.equationString = cursor.getString(cursor.getColumnIndex("FinalDataEntryString"));
 
         return m;
-    }
+    }*/
 
     // check if a record exists so it won't insert the next time you run this code
     public boolean checkIfExists(String objectName){
