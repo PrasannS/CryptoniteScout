@@ -63,9 +63,9 @@ public class CryptoniteScoutDAO {
 
     private FinalDataEntry cursorToFinalDataEntry(Cursor cursor) {
         FinalDataEntry m = new FinalDataEntry();
-        //m.info = cursor.getString(cursor.getColumnIndex("FinalDataEntryInfo"));
-        //m.name= cursor.getString(cursor.getColumnIndex("FinalDataEntryName"));
-        //m.equationString = cursor.getString(cursor.getColumnIndex("FinalDataEntryString"));
+        m.info = cursor.getString(cursor.getColumnIndex("FinalDataEntryInfo"));
+        m.name= cursor.getString(cursor.getColumnIndex("FinalDataEntryName"));
+        m.equationString = cursor.getString(cursor.getColumnIndex("FinalDataEntryString"));
 
         return m;
     }
