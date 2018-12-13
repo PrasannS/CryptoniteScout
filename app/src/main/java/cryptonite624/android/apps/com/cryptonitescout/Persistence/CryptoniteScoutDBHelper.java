@@ -51,10 +51,10 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         String id = java.util.UUID.randomUUID().toString();
         values.put("ID",id);
-        //values.put("FinalDataEntryName",m.name);
-        //values.put("FinalDataEntryString",m.equationString);
-        //values.put("FinalDataEntryInfo",m.info);
-        //long insertID = database.insert(GraphingCalculatorDBHelper.FINALDE_TABLE_NAME, null, values);
+        values.put("FinalDataEntryName",m.name);
+        values.put("FinalDataEntryString",m.equationString);
+        values.put("FinalDataEntryInfo",m.info);
+        long insertID = database.insert(GraphingCalculatorDBHelper.FINALDE_TABLE_NAME, null, values);
     }
 
     public void initialLoad(SQLiteDatabase database)throws IOException{
