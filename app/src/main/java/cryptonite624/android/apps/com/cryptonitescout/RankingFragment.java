@@ -7,18 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link rankings.OnFragmentInteractionListener} interface
+ * {@link RankingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link rankings#newInstance} factory method to
+ * Use the {@link RankingFragment#newInstance} factory method to
  * create an instance of this fragment.
- * This file matches the xml file (rankings.xml)
  */
-public class rankings extends Fragment {
+public class RankingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +29,7 @@ public class rankings extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public rankings() {
+    public RankingFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +39,11 @@ public class rankings extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment rankings.
+     * @return A new instance of fragment RankingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static rankings newInstance(String param1, String param2) {
-        rankings fragment = new rankings();
+    public static RankingFragment newInstance(String param1, String param2) {
+        RankingFragment fragment = new RankingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,8 +63,9 @@ public class rankings extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rankings, container, false);
+        TextView textView = new TextView(getActivity());
+        textView.setText(R.string.hello_blank_fragment);
+        return textView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
