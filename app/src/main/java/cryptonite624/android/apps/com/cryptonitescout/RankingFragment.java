@@ -1,5 +1,6 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,11 +27,27 @@ public class RankingFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static final String INPUTS = "inputs";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    private int[] inputs;
+
+
+    private Button teamnum_ranking;
+    private Button teamname_ranking;
+    private Button scoring1;
+    private Button scoring2;
+    private Button scoring3;
+    private Button scoring4;
+
+    public String message;
+
     private OnFragmentInteractionListener mListener;
+
+    OnRankingRead onRankingRead;
 
     public RankingFragment() {
         // Required empty public constructor
@@ -63,9 +83,65 @@ public class RankingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        View view = inflater.inflate(R.layout.fragment_rankings, container, false);
+
+        teamnum_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
+        teamnum_ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+        teamname_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
+        teamname_ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+        scoring1 = (Button)(view.findViewById(R.id.scoring1));
+        scoring1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+        scoring2 = (Button)(view.findViewById(R.id.scoring2));
+        scoring2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+        scoring3 = (Button)(view.findViewById(R.id.scoring3));
+        scoring3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+        scoring4 = (Button)(view.findViewById(R.id.scoring4));
+        scoring4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toAuton";
+                onRankingRead.OnRankingRead(message);
+            }
+        });
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -78,11 +154,11 @@ public class RankingFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        Activity activity = (Activity)context;
+        try{
+            onRankingRead = (RankingFragment.OnRankingRead) activity;
+        }catch(ClassCastException e){
+            throw new ClassCastException(activity.toString() + "must override onkeyboardoneread");
         }
     }
 
@@ -105,5 +181,11 @@ public class RankingFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public interface OnRankingRead{
+        public void OnRankingRead(String message);
+
+        public void OnRankingRead(PregameEntry p);
     }
 }
