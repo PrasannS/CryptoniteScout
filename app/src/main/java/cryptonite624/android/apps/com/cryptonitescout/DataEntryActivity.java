@@ -90,7 +90,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void LoadPregameData(PregameEntry p) {
-        p.setTeamnum("");
+        p.setTeamnum(0);
     }
 
     @Override

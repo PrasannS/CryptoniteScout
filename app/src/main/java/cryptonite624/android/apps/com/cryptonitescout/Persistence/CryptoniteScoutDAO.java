@@ -54,7 +54,7 @@ public class CryptoniteScoutDAO {
         values.put("Endgame",m.endgameEntry.toString());
 
         long insertID = database.insert(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, null, values);
-    }
+    }/*
 
     public FinalDataEntry getFinalDataEntry(String name){
         Cursor cursor = database.query(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, allColumns, "FinalDataEntryName" + " = " + "\""+ name+"\"", null, null, null, null );
@@ -62,7 +62,7 @@ public class CryptoniteScoutDAO {
         FinalDataEntry newE = cursorToFinalDataEntry(cursor);
         cursor.close();
         return newE;
-    }
+    }*//*
 
     private FinalDataEntry cursorToFinalDataEntry(Cursor cursor) {
         FinalDataEntry m = new FinalDataEntry();
@@ -72,6 +72,6 @@ public class CryptoniteScoutDAO {
         m.pregameEntry.PregameParse(cursor.getString(cursor.getColumnIndex("Pregame")));
 
         return m;
-    }
+    }*/
 
 }
