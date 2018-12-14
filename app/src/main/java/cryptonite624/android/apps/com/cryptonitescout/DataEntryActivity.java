@@ -11,6 +11,21 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
+/** TODO
+ * field map analysis touch
+ * picture input
+ * data analysis graphs
+ * based off of time
+ * elo
+ * ranking system(elo), clash royale
+ * excel - spreadsheet, csv output
+ * team comparison - 2 or more
+ * 1678 frc whitepaper
+ * separate input superscout ranking commentbox
+ * 
+ *
+ */
+
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
     DataEntry dataEntry = new DataEntry(getteam());
