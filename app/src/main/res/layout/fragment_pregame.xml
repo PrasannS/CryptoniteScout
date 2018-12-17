@@ -112,7 +112,7 @@
                 android:background="@android:color/holo_green_dark"/>
 
             <Button
-                android:id="@+id/pregame_mapview"
+                android:id="@+id/prematch_mapview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="35sp"

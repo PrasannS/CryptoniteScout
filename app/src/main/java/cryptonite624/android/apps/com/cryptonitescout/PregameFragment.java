@@ -35,6 +35,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 public class PregameFragment extends Fragment {
     //setup all of your buttons and class variables here
     public Button toAuton;
+    public Button toMapView;
     public EditText matchNum;
     public String message;
     public EditText teamNum;
@@ -89,7 +90,14 @@ public class PregameFragment extends Fragment {
             }
         });
 
-
+        toMapView = (Button)view.findViewById(R.id.prematch_mapview);
+        toMapView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MapView.class);
+                startActivity(i);
+            }
+        });
 
         matchNum = (EditText) view.findViewById(R.id.matchnum);
         teamNum = (EditText) view.findViewById(R.id.teamnum);
