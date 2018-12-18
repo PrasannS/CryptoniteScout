@@ -35,6 +35,13 @@ public class CryptoniteScoutDAO {
         database=dbHelper.getWritableDatabase();
     }
 
+    public Cursor getUnsyncedNames() {
+        SQLiteDatabase db = database;
+        String sql = "SELECT * FROM " + CryptoniteScoutDBHelper.FINALDE_TABLE_NAME + " WHERE " + "Status" + " = 0;";
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
+
     public void close() {
         dbHelper.close();
     }
@@ -43,7 +50,16 @@ public class CryptoniteScoutDAO {
         return "Prasann is an amazing person.";
     }
 
-    public void addFinalDataEntry(FinalDataEntry m){
+
+    public boolean updateNameStatus(int id, int status) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Status", status);
+        database.update(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, contentValues, "ID " + "=" + id, null);
+        database.close();
+        return true;
+    }
+
+    public void addFinalDataEntry(FinalDataEntry m,int status){
 
         ContentValues values = new ContentValues();
         String id = java.util.UUID.randomUUID().toString();
@@ -52,6 +68,7 @@ public class CryptoniteScoutDAO {
         values.put("Teleop",m.teleopEntry.toString());
         values.put("Pregame",m.pregameEntry.toString());
         values.put("Endgame",m.endgameEntry.toString());
+        values.put("Status",status);
 
         long insertID = database.insert(CryptoniteScoutDBHelper.FINALDE_TABLE_NAME, null, values);
     }/*

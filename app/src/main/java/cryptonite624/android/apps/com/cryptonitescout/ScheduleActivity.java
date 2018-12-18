@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment;
+
 public class ScheduleActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
