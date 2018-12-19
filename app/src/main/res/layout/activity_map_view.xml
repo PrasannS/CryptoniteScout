@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp">
+        <!--
         <TextView
             android:id="@+id/XDisplay"
             android:textColor="@android:color/black"
@@ -37,6 +38,42 @@
             android:layout_weight="1"
             android:text="Code Display"
             />
+            -->
+        <Button
+            android:id= "@+id/StatusButtonBack"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="B"
+            />
+        <TextView
+            android:id= "@+id/StatusDisplay"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="Pregame"
+            />
+
+        <Button
+            android:id= "@+id/StatusButtonForward"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="F"
+            />
+        <TextView
+            android:id= "@+id/TotalDisplay"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="Total Cube Display"
+            />
+
+
     </LinearLayout>
 
 </LinearLayout>

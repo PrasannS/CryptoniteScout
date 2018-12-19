@@ -14,7 +14,13 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 
 public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
@@ -32,7 +38,18 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
     public static int[] REDSWITCH2MAX = {1240, 615};
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};
-
+    Drawing drawing;
+    public ActionMap actionMap = new ActionMap();
+    //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
+    public int matchStatus = 0;
+    public Button statusForward, statusBack;
+    public TextView statusDisplay;
+    public static String[] statusStrings = {"pregame", "auton", "teleop", "endgame"};
+    public boolean actionReady;
+    public int tempX, tempY;
+    public TextView totalDisplay;
+    public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
+    public static int[] ALLSTATUS = {1, 2, 3};
 
 
     @Override
@@ -41,9 +58,37 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_view);
 
-        xDisplay = (TextView)findViewById(R.id.XDisplay);
-        yDisplay = (TextView)findViewById(R.id.YDisplay);
-        CodeDisplay = (TextView)findViewById(R.id.CodeDisplay);
+        //xDisplay = (TextView)findViewById(R.id.XDisplay);
+        //yDisplay = (TextView)findViewById(R.id.YDisplay);
+        //CodeDisplay = (TextView)findViewById(R.id.CodeDisplay);
+        statusDisplay = (TextView)findViewById(R.id.StatusDisplay);
+        totalDisplay = (TextView)findViewById(R.id.TotalDisplay);
+
+        statusForward = (Button)findViewById(R.id.StatusButtonForward);
+        statusForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(matchStatus < 3) {
+                    matchStatus++;
+                    updateDisplay();
+                }
+            }
+        });
+
+        statusBack = (Button)findViewById(R.id.StatusButtonBack);
+        statusBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(matchStatus > 0) {
+                    matchStatus--;
+                    updateDisplay();
+                }
+            }
+        });
+
+        //drawing = (Drawing) findViewById(R.id.)
+
+        //setContentView(drawing);
     }
 
     @SuppressLint("WrongCall")
@@ -52,14 +97,25 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
         x = (int)event.getX();
         y = (int)event.getY();
 
+        //drawing = new Drawing(this);
 
-        /*Canvas canvas = new Canvas();
-        Drawing drawing = new Drawing(this);
-        //drawing.onDraw(canvas);*/
+        if(actionReady){
+            actionReady = false;
+            actionMap.actions.add(new RobotAction(tempX, tempY, getCode(x, y), matchStatus));
+        }
 
-        xDisplay.setText("" + x);
-        yDisplay.setText("" + y);
-        CodeDisplay.setText("" + getCode(x, y));
+        if(getCode(x, y) == 0){
+            actionReady = true;
+            tempX = x;
+            tempY = y;
+        }
+
+
+        updateDisplay();
+
+        //xDisplay.setText("" + x);
+        //yDisplay.setText("" + y);
+        //CodeDisplay.setText("" + getCode(x, y));
         return false;
     }
 
@@ -89,13 +145,10 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             return 7;
     }
 
-
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
-
 
     public class Drawing extends View{
 
@@ -106,15 +159,19 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             circle = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
         }
 
-
         @Override
         protected void onDraw(Canvas canvas){
             super.onDraw(canvas);
-            canvas.drawColor(Color.WHITE);
-            //canvas.drawBitmap(circle, x, y, null);*/
-            canvas.drawText("If you see this then it's working", x, y, null);
-            //canvas.drawPath(path, brush);
+            Paint paint = new Paint();
+            paint.setColor(Color.GREEN);
+            paint.setStyle(Paint.Style.FILL);
+            canvas.drawCircle(0, canvas.getWidth()/2, 10, paint);
         }
+    }
+
+    public void updateDisplay(){
+        statusDisplay.setText(statusStrings[matchStatus]);
+        totalDisplay.setText("" + actionMap.numCubes(ALLCODES, ALLSTATUS));
     }
 }
 

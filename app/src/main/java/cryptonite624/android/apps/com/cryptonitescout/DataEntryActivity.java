@@ -11,6 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
@@ -36,6 +39,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
+    public ActionMap actionMap = new ActionMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
