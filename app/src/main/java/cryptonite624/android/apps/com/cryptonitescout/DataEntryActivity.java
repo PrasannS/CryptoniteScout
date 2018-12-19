@@ -40,7 +40,8 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         return 624;
     }
 
-    //All the override methods are the implementations of the fragment interfaces which allow for the communication between the fragment and the activity
+    //All the override methods are the implementations of the fragment interfaces which allow for the
+    //communication between the fragment and the activity
 
     @Override
     public void OnAutonRead(String message) {

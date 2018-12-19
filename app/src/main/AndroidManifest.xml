@@ -23,8 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".DataEntryActivity"></activity>
+        <activity android:name=".DataEntryActivity" />
+        <activity
+            android:name=".pit_note"
+            android:label="@string/title_activity_pit_note"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

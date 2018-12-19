@@ -35,7 +35,6 @@ public class RankingFragment extends Fragment {
 
     private int[] inputs;
 
-
     private Button teamnum_ranking;
     private Button teamname_ranking;
     private Button scoring1;

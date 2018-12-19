@@ -14,7 +14,7 @@ public class AutonEntry extends DataEntry {
 
     public AutonEntry(){
         super();
-        autonEntry = new AutonEntry();
+
     }
 
     public AutonEntry(int tn){
