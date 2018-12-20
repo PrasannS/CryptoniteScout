@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        toPitnote = (Button) findViewById(R.id.MoveToPitnote);
+        toPitnote = findViewById(R.id.MoveToPitnote);
         toPitnote.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class pit_note extends AppCompatActivity {
+    public FloatingActionButton toCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,15 @@ public class pit_note extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        //Button that opens up the default camera app
+        toCamera = (FloatingActionButton)findViewById(R.id.fab);
+        toCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               openCamera();
+            }
+        });
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -46,6 +56,10 @@ public class pit_note extends AppCompatActivity {
     private String mCurrentPhotoPath;
     private ImageView mImageView;
 
+
+
+
+    //function that captures the picture
     private void dispatchCameraIntent(){
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null){
@@ -56,7 +70,7 @@ public class pit_note extends AppCompatActivity {
             }
             catch (IOException ex){
                 //In case of error while creating the file
-                // Log.i(Tag,"IOException");
+                //Log.i(Tag"IOException");
             }
             //Continue only if the File was created
             if (photoFile != null){
@@ -66,8 +80,8 @@ public class pit_note extends AppCompatActivity {
         }
     }
 
+    //Create an image file name
     private File createImageFile() throws IOException{
-        //Create an image file name
         String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_"+timeStamp+"_";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -120,6 +134,11 @@ public class pit_note extends AppCompatActivity {
 
         Bitmap bitmap = new BitmapFactory().decodeFile(mCurrentPhotoPath, bmOPtions);
         mImageView.setImageBitmap(bitmap);
+    }
+
+    public void openCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
     }
 
 }
