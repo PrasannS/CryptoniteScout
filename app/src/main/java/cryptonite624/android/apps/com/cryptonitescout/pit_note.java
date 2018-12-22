@@ -80,11 +80,11 @@ public class pit_note extends AppCompatActivity {
         }
     }
 
-    //Create an image file name
+    //Create an image file name (saving the image to gallery)fla
     private File createImageFile() throws IOException{
         String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_"+timeStamp+"_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStorageDirectory();
         File image = File.createTempFile(imageFileName,".jpg",storageDir);
         mCurrentPhotoPath = "file:"+image.getAbsolutePath();
         return image;
@@ -112,6 +112,7 @@ public class pit_note extends AppCompatActivity {
     }
 
     //reducing the scale of image to save memory
+    //Converting bitmap into
     private void setPic(){
         //get the dimension of the picture
         int targetW = mImageView.getWidth();
