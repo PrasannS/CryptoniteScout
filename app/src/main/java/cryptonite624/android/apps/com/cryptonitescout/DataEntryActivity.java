@@ -60,7 +60,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     private List<FinalDataEntry>finals;
     public FinalDataEntry cur = new FinalDataEntry();
 
-    public static final String URL_SAVE_NAME = "sample url:http://192.168.1.107/SqliteSync/saveName.php";
+    public static final String URL_SAVE_NAME = "http://192.168.64.2/appload/apploader.php";
 
     public static final int NAME_SYNCED_WITH_SERVER = 1;
     public static final int NAME_NOT_SYNCED_WITH_SERVER = 0;
@@ -70,6 +70,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     //Broadcast receiver to know the sync status
     private BroadcastReceiver broadcastReceiver;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

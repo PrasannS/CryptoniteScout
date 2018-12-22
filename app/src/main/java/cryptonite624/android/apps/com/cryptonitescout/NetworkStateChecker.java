@@ -38,7 +38,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
     private Context context;
     private CryptoniteScoutDAO datasource=null;
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
