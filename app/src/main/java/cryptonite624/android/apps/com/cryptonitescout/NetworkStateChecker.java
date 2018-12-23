@@ -43,6 +43,7 @@ public class NetworkStateChecker extends BroadcastReceiver {
 
         this.context = context;
         datasource = new CryptoniteScoutDAO(context);
+        datasource.open();
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 

@@ -36,9 +36,8 @@ public class CryptoniteScoutDAO {
     }
 
     public Cursor getUnsyncedNames() {
-        SQLiteDatabase db = database;
         String sql = "SELECT * FROM " + CryptoniteScoutDBHelper.FINALDE_TABLE_NAME + " WHERE " + "Status" + " = 0;";
-        Cursor c = db.rawQuery(sql, null);
+        Cursor c = database.rawQuery(sql, null);
         return c;
     }
 
