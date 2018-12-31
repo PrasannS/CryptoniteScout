@@ -84,7 +84,6 @@ public class PregameFragment extends Fragment {
             public void onClick(View view) {
                 message = "toAuton";
                 pregameReadListener.OnPregameRead(message);
-
                 pregameEntry = new PregameEntry();
 
             }
