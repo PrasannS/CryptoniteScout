@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         */
         //Intent intent1 = new Intent(this, DataEntryActivity.class);
-        Intent intent1 = new Intent(this, DashboardActivity.class);
+        Intent intent1 = new Intent(this, DataAccessActivity.class);
         startActivity(intent1);
 
 

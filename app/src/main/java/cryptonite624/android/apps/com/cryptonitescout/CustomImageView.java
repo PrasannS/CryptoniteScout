@@ -22,7 +22,8 @@ public class CustomImageView extends View {
     Canvas canvas;
     Paint paint;
     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.powerupfield);
-    ActionMap actionMap;
+    ActionMap actionMap = null;
+    int x, y;
 
     public CustomImageView(Context context){
         super(context);
@@ -39,8 +40,20 @@ public class CustomImageView extends View {
         //canvas = new Canvas();
     }
 
+    /*public CustomImageView(Context context, int xCoor, int yCoor){
+        super(context);
+        x = xCoor;
+        y = yCoor;
+    }*/
+
     public void setActionMap(ActionMap map){
         actionMap = map;
+        this.invalidate();
+    }
+
+    public void setClickLocation(int xCoor, int yCoor){
+        x = xCoor;
+        y = yCoor;
         this.invalidate();
     }
 
@@ -55,12 +68,16 @@ public class CustomImageView extends View {
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawBitmap(bitmap, 0, 0, paint);
-        if(actionMap != null) {
+        if(actionMap == null) {
+            canvas.drawCircle(x, y, 10, paint);
+        }
+        else
             for (RobotAction r : actionMap.actions) {
                 canvas.drawCircle(r.x, r.y, 10, paint);
             }
         }
-    }
-
 
 }
+
+
+

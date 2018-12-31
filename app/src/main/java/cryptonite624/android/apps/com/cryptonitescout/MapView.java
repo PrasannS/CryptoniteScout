@@ -71,6 +71,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
     private int mOffset = OFFSET;
 
+    CustomImageView customView;
 
     private Rect mRect = new Rect();
     private Rect mBounds = new Rect();
@@ -82,7 +83,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
-        CustomImageView view = (CustomImageView) findViewById(R.id.drawview);
+        customView = (CustomImageView) findViewById(R.id.drawview);
 
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
@@ -148,13 +149,17 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             actionMap.actions.add(new RobotAction(tempX, tempY, getCode(x, y), matchStatus));
         }
 
+        if(actionReady == false){
+            customView.setClickLocation(x, y);
+        }
+
         if(getCode(x, y) == 0){
             actionReady = true;
             tempX = x;
             tempY = y;
         }
 
-        updateDisplay();
+        //updateDisplay();
 
 
 
