@@ -5,8 +5,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+
+/** TODO
+ * field map analysis touch
+ * picture input
+ * data analysis graphs
+ * based off of time
+ * elo
+ * ranking system(elo), clash royale
+ * excel - spreadsheet, csv output
+ * team comparison - 2 or more
+ * 1678 frc whitepaper
+ * separate input superscout ranking commentbox
+ * 
+ *
+ */
 
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
@@ -17,7 +35,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_entry);
-
         //this is the initial code that generates the pregame fragment and adds it to the layout
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.fragmentcontainer)!=null){
@@ -32,9 +49,9 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         }
     }
 
-    public String getteam(){
+    public int getteam(){
         //this is just placeholder code I will replace it with actual data loading stuff when I learn how
-        return "624";
+        return 624;
     }
 
     //All the override methods are the implementations of the fragment interfaces which allow for the communication between the fragment and the activity
@@ -65,6 +82,11 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     }
 
     @Override
+    public void LoadAutonData(AutonEntry a) {
+
+    }
+
+    @Override
     public void OnPregameRead(String message) {
         switch (message){
             case "toAuton":
@@ -83,7 +105,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void LoadPregameData(PregameEntry p) {
-        p.setTeamnum("");
+        p.setTeamnum(0);
     }
 
     @Override
@@ -113,6 +135,11 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     }
 
     @Override
+    public void LoadTeleopData(TeleopEntry t) {
+
+    }
+
+    @Override
     public void OnEndgameRead(String message) {
         switch(message){
             case "toTeleop":
@@ -126,6 +153,11 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
             default:
         }
+
+    }
+
+    @Override
+    public void LoadEndgameData(EndgameEntry e) {
 
     }
 }

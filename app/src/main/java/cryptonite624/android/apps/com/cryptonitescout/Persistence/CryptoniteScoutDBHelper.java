@@ -17,6 +17,8 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     public static final String FINALDE_TABLE_NAME = "TBL_FINAL_DE";
 
+    //CREATE TABLE FINALDE_TABLE_NAME(ID TEXT primary key,
+
     private static final String FINALDE_TABLE_CREATE =
             "CREATE TABLE " + FINALDE_TABLE_NAME + " (" +
                     "ID" + " TEXT primary key, " +
@@ -46,7 +48,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + FINALDE_TABLE_NAME);
         onCreate(db);
     }
-
+/*
     public void addFinalDataEntry(FinalDataEntry m,SQLiteDatabase database){
         ContentValues values = new ContentValues();
         String id = java.util.UUID.randomUUID().toString();
@@ -55,7 +57,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
         values.put("FinalDataEntryString",m.equationString);
         values.put("FinalDataEntryInfo",m.info);
         long insertID = database.insert(GraphingCalculatorDBHelper.FINALDE_TABLE_NAME, null, values);
-    }
+    }*/
 
     public void initialLoad(SQLiteDatabase database)throws IOException{
 

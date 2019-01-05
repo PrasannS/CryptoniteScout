@@ -14,13 +14,12 @@ public class AutonEntry extends DataEntry {
 
     public AutonEntry(){
         super();
-        autonEntry = new AutonEntry();
     }
 
     public AutonEntry(int tn){
         super.setTeamnum(tn);
 }
-     public void setTeamNum(String tn){
+     public void setTeamNum(int tn){
         super.setTeamnum(tn);
      }
 

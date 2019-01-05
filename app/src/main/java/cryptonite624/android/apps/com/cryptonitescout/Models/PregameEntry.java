@@ -9,12 +9,12 @@ public class PregameEntry extends DataEntry {
     public boolean LostCommns = false;
 
     @Override
-    public void setTeamnum(String tn) {
+    public void setTeamnum(int tn) {
         super.setTeamnum(tn);
     }
 
     public PregameEntry (int teamNum){
-       teamNum = Integer.parseInt(teamnum);
+       teamNum = teamnum;
     }
 
     public String toString(){
