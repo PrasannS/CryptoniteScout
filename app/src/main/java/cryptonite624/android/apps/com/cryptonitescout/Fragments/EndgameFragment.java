@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
@@ -26,6 +27,7 @@ public class EndgameFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     public Button toTeleop;
+    public Button submit;
     public String message;
     public EndgameEntry endgameEntry = new EndgameEntry();
 
@@ -43,7 +45,6 @@ public class EndgameFragment extends Fragment {
 
     public interface OnEndgameReadListener{
         public void OnEndgameRead(String message);
-
         public void LoadEndgameData(EndgameEntry e);
     }
 
@@ -62,14 +63,16 @@ public class EndgameFragment extends Fragment {
             }
         });
 
-        return view;
-    }
+        submit = (Button)view.findViewById(R.id.endgame_submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** TODO specialised code based on game challenge will be put here*/
+                endgameReadListener.LoadEndgameData(new EndgameEntry());
+            }
+        });
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        return view;
     }
 
     @Override

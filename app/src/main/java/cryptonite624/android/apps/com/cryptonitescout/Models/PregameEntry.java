@@ -21,11 +21,13 @@ public class PregameEntry extends DataEntry {
         return ""+matchNumber+",,,"+noShow+",,,"+LostCommns;
     }
 
-    public void PregameParse(String str) {
+    public static PregameEntry PregameParse(String str) {
         String [] split = str.split(",,,");
-        matchNumber = Integer.parseInt(split[0]);
-        noShow = Boolean.parseBoolean(split[1]);
-        LostCommns = Boolean.parseBoolean(split[2]);
+        PregameEntry p = new PregameEntry();
+        p.matchNumber = Integer.parseInt(split[0]);
+        p.noShow = Boolean.parseBoolean(split[1]);
+        p.LostCommns = Boolean.parseBoolean(split[2]);
+        return p;
     }
 
 }

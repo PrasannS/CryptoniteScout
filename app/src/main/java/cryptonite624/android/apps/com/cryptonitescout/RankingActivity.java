@@ -1,6 +1,5 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,37 +7,29 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TeleopFragment.OnFragmentInteractionListener} interface
+ * {@link RankingActivity.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TeleopFragment#newInstance} factory method to
+ * Use the {@link RankingActivity#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TeleopFragment extends Fragment {
-
+public class RankingActivity extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    OnTeleopReadListener teleopReadListener;
-
-    public Button toAuton;
-    public TeleopEntry teleopEntry;
-    public Button toEndgame;
-    public String message;
-
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public TeleopFragment() {
+    public RankingActivity() {
         // Required empty public constructor
     }
 
@@ -48,11 +39,11 @@ public class TeleopFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TeleopFragment.
+     * @return A new instance of fragment RankingActivity.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeleopFragment newInstance(String param1, String param2) {
-        TeleopFragment fragment = new TeleopFragment();
+    public static RankingActivity newInstance(String param1, String param2) {
+        RankingActivity fragment = new RankingActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,37 +60,11 @@ public class TeleopFragment extends Fragment {
         }
     }
 
-    public interface OnTeleopReadListener{
-        public void OnTeleopRead(String message);
-
-        public void LoadTeleopData(TeleopEntry t);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_teleop, container, false);
-
-        toAuton = (Button)view.findViewById(R.id.teleop_auton);
-        toAuton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                teleopReadListener.OnTeleopRead(message);
-            }
-        });
-
-        toEndgame = (Button)view.findViewById(R.id.teleop_endgame);
-        toEndgame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toEndgame";
-                teleopReadListener.OnTeleopRead(message);
-            }
-        });
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_ranking, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -112,11 +77,11 @@ public class TeleopFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Activity activity = (Activity)context;
-        try{
-            teleopReadListener = (TeleopFragment.OnTeleopReadListener) activity;
-        }catch(ClassCastException e){
-            throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
