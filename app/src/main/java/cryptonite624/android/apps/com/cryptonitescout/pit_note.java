@@ -20,10 +20,17 @@ import android.util.EventLogTags;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 public class pit_note extends AppCompatActivity {
+
+    public Button toNextPage;
     public FloatingActionButton toCamera;
+    public Switch Programmer_On_Site;
+    public Switch From_Cali;
+    public Switch Penalties;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,10 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
+        toNextPage = (Button)findViewById(R.id.pit_note_nextPage);
+        //Place holder until I make the next page
+        // toNextPage.setOnClickListener();
+
         //Button that opens up the default camera app
         toCamera = (FloatingActionButton)findViewById(R.id.fab);
         toCamera.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +60,34 @@ public class pit_note extends AppCompatActivity {
                openCamera();
             }
         });
+
+
+        //Check if Switch Button "programmer on site" is true or false
+        Programmer_On_Site = (Switch)findViewById(R.id.Programmer_On_Site);
+        Programmer_On_Site.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.v("Programmer on site :",""+isChecked);
+            }
+        });
+
+        From_Cali = (Switch)findViewById(R.id.From_Cali);
+        From_Cali.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.v("From Cali : ",""+isChecked);
+            }
+        });
+
+        Penalties = (Switch)findViewById(R.id.Penalties);
+        Penalties.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.v("Penalties : ",""+isChecked);
+            }
+        });
+
+
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -137,9 +176,17 @@ public class pit_note extends AppCompatActivity {
         mImageView.setImageBitmap(bitmap);
     }
 
+    //Opening the camera app
     public void openCamera(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
     }
+
+    //function that allows the button to open up the login page
+    public void openLoginPage(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
 }

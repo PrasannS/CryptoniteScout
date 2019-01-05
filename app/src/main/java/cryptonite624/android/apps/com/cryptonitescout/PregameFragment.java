@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 public class PregameFragment extends Fragment {
     //setup all of your buttons and class variables here
     public Button toAuton;
+    public Button toLogin;
     public EditText matchNum;
     public String message;
     public EditText teamNum;
@@ -70,7 +72,7 @@ public class PregameFragment extends Fragment {
         //The variable view is not default
         View view = inflater.inflate(R.layout.fragment_pregame, container, false);
 
-        toAuton = (Button)view.findViewById(R.id.prematch_auton);
+        toAuton = (Button)view.findViewById(R.id.to_auton);
         toAuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +83,6 @@ public class PregameFragment extends Fragment {
 
             }
         });
-
 
 
         matchNum = (EditText) view.findViewById(R.id.matchnum);
@@ -109,6 +110,7 @@ public class PregameFragment extends Fragment {
         super.onDetach();
         pregameReadListener = null;
     }
+
 
 
 
