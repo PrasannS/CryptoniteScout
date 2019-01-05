@@ -36,10 +36,10 @@ public class pit_note extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_note);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,12 +48,16 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
-        toNextPage = (Button)findViewById(R.id.pit_note_nextPage);
-        //Place holder until I make the next page
-        // toNextPage.setOnClickListener();
+        toNextPage = findViewById(R.id.pit_note_nextPage);
+        toNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNextPage();
+            }
+        });
 
         //Button that opens up the default camera app
-        toCamera = (FloatingActionButton)findViewById(R.id.fab);
+        toCamera = findViewById(R.id.fab);
         toCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +67,7 @@ public class pit_note extends AppCompatActivity {
 
 
         //Check if Switch Button "programmer on site" is true or false
-        Programmer_On_Site = (Switch)findViewById(R.id.Programmer_On_Site);
+        Programmer_On_Site = findViewById(R.id.Programmer_On_Site);
         Programmer_On_Site.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -71,7 +75,7 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
-        From_Cali = (Switch)findViewById(R.id.From_Cali);
+        From_Cali = findViewById(R.id.From_Cali);
         From_Cali.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -79,7 +83,7 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
-        Penalties = (Switch)findViewById(R.id.Penalties);
+        Penalties = findViewById(R.id.Penalties);
         Penalties.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -129,7 +133,7 @@ public class pit_note extends AppCompatActivity {
         return image;
     }
 
-    protected void onActivityREsult(int requestCode, int resultCode, Intent data)throws IOException{
+    protected void onActivityREsult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             try{
                 mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
@@ -183,8 +187,8 @@ public class pit_note extends AppCompatActivity {
     }
 
     //function that allows the button to open up the login page
-    public void openLoginPage(){
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void openNextPage(){
+        Intent intent = new Intent(this, Pitnote_page2.class);
         startActivity(intent);
     }
 
