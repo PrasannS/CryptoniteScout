@@ -1,44 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mainlayout"
-    android:orientation="vertical"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/powerupfield"
-    >
+    tools:context="cryptonite624.android.apps.com.cryptonitescout.MapView">
 
-    <LinearLayout
+    <cryptonite624.android.apps.com.cryptonitescout.CustomImageView
+        android:id="@+id/drawview"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <!--
-        <TextView
-            android:id="@+id/XDisplay"
-            android:textColor="@android:color/black"
+        android:layout_height="match_parent"
+        android:src="@drawable/powerupfield"
+        />
+
+    <!--
+        <ImageView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="drawSomething"
+            />
+    -->
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        >
+            <ImageView
+                android:id="@+id/mapview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/powerupfield"/>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="X Display"
-            />
-        <TextView
-            android:id= "@+id/YDisplay"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Y Display"
-            />
-        <TextView
-            android:id= "@+id/CodeDisplay"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Code Display"
-            />
-            -->
+            android:orientation="vertical">
+            <!-
+            <TextView
+                android:id="@+id/XDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="X Display"
+                />
+            <TextView
+                android:id= "@+id/YDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Y Display"
+                />
+            <TextView
+                android:id= "@+id/CodeDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Code Display"
+                />
+                -->
+<!--
         <Button
             android:id= "@+id/StatusButtonBack"
             android:textColor="@android:color/black"
@@ -77,3 +112,5 @@
     </LinearLayout>
 
 </LinearLayout>
+-->
+

@@ -26,7 +26,10 @@
         <activity android:name=".DataEntryActivity" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".MapView" android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".MapView"
+            android:screenOrientation="landscape" />
+        <activity android:name=".DataAccessActivity"></activity>
     </application>
 
 </manifest>

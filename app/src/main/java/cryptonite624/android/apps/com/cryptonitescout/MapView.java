@@ -9,12 +9,18 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -50,18 +56,46 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
     public TextView totalDisplay;
     public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
     public static int[] ALLSTATUS = {1, 2, 3};
+    private static final int OFFSET = 120;
+
+    CustomDrawableView mCustomDrawableView;
+
+    private Canvas mCanvas;
+    private Paint mPaint = new Paint();
+    private Paint mPaintText = new Paint(Paint.UNDERLINE_TEXT_FLAG);
+    private Bitmap mBitmap;
+    private ImageView mImageView;
+    private int mColorBackground;
+    private int mColorRectangle;
+    private int mColorAccent;
+
+    private int mOffset = OFFSET;
+
+    CustomImageView customView;
+
+    private Rect mRect = new Rect();
+    private Rect mBounds = new Rect();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //RelativeLayout layout = (RelativeLayout)findViewById(R.id.mapview);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
+        customView = (CustomImageView) findViewById(R.id.drawview);
+
         setContentView(R.layout.activity_map_view);
+        //setContentView(view);
+
+        //mCustomDrawableView = new CustomDrawableView(this);
+
+        //setContentView(mCustomDrawableView);
 
         //xDisplay = (TextView)findViewById(R.id.XDisplay);
         //yDisplay = (TextView)findViewById(R.id.YDisplay);
         //CodeDisplay = (TextView)findViewById(R.id.CodeDisplay);
-        statusDisplay = (TextView)findViewById(R.id.StatusDisplay);
+        /*statusDisplay = (TextView)findViewById(R.id.StatusDisplay);
         totalDisplay = (TextView)findViewById(R.id.TotalDisplay);
 
         statusForward = (Button)findViewById(R.id.StatusButtonForward);
@@ -84,11 +118,22 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
                     updateDisplay();
                 }
             }
-        });
+        });*/
 
         //drawing = (Drawing) findViewById(R.id.)
 
+        //drawing = new Drawing(this);
         //setContentView(drawing);
+
+        mColorBackground = ResourcesCompat.getColor(getResources(),
+                R.color.colorBackground, null);
+        mColorRectangle = ResourcesCompat.getColor(getResources(),
+                R.color.colorRectangle, null);
+        mColorAccent = ResourcesCompat.getColor(getResources(),
+                R.color.colorAccent, null);
+        mPaint.setColor(mColorBackground);
+
+        //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
     @SuppressLint("WrongCall")
@@ -104,14 +149,19 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             actionMap.actions.add(new RobotAction(tempX, tempY, getCode(x, y), matchStatus));
         }
 
+        if(actionReady == false){
+            customView.setClickLocation(x, y);
+        }
+
         if(getCode(x, y) == 0){
             actionReady = true;
             tempX = x;
             tempY = y;
         }
 
+        //updateDisplay();
 
-        updateDisplay();
+
 
         //xDisplay.setText("" + x);
         //yDisplay.setText("" + y);
@@ -145,34 +195,90 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             return 7;
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
+    public void drawSomething(View view){
+        int vWidth = view.getWidth();
+        int vHeight = view.getHeight();
+        int halfWidth = vWidth / 2;
+        int halfHeight = vHeight / 2;
+
+        mImageView.invalidate();
+
+       // BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
+
+       // mImageView.invalidateDrawable(drawable);
+
+        //mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+
+        mBitmap = Bitmap.createBitmap(
+                vWidth, vHeight, Bitmap.Config.ARGB_8888);
+
+        //mBitmap = drawable.getBitmap();
+
+        Bitmap field = BitmapFactory.decodeResource(getResources(), R.drawable.powerupfield);
+
+        //mImageView.setImageBitmap(field);
+
+        mCanvas = new Canvas(mBitmap);
+
+        mCanvas.drawColor(mColorBackground);
+        mPaint.setColor(mColorRectangle);
+
+        mRect.set(
+                mOffset, mOffset, vWidth - mOffset, vHeight - mOffset);
+
+        mCanvas.drawRect(mRect, mPaint);
+
+        mCanvas.drawBitmap(field, 100, 100, mPaint);
+
+        mCanvas.drawText("If you see this then it's probably working so far", 100, 100, mPaintText);
+        mCanvas.drawRect(mRect, mPaint);
+
+        //Canvas.drawCircle(
+         //       halfWidth, halfHeight, halfWidth / 3, mPaint);
+
+        //Drawable d = getResources().getDrawable(R.drawable.powerupfield, null);
+
+        //Canvas canvas = new Canvas();
+        //d.setBounds(100, 100, 100, 100);
+        //d.draw(canvas);
+        //canvas.drawCircle(100, 100, 50, mPaint);
+
+        view.invalidate();
     }
 
-    public class Drawing extends View{
-
-        Bitmap circle;
-
-        public Drawing(Context context) {
-            super(context);
-            circle = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas){
-            super.onDraw(canvas);
-            Paint paint = new Paint();
-            paint.setColor(Color.GREEN);
-            paint.setStyle(Paint.Style.FILL);
-            canvas.drawCircle(0, canvas.getWidth()/2, 10, paint);
-        }
-    }
 
     public void updateDisplay(){
         statusDisplay.setText(statusStrings[matchStatus]);
         totalDisplay.setText("" + actionMap.numCubes(ALLCODES, ALLSTATUS));
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
+
+    public class Drawing extends View{
+
+        //Bitmap circle;
+
+        public Drawing(Context context) {
+            super(context);
+            //circle = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas){
+            super.onDraw(canvas);
+            /*Paint paint = new Paint();
+            paint.setColor(Color.GREEN);
+            paint.setStyle(Paint.Style.FILL);
+            canvas.drawCircle(500, 500, 50, paint);*/
+        }
+
+    }
+
+
 }
 
 
