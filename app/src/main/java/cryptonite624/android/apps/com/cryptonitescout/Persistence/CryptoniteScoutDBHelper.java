@@ -17,6 +17,8 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     public static final String FINALDE_TABLE_NAME = "TBL_FINAL_DE";
 
+    //CREATE TABLE FINALDE_TABLE_NAME(ID TEXT primary key,
+
     private static final String FINALDE_TABLE_CREATE =
             "CREATE TABLE " + FINALDE_TABLE_NAME + " (" +
                     "ID" + " TEXT primary key, " +

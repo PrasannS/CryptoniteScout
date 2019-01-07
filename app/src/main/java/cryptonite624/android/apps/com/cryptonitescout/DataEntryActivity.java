@@ -1,25 +1,55 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
+/** TODO
+ * field map analysis touch
+ * picture input
+ * data analysis graphs
+ * based off of time
+ * elo
+ * ranking system(elo), clash royale
+ * excel - spreadsheet, csv output
+ * team comparison - 2 or more
+ * 1678 frc whitepaper
+ * separate input superscout ranking commentbox
+ * 
+ *
+ */
+
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
     DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
+    public ActionMap actionMap = new ActionMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_entry);
+
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darktheme);
+        }
+        else setTheme(R.style.lighttheme);
 
         //this is the initial code that generates the pregame fragment and adds it to the layout
         fragmentManager = getSupportFragmentManager();
@@ -33,6 +63,8 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
             fragmentTransaction.commit();
 
         }
+
+
     }
 
     public int getteam(){
@@ -145,6 +177,25 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void LoadEndgameData(EndgameEntry e) {
-
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.settings_menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.settings:
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DataEntryActivity.this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
