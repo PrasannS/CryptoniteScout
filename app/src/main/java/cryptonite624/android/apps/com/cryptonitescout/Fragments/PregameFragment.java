@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout.Fragments;
+package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatDelegate;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,9 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import cryptonite624.android.apps.com.cryptonitescout.MapView;
+
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
@@ -85,8 +82,6 @@ public class PregameFragment extends Fragment {
         toAuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /** TODO specialised code based on game challenge will be put here*/
-                pregameReadListener.LoadPregameData(new PregameEntry(/**This is where*/));
                 message = "toAuton";
                 pregameReadListener.OnPregameRead(message);
                 pregameEntry = new PregameEntry();

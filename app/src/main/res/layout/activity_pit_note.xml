@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pit_note">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pitnote"
+                android:textColor="@color/teamGreen"
+                android:background="@android:color/black"
+                android:textSize="40sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Match #"
+                android:textColor="@android:color/black"
+                android:background="@android:color/white"
+                android:textSize="40sp"/>
+
+            <EditText
+                android:id="@+id/matchnum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:text="Programmer"
+                android:textColor="@color/teamGreen"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/Programmer_On_Site"
+                android:background="@android:color/black"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Penalties"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/Penalties"
+                android:layout_marginLeft="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@android:color/black">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="From Cali"
+                android:textColor="@color/teamGreen"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/From_Cali"
+                android:layout_marginLeft="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:srcCompat="@drawable/camerabutton" />
+
+            <Button
+                android:id="@+id/pit_note_nextPage"
+                android:layout_width="200dp"
+                android:layout_marginLeft="130dp"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="Next\nPage"
+                android:textColor="@color/teamGreen"
+                android:background="@android:color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

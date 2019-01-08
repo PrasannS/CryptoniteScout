@@ -21,7 +21,7 @@ public class CustomImageView extends View {
 
     Canvas canvas;
     Paint paint;
-    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.powerupfield);
+    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tempfield);
     ActionMap actionMap = null;
     int x, y;
 

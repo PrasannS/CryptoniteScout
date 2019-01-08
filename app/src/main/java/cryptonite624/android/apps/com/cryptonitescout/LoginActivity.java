@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    public Button toPitnote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        toPitnote = findViewById(R.id.MoveToPitnote);
+        toPitnote.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPitnote();
             }
         });
 
@@ -198,13 +207,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
         */
-        //Intent intent1 = new Intent(this, DataEntryActivity.class);
         Intent intent1 = new Intent(this, DataAccessActivity.class);
         startActivity(intent1);
 
 
 
     }
+
+    public void openPitnote(){
+        Intent intent1 = new Intent(this,pit_note.class);
+        startActivity(intent1);
+    }
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
