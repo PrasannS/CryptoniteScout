@@ -30,14 +30,16 @@ public class AutonEntry extends DataEntry {
                 +AutonScaleCubes+",,,"+StartingPosition;
     }
 
-    public void AutonParse (String str) {
+    public static AutonEntry AutonParse (String str) {
+        AutonEntry a = new AutonEntry();
         String [] split = str.split(",,,");
-        baslineCrossed = Boolean.parseBoolean(split[0]);
-        AutoSwitchAttempt = Boolean.parseBoolean(split[1]);
-        AutonNotes = split[2];
-        AutonScaleCubes = Integer.parseInt(split[3]);
-        AutonScaleCubes = Integer.parseInt(split[4]);
-        StartingPosition = Integer.parseInt(split[5]);
+        a.baslineCrossed = Boolean.parseBoolean(split[0]);
+        a.AutoSwitchAttempt = Boolean.parseBoolean(split[1]);
+        a.AutonNotes = split[2];
+        a.AutonScaleCubes = Integer.parseInt(split[3]);
+        a.AutonScaleCubes = Integer.parseInt(split[4]);
+        a.StartingPosition = Integer.parseInt(split[5]);
+        return a;
     }
 
 

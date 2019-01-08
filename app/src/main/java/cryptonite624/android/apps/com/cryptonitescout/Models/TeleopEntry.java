@@ -1,5 +1,7 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
+import android.widget.TextView;
+
 public class TeleopEntry extends DataEntry {
     public int exchangeCubes;
     public int ownSwitchCubes;
@@ -15,13 +17,15 @@ public class TeleopEntry extends DataEntry {
         return "" + exchangeCubes + ",,," + ownSwitchCubes + ",,," + scaleCubes + ",,," + opponentCubes + ",,," + totalCubes;
     }
 
-    public void teleopParse(String str){
+    public static TeleopEntry teleopParse(String str){
         String[] split = str.split(",,,");
-        exchangeCubes = Integer.parseInt(split[0]);
-        ownSwitchCubes = Integer.parseInt(split[1]);
-        scaleCubes = Integer.parseInt(split[2]);
-        opponentCubes = Integer.parseInt(split[3]);
-        totalCubes = Integer.parseInt(split[4]);
+        TeleopEntry t = new TeleopEntry();
+        t.exchangeCubes = Integer.parseInt(split[0]);
+        t.ownSwitchCubes = Integer.parseInt(split[1]);
+        t.scaleCubes = Integer.parseInt(split[2]);
+        t.opponentCubes = Integer.parseInt(split[3]);
+        t.totalCubes = Integer.parseInt(split[4]);
+        return t;
     }
 
 }

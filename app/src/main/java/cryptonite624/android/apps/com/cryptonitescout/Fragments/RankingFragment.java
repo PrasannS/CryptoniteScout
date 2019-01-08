@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,17 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
-
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ScheduleFragment.OnFragmentInteractionListener} interface
+ * {@link RankingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ScheduleFragment#newInstance} factory method to
+ * Use the {@link RankingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScheduleFragment extends Fragment {
+public class RankingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,33 +29,27 @@ public class ScheduleFragment extends Fragment {
 
     private static final String INPUTS = "inputs";
 
-
-
-
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private int[] inputs;
 
-    private OnFragmentInteractionListener mListener;
 
-    private Button matchnum;
-    private Button red1;
-    private Button red2;
-    private Button red3;
-    private Button blue1;
-    private Button blue2;
-    private Button blue3;
+    private Button teamnum_ranking;
+    private Button teamname_ranking;
+    private Button scoring1;
+    private Button scoring2;
+    private Button scoring3;
+    private Button scoring4;
 
     public String message;
 
-    OnScheduleRead onScheduleRead;
+    private OnFragmentInteractionListener mListener;
 
+    OnRankingRead onRankingRead;
 
-
-    public ScheduleFragment() {
+    public RankingFragment() {
         // Required empty public constructor
     }
 
@@ -65,21 +59,16 @@ public class ScheduleFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ScheduleFragment.
+     * @return A new instance of fragment RankingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ScheduleFragment newInstance(int[] inputs) {
-        ScheduleFragment fragment = new ScheduleFragment();
+    public static RankingFragment newInstance(String param1, String param2) {
+        RankingFragment fragment = new RankingFragment();
         Bundle args = new Bundle();
-        args.putIntArray(INPUTS,inputs);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public interface OnScheduleRead{
-        public void OnScheduleRead(String message);
-
-        public void OnScheduleRead(PregameEntry p);
     }
 
     @Override
@@ -89,84 +78,70 @@ public class ScheduleFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_ranking, container, false);
 
-
-
-        matchnum = (Button)(view.findViewById(R.id.matchnum));
-        matchnum.setOnClickListener(new View.OnClickListener() {
+        teamnum_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
+        teamnum_ranking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        red1 = (Button)(view.findViewById(R.id.red1));
-        red1.setOnClickListener(new View.OnClickListener() {
+        teamname_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
+        teamname_ranking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        red2 = (Button)(view.findViewById(R.id.red2));
-        red2.setOnClickListener(new View.OnClickListener() {
+        scoring1 = (Button)(view.findViewById(R.id.scoring1));
+        scoring1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        red3 = (Button)(view.findViewById(R.id.red3));
-        red3.setOnClickListener(new View.OnClickListener() {
+        scoring2 = (Button)(view.findViewById(R.id.scoring2));
+        scoring2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        blue1 = (Button)(view.findViewById(R.id.blue1));
-        blue1.setOnClickListener(new View.OnClickListener() {
+        scoring3 = (Button)(view.findViewById(R.id.scoring3));
+        scoring3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        blue2 = (Button)(view.findViewById(R.id.blue2));
-        blue2.setOnClickListener(new View.OnClickListener() {
+        scoring4 = (Button)(view.findViewById(R.id.scoring4));
+        scoring4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
+                onRankingRead.OnRankingRead(message);
             }
         });
 
-        blue3 = (Button)(view.findViewById(R.id.blue3));
-        blue3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
 
 
         return view;
-
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -181,9 +156,9 @@ public class ScheduleFragment extends Fragment {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            onScheduleRead = (ScheduleFragment.OnScheduleRead) activity;
+            onRankingRead = (RankingFragment.OnRankingRead) activity;
         }catch(ClassCastException e){
-            throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
+            throw new ClassCastException(activity.toString() + "must override onkeyboardoneread");
         }
     }
 
@@ -206,5 +181,11 @@ public class ScheduleFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public interface OnRankingRead{
+        public void OnRankingRead(String message);
+
+        public void OnRankingRead(PregameEntry p);
     }
 }

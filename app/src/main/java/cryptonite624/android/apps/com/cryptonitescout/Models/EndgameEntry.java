@@ -15,11 +15,13 @@ public class EndgameEntry extends DataEntry {
         return "" + climb + ",,," + climbSupported + ",,," + techFouls + ",,," + endgameComments;
     }
 
-    public void endgameParse(String str){
+    public static EndgameEntry endgameParse(String str){
         String[] split = str.split(",,,");
-        climb = Integer.parseInt(split[0]);
-        climbSupported = Integer.parseInt(split[1]);
-        techFouls = Boolean.parseBoolean(split[2]);
-        endgameComments = split[3];
+        EndgameEntry e = new EndgameEntry();
+        e.climb = Integer.parseInt(split[0]);
+        e.climbSupported = Integer.parseInt(split[1]);
+        e.techFouls = Boolean.parseBoolean(split[2]);
+        e.endgameComments = split[3];
+        return e;
     }
 }
