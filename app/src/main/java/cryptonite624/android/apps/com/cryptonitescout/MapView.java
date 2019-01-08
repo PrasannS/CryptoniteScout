@@ -121,8 +121,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
         //setContentView(mCustomDrawableView);
 
-        xDisplay = (TextView)findViewById(R.id.XDisplay);
-        yDisplay = (TextView)findViewById(R.id.YDisplay);
+        //xDisplay = (TextView)findViewById(R.id.XDisplay);
+        //yDisplay = (TextView)findViewById(R.id.YDisplay);
         //CodeDisplay = (TextView)findViewById(R.id.CodeDisplay);
         /*statusDisplay = (TextView)findViewById(R.id.StatusDisplay);
         totalDisplay = (TextView)findViewById(R.id.TotalDisplay);

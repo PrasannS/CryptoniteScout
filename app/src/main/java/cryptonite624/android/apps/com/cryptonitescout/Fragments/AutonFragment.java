@@ -92,7 +92,7 @@ public class AutonFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_auton, container, false);
 
-        toPrematch = (Button)view.findViewById(R.id.auton_prematch);
+        toPrematch = (Button)view.findViewById(R.id.auton_pregame);
         toPrematch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

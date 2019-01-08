@@ -57,10 +57,10 @@ public class NetworkStateChecker extends BroadcastReceiver {
                 if (cursor.moveToFirst()) {
                     do {
                         //calling the method to save the unsynced name to MySQL
-                        saveName(
-                                cursor.getInt(cursor.getColumnIndex("ID")),
-                                new FinalDataEntry(AutonEntry.AutonParse(cursor.getString(cursor.getColumnIndex("Auton"))),PregameEntry.PregameParse(cursor.getString(cursor.getColumnIndex("Pregame"))),TeleopEntry.teleopParse(cursor.getString(cursor.getColumnIndex("Teleop"))), EndgameEntry.endgameParse(cursor.getString(cursor.getColumnIndex("Engame"))))
-                        );
+                        //saveName(
+                          //      cursor.getInt(cursor.getColumnIndex("ID")),
+                            //    new FinalDataEntry(AutonEntry.AutonParse(cursor.getString(cursor.getColumnIndex("Auton"))),PregameEntry.PregameParse(cursor.getString(cursor.getColumnIndex("Pregame"))),TeleopEntry.teleopParse(cursor.getString(cursor.getColumnIndex("Teleop"))), EndgameEntry.endgameParse(cursor.getString(cursor.getColumnIndex("Engame"))))
+                        //);
                     } while (cursor.moveToNext());
                 }
             }
@@ -73,6 +73,8 @@ public class NetworkStateChecker extends BroadcastReceiver {
      * if the name is successfully sent
      * we will update the status as synced in SQLite
      * */
+
+    /*
     private void saveName(final int id, final FinalDataEntry finalDataEntry) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, DataEntryActivity.URL_SAVE_NAME,
                 new Response.Listener<String>() {
@@ -107,6 +109,6 @@ public class NetworkStateChecker extends BroadcastReceiver {
         };
 
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
-    }
+    }*/
 
 }

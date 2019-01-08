@@ -78,7 +78,7 @@ public class PregameFragment extends Fragment {
         //The variable view is not default
         View view = inflater.inflate(R.layout.fragment_pregame, container, false);
 
-        toAuton = (Button)view.findViewById(R.id.prematch_auton);
+        toAuton = (Button)view.findViewById(R.id.pregame_auton);
         toAuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,17 +89,16 @@ public class PregameFragment extends Fragment {
             }
         });
 
-        toMapView = (Button)view.findViewById(R.id.prematch_mapview);
+        /*toMapView = (Button)view.findViewById(R.id.prematch_mapview);
         toMapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), MapView.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         matchNum = (EditText) view.findViewById(R.id.matchnum);
-        teamNum = (EditText) view.findViewById(R.id.teamnum);
 
 
         return view;

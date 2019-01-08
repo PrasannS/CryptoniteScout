@@ -4,121 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.PregameFragment"
+    tools:context=".PregameFragment"
     android:orientation="vertical">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/black"
-                android:text="Prematch"
-                android:textColor="@android:color/holo_green_light"
-                android:textSize="40sp" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id = "@+id/pregameguide"
+            android:text="    click on each preset and select type for alliance"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="3">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Match #"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <EditText
-                android:id="@+id/matchnum"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Team #"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
+                android:layout_weight="1"
+                android:id = "@+id/pregamehatch"
+                android:text = "hatch" />
 
-            <EditText
-                android:id="@+id/teamnum"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="No Show"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
+                android:layout_weight="1"
+                android:id = "@+id/pregamecargo"
+                android:text = "cargo" />
 
-            <Switch
-                android:id="@+id/noshow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Lost Comms"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <Switch
-                android:id="@+id/lostcomms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/prematch_auton"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:textSize="35sp"
-                android:text="AUTON"
-                android:textColor="@android:color/black"
-                android:background="@android:color/holo_green_dark"/>
+            android:layout_weight="3">
 
             <Button
-                android:id="@+id/prematch_mapview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="35sp"
-                android:text="MAPVIEW"
-                android:textColor="@android:color/holo_green_dark"
-                android:background="@android:color/black"/>
+                android:layout_weight="1"
+                android:id = "@+id/pregame_auton"
+                android:text = "sandstorm" />
+
         </LinearLayout>
 
     </LinearLayout>

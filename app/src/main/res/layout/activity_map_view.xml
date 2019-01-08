@@ -8,27 +8,15 @@
     tools:context="cryptonite624.android.apps.com.cryptonitescout.MapView">
 
     <LinearLayout
-        android:id="@+id/infoframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="2">
 
-        <TextView
-            android:id="@+id/XDisplay"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="X Display"
-            android:textColor="@android:color/black" />
-        <TextView
-            android:id= "@+id/YDisplay"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="Y Display"
-            />
+            android:layout_height="match_parent"
+            android:id="@+id/infoframe"></FrameLayout>
 
 
     </LinearLayout>

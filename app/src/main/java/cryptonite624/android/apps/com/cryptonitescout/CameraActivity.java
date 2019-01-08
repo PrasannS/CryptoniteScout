@@ -54,7 +54,7 @@ public class CameraActivity extends AppCompatActivity {
         mCamera = getCameraInstance();
 
         //Create the preview and set is as a content of the activity
-        mPreview = new CameraPreview(this, mCamera);
+        //mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout)findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
