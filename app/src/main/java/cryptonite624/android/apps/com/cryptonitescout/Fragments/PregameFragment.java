@@ -2,17 +2,14 @@ package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
-<<<<<<< HEAD:app/src/main/java/cryptonite624/android/apps/com/cryptonitescout/PregameFragment.java
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatDelegate;
-=======
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
->>>>>>> origin/Prasann:app/src/main/java/cryptonite624/android/apps/com/cryptonitescout/Fragments/PregameFragment.java
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,12 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD:app/src/main/java/cryptonite624/android/apps/com/cryptonitescout/PregameFragment.java
 import android.widget.TextView;
 import android.widget.Toast;
-=======
->>>>>>> origin/Prasann:app/src/main/java/cryptonite624/android/apps/com/cryptonitescout/Fragments/PregameFragment.java
-
+import cryptonite624.android.apps.com.cryptonitescout.MapView;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
