@@ -12,6 +12,8 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,10 +27,18 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
+import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
+import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
+import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener {
+public class MapView extends AppCompatActivity implements View.OnTouchListener,EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
     public int x, y;
     TextView xDisplay, yDisplay, CodeDisplay;
@@ -66,15 +76,9 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
     public static int[] CARGO8MIN = {1500, 700};
     public static int[] CARGO8MAX = {1620, 760};
 
-
-
-
-
-
-
-
-    Drawing drawing;
+    public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
+    Drawing drawing;
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     public int matchStatus = 0;
     public Button statusForward, statusBack;
@@ -100,6 +104,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
     private int mOffset = OFFSET;
 
+    public boolean sandstorm = true;
+
     CustomImageView customView;
 
     private Rect mRect = new Rect();
@@ -116,6 +122,18 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
 
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
+
+        fragmentManager = getSupportFragmentManager();
+        if(findViewById(R.id.infoframe)!=null){
+            if(savedInstanceState!=null){
+                return;
+            }
+            cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
+            fragmentTransaction.commit();
+
+        }
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
@@ -187,8 +205,9 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
             tempX = x;
             tempY = y;
         }
-
-        updateDisplay();
+        else if(getCode(x,y)==1||getCode(x,y)==2){
+            openRocket();
+        }
 
 
 
@@ -287,17 +306,148 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener {
         view.invalidate();
     }
 
-
-    public void updateDisplay(){
-        //statusDisplay.setText(statusStrings[matchStatus]);
-        //totalDisplay.setText("" + actionMap.numCubes(ALLCODES, ALLSTATUS));
-        xDisplay.setText("" + x);
-        yDisplay.setText("" + y);
-    }
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return false;
+    }
+
+    @Override
+    public void OnAutonRead(String message) {
+        switch(message){
+            case "toPrematch":
+                if(findViewById(R.id.infoframe)!=null){
+                    cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,pregameFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            case "toTeleop":
+                if(findViewById(R.id.infoframe)!=null){
+                    TeleopFragment teleopFragment= new TeleopFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,teleopFragment,null);
+                    fragmentTransaction.commit();
+                    sandstorm=false;
+                }
+                break;
+
+            default:
+        }
+    }
+
+    @Override
+    public void LoadAutonData(AutonEntry a) {
+
+    }
+
+    @Override
+    public void OnPregameRead(String message) {
+        switch (message){
+            case "toAuton":
+                if(findViewById(R.id.infoframe)!=null){
+                    AutonFragment autonFragment= new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,autonFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+
+        }
+    }
+
+    @Override
+    public void LoadPregameData(PregameEntry p) {
+        p.setTeamnum(0);
+    }
+
+    @Override
+    public void OnTeleopRead(String message) {
+        switch (message){
+            case "toAuton":
+                if(findViewById(R.id.infoframe)!=null){
+                    AutonFragment autonFragment = new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,autonFragment,null);
+                    fragmentTransaction.commit();
+                    sandstorm=true;
+                }
+                break;
+
+            case "toEndgame":
+                if(findViewById(R.id.infoframe)!=null){
+                    EndgameFragment endgameFragment= new EndgameFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,endgameFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+
+        }
+    }
+
+    @Override
+    public void LoadTeleopData(TeleopEntry t) {
+
+    }
+
+    @Override
+    public void OnEndgameRead(String message) {
+        switch(message){
+            case "toTeleop":
+                if(findViewById(R.id.infoframe)!=null){
+                    TeleopFragment teleopFragment= new TeleopFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,teleopFragment,null);
+                    fragmentTransaction.commit();
+                }
+                break;
+
+            default:
+        }
+
+    }
+
+    @Override
+    public void LoadEndgameData(EndgameEntry e) {
+
+    }
+
+    public void openRocket(){
+        if(findViewById(R.id.infoframe)!=null){
+            RocketFragment rocketFragment= new RocketFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+            fragmentTransaction.commit();
+        }
+    }
+
+    @Override
+    public void OnrocketRead(String message) {
+        switch (message){
+            case "return":
+                if(sandstorm){
+                    if(findViewById(R.id.infoframe)!=null){
+                        AutonFragment rocketFragment= new AutonFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                }
+                else{
+                    if(findViewById(R.id.infoframe)!=null){
+                        TeleopFragment rocketFragment= new TeleopFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                }
+        }
     }
 
 
