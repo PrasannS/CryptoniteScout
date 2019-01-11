@@ -40,6 +40,29 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
 public class MapView extends AppCompatActivity implements View.OnTouchListener,EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
+
+    /**
+     *
+     * TODO
+     * popup on click for hatch, cargo, successful\
+     * rocket, 12 buttons?
+     * total hatches, total cargo
+     * forward cycle?
+     *
+     * PICTURE!!!
+     * already done display
+     * - make button slightly different
+     * - show preinstalled as different
+     *
+     * two color versions, make map look nice
+     * calibration
+     *
+     * dylan - superscout
+     *record preloads
+     * easy touch targets
+     * 
+     *
+     */
     public int x, y;
     TextView xDisplay, yDisplay, CodeDisplay;
     /*public static int[] REDSWITCH1MIN = {530, 530};

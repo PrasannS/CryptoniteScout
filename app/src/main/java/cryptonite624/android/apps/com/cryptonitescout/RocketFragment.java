@@ -56,6 +56,13 @@ public class RocketFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
 
+    /**
+     *
+     *
+     * Scouting meeting debrief
+     * TODO
+     */
+
     public interface OnrocketReadListener{
         public void OnrocketRead(String message);
     }
