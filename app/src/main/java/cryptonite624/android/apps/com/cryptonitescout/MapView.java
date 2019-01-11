@@ -30,10 +30,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import java.util.Arrays;
-
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
@@ -43,7 +42,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener,EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
 
     /**
@@ -65,7 +64,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
      * dylan - superscout
      *record preloads
      * easy touch targets
-     *
+     * 
      *
      */
     public int x, y;
@@ -83,38 +82,48 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
 
-    public static int[] ROCKET1MIN = {238, 8};
-    public static int[] ROCKET1MAX = {345, 75};
-    public static int[] ROCKET2MIN = {237, 271};
-    public static int[] ROCKET2MAX = {345, 348};
-    public static int[] CARGO1MIN = {225, 145};
-    public static int[] CARGO1MAX = {260, 180};
-    public static int[] CARGO2MIN = {280, 126};
-    public static int[] CARGO2MAX = {340, 160};
-    public static int[] CARGO3MIN = {360, 127};
-    public static int[] CARGO3MAX = {430, 160};
-    public static int[] CARGO4MIN = {467, 128};
-    public static int[] CARGO4MAX = {533, 163};
-    public static int[] CARGO5MIN = {225, 200};
-    public static int[] CARGO5MAX = {260, 225};
-    public static int[] CARGO6MIN = {280, 210};
-    public static int[] CARGO6MAX = {337, 244};
-    public static int[] CARGO7MIN = {365, 210};
-    public static int[] CARGO7MAX = {428, 244};
-    public static int[] CARGO8MIN = {471, 210};
-    public static int[] CARGO8MAX = {530, 245};
-    public static int[] HAB1MIN = {8, 58};
-    public static int[] HAB1MAX = {110, 118};
-    public static int[] HAB2MIN = {8, 120};
-    public static int[] HAB2MAX = {110, 238};
-    public static int[] HAB3MIN = {8, 242};
-    public static int[] HAB3MAX = {110, 300};
+    /*
+    public static int[] ROCKET1MIN = {1050, 350};
+    public static int[] ROCKET1MAX = {1260, 420};
+    public static int[] ROCKET2MIN = {1050, 815};
+    public static int[] ROCKET2MAX = {1270, 960};
+    public static int[] CARGO1MIN = {1030, 570};
+    public static int[] CARGO1MAX = {1100, 620};
+    public static int[] CARGO2MIN = {1130, 520};
+    public static int[] CARGO2MAX = {1260, 590};
+    public static int[] CARGO3MIN = {1030, 570};
+    public static int[] CARGO3MAX = {1100, 620};
+    public static int[] CARGO4MIN = {1500, 540};
+    public static int[] CARGO4MAX = {1630, 600};
+    public static int[] CARGO5MIN = {1030, 670};
+    public static int[] CARGO5MAX = {1100, 720};
+    public static int[] CARGO6MIN = {1145, 685};
+    public static int[] CARGO6MAX = {1250, 770};
+    public static int[] CARGO7MIN = {1300, 570};
+    public static int[] CARGO7MAX = {1430, 760};
+    public static int[] CARGO8MIN = {1500, 700};
+    public static int[] CARGO8MAX = {1620, 760};*/
 
-    public static int[] imageratio = {620,357};
-
-    public static int[] screenratio;
-
-    public static double conversionfactor;
+    public static int[] ROCKET1MIN;
+    public static int[] ROCKET1MAX;
+    public static int[] ROCKET2MIN;
+    public static int[] ROCKET2MAX;
+    public static int[] CARGO1MIN;
+    public static int[] CARGO1MAX;
+    public static int[] CARGO2MIN;
+    public static int[] CARGO2MAX;
+    public static int[] CARGO3MIN;
+    public static int[] CARGO3MAX;
+    public static int[] CARGO4MIN;
+    public static int[] CARGO4MAX;
+    public static int[] CARGO5MIN;
+    public static int[] CARGO5MAX;
+    public static int[] CARGO6MIN;
+    public static int[] CARGO6MAX;
+    public static int[] CARGO7MIN;
+    public static int[] CARGO7MAX;
+    public static int[] CARGO8MIN;
+    public static int[] CARGO8MAX;
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
@@ -163,6 +172,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
 
+
+
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.infoframe)!=null){
             if(savedInstanceState!=null){
@@ -172,10 +183,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
             fragmentTransaction.commit();
-
         }
-
-        setScreenratio();
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
@@ -348,10 +356,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
         view.invalidate();
     }
 
-    public int getpixelheight(){
-        return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
-    }
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return false;
@@ -494,28 +498,21 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
                     }
                 }
         }
-    }
-
-    public void setScreenratio(){
+        }
+    public void setBounds(){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        screenratio[0]= size.x;
-        screenratio[1] = size.y;
-        conversionfactor = screenratio[0]/imageratio[0];
-        Log.e("ScreenRatio*&*%F&^%", "" + Arrays.toString(screenratio));
+        int width = size.x;
+        int height = size.y;
+        Log.e("Width", "" + width);
+        Log.e("height", "" + height);
     }
 
-    public void setBounds(){
-        int topx,topy,bttmx,bttmy;
-        topx = screenratio[0]/3;
-        topy = (screenratio[1]-getpixelheight())/2;
-        bttmx = screenratio[0];
-        bttmy = getpixelheight()+topy;
-
+    @Override
+    public void hatch(Boolean b) {
 
     }
-
 
 
     public class Drawing extends View{

@@ -17,28 +17,7 @@
             android:id = "@+id/teleopguide"
             android:text="    click on action location, then click whether hatch or cargo"/>
 
-        
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id = "@+id/teleophatch"
-                android:text = "hatch" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id = "@+id/teleopcargo"
-                android:text = "cargo" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

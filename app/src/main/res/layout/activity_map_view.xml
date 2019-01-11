@@ -16,7 +16,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/infoframe"></FrameLayout>
+            android:id="@+id/infoframe"
+            android:layout_weight="1"></FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/inputcontainer"
+            android:layout_weight="3"></FrameLayout>
 
 
     </LinearLayout>

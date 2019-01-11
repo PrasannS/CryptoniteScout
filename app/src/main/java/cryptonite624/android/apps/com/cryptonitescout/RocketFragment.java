@@ -22,8 +22,8 @@ import android.widget.EditText;
  */
 public class RocketFragment extends Fragment {
     //setup all of your buttons and class variables here
-    public Button rocketHatch;
-    public Button rocketCargo;
+    //public Button rocketHatch;
+    //public Button rocketCargo;
     public String message;
     public Button br;
     public Button bl;
@@ -83,7 +83,7 @@ public class RocketFragment extends Fragment {
             }
         });*/
 
-        rocketCargo = (Button)view.findViewById(R.id.rocketcargo);
+        /*rocketCargo = (Button)view.findViewById(R.id.rocketcargo);
         rocketCargo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,7 @@ public class RocketFragment extends Fragment {
                 message = "return";
                 rocketReadListener.OnrocketRead(message);
             }
-        });
+        });*/
 
         br = (Button)view.findViewById(R.id.br);
         br.setOnClickListener(new View.OnClickListener() {
