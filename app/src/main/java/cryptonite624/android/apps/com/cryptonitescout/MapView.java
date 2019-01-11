@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -29,6 +32,7 @@ import org.w3c.dom.Text;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
@@ -38,7 +42,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener,EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
 
     /**
@@ -78,6 +82,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
 
+    /*
     public static int[] ROCKET1MIN = {1050, 350};
     public static int[] ROCKET1MAX = {1260, 420};
     public static int[] ROCKET2MIN = {1050, 815};
@@ -97,7 +102,28 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     public static int[] CARGO7MIN = {1300, 570};
     public static int[] CARGO7MAX = {1430, 760};
     public static int[] CARGO8MIN = {1500, 700};
-    public static int[] CARGO8MAX = {1620, 760};
+    public static int[] CARGO8MAX = {1620, 760};*/
+
+    public static int[] ROCKET1MIN;
+    public static int[] ROCKET1MAX;
+    public static int[] ROCKET2MIN;
+    public static int[] ROCKET2MAX;
+    public static int[] CARGO1MIN;
+    public static int[] CARGO1MAX;
+    public static int[] CARGO2MIN;
+    public static int[] CARGO2MAX;
+    public static int[] CARGO3MIN;
+    public static int[] CARGO3MAX;
+    public static int[] CARGO4MIN;
+    public static int[] CARGO4MAX;
+    public static int[] CARGO5MIN;
+    public static int[] CARGO5MAX;
+    public static int[] CARGO6MIN;
+    public static int[] CARGO6MAX;
+    public static int[] CARGO7MIN;
+    public static int[] CARGO7MAX;
+    public static int[] CARGO8MIN;
+    public static int[] CARGO8MAX;
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
@@ -146,6 +172,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
 
+
+
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.infoframe)!=null){
             if(savedInstanceState!=null){
@@ -155,7 +183,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
             fragmentTransaction.commit();
-
         }
 
         //mCustomDrawableView = new CustomDrawableView(this);
@@ -471,6 +498,20 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
                     }
                 }
         }
+        }
+    public void setBounds(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        Log.e("Width", "" + width);
+        Log.e("height", "" + height);
+    }
+
+    @Override
+    public void hatch(Boolean b) {
+
     }
 
 
