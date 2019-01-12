@@ -30,6 +30,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
@@ -82,48 +84,38 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
 
-    /*
-    public static int[] ROCKET1MIN = {1050, 350};
-    public static int[] ROCKET1MAX = {1260, 420};
-    public static int[] ROCKET2MIN = {1050, 815};
-    public static int[] ROCKET2MAX = {1270, 960};
-    public static int[] CARGO1MIN = {1030, 570};
-    public static int[] CARGO1MAX = {1100, 620};
-    public static int[] CARGO2MIN = {1130, 520};
-    public static int[] CARGO2MAX = {1260, 590};
-    public static int[] CARGO3MIN = {1030, 570};
-    public static int[] CARGO3MAX = {1100, 620};
-    public static int[] CARGO4MIN = {1500, 540};
-    public static int[] CARGO4MAX = {1630, 600};
-    public static int[] CARGO5MIN = {1030, 670};
-    public static int[] CARGO5MAX = {1100, 720};
-    public static int[] CARGO6MIN = {1145, 685};
-    public static int[] CARGO6MAX = {1250, 770};
-    public static int[] CARGO7MIN = {1300, 570};
-    public static int[] CARGO7MAX = {1430, 760};
-    public static int[] CARGO8MIN = {1500, 700};
-    public static int[] CARGO8MAX = {1620, 760};*/
+    public static int[] ROCKET1MIN = {238, 8};
+    public static int[] ROCKET1MAX = {345, 75};
+    public static int[] ROCKET2MIN = {237, 271};
+    public static int[] ROCKET2MAX = {345, 348};
+    public static int[] CARGO1MIN = {225, 145};
+    public static int[] CARGO1MAX = {260, 180};
+    public static int[] CARGO2MIN = {280, 126};
+    public static int[] CARGO2MAX = {340, 160};
+    public static int[] CARGO3MIN = {360, 127};
+    public static int[] CARGO3MAX = {430, 160};
+    public static int[] CARGO4MIN = {467, 128};
+    public static int[] CARGO4MAX = {533, 163};
+    public static int[] CARGO5MIN = {225, 200};
+    public static int[] CARGO5MAX = {260, 225};
+    public static int[] CARGO6MIN = {280, 210};
+    public static int[] CARGO6MAX = {337, 244};
+    public static int[] CARGO7MIN = {365, 210};
+    public static int[] CARGO7MAX = {428, 244};
+    public static int[] CARGO8MIN = {471, 210};
+    public static int[] CARGO8MAX = {530, 245};
+    public static int[] HAB1MIN = {8, 58};
+    public static int[] HAB1MAX = {110, 118};
+    public static int[] HAB2MIN = {8, 120};
+    public static int[] HAB2MAX = {110, 238};
+    public static int[] HAB3MIN = {8, 242};
+    public static int[] HAB3MAX = {110, 300};
 
-    public static int[] ROCKET1MIN;
-    public static int[] ROCKET1MAX;
-    public static int[] ROCKET2MIN;
-    public static int[] ROCKET2MAX;
-    public static int[] CARGO1MIN;
-    public static int[] CARGO1MAX;
-    public static int[] CARGO2MIN;
-    public static int[] CARGO2MAX;
-    public static int[] CARGO3MIN;
-    public static int[] CARGO3MAX;
-    public static int[] CARGO4MIN;
-    public static int[] CARGO4MAX;
-    public static int[] CARGO5MIN;
-    public static int[] CARGO5MAX;
-    public static int[] CARGO6MIN;
-    public static int[] CARGO6MAX;
-    public static int[] CARGO7MIN;
-    public static int[] CARGO7MAX;
-    public static int[] CARGO8MIN;
-    public static int[] CARGO8MAX;
+
+    public static int[] imageratio = {620,357};
+
+    public static int[] screenratio = new int[2];
+    public static double conversionfactor;
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
@@ -239,6 +231,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                 R.color.colorAccent, null);
         mPaint.setColor(mColorBackground);
 
+        setScreenratio();
+        setBounds();
         //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
@@ -475,14 +469,53 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                 currentAction.actionCode = currentAction.actionCode+1;
         }
         }
-    public void setBounds(){
+
+    public int getpixelheight(){
+        return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
+    }
+    public void setScreenratio(){
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        Log.e("Width", "" + width);
-        Log.e("height", "" + height);
+        screenratio[0]= size.x;
+        screenratio[1] = size.y;
+        conversionfactor = screenratio[0]/imageratio[0];
+        Log.e("ScreenRatio*&*%F&^%", "" + Arrays.toString(screenratio));
+    }
+
+
+    public void setBounds(){
+    int topx,topy,bttmx,bttmy;
+        topx = screenratio[0]/3;
+        topy = (screenratio[1]-getpixelheight())/2;
+        bttmx = screenratio[0];
+        bttmy = getpixelheight()+topy;
+        ROCKET1MIN [0] =topx+(int)(238*conversionfactor); ROCKET1MIN [1] =topy+(int)( 8*conversionfactor);
+        ROCKET1MAX [0] =topx+(int)( 345*conversionfactor); ROCKET1MAX [1] =topy+(int)( 75*conversionfactor);
+        ROCKET2MIN [0] =topx+(int)( 237*conversionfactor); ROCKET2MIN [1] =topy+(int)( 271*conversionfactor);
+        ROCKET2MAX [0] =topx+(int)( 345*conversionfactor); ROCKET2MAX [1] =topy+(int)( 348*conversionfactor);
+        CARGO1MIN [0] =topx+(int)( 225*conversionfactor);CARGO1MIN [1] =topy+(int)( 145*conversionfactor);
+        CARGO1MAX [0] =topx+(int)( 260*conversionfactor);CARGO1MAX [1] =topy+(int)( 180*conversionfactor);
+        CARGO2MIN [0] =topx+(int)( 280*conversionfactor);CARGO2MIN [1] =topy+(int)( 126*conversionfactor);
+        CARGO2MAX [0] =topx+(int)( 340*conversionfactor);CARGO2MAX [1] =topy+(int)( 160*conversionfactor);
+        CARGO3MIN [0] =topx+(int)( 360*conversionfactor);CARGO3MIN [1] =topy+(int)( 127*conversionfactor);
+        CARGO3MAX [0] =topx+(int)( 430*conversionfactor);CARGO3MAX [1] =topy+(int)( 160*conversionfactor);
+        CARGO4MIN [0] =topx+(int)( 467*conversionfactor);CARGO4MIN [1] =topy+(int)( 128*conversionfactor);
+        CARGO4MAX [0] =topx+(int)( 533*conversionfactor);CARGO4MAX [1] =topy+(int)( 163*conversionfactor);
+        CARGO5MIN [0] =topx+(int)( 225*conversionfactor);CARGO5MIN [1] =topy+(int)( 200*conversionfactor);
+        CARGO5MAX [0] =topx+(int)( 260*conversionfactor);CARGO5MAX [1] =topy+(int)( 225*conversionfactor);
+        CARGO6MIN [0] =topx+(int)( 280*conversionfactor);CARGO6MIN [1] =topy+(int)( 210*conversionfactor);
+        CARGO6MAX [0] =topx+(int)( 337*conversionfactor);CARGO6MAX [1] =topy+(int)( 244*conversionfactor);
+        CARGO7MIN [0] =topx+(int)( 365*conversionfactor);CARGO7MIN [1] =topy+(int)( 210*conversionfactor);
+        CARGO7MAX [0] =topx+(int)( 428*conversionfactor);CARGO7MAX [1] =topy+(int)( 244*conversionfactor);
+        CARGO8MIN [0] =topx+(int)( 471*conversionfactor);CARGO8MIN [1] =topy+(int)( 210*conversionfactor);
+        CARGO8MAX [0] =topx+ (int)( 530*conversionfactor);CARGO8MAX [1] =(int)( 245*conversionfactor);
+        HAB1MIN [0] =topx+(int)( 8*conversionfactor);   HAB1MIN [1] =topy+(int)(   58*conversionfactor);
+        HAB1MAX [0] =topx+(int)( 110*conversionfactor); HAB1MAX [1] =topy+(int)(    118*conversionfactor);
+        HAB2MAX [0] =topx+(int)( 110*conversionfactor); HAB2MAX [1] =topy+(int)(    238*conversionfactor);
+        HAB3MIN [0] =topx+(int)( 8*conversionfactor);   HAB3MIN [1] =topy+(int)(   242*conversionfactor);
+        HAB3MAX [0] =topx+(int)( 110*conversionfactor); HAB3MAX [1] =topy+(int)(    300*conversionfactor);
+        
     }
 
     @Override
@@ -490,6 +523,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         currentAction.hatch = b;
         actionMap.actions.add(currentAction);
     }
+
+
 
 
 
