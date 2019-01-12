@@ -458,15 +458,15 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
             case "1":
                 currentAction.actionCode = currentAction.actionCode+1;
             case "2":
-                currentAction.actionCode = currentAction.actionCode+1;
+                currentAction.actionCode = currentAction.actionCode+2;
             case "3":
-                currentAction.actionCode = currentAction.actionCode+1;
+                currentAction.actionCode = currentAction.actionCode+3;
             case "4":
-                currentAction.actionCode = currentAction.actionCode+1;
+                currentAction.actionCode = currentAction.actionCode+4;
             case "5":
-                currentAction.actionCode = currentAction.actionCode+1;
+                currentAction.actionCode = currentAction.actionCode+5;
             case "6":
-                currentAction.actionCode = currentAction.actionCode+1;
+                currentAction.actionCode = currentAction.actionCode+6;
         }
         }
 
