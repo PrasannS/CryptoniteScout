@@ -67,6 +67,8 @@ public class RocketFragment extends Fragment {
         public void OnrocketRead(String message);
     }
 
+    public int rocketCode;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,7 +107,8 @@ public class RocketFragment extends Fragment {
         br.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "1";
+                rocketCode = 1;
             }
         });
 
@@ -113,7 +116,8 @@ public class RocketFragment extends Fragment {
         bl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "2";
+                rocketCode = 2;
             }
         });
 
@@ -121,7 +125,8 @@ public class RocketFragment extends Fragment {
         mr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "3";
+                rocketCode = 3;
             }
         });
 
@@ -129,7 +134,8 @@ public class RocketFragment extends Fragment {
         ml.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "4";
+                rocketCode = 4;
             }
         });
 
@@ -137,7 +143,8 @@ public class RocketFragment extends Fragment {
         tr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "5";
+                rocketCode = 5;
             }
         });
 
@@ -145,12 +152,10 @@ public class RocketFragment extends Fragment {
         tl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "return";
+                message = "6";
+                rocketCode = 6;
             }
         });
-
-
-
 
         return view;
     }

@@ -127,7 +127,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
-    Drawing drawing;
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     public int matchStatus = 0;
     public Button statusForward, statusBack;
@@ -139,6 +138,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
     public static int[] ALLSTATUS = {1, 2, 3};
     private static final int OFFSET = 120;
+    public static int totalHatches = 0;
+    public static int totalCargo = 0;
 
     CustomDrawableView mCustomDrawableView;
 
@@ -160,6 +161,12 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     private Rect mRect = new Rect();
     private Rect mBounds = new Rect();
 
+    TextView hatchDisplay;
+    TextView cargoDisplay;
+
+    public RobotAction currentAction = new RobotAction();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,8 +178,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
-
-
 
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.infoframe)!=null){
@@ -188,6 +193,10 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         //mCustomDrawableView = new CustomDrawableView(this);
 
         //setContentView(mCustomDrawableView);
+
+
+        cargoDisplay = (TextView)findViewById(R.id.cargodisplay);
+        hatchDisplay = (TextView)findViewById(R.id.hatchdisplay);
 
         //xDisplay = (TextView)findViewById(R.id.XDisplay);
         //yDisplay = (TextView)findViewById(R.id.YDisplay);
@@ -233,6 +242,11 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
+    public void updateDisplay(){
+        hatchDisplay.setText("" + totalHatches);
+        cargoDisplay.setText("" + totalCargo);
+    }
+
     @SuppressLint("WrongCall")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -243,21 +257,21 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
         if(actionReady){
             actionReady = false;
-            actionMap.actions.add(new RobotAction(tempX, tempY, getCode(x, y), matchStatus));
+            actionMap.actions.add(new RobotAction(getCode(x, y), matchStatus));
         }
 
         /*if(actionReady == false){
             customView.setClickLocation(x, y);
         }*/
 
-        if(getCode(x, y) == 0){
-            actionReady = true;
-            tempX = x;
-            tempY = y;
+        if(!getCode(x, y).equals("Z")){
+            //actionReady = true;
+            currentAction.actionCode = getCode(x, y);
         }
-        else if(getCode(x,y)==1||getCode(x,y)==2){
+        else if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
             openRocket();
         }
+
 
 
 
@@ -268,92 +282,42 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     }
 
     //0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
-    public int getCode(int x, int y){
+    public String getCode(int x, int y){
         if(x > ROCKET1MIN[0] && x < ROCKET1MAX[0] && y > ROCKET1MIN[1] && y < ROCKET1MAX[1]){
-            return 1;
+            return "A";
         }
         if(x > ROCKET2MIN[0] && x < ROCKET2MAX[0] && y > ROCKET2MIN[1] && y < ROCKET2MAX[1]){
-            return 2;
+            return "B";
         }
         else if(x > CARGO1MIN[0] && x < CARGO1MAX[0] && y > CARGO1MIN[1] && y < CARGO1MAX[1]){
-            return 3;
+            return "C1";
         }
         else if(x > CARGO2MIN[0] && x < CARGO2MAX[0] && y > CARGO2MIN[1] && y < CARGO2MAX[1]){
-            return 4;
+            return "C2";
         }
         else if(x > CARGO3MIN[0] && x < CARGO3MAX[0] && y > CARGO3MIN[1] && y < CARGO3MAX[1]){
-            return 5;
+            return "C3";
         }
         else if(x > CARGO4MIN[0] && x < CARGO4MAX[0] && y > CARGO4MIN[1] && y < CARGO4MAX[1]){
-            return 6;
+            return "C4";
         }
         else if(x > CARGO5MIN[0] && x < CARGO5MAX[0] && y > CARGO5MIN[1] && y < CARGO5MAX[1]){
-            return 7;
+            return "C5";
         }
         else if(x > CARGO6MIN[0] && x < CARGO6MAX[0] && y > CARGO6MIN[1] && y < CARGO6MAX[1]){
-            return 8;
+            return "C6";
         }
         else if(x > CARGO7MIN[0] && x < CARGO7MAX[0] && y > CARGO7MIN[1] && y < CARGO7MAX[1]){
-            return 9;
+            return "C7";
         }
         else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
-            return 10;
+            return "C8";
         }
         else if(y > 330)
-            return 0;
+            return "0";
+
         else
-            return 11;
-    }
-
-    public void drawSomething(View view){
-        int vWidth = view.getWidth();
-        int vHeight = view.getHeight();
-        int halfWidth = vWidth / 2;
-        int halfHeight = vHeight / 2;
-
-        mImageView.invalidate();
-
-       // BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
-
-       // mImageView.invalidateDrawable(drawable);
-
-        //mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-
-        mBitmap = Bitmap.createBitmap(
-                vWidth, vHeight, Bitmap.Config.ARGB_8888);
-
-        //mBitmap = drawable.getBitmap();
-
-        Bitmap field = BitmapFactory.decodeResource(getResources(), R.drawable.powerupfield);
-
-        //mImageView.setImageBitmap(field);
-
-        mCanvas = new Canvas(mBitmap);
-
-        mCanvas.drawColor(mColorBackground);
-        mPaint.setColor(mColorRectangle);
-
-        mRect.set(
-                mOffset, mOffset, vWidth - mOffset, vHeight - mOffset);
-
-        mCanvas.drawRect(mRect, mPaint);
-
-        mCanvas.drawBitmap(field, 100, 100, mPaint);
-
-        mCanvas.drawText("If you see this then it's probably working so far", 100, 100, mPaintText);
-        mCanvas.drawRect(mRect, mPaint);
-
-        //Canvas.drawCircle(
-         //       halfWidth, halfHeight, halfWidth / 3, mPaint);
-
-        //Drawable d = getResources().getDrawable(R.drawable.powerupfield, null);
-
-        //Canvas canvas = new Canvas();
-        //d.setBounds(100, 100, 100, 100);
-        //d.draw(canvas);
-        //canvas.drawCircle(100, 100, 50, mPaint);
-
-        view.invalidate();
+            return "Z";
     }
 
     @Override
@@ -497,6 +461,18 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                         fragmentTransaction.commit();
                     }
                 }
+            case "1":
+                currentAction.actionCode = currentAction.actionCode+1;
+            case "2":
+                currentAction.actionCode = currentAction.actionCode+1;
+            case "3":
+                currentAction.actionCode = currentAction.actionCode+1;
+            case "4":
+                currentAction.actionCode = currentAction.actionCode+1;
+            case "5":
+                currentAction.actionCode = currentAction.actionCode+1;
+            case "6":
+                currentAction.actionCode = currentAction.actionCode+1;
         }
         }
     public void setBounds(){
@@ -511,29 +487,10 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
     @Override
     public void hatch(Boolean b) {
-
+        currentAction.hatch = b;
+        actionMap.actions.add(currentAction);
     }
 
-
-    public class Drawing extends View{
-
-        //Bitmap circle;
-
-        public Drawing(Context context) {
-            super(context);
-            //circle = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-        }
-
-        @Override
-        protected void onDraw(Canvas canvas){
-            super.onDraw(canvas);
-            /*Paint paint = new Paint();
-            paint.setColor(Color.GREEN);
-            paint.setStyle(Paint.Style.FILL);
-            canvas.drawCircle(500, 500, 50, paint);*/
-        }
-
-    }
 
 
 }

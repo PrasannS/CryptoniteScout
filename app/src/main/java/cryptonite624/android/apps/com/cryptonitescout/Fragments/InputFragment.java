@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import cryptonite624.android.apps.com.cryptonitescout.MapView;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
@@ -29,6 +30,8 @@ public class InputFragment extends Fragment {
 
     OnInputReadListener inputReadListener;
 
+    public String clickCode;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -38,6 +41,7 @@ public class InputFragment extends Fragment {
     
     Button hatch;
     Button cargo;
+    boolean hatchSelected;
 
     public InputFragment() {
         // Required empty public constructor
@@ -63,6 +67,7 @@ public class InputFragment extends Fragment {
 
     public interface OnInputReadListener{
         public void hatch(Boolean b);
+
     }
 
     @Override
@@ -85,6 +90,8 @@ public class InputFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 inputReadListener.hatch(false);
+                //addHatch(MapView.getCode());
+                MapView.totalCargo++;
             }
         });
 
@@ -93,6 +100,7 @@ public class InputFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 inputReadListener.hatch(true);
+                MapView.totalHatches++;
             }
         });
 
@@ -136,5 +144,9 @@ public class InputFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void addHatch(int code){
+
     }
 }
