@@ -62,20 +62,21 @@ public class CustomImageView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas){
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paint = new Paint();
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawBitmap(bitmap, 0, 0, paint);
-        if(actionMap == null) {
+        /*if(actionMap == null) {
             canvas.drawCircle(x, y, 10, paint);
         }
         else
             for (RobotAction r : actionMap.actions) {
                 canvas.drawCircle(r.x, r.y, 10, paint);
             }
-        }
+        */
+    }
 
 }
 
