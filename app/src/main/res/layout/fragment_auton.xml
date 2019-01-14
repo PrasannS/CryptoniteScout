@@ -3,118 +3,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AutonFragment">
+    tools:context=".Fragments.AutonFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Auton"
-                android:textColor="@android:color/holo_green_light"
-                android:background="@android:color/black"
-                android:textSize="40sp"/>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id = "@+id/autonguide"
+            android:text="    click on action location, then click whether hatch or cargo"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Match #"
-                android:textColor="@android:color/black"
-                android:background="@android:color/white"
-                android:textSize="40sp"/>
-
-            <EditText
-                android:id="@+id/matchnum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Team #"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <EditText
-                android:id="@+id/teamnum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="No Show"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
+            android:layout_height="match_parent"
+            android:layout_weight="2">
 
             <Switch
-                android:id="@+id/noshow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Lost Comms"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
+                android:layout_weight="1"
+                android:id = "@+id/baselinecrossed"
+                android:text = "    BASELINE CROSSED" />
 
-            <Switch
-                android:id="@+id/lostcomms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/auton_prematch"
-                android:layout_width="200dp"
+            android:layout_weight="2">
+
+            <Switch
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="30sp"
-                android:text="Prematch"
-                android:textColor="@android:color/holo_green_light"
-                android:background="@android:color/black"/>
+                android:layout_weight="1"
+                android:id = "@+id/autosandstorm"
+                android:text = "    AUTONOMOUS SANDSTORM" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id = "@+id/autonhatch"
+                android:text = "hatch" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id = "@+id/autoncargo"
+                android:text = "cargo" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/auton_pregame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Pregame" />
+
             <Button
                 android:id="@+id/auton_teleop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="30sp"
-                android:textColor="@android:color/black"
-                android:text="Teleop"
-                android:background="@android:color/holo_green_light"/>
+                android:layout_weight="1"
+                android:text="teleop" />
+
         </LinearLayout>
 
     </LinearLayout>

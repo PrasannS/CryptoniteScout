@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
@@ -94,6 +95,8 @@ public class TeleopFragment extends Fragment {
         toEndgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /** TODO specialised code based on game challenge will be put here*/
+                teleopReadListener.LoadTeleopData(new TeleopEntry(/**This is where*/));
                 message = "toEndgame";
                 teleopReadListener.OnTeleopRead(message);
             }

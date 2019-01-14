@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="cryptonite624.android.apps.com.cryptonitescout.MapView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/infoframe"></FrameLayout>
+
+
+    </LinearLayout>
+
+    <!--
+    <cryptonite624.android.apps.com.cryptonitescout.CustomImageView
+        android:id="@+id/drawview"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/tempfield"/>
+
+    -->
+
+
+        <ImageView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/actualtempfield"
+            />
+
+    </LinearLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapView"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        >
+            <ImageView
+                android:id="@+id/mapview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/powerupfield"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical">
+            <!-
+            <TextView
+                android:id="@+id/XDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="X Display"
+                />
+            <TextView
+                android:id= "@+id/YDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Y Display"
+                />
+            <TextView
+                android:id= "@+id/CodeDisplay"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Code Display"
+                />
+                -->
+<!--
+        <Button
+            android:id= "@+id/StatusButtonBack"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="B"
+            />
+        <TextView
+            android:id= "@+id/StatusDisplay"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="Pregame"
+            />
+
+        <Button
+            android:id= "@+id/StatusButtonForward"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="3"
+            android:text="F"
+            />
+        <TextView
+            android:id= "@+id/TotalDisplay"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="Total Cube Display"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+-->
+

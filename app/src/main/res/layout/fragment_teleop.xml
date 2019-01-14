@@ -3,109 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeleopFragment">
+    tools:context=".Fragments.TeleopFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id = "@+id/teleopguide"
+            android:text="    click on action location, then click whether hatch or cargo"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Teleop"
-                android:textColor="@android:color/holo_green_light"
-                android:background="@android:color/black"
-                android:textSize="40sp"/>
-
-        </LinearLayout>
+        
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Match #"
-                android:textSize="40sp"/>
-
-            <TextView
-                android:id="@+id/matchnum"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Team #"
-                android:textSize="40sp"/>
+                android:layout_weight="1"
+                android:id = "@+id/teleophatch"
+                android:text = "hatch" />
 
-            <TextView
-                android:id="@+id/teamnum"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="No Show"
-                android:textSize="40sp"/>
+                android:layout_weight="1"
+                android:id = "@+id/teleopcargo"
+                android:text = "cargo" />
 
-            <Switch
-                android:id="@+id/noshow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Lost Comms"
-                android:textSize="40sp"/>
-
-            <Switch
-                android:id="@+id/lostcomms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/teleop_auton"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="25sp"
-                android:text="auton"/>
+                android:layout_weight="1"
+                android:text="sandstorm" />
+
             <Button
                 android:id="@+id/teleop_endgame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="25sp"
-                android:text="Endgame"/>
+                android:layout_weight="1"
+                android:text="endgame" />
+
         </LinearLayout>
 
     </LinearLayout>

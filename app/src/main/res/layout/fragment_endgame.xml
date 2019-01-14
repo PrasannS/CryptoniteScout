@@ -3,117 +3,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EndgameFragment">
+    tools:context=".Fragments.EndgameFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id = "@+id/endgameguide"
+            android:text="    click on action location, then click whether hatch or cargo click on platform if successful climb "/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Endgame"
-                android:textColor="@android:color/holo_green_light"
-                android:background="@android:color/black"
-                android:textSize="40sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:text = "comments"
+            android:layout_weight="1"
+            android:id = "@+id/comments"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Climb"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
 
-            <TextView
-                android:id="@+id/matchnum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Climb Supported"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <TextView
-                android:id="@+id/teamnum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Tech Fouls"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <Switch
-                android:id="@+id/noshow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Endgame Comments"
-                android:textColor="@android:color/black"
-                android:textSize="40sp"/>
-
-            <Switch
-                android:id="@+id/lostcomms"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/endgame_teleop"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:textSize="25sp"
-                android:text="teleop"
-                android:textColor="@android:color/black"
-                android:background="@android:color/holo_green_light"/>
-            <Button
-                android:id="@+id/engame_submit"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="25sp"
-                android:background="@android:color/black"
-                android:text="submit"
-                android:textColor="@android:color/holo_green_light"/>
+                android:layout_weight="2">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id = "@+id/endgamehatch"
+                    android:text = "hatch" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id = "@+id/endgamecargo"
+                    android:text = "cargo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/endgame_teleop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="teleop" />
+
+                <Button
+                    android:id="@+id/endgame_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="submit" />
+        </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

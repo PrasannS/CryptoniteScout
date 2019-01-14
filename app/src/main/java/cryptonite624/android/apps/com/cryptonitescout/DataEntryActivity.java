@@ -1,10 +1,22 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
@@ -26,27 +38,36 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
  *
  */
 
-public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
+public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
     DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
+    public ActionMap actionMap = new ActionMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_entry);
+
+        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darktheme);
+        }
+        else setTheme(R.style.lighttheme);
+
         //this is the initial code that generates the pregame fragment and adds it to the layout
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.fragmentcontainer)!=null){
             if(savedInstanceState!=null){
                 return;
             }
-            PregameFragment pregameFragment= new PregameFragment();
+            cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fragmentcontainer,pregameFragment,null);
             fragmentTransaction.commit();
 
         }
+
+
     }
 
     public int getteam(){
@@ -54,14 +75,15 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         return 624;
     }
 
-    //All the override methods are the implementations of the fragment interfaces which allow for the communication between the fragment and the activity
+    //All the override methods are the implementations of the fragment interfaces which allow for the
+    //communication between the fragment and the activity
 
     @Override
     public void OnAutonRead(String message) {
         switch(message){
             case "toPrematch":
                 if(findViewById(R.id.fragmentcontainer)!=null){
-                    PregameFragment pregameFragment= new PregameFragment();
+                    cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentcontainer,pregameFragment,null);
                     fragmentTransaction.commit();
@@ -158,6 +180,25 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     @Override
     public void LoadEndgameData(EndgameEntry e) {
-
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.settings_menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.settings:
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DataEntryActivity.this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
