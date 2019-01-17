@@ -13,6 +13,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -44,7 +45,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
 
     /**
@@ -130,8 +131,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
     public static int[] ALLSTATUS = {1, 2, 3};
     private static final int OFFSET = 120;
-    public static int totalHatches = 0;
-    public static int totalCargo = 0;
+    public static int topx,topy,bttmx,bttmy;
 
     CustomDrawableView mCustomDrawableView;
 
@@ -181,6 +181,14 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
             fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
             fragmentTransaction.commit();
         }
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
+        }
+
+
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
@@ -236,11 +244,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
-    public void updateDisplay(){
-        hatchDisplay.setText("" + totalHatches);
-        cargoDisplay.setText("" + totalCargo);
-    }
-
     @SuppressLint("WrongCall")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -260,11 +263,34 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
         if(!getCode(x, y).equals("Z")){
             //actionReady = true;
+            if(findViewById(R.id.inputcontainer)!=null){
+                EmptyFragment emptyFragment= new EmptyFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+                fragmentTransaction.commit();
+            }
+
+            if(sandstorm){
+                if(findViewById(R.id.infoframe)!=null){
+                    AutonFragment rocketFragment= new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                    fragmentTransaction.commit();
+                }
+            }
+
             currentAction.actionCode = getCode(x, y);
+            if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
+                openRocket();
+            }
+            else if(findViewById(R.id.inputcontainer)!=null){
+                InputFragment inputFragment= new InputFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+                fragmentTransaction.commit();
+            }
         }
-        else if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
-            openRocket();
-        }
+
 
 
 
@@ -307,11 +333,11 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
             return "C8";
         }
-        else if(y > 330)
+        else if(x > topx)
+            return "Z";
+        else
             return "0";
 
-        else
-            return "Z";
     }
 
     @Override
@@ -433,6 +459,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
             fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
             fragmentTransaction.commit();
         }
+
+
     }
 
     @Override
@@ -455,20 +483,37 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                         fragmentTransaction.commit();
                     }
                 }
+                break;
             case "1":
                 currentAction.actionCode = currentAction.actionCode+1;
+                break;
             case "2":
-                currentAction.actionCode = currentAction.actionCode+2;
+                currentAction.actionCode = currentAction.actionCode+2;break;
+
             case "3":
-                currentAction.actionCode = currentAction.actionCode+3;
+                currentAction.actionCode = currentAction.actionCode+3;break;
             case "4":
-                currentAction.actionCode = currentAction.actionCode+4;
+                currentAction.actionCode = currentAction.actionCode+4;break;
             case "5":
-                currentAction.actionCode = currentAction.actionCode+5;
+                currentAction.actionCode = currentAction.actionCode+5;break;
             case "6":
-                currentAction.actionCode = currentAction.actionCode+6;
+                currentAction.actionCode = currentAction.actionCode+6;break;
+
+
+
+
         }
+
+        if(findViewById(R.id.inputcontainer)!=null){
+            InputFragment inputFragment= new InputFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+            fragmentTransaction.commit();
         }
+
+
+        }
+
 
     public int getpixelheight(){
         return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
@@ -485,7 +530,6 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
 
     public void setBounds(){
-    int topx,topy,bttmx,bttmy;
         topx = screenratio[0]/3;
         topy = (screenratio[1]-getpixelheight())/2;
         bttmx = screenratio[0];
@@ -522,12 +566,44 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public void hatch(Boolean b) {
         currentAction.hatch = b;
         actionMap.actions.add(currentAction);
+        currentAction = new RobotAction();
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
+        }
+
+        if(sandstorm){
+            if(findViewById(R.id.infoframe)!=null){
+                AutonFragment rocketFragment= new AutonFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
+        }
+        else{
+            if(findViewById(R.id.infoframe)!=null){
+                TeleopFragment rocketFragment= new TeleopFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
+        }
+        updateScreen();
+    }
+
+    public void updateScreen(){
+        cargoDisplay.setText(""+actionMap.totalhatches(false));
+        hatchDisplay.setText(""+actionMap.totalhatches(true));
     }
 
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-
+    }
 }
 
 

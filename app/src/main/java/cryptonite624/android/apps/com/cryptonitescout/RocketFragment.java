@@ -109,6 +109,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "1";
                 rocketCode = 1;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 
@@ -118,6 +119,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "2";
                 rocketCode = 2;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 
@@ -127,6 +129,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "3";
                 rocketCode = 3;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 
@@ -136,6 +139,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "4";
                 rocketCode = 4;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 
@@ -145,6 +149,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "5";
                 rocketCode = 5;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 
@@ -154,6 +159,7 @@ public class RocketFragment extends Fragment {
             public void onClick(View view) {
                 message = "6";
                 rocketCode = 6;
+                rocketReadListener.OnrocketRead(message);
             }
         });
 

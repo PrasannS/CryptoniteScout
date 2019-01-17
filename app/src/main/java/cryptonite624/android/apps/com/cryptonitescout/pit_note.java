@@ -32,6 +32,20 @@ public class pit_note extends AppCompatActivity {
     public Switch From_Cali;
     public Switch Penalties;
 
+    /**TODO
+     * all the stuff from the discord should be on there
+     * Go for Everything
+     * comments section call (other notes
+     * scouting map
+     *  reminder to add
+     *  green-scouted
+     *  yellow-partial
+     *  red-no data
+     *  server updates
+     *  excel
+
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

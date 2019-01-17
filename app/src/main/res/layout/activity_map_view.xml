@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Number"
+                    android:text=""
                     android:id="@+id/hatchdisplay"/>
             </LinearLayout>
             <LinearLayout
@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Number"
+                    android:text=""
                     android:id="@+id/cargodisplay"/>
             </LinearLayout>
         </LinearLayout>

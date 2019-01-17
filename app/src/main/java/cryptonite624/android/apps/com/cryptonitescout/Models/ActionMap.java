@@ -32,6 +32,16 @@ public class ActionMap {
         return total;
     }
 
+    public int totalhatches(boolean b){
+        int count = 0;
+        for(RobotAction r: actions){
+            if(b==r.hatch){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public int totalPoints(){
         return actions.size();
     }
