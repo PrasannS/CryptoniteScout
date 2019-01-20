@@ -152,7 +152,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private int mOffset = OFFSET;
 
     public boolean sandstorm = true;
-    private ImageView mapview;
+    private RelativeLayout mapview;
 
     CustomImageView customView;
 
@@ -196,7 +196,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         switchbounds();
 
-        mapview = (ImageView)findViewById(R.id.mapview);
+        mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
 
 
@@ -210,17 +210,17 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             public void onClick(View view) {
                 if(red){
                     if(left){
-                        mapview.setImageResource(R.drawable.redright);
+                        mapview.setBackgroundResource(R.drawable.redright);
                     }else{
-                        mapview.setImageResource(R.drawable.red);
+                        mapview.setBackgroundResource(R.drawable.red);
                     }
                 }
                 else{
                     if(left){
-                        mapview.setImageResource(R.drawable.blueright);
+                        mapview.setBackgroundResource(R.drawable.blueright);
                     }
                     else {
-                        mapview.setImageResource(R.drawable.blue);
+                        mapview.setBackgroundResource(R.drawable.blue);
                     }
                 }
                 switchbounds();
@@ -283,8 +283,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         x = (int)event.getX();
         y = (int)event.getY();
 
-        hatchDisplay.setText(""+x);
-        cargoDisplay.setText(""+y);
+        //hatchDisplay.setText(""+x);
+        //cargoDisplay.setText(""+y);
 
         //drawing = new Drawing(this);
 
