@@ -118,12 +118,37 @@
     -->
 
 
-    <ImageView
-        android:id="@+id/mapview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:src="@drawable/actualtempfield" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_gravity="right"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"></FrameLayout>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="switch"
+                android:id = "@+id/mapswitch"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/redright" />
+
+    </LinearLayout>
 
     </LinearLayout>
 
