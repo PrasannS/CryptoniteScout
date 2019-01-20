@@ -41,6 +41,8 @@ public class PregameFragment extends Fragment {
     public EditText teamNum;
     public PregameEntry pregameEntry = new PregameEntry();
 
+    public TextView hatchDisplay;
+
     OnPregameReadListener pregameReadListener;
 
     public PregameFragment() {
@@ -78,7 +80,7 @@ public class PregameFragment extends Fragment {
         //The variable view is not default
         View view = inflater.inflate(R.layout.fragment_pregame, container, false);
 
-        toAuton = (Button)view.findViewById(R.id.pregame_auton);
+        /*toAuton = (Button)view.findViewById(R.id.pregame_auton);
         toAuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +89,11 @@ public class PregameFragment extends Fragment {
                 pregameEntry = new PregameEntry();
 
             }
-        });
+        });*/
+
+        //hatchDisplay = (TextView)view.findViewById(R.id.pregame_hatchdisplay);
+
+
 
         /*toMapView = (Button)view.findViewById(R.id.prematch_mapview);
         toMapView.setOnClickListener(new View.OnClickListener() {

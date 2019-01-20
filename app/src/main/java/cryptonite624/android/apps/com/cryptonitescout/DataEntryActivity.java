@@ -40,7 +40,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
-    DataEntry dataEntry = new DataEntry(getteam());
+    public DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
 
@@ -66,8 +66,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
             fragmentTransaction.commit();
 
         }
-
-
     }
 
     public int getteam(){
@@ -198,6 +196,10 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public int getNumAutonHatches(){
+        return 0;
     }
 
 }

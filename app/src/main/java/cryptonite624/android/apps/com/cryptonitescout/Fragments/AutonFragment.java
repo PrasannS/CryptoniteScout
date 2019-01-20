@@ -91,7 +91,7 @@ public class AutonFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_auton, container, false);
-
+    /*
         toPrematch = (Button)view.findViewById(R.id.auton_pregame);
         toPrematch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,16 +102,17 @@ public class AutonFragment extends Fragment {
             }
         });
 
-        toTeleop = (Button)view.findViewById(R.id.auton_teleop);
+        /*toTeleop = (Button)view.findViewById(R.id.auton_teleop);
         toTeleop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /** TODO specialised code based on game challenge will be put here*/
-                autonReadListener.LoadAutonData(new AutonEntry(/**This is where*/));
+                /** TODO specialised code based on game challenge will be put here*//*
+                autonReadListener.LoadAutonData(new AutonEntry(/**This is where));/*
+/*
                 message = "toTeleop";
                 autonReadListener.OnAutonRead(message);
             }
-        });
+        });*/
 
         return view;
     }

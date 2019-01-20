@@ -2,7 +2,12 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 import java.util.ArrayList;
 
-public class ActionMap {
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+@SuppressLint("ParcelCreator")
+public class ActionMap implements Parcelable{
 
     public ArrayList<RobotAction> actions;
 
@@ -14,6 +19,22 @@ public class ActionMap {
     public ActionMap(ArrayList<RobotAction> acts){
         actions = acts;
     }
+
+    protected ActionMap(Parcel in) {
+        actions = in.createTypedArrayList(RobotAction.CREATOR);
+    }
+
+    public static final Creator<ActionMap> CREATOR = new Creator<ActionMap>() {
+        @Override
+        public ActionMap createFromParcel(Parcel in) {
+            return new ActionMap(in);
+        }
+
+        @Override
+        public ActionMap[] newArray(int size) {
+            return new ActionMap[size];
+        }
+    };
 
     //action code + match status
     public int numScored(int [] codes, int [] matchStatus){
@@ -61,7 +82,23 @@ public class ActionMap {
         return new ActionMap(acts);
     }
 
+    public boolean isFilled(String code){
+        if(actions.contains(code)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(actions);
+    }
 }
