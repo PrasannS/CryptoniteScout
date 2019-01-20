@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 
 
 /**
@@ -32,17 +35,73 @@ public class RocketFragment extends Fragment {
     public Button tr;
     public Button tl;
 
+    public boolean brcf;
+    public boolean blcf;
+    public boolean mrcf;
+    public boolean mlcf;
+    public boolean trcf;
+    public boolean tlcf;
+    public boolean brhf;
+    public boolean blhf;
+    public boolean mrhf;
+    public boolean mlhf;
+    public boolean trhf;
+    public boolean tlhf;
+    ActionMap map;
+
+
     OnrocketReadListener rocketReadListener;
 
     public RocketFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    public void setArguments(ActionMap actionMap) {
+        map = actionMap;
+        for(int i = 0; i < actionMap.actions.size(); i++){
+            if(actionMap.actions.get(i).actionCode.equals("A1")){
+                brhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A2")){
+                blhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A3")){
+                mrhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A4")){
+                mlhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A5")){
+                trhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A6")){
+                tlhf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A7")){
+                brcf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A8")){
+                blcf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A9")){
+                mrcf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A10")){
+                mlcf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A11")){
+                trcf = true;
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("A12")){
+                tlcf = true;
+            }
+        }
     }
 
     /**
@@ -162,6 +221,43 @@ public class RocketFragment extends Fragment {
                 rocketReadListener.OnrocketRead(message);
             }
         });
+
+        if(brhf){
+            br.setBackgroundColor(Color.RED);
+        }
+        if(blhf){
+            bl.setBackgroundColor(Color.RED);
+        }
+        if(mrhf){
+            mr.setBackgroundColor(Color.RED);
+        }
+        if(mlhf){
+            ml.setBackgroundColor(Color.RED);
+        }
+        if(trhf){
+            tr.setBackgroundColor(Color.RED);
+        }
+        if(tlhf){
+            tl.setBackgroundColor(Color.RED);
+        }
+        if(brcf){
+            br.setBackgroundColor(Color.YELLOW);
+        }
+        if(blcf){
+            bl.setBackgroundColor(Color.YELLOW);
+        }
+        if(mrcf){
+            mr.setBackgroundColor(Color.YELLOW);
+        }
+        if(mlcf){
+            ml.setBackgroundColor(Color.YELLOW);
+        }
+        if(trcf){
+            tr.setBackgroundColor(Color.YELLOW);
+        }
+        if(tlcf){
+            tl.setBackgroundColor(Color.YELLOW);
+        }
 
         return view;
     }

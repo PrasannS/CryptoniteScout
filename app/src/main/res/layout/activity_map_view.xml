@@ -10,61 +10,79 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Hatches:"/>
+                    android:text="Hatches:" />
+
                 <TextView
+                    android:id="@+id/hatchdisplay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text=""
-                    android:id="@+id/hatchdisplay"/>
+                    android:text="" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Cargo"/>
+                    android:text="Cargo" />
+
                 <TextView
+                    android:id="@+id/cargodisplay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text=""
-                    android:id="@+id/cargodisplay"/>
+                    android:text="" />
             </LinearLayout>
         </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/infoframe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/infoframe"
-            android:layout_weight="1"></FrameLayout>
+            android:layout_weight="2"></FrameLayout>
 
         <FrameLayout
+            android:id="@+id/inputcontainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/inputcontainer"
             android:layout_weight="3"></FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <Button
+                android:id="@+id/statuschanger"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pregame" />
+        </LinearLayout>
 
 
     </LinearLayout>

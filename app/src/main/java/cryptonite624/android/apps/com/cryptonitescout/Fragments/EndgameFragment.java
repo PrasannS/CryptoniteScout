@@ -53,7 +53,7 @@ public class EndgameFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_endgame, container, false);
-
+    /*
         toTeleop = (Button)view.findViewById(R.id.endgame_teleop);
         toTeleop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +62,7 @@ public class EndgameFragment extends Fragment {
                 endgameReadListener.OnEndgameRead(message);
             }
         });
+        */
 
         submit = (Button)view.findViewById(R.id.endgame_submit);
         submit.setOnClickListener(new View.OnClickListener() {
