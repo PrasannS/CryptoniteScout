@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,53 +10,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
+import cryptonite624.android.apps.com.cryptonitescout.MapView;
+import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DashboardFragment.OnFragmentInteractionListener} interface
+ * {@link InputFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DashboardFragment#newInstance} factory method to
+ * Use the {@link InputFragment#newInstance} factory method to
  * create an instance of this fragment.
- * configuration database
- * admin tab - usernames, position
- * user data
- * cycle times
  */
-public class DashboardFragment extends Fragment {
+public class InputFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    OnInputReadListener inputReadListener;
+
+    public String clickCode;
+
+
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public Button toMatches;
-    public Button toPitnotes;
-    public Button toRankings;
-    public Button toMapview;
-    private String message;
+    private OnFragmentInteractionListener mListener;
+    
+    private Button hatch;
+    private Button cargo;
+    boolean hatchSelected;
 
-    OnDashboardReadListener dashboardReadListener;
-
-    private AutonFragment.OnFragmentInteractionListener mListener;
-
-    public DashboardFragment() {
+    public InputFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment InputFragment.
+     */
     // TODO: Rename and change types and number of parameters
-    public static DashboardFragment newInstance(String param1, String param2) {
-        DashboardFragment fragment = new DashboardFragment();
+    public static InputFragment newInstance(String param1, String param2) {
+        InputFragment fragment = new InputFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public interface OnInputReadListener{
+        public void hatch(Boolean b);
+
     }
 
     @Override
@@ -68,53 +80,27 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    public interface OnDashboardReadListener{
-        public void OnDashboardRead(String message);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        toPitnotes = (Button)view.findViewById(R.id.pitnotebutton);
-        toPitnotes.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_input, container, false);
+
+        cargo = (Button)view.findViewById(R.id.input_cargo);
+        cargo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toPitnotes";
-
-                dashboardReadListener.OnDashboardRead(message);
+                inputReadListener.hatch(false);
             }
         });
 
-        toMatches = (Button)view.findViewById(R.id.matchesbutton);
-        toMatches.setOnClickListener(new View.OnClickListener() {
+        hatch = (Button)view.findViewById(R.id.input_hatch);
+        hatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toMatch";
-                dashboardReadListener.OnDashboardRead(message);
+                inputReadListener.hatch(true);
             }
         });
-
-        toRankings = (Button)view.findViewById(R.id.rankingbutton);
-        toRankings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toRankings";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-
-        toMapview = (Button)view.findViewById(R.id.newentrybutton);
-        toMapview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toMapview";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-        
-        
 
         return view;
     }
@@ -131,16 +117,15 @@ public class DashboardFragment extends Fragment {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            dashboardReadListener = (DashboardFragment.OnDashboardReadListener) activity;
+            inputReadListener = (InputFragment.OnInputReadListener) activity;
         }catch(ClassCastException e){
-            throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
+            throw new ClassCastException(activity.toString() + "must override onkeyboardoneread");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-
         mListener = null;
     }
 
@@ -157,5 +142,9 @@ public class DashboardFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void addHatch(int code){
+
     }
 }

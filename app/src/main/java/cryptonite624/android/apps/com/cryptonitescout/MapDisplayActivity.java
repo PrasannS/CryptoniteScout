@@ -26,9 +26,9 @@ public class MapDisplayActivity extends AppCompatActivity {
         Canvas canvas = new Canvas(bitmap.copy(Bitmap.Config.ARGB_8888, true));
     }
 
-    public void drawCoords(ActionMap map){
+    /*public void drawCoords(ActionMap map){
         for(int i = 0; i < map.actions.size(); i++){
             canvas.drawCircle(map.actions.get(i).x, map.actions.get(i).y, 10, paint);
         }
-    }
+    }*/
 }

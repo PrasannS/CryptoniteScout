@@ -9,14 +9,18 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -27,8 +31,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
@@ -38,7 +45,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener,EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
 
     /**
@@ -77,31 +84,45 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     public static int[] REDSWITCH2MAX = {1240, 615};
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
+    
+    public boolean red = true;
+    public boolean left = true;
 
-    public static int[] ROCKET1MIN = {1050, 350};
-    public static int[] ROCKET1MAX = {1260, 420};
-    public static int[] ROCKET2MIN = {1050, 815};
-    public static int[] ROCKET2MAX = {1270, 960};
-    public static int[] CARGO1MIN = {1030, 570};
-    public static int[] CARGO1MAX = {1100, 620};
-    public static int[] CARGO2MIN = {1130, 520};
-    public static int[] CARGO2MAX = {1260, 590};
-    public static int[] CARGO3MIN = {1030, 570};
-    public static int[] CARGO3MAX = {1100, 620};
-    public static int[] CARGO4MIN = {1500, 540};
-    public static int[] CARGO4MAX = {1630, 600};
-    public static int[] CARGO5MIN = {1030, 670};
-    public static int[] CARGO5MAX = {1100, 720};
-    public static int[] CARGO6MIN = {1145, 685};
-    public static int[] CARGO6MAX = {1250, 770};
-    public static int[] CARGO7MIN = {1300, 570};
-    public static int[] CARGO7MAX = {1430, 760};
-    public static int[] CARGO8MIN = {1500, 700};
-    public static int[] CARGO8MAX = {1620, 760};
+    public static int[] ROCKET1MIN ={740, 100};
+    public static int[] ROCKET1MAX ={942, 195};
+    public static int[] ROCKET2MIN ={752, 472};
+    public static int[] ROCKET2MAX ={933, 545};
+    public static int[] CARGO1MIN = {614, 265};
+    public static int[] CARGO1MAX = {710, 321};
+    public static int[] CARGO2MIN = {743, 255};
+    public static int[] CARGO2MAX = {822, 300};
+    public static int[] CARGO3MIN = {840, 260};
+    public static int[] CARGO3MAX = {923, 300};
+    public static int[] CARGO4MIN = {936, 260};
+    public static int[] CARGO4MAX = {1018,299};
+    public static int[] CARGO5MIN = {614, 329};
+    public static int[] CARGO5MAX = {710, 377};
+    public static int[] CARGO6MIN = {743, 342};
+    public static int[] CARGO6MAX = {822, 396};
+    public static int[] CARGO7MIN = {840, 342};
+    public static int[] CARGO7MAX = {923, 396};
+    public static int[] CARGO8MIN = {936, 342};
+    public static int[] CARGO8MAX = {1018, 396};
+    public static int[] HAB1MIN =   {348, 237};
+    public static int[] HAB1MAX =   {445, 293};
+    public static int[] HAB2MIN =   {348, 293};
+    public static int[] HAB2MAX =   {445, 362};
+    public static int[] HAB3MIN =   {348, 362};
+    public static int[] HAB3MAX =   {445, 413};
+
+
+    public static int[] imageratio = {1,1};
+
+    public static int[] screenratio = new int[2];
+    public static double conversionfactor;
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
-    Drawing drawing;
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     public int matchStatus = 0;
     public Button statusForward, statusBack;
@@ -113,6 +134,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
     public static int[] ALLSTATUS = {1, 2, 3};
     private static final int OFFSET = 120;
+    public static int topx,topy,bttmx,bttmy;
 
     CustomDrawableView mCustomDrawableView;
 
@@ -125,14 +147,23 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     private int mColorRectangle;
     private int mColorAccent;
 
+
+    private Button imageswitch;
     private int mOffset = OFFSET;
 
     public boolean sandstorm = true;
+    private ImageView mapview;
 
     CustomImageView customView;
 
     private Rect mRect = new Rect();
     private Rect mBounds = new Rect();
+
+    TextView hatchDisplay;
+    TextView cargoDisplay;
+
+    public RobotAction currentAction = new RobotAction();
+
 
 
     @Override
@@ -155,12 +186,51 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
             fragmentTransaction.commit();
-
         }
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
+        }
+
+        switchbounds();
+
+        mapview = (ImageView)findViewById(R.id.mapview);
+        imageswitch = (Button) findViewById(R.id.mapswitch);
+
+
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
         //setContentView(mCustomDrawableView);
+
+        imageswitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(red){
+                    if(left){
+                        mapview.setImageResource(R.drawable.redright);
+                    }else{
+                        mapview.setImageResource(R.drawable.red);
+                    }
+                }
+                else{
+                    if(left){
+                        mapview.setImageResource(R.drawable.blueright);
+                    }
+                    else {
+                        mapview.setImageResource(R.drawable.blue);
+                    }
+                }
+                switchbounds();
+
+            }
+        });
+
+
+        cargoDisplay = (TextView)findViewById(R.id.cargodisplay);
+        hatchDisplay = (TextView)findViewById(R.id.hatchdisplay);
 
         //xDisplay = (TextView)findViewById(R.id.XDisplay);
         //yDisplay = (TextView)findViewById(R.id.YDisplay);
@@ -203,6 +273,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
                 R.color.colorAccent, null);
         mPaint.setColor(mColorBackground);
 
+
         //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
@@ -212,25 +283,51 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
         x = (int)event.getX();
         y = (int)event.getY();
 
+        hatchDisplay.setText(""+x);
+        cargoDisplay.setText(""+y);
+
         //drawing = new Drawing(this);
 
         if(actionReady){
             actionReady = false;
-            actionMap.actions.add(new RobotAction(tempX, tempY, getCode(x, y), matchStatus));
+            actionMap.actions.add(new RobotAction(getCode(x, y), matchStatus));
         }
 
         /*if(actionReady == false){
             customView.setClickLocation(x, y);
         }*/
 
-        if(getCode(x, y) == 0){
-            actionReady = true;
-            tempX = x;
-            tempY = y;
+        if(!getCode(x, y).equals("Z")){
+            //actionReady = true;
+            if(findViewById(R.id.inputcontainer)!=null){
+                EmptyFragment emptyFragment= new EmptyFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+                fragmentTransaction.commit();
+            }
+
+            if(sandstorm){
+                if(findViewById(R.id.infoframe)!=null){
+                    AutonFragment rocketFragment= new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                    fragmentTransaction.commit();
+                }
+            }
+
+            currentAction.actionCode = getCode(x, y);
+            if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
+                openRocket();
+            }
+            else if(findViewById(R.id.inputcontainer)!=null){
+                InputFragment inputFragment= new InputFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+                fragmentTransaction.commit();
+            }
         }
-        else if(getCode(x,y)==1||getCode(x,y)==2){
-            openRocket();
-        }
+
+
 
 
 
@@ -241,92 +338,42 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
     }
 
     //0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
-    public int getCode(int x, int y){
+    public String getCode(int x, int y){
         if(x > ROCKET1MIN[0] && x < ROCKET1MAX[0] && y > ROCKET1MIN[1] && y < ROCKET1MAX[1]){
-            return 1;
+            return "A";
         }
         if(x > ROCKET2MIN[0] && x < ROCKET2MAX[0] && y > ROCKET2MIN[1] && y < ROCKET2MAX[1]){
-            return 2;
+            return "B";
         }
         else if(x > CARGO1MIN[0] && x < CARGO1MAX[0] && y > CARGO1MIN[1] && y < CARGO1MAX[1]){
-            return 3;
+            return "C1";
         }
         else if(x > CARGO2MIN[0] && x < CARGO2MAX[0] && y > CARGO2MIN[1] && y < CARGO2MAX[1]){
-            return 4;
+            return "C2";
         }
         else if(x > CARGO3MIN[0] && x < CARGO3MAX[0] && y > CARGO3MIN[1] && y < CARGO3MAX[1]){
-            return 5;
+            return "C3";
         }
         else if(x > CARGO4MIN[0] && x < CARGO4MAX[0] && y > CARGO4MIN[1] && y < CARGO4MAX[1]){
-            return 6;
+            return "C4";
         }
         else if(x > CARGO5MIN[0] && x < CARGO5MAX[0] && y > CARGO5MIN[1] && y < CARGO5MAX[1]){
-            return 7;
+            return "C5";
         }
         else if(x > CARGO6MIN[0] && x < CARGO6MAX[0] && y > CARGO6MIN[1] && y < CARGO6MAX[1]){
-            return 8;
+            return "C6";
         }
         else if(x > CARGO7MIN[0] && x < CARGO7MAX[0] && y > CARGO7MIN[1] && y < CARGO7MAX[1]){
-            return 9;
+            return "C7";
         }
         else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
-            return 10;
+            return "C8";
         }
-        else if(y > 330)
-            return 0;
+        else if(x > topx)
+            return "Z";
         else
-            return 11;
-    }
+            return "0";
 
-    public void drawSomething(View view){
-        int vWidth = view.getWidth();
-        int vHeight = view.getHeight();
-        int halfWidth = vWidth / 2;
-        int halfHeight = vHeight / 2;
-
-        mImageView.invalidate();
-
-       // BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
-
-       // mImageView.invalidateDrawable(drawable);
-
-        //mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-
-        mBitmap = Bitmap.createBitmap(
-                vWidth, vHeight, Bitmap.Config.ARGB_8888);
-
-        //mBitmap = drawable.getBitmap();
-
-        Bitmap field = BitmapFactory.decodeResource(getResources(), R.drawable.powerupfield);
-
-        //mImageView.setImageBitmap(field);
-
-        mCanvas = new Canvas(mBitmap);
-
-        mCanvas.drawColor(mColorBackground);
-        mPaint.setColor(mColorRectangle);
-
-        mRect.set(
-                mOffset, mOffset, vWidth - mOffset, vHeight - mOffset);
-
-        mCanvas.drawRect(mRect, mPaint);
-
-        mCanvas.drawBitmap(field, 100, 100, mPaint);
-
-        mCanvas.drawText("If you see this then it's probably working so far", 100, 100, mPaintText);
-        mCanvas.drawRect(mRect, mPaint);
-
-        //Canvas.drawCircle(
-         //       halfWidth, halfHeight, halfWidth / 3, mPaint);
-
-        //Drawable d = getResources().getDrawable(R.drawable.powerupfield, null);
-
-        //Canvas canvas = new Canvas();
-        //d.setBounds(100, 100, 100, 100);
-        //d.draw(canvas);
-        //canvas.drawCircle(100, 100, 50, mPaint);
-
-        view.invalidate();
     }
 
     @Override
@@ -448,6 +495,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
             fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
             fragmentTransaction.commit();
         }
+
+
     }
 
     @Override
@@ -470,31 +519,207 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener,E
                         fragmentTransaction.commit();
                     }
                 }
+                break;
+            case "1":
+                currentAction.actionCode = currentAction.actionCode+1;
+                break;
+            case "2":
+                currentAction.actionCode = currentAction.actionCode+2;break;
+
+            case "3":
+                currentAction.actionCode = currentAction.actionCode+3;break;
+            case "4":
+                currentAction.actionCode = currentAction.actionCode+4;break;
+            case "5":
+                currentAction.actionCode = currentAction.actionCode+5;break;
+            case "6":
+                currentAction.actionCode = currentAction.actionCode+6;break;
+
+
+
+
         }
+
+        if(findViewById(R.id.inputcontainer)!=null){
+            InputFragment inputFragment= new InputFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+            fragmentTransaction.commit();
+        }
+
+
+        }
+
+
+    public int getpixelheight(){
+        return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
+    }
+    public void setScreenratio(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenratio[0]= size.x;
+        screenratio[1] = size.y;
+        conversionfactor = screenratio[0]/imageratio[0];
+        Log.e("ScreenRatio*&*%F&^%", "" + Arrays.toString(screenratio));
     }
 
 
-    public class Drawing extends View{
+    public void switchbounds(){
+        if(left) {
+            ROCKET1MIN[0] = 430;
+            ROCKET1MAX[0] = 624;
+            ROCKET2MIN[0] = 439;
+            ROCKET2MAX[0] = 624;
+            CARGO1MIN[0] = 659;
+            CARGO1MAX[0] = 749;
+            CARGO2MIN[0] = 542;
+            CARGO2MAX[0] = 621;
+            CARGO3MIN[0] = 446;
+            CARGO3MAX[0] = 529;
+            CARGO4MIN[0] = 348;
+            CARGO4MAX[0] = 427;
+            CARGO5MIN[0] = 654;
+            CARGO5MAX[0] = 751;
+            CARGO6MIN[0] = 547;
+            CARGO6MAX[0] = 623;
+            CARGO7MIN[0] = 442;
+            CARGO7MAX[0] = 522;
+            CARGO8MIN[0] = 347;
+            CARGO8MAX[0] = 422;
+            HAB1MIN[0] = 924;
+            HAB1MAX[0] = 1019;
+            HAB2MIN[0] = 929;
+            HAB2MAX[0] = 1019;
+            HAB3MIN[0] = 926;
+            HAB3MAX[0] = 1015;
+            ROCKET1MIN[1] = 456;
+            ROCKET1MAX[1] = 545;
+            ROCKET2MIN[1] = 100;
+            ROCKET2MAX[1] = 175;
+            CARGO1MIN[1] = 332;
+            CARGO1MAX[1] = 386;
+            CARGO2MIN[1] = 347;
+            CARGO2MAX[1] = 385;
+            CARGO3MIN[1] = 346;
+            CARGO3MAX[1] = 392;
+            CARGO4MIN[1] = 349;
+            CARGO4MAX[1] = 392;
+            CARGO5MIN[1] = 264;
+            CARGO5MAX[1] = 314;
+            CARGO6MIN[1] = 254;
+            CARGO6MAX[1] = 307;
+            CARGO7MIN[1] = 255;
+            CARGO7MAX[1] = 307;
+            CARGO8MIN[1] = 258;
+            CARGO8MAX[1] = 300;
+            HAB1MIN[1] = 359;
+            HAB1MAX[1] = 413;
+            HAB2MIN[1] = 293;
+            HAB2MAX[1] = 357;
+            HAB3MIN[1] = 237;
+            HAB3MAX[1] = 283;
+        }
+        else{
+            ROCKET1MIN[0] =   740; 
+            ROCKET1MAX[0] =   942; 
+            ROCKET2MIN[0] =   752; 
+            ROCKET2MAX[0] =   933; 
+            CARGO1MIN[0] =    614; 
+            CARGO1MAX[0] =    710; 
+            CARGO2MIN[0] =    743; 
+            CARGO2MAX[0] =    822; 
+            CARGO3MIN[0] =    840; 
+            CARGO3MAX[0] =    923; 
+            CARGO4MIN[0] =    936; 
+            CARGO4MAX[0] =    1018;
+            CARGO5MIN[0] =    614; 
+            CARGO5MAX[0] =    710; 
+            CARGO6MIN[0] =    743; 
+            CARGO6MAX[0] =    822; 
+            CARGO7MIN[0] =    840; 
+            CARGO7MAX[0] =    923; 
+            CARGO8MIN[0] =    936; 
+            CARGO8MAX[0] =    1018;
+            HAB1MIN[0] =      348; 
+            HAB1MAX[0] =      445; 
+            HAB2MIN[0] =      348; 
+            HAB2MAX[0] =      445; 
+            HAB3MIN[0] =      348; 
+            HAB3MAX[0] =      445; 
+            ROCKET1MIN[1] =   100;
+            ROCKET1MAX[1] =   195;
+            ROCKET2MIN[1] =   472;
+            ROCKET2MAX[1] =   545;
+            CARGO1MIN[1] =    265;
+            CARGO1MAX[1] =    321;
+            CARGO2MIN[1] =    255;
+            CARGO2MAX[1] =    300;
+            CARGO3MIN[1] =    260;
+            CARGO3MAX[1] =    300;
+            CARGO4MIN[1] =    260;
+            CARGO4MAX[1] =    299;
+            CARGO5MIN[1] =    329;
+            CARGO5MAX[1] =    377;
+            CARGO6MIN[1] =    342;
+            CARGO6MAX[1] =    396;
+            CARGO7MIN[1] =    342;
+            CARGO7MAX[1] =    396;
+            CARGO8MIN[1] =    342;
+            CARGO8MAX[1] =     396;
+            HAB1MIN[1] =      237;
+            HAB1MAX[1] =      293;
+            HAB2MIN[1] =      293;
+            HAB2MAX[1] =      362;
+            HAB3MIN[1] =      362;
+            HAB3MAX[1] =      413;
+        }
+        left = !left;
+        
+    }
 
-        //Bitmap circle;
-
-        public Drawing(Context context) {
-            super(context);
-            //circle = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+    @Override
+    public void hatch(Boolean b) {
+        currentAction.hatch = b;
+        actionMap.actions.add(currentAction);
+        currentAction = new RobotAction();
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
         }
 
-        @Override
-        protected void onDraw(Canvas canvas){
-            super.onDraw(canvas);
-            /*Paint paint = new Paint();
-            paint.setColor(Color.GREEN);
-            paint.setStyle(Paint.Style.FILL);
-            canvas.drawCircle(500, 500, 50, paint);*/
+        if(sandstorm){
+            if(findViewById(R.id.infoframe)!=null){
+                AutonFragment rocketFragment= new AutonFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
         }
+        else{
+            if(findViewById(R.id.infoframe)!=null){
+                TeleopFragment rocketFragment= new TeleopFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
+        }
+        updateScreen();
+    }
 
+    public void updateScreen(){
+        cargoDisplay.setText(""+actionMap.totalhatches(false));
+        hatchDisplay.setText(""+actionMap.totalhatches(true));
     }
 
 
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
 
 
