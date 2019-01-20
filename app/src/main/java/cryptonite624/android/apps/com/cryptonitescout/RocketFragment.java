@@ -65,40 +65,40 @@ public class RocketFragment extends Fragment {
     public void setArguments(ActionMap actionMap) {
         map = actionMap;
         for(int i = 0; i < actionMap.actions.size(); i++){
-            if(actionMap.actions.get(i).actionCode.equals("A1")){
+            if(actionMap.actions.get(i).actionCode.equals("A1") && actionMap.actions.get(i).hatch){
                 brhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A2")){
+            else if(actionMap.actions.get(i).actionCode.equals("A2")&& actionMap.actions.get(i).hatch){
                 blhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A3")){
+            else if(actionMap.actions.get(i).actionCode.equals("A3")&& actionMap.actions.get(i).hatch){
                 mrhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A4")){
+            else if(actionMap.actions.get(i).actionCode.equals("A4")&& actionMap.actions.get(i).hatch){
                 mlhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A5")){
+            else if(actionMap.actions.get(i).actionCode.equals("A5")&& actionMap.actions.get(i).hatch){
                 trhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A6")){
+            else if(actionMap.actions.get(i).actionCode.equals("A6")&& actionMap.actions.get(i).hatch){
                 tlhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A7")){
+            else if(actionMap.actions.get(i).actionCode.equals("A1")&& actionMap.actions.get(i).hatch){
                 brcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A8")){
+            else if(actionMap.actions.get(i).actionCode.equals("A2")&& !actionMap.actions.get(i).hatch){
                 blcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A9")){
+            else if(actionMap.actions.get(i).actionCode.equals("A3")&& !actionMap.actions.get(i).hatch){
                 mrcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A10")){
+            else if(actionMap.actions.get(i).actionCode.equals("A4")&& !actionMap.actions.get(i).hatch){
                 mlcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A11")){
+            else if(actionMap.actions.get(i).actionCode.equals("A5")&& !actionMap.actions.get(i).hatch){
                 trcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A12")){
+            else if(actionMap.actions.get(i).actionCode.equals("A6")&& !actionMap.actions.get(i).hatch){
                 tlcf = true;
             }
         }
@@ -221,6 +221,8 @@ public class RocketFragment extends Fragment {
                 rocketReadListener.OnrocketRead(message);
             }
         });
+
+        //if the hatch is in, it's red. if the cargo is in, it's yellow. if both, it's green
 
         if(brhf){
             br.setBackgroundColor(Color.RED);

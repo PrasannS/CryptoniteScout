@@ -8,6 +8,7 @@ public class RobotAction implements Parcelable{
     public int matchStatus;
     public String actionCode;
     public boolean hatch;
+    public int habLevel;
 
     public RobotAction(){
 
@@ -48,4 +49,9 @@ public class RobotAction implements Parcelable{
         dest.writeString(actionCode);
         dest.writeByte((byte) (hatch ? 1 : 0));
     }
+
+    public String toString(){
+        return actionCode + hatch;
+    }
+
 }

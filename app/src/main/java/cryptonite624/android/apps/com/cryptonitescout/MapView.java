@@ -129,6 +129,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] ALLSTATUS = {1, 2, 3};
     private static final int OFFSET = 120;
     public static int topx, topy, bttmx, bttmy;
+    public int habLevel;
 
     CustomDrawableView mCustomDrawableView;
 
@@ -153,6 +154,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     TextView hatchDisplay;
     TextView cargoDisplay;
+    TextView habDisplay;
 
     public RobotAction currentAction = new RobotAction();
     Button statusButton;
@@ -196,6 +198,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         cargoDisplay = (TextView) findViewById(R.id.cargodisplay);
         hatchDisplay = (TextView) findViewById(R.id.hatchdisplay);
+        habDisplay = (TextView) findViewById(R.id.hableveldisplay);
+
 
         //xDisplay = (TextView)findViewById(R.id.XDisplay);
         //yDisplay = (TextView)findViewById(R.id.YDisplay);
@@ -297,7 +301,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 fragmentTransaction.replace(R.id.inputcontainer, emptyFragment, null);
                 fragmentTransaction.commit();
             }
-
             if (sandstorm) {
                 if (findViewById(R.id.infoframe) != null) {
                     AutonFragment rocketFragment = new AutonFragment();
@@ -308,15 +311,25 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
 
             currentAction.actionCode = getCode(x, y);
-            if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
-                openRocket();
-            } else if (findViewById(R.id.inputcontainer) != null) {
-                InputFragment inputFragment = new InputFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);
-                fragmentTransaction.commit();
+            if (getCode(x, y).equals("H1") || currentAction.actionCode.equals("H3")) {
+                System.out.println("hab level 2");
+                habLevel = 2;
+                updateScreen();
+            } else if (currentAction.actionCode.equals("H2")) {
+                System.out.println("hab level 3");
+                habLevel = 3;
+                updateScreen();
             }
+
+        if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
+            openRocket();
+        } else if (findViewById(R.id.inputcontainer) != null) {
+            InputFragment inputFragment = new InputFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);
+            fragmentTransaction.commit();
         }
+    }
 
 
         //xDisplay.setText("" + x);
@@ -325,7 +338,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         return false;
     }
 
-    //0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
+    //cargo ship numbers start from top left corner i think
+    //hab numbers go from top to bottom
     public String getCode(int x, int y) {
         if (x > ROCKET1MIN[0] && x < ROCKET1MAX[0] && y > ROCKET1MIN[1] && y < ROCKET1MAX[1]) {
             return "A";
@@ -348,6 +362,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             return "C7";
         } else if (x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]) {
             return "C8";
+        }else if (x > HAB1MIN[0] && x < HAB1MAX[0] && y > HAB2MIN[1] && y < HAB2MAX[1]) {
+            return "H1";
+        }else if (x > HAB2MIN[0] && x < HAB2MAX[0] && y > HAB2MIN[1] && y < HAB2MAX[1]) {
+            return "H2";
+        }else if (x > HAB3MIN[0] && x < HAB3MAX[0] && y > HAB3MIN[1] && y < HAB3MAX[1]) {
+            return "H3";
         } else if (x > topx) {
             return "Z";
         }
@@ -616,16 +636,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void hatch(Boolean b) {
+        //currentAction = new RobotAction();
         currentAction.hatch = b;
-        actionMap.actions.add(currentAction);
-        currentAction = new RobotAction();
+
+
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.inputcontainer, emptyFragment, null);
             fragmentTransaction.commit();
         }
-
         if (sandstorm) {
             if (findViewById(R.id.infoframe) != null) {
                 AutonFragment rocketFragment = new AutonFragment();
@@ -641,21 +661,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 fragmentTransaction.commit();
             }
         }
-        if(rocket){
-            if(!b && currentAction.actionCode != null){
-                String firstcode = "" + currentAction.actionCode.charAt(0);
-                int secondcode = Integer.parseInt("" + currentAction.actionCode.charAt(1));
-                secondcode += 6;
-                currentAction.actionCode = "" + firstcode + secondcode;
-                actionMap.actions.add(currentAction);
-            }
-        }
+        actionMap.actions.add(currentAction);
         updateScreen();
     }
 
     public void updateScreen() {
         cargoDisplay.setText("" + actionMap.totalhatches(false));
         hatchDisplay.setText("" + actionMap.totalhatches(true));
+        habDisplay.setText("" + habLevel);
+        currentAction = new RobotAction();
+        System.out.println(actionMap.actions);
     }
 
     @Override
