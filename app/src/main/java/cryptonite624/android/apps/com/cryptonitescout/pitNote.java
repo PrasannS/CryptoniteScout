@@ -34,11 +34,24 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
-    public Button toNextPage;
+    //Class variables that'll help(?) Prasann with the database
+    public int matchNum;
+    public String Comment;
+    public boolean ProgrammerOnSite;
+    public boolean LevelTwoStart;
+    public boolean CrossBase;
+    public boolean shifter;
+    public int numBaerries;
+    public int numChargers;
+    public int numCIMS;
+    public int numMiniCIMS;
+    public double robotDimension;
+    
     public FloatingActionButton toCamera;
     public Switch Programmer_On_Site;
-    public Switch From_Cali;
-    public Switch Penalties;
+    public Switch LevTwoStart;
+    public Switch CrossBaseLine;
+    public Switch Shifters;
     public ImageView imageview;
     public Button toDashboard;
 
@@ -82,7 +95,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
      *  red-no data
      *  server updates
      *  excel
-
      */
 
     @Override
@@ -134,16 +146,16 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             }
         });
 
-        From_Cali = findViewById(R.id.Shifters);
-        From_Cali.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Shifters = findViewById(R.id.Shifters);
+        Shifters.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.v("Shifters : ",""+isChecked);
             }
         });
 
-        Penalties = findViewById(R.id.CrossBaseline);
-        Penalties.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        CrossBaseLine = findViewById(R.id.CrossBaseline);
+        CrossBaseLine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.v("Cross Baseline : ",""+isChecked);
