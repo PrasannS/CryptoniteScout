@@ -5,15 +5,18 @@ import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,6 +30,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import static android.os.Environment.getExternalStoragePublicDirectory;
+
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     public Button toNextPage;
@@ -34,6 +39,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public Switch Programmer_On_Site;
     public Switch From_Cali;
     public Switch Penalties;
+    public ImageView imageview;
     public Button toDashboard;
 
     //Spinner variables for the wheels
@@ -87,13 +93,18 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        if(Build.VERSION.SDK_INT>=23){
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2 );
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //dispatchCameraIntent();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,0);
             }
         });
+        imageview = findViewById(R.id.pictureImage);
 
         toDashboard = findViewById(R.id.toDashboardPage);
         toDashboard.setOnClickListener(new View.OnClickListener() {
@@ -169,51 +180,46 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath;
     private ImageView mImageView;
-
+    public String pathToFile;
 
 
 
     //function that captures the picture
-    private void dispatchCameraIntent(){
+    private void dispatchCameraIntent() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null){
             File photoFile = null;
-            try{
-                //Create the file where the photo should go
-                photoFile = createImageFile();
-            }
-            catch (IOException ex){
-                //In case of error while creating the file
-                //Log.i(Tag"IOException");
-            }
-            //Continue only if the File was created
-            if (photoFile != null){
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+            photoFile = createImageFile();
+
+            if(photoFile != null){
+                pathToFile = photoFile.getAbsolutePath();
+                Uri photoUri = FileProvider.getUriForFile(pitNote.this,"asdfasdf",photoFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(cameraIntent, 1);
             }
         }
     }
 
-    //Create an image file name (saving the image to gallery)fla
-    private File createImageFile() throws IOException{
+    //Create an image file name (saving the image to gallery)
+    private File createImageFile() {
         String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_"+timeStamp+"_";
-        File storageDir = Environment.getExternalStorageDirectory();
-        File image = File.createTempFile(imageFileName,".jpg",storageDir);
-        mCurrentPhotoPath = "file:"+image.getAbsolutePath();
+        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = null;
+        try{
+            image = File.createTempFile(timeStamp, ".jpg",storageDir);
+        } catch (Exception e){
+           Log.d("myLog","Excep : "+e.toString());
+        }
         return image;
+
+
     }
 
-    protected void onActivityREsult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            try{
-                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
-                mImageView.setImageBitmap(mImageBitmap);
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        imageview.setImageBitmap(bitmap);
     }
 
     //adding the picture to the gallery

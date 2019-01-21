@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Pitnote"
-                android:textColor="@android:color/white"
+                android:textColor="@color/teamGreen"
                 android:background="@android:color/black"
                 android:textSize="40sp"/>
 
@@ -320,11 +320,15 @@
                 android:layout_margin="@dimen/fab_margin"
                 app:srcCompat="@drawable/camerabutton" />
 
+            <ImageView
+                android:id="@+id/pictureImage"
+                android:layout_width="750dp"
+                android:layout_height="500dp" />
+
             <Button
                 android:id="@+id/toDashboardPage"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="745dp"
                 android:textSize="30sp"
                 android:text="DashBoard"
                 android:textColor="@android:color/black"
