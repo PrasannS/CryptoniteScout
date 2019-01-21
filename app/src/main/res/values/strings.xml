@@ -2,6 +2,13 @@
     <string name="app_name">CryptoniteScout</string>
     <string name="title_activity_login">Sign in</string>
 
+    <string-array name="ProgrammingLanguages">
+        <item>Java</item>
+        <item>LabView</item>
+        <item>C++</item>
+        <item>Python</item>
+    </string-array>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

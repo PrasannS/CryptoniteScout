@@ -1,14 +1,14 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,21 +16,54 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.EventLogTags;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
-public class pit_note extends AppCompatActivity {
+public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     public Button toNextPage;
     public FloatingActionButton toCamera;
     public Switch Programmer_On_Site;
     public Switch From_Cali;
     public Switch Penalties;
+    public Button toDashboard;
+
+    //Spinner variables for the wheels
+    public Spinner wheelSpinner;
+    public String wheels;
+    public static String [] wheelArr = {"Roughtop", "Colson", "Mecanum", "Omni", "Pneu"};
+
+    //Spinner variables for the layout
+    public Spinner layoutSpinner;
+    public String layouts;
+    public static String [] layoutArr = {"4WD", "6WD", "8WD", "10WD", "Swerve", "Tank", "2+2", "Rhino", "Kiwi", "H","Comment"};
+
+    //Spinner variables for Climbing Levels
+    public Spinner ClimibLevels;
+    public String Levels;
+    public static String [] levels = {"Level 1","Level 2","Level 3","Buddy to one"};
+
+    //Spinner variables for Cargo Intake
+    public Spinner cargoIntake;
+    public String Intake2;
+
+    //Spinner variables for hatch Intake
+    public Spinner hatchIntake;
+    public String Intake;
+    public static String [] Intakes = {"Floor","Station","Both","None","Other(List Comments"};
+
+    //Spinner variables for programming languages
+    public Spinner pgLanguage;
+    public String language;
+    public static String [] languages = {"Java","C++","LabView","Python","Other(List Comments)"};
 
     /**TODO
      * all the stuff from the discord should be on there
@@ -62,13 +95,14 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
-        toNextPage = findViewById(R.id.pit_note_nextPage);
-        toNextPage.setOnClickListener(new View.OnClickListener() {
+        toDashboard = findViewById(R.id.toDashboardPage);
+        toDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openNextPage();
+                openDashboard();
             }
         });
+
 
         //Button that opens up the default camera app
         toCamera = findViewById(R.id.fab);
@@ -105,6 +139,29 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
+        pgLanguage = findViewById(R.id.Programming_Language);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,languages);
+        pgLanguage.setAdapter(adapter);
+
+        hatchIntake = findViewById(R.id.HatchIntake);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
+        hatchIntake.setAdapter(adapter1);
+
+        cargoIntake = findViewById(R.id.CargoIntake);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
+        cargoIntake.setAdapter(adapter2);
+
+        ClimibLevels = findViewById(R.id.ClimbLevel);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
+        ClimibLevels.setAdapter(adapter3);
+
+        layoutSpinner = findViewById(R.id.LayoutSpinner);
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, layoutArr);
+        layoutSpinner.setAdapter(adapter4);
+
+        wheelSpinner = findViewById(R.id.Wheels);
+        ArrayAdapter<String> adapter5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, wheelArr);
+        wheelSpinner.setAdapter(adapter5);
 
     }
 
@@ -202,9 +259,51 @@ public class pit_note extends AppCompatActivity {
 
     //function that allows the button to open up the login page
     public void openNextPage(){
-        Intent intent = new Intent(this, Pitnote_page2.class);
+        Intent intent = new Intent(this, pitNotePageTwo.class);
+        startActivity(intent);
+    }
+
+    //Opening the dashboard page
+    public void openDashboard(){
+        Intent intent = new Intent(this,DataAccessActivity.class);
         startActivity(intent);
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //setting the dropdown elements and displaying the texts for the programming languages
+        language = languages[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+
+        //setting the dropdown elements and displaying the texts for the hatch intakes
+        Intake = Intakes[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+
+        //setting the dropdown elements and displaying the texts for the cargo intakes
+        Intake2 = Intakes[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+
+        //setting the dropdown elements and displaying the texts for the climbing levels
+        Levels = levels[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+
+        //setting the dropdown elements and displaying the texts for the climbing levels
+        layouts = layoutArr[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+
+        //setting the dropdown elements and displaying the texts for the climbing levels
+        wheels = wheelArr[position];
+        Toast.makeText(parent.getContext(), language, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Nothing goes here
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        //Nothing goes here
+    }
 }

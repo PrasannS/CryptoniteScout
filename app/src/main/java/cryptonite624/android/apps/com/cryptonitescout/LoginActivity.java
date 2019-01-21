@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,8 +35,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -69,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    public Button toPitnote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,13 +94,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        toPitnote = findViewById(R.id.MoveToPitnote);
-        toPitnote.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPitnote();
-            }
-        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -214,10 +202,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    public void openPitnote(){
-        Intent intent1 = new Intent(this,pit_note.class);
-        startActivity(intent1);
-    }
 
 
     private boolean isEmailValid(String email) {

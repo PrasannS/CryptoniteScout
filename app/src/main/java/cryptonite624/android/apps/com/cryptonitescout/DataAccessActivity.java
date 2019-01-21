@@ -53,6 +53,9 @@ public class DataAccessActivity extends AppCompatActivity implements DashboardFr
                 break;
             case "toMapview":
                 startActivity(new Intent(DataAccessActivity.this, MapView.class));
+                break;
+            case "toPitnote":
+                startActivity(new Intent(DataAccessActivity.this, pitNote.class));
             default:
         }
     }

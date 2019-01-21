@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pitnote_page2">
+    tools:context=".pitNotePageTwo">
 
 
     <LinearLayout
@@ -30,22 +30,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="70dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Programming"
-                android:textColor="@android:color/black"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
                 android:background="@android:color/white"
-                android:textSize="40sp"/>
-
-            <EditText
+                android:text="Language"
+                android:textSize="40dp"
+                android:textColor="@color/teamGreen"/>
+            <Spinner
                 android:id="@+id/Programming_Language"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown">
+            </Spinner>
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,12 +98,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Ultimate"
+                android:text="Level 2 start"
                 android:textColor="@color/teamGreen"
                 android:textSize="40sp"/>
 
             <Switch
-                android:id="@+id/From_Cali"
+                android:id="@+id/LevTwoStart"
                 android:layout_marginLeft="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
