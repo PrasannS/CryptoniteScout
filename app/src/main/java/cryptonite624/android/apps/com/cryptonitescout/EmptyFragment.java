@@ -1,6 +1,5 @@
-package cryptonite624.android.apps.com.cryptonitescout.Fragments;
+package cryptonite624.android.apps.com.cryptonitescout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,43 +7,29 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
-import cryptonite624.android.apps.com.cryptonitescout.MapView;
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
-import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link InputFragment.OnFragmentInteractionListener} interface
+ * {@link EmptyFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link InputFragment#newInstance} factory method to
+ * Use the {@link EmptyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InputFragment extends Fragment {
+public class EmptyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    OnInputReadListener inputReadListener;
-
-    public String clickCode;
-
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    
-    private Button hatch;
-    private Button cargo;
-    boolean hatchSelected;
 
-    public InputFragment() {
+    public EmptyFragment() {
         // Required empty public constructor
     }
 
@@ -54,21 +39,16 @@ public class InputFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment InputFragment.
+     * @return A new instance of fragment EmptyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static InputFragment newInstance(String param1, String param2) {
-        InputFragment fragment = new InputFragment();
+    public static EmptyFragment newInstance(String param1, String param2) {
+        EmptyFragment fragment = new EmptyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public interface OnInputReadListener{
-        public void hatch(Boolean b);
-
     }
 
     @Override
@@ -83,26 +63,8 @@ public class InputFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_input, container, false);
-
-        cargo = (Button)view.findViewById(R.id.input_cargo);
-        cargo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputReadListener.hatch(false);
-            }
-        });
-
-        hatch = (Button)view.findViewById(R.id.input_hatch);
-        hatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputReadListener.hatch(true);
-            }
-        });
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_empty, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -115,11 +77,11 @@ public class InputFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Activity activity = (Activity)context;
-        try{
-            inputReadListener = (InputFragment.OnInputReadListener) activity;
-        }catch(ClassCastException e){
-            throw new ClassCastException(activity.toString() + "must override onkeyboardoneread");
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -142,9 +104,5 @@ public class InputFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    public void addHatch(int code){
-
     }
 }

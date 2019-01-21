@@ -13,6 +13,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -44,7 +45,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
-public class MapView extends AppCompatActivity implements View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
 
     /**
@@ -83,36 +84,39 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public static int[] REDSWITCH2MAX = {1240, 615};
     public static int[] BLUESWITCH2MIN = {1130, 750};
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
+    
+    public boolean red = true;
+    public boolean left = true;
 
-    public static int[] ROCKET1MIN = {238, 8};
-    public static int[] ROCKET1MAX = {345, 75};
-    public static int[] ROCKET2MIN = {237, 271};
-    public static int[] ROCKET2MAX = {345, 348};
-    public static int[] CARGO1MIN = {225, 145};
-    public static int[] CARGO1MAX = {260, 180};
-    public static int[] CARGO2MIN = {280, 126};
-    public static int[] CARGO2MAX = {340, 160};
-    public static int[] CARGO3MIN = {360, 127};
-    public static int[] CARGO3MAX = {430, 160};
-    public static int[] CARGO4MIN = {467, 128};
-    public static int[] CARGO4MAX = {533, 163};
-    public static int[] CARGO5MIN = {225, 200};
-    public static int[] CARGO5MAX = {260, 225};
-    public static int[] CARGO6MIN = {280, 210};
-    public static int[] CARGO6MAX = {337, 244};
-    public static int[] CARGO7MIN = {365, 210};
-    public static int[] CARGO7MAX = {428, 244};
-    public static int[] CARGO8MIN = {471, 210};
-    public static int[] CARGO8MAX = {530, 245};
-    public static int[] HAB1MIN = {8, 58};
-    public static int[] HAB1MAX = {110, 118};
-    public static int[] HAB2MIN = {8, 120};
-    public static int[] HAB2MAX = {110, 238};
-    public static int[] HAB3MIN = {8, 242};
-    public static int[] HAB3MAX = {110, 300};
+    public static int[] ROCKET1MIN ={740, 100};
+    public static int[] ROCKET1MAX ={942, 195};
+    public static int[] ROCKET2MIN ={752, 472};
+    public static int[] ROCKET2MAX ={933, 545};
+    public static int[] CARGO1MIN = {614, 265};
+    public static int[] CARGO1MAX = {710, 321};
+    public static int[] CARGO2MIN = {743, 255};
+    public static int[] CARGO2MAX = {822, 300};
+    public static int[] CARGO3MIN = {840, 260};
+    public static int[] CARGO3MAX = {923, 300};
+    public static int[] CARGO4MIN = {936, 260};
+    public static int[] CARGO4MAX = {1018,299};
+    public static int[] CARGO5MIN = {614, 329};
+    public static int[] CARGO5MAX = {710, 377};
+    public static int[] CARGO6MIN = {743, 342};
+    public static int[] CARGO6MAX = {822, 396};
+    public static int[] CARGO7MIN = {840, 342};
+    public static int[] CARGO7MAX = {923, 396};
+    public static int[] CARGO8MIN = {936, 342};
+    public static int[] CARGO8MAX = {1018, 396};
+    public static int[] HAB1MIN =   {348, 237};
+    public static int[] HAB1MAX =   {445, 293};
+    public static int[] HAB2MIN =   {348, 293};
+    public static int[] HAB2MAX =   {445, 362};
+    public static int[] HAB3MIN =   {348, 362};
+    public static int[] HAB3MAX =   {445, 413};
 
 
-    public static int[] imageratio = {620,357};
+    public static int[] imageratio = {1,1};
 
     public static int[] screenratio = new int[2];
     public static double conversionfactor;
@@ -130,8 +134,7 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
     public static int[] ALLSTATUS = {1, 2, 3};
     private static final int OFFSET = 120;
-    public static int totalHatches = 0;
-    public static int totalCargo = 0;
+    public static int topx,topy,bttmx,bttmy;
 
     CustomDrawableView mCustomDrawableView;
 
@@ -144,9 +147,12 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     private int mColorRectangle;
     private int mColorAccent;
 
+
+    private Button imageswitch;
     private int mOffset = OFFSET;
 
     public boolean sandstorm = true;
+    private ImageView mapview;
 
     CustomImageView customView;
 
@@ -181,10 +187,46 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
             fragmentTransaction.add(R.id.infoframe,pregameFragment,null);
             fragmentTransaction.commit();
         }
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
+        }
+
+        switchbounds();
+
+        mapview = (ImageView)findViewById(R.id.mapview);
+        imageswitch = (Button) findViewById(R.id.mapswitch);
+
+
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
         //setContentView(mCustomDrawableView);
+
+        imageswitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(red){
+                    if(left){
+                        mapview.setImageResource(R.drawable.redright);
+                    }else{
+                        mapview.setImageResource(R.drawable.red);
+                    }
+                }
+                else{
+                    if(left){
+                        mapview.setImageResource(R.drawable.blueright);
+                    }
+                    else {
+                        mapview.setImageResource(R.drawable.blue);
+                    }
+                }
+                switchbounds();
+
+            }
+        });
 
 
         cargoDisplay = (TextView)findViewById(R.id.cargodisplay);
@@ -231,14 +273,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                 R.color.colorAccent, null);
         mPaint.setColor(mColorBackground);
 
-        setScreenratio();
-        setBounds();
-        //mImageView = (ImageView) findViewById(R.id.mapview);
-    }
 
-    public void updateDisplay(){
-        hatchDisplay.setText("" + totalHatches);
-        cargoDisplay.setText("" + totalCargo);
+        //mImageView = (ImageView) findViewById(R.id.mapview);
     }
 
     @SuppressLint("WrongCall")
@@ -246,6 +282,9 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public boolean onTouchEvent(MotionEvent event) {
         x = (int)event.getX();
         y = (int)event.getY();
+
+        hatchDisplay.setText(""+x);
+        cargoDisplay.setText(""+y);
 
         //drawing = new Drawing(this);
 
@@ -260,11 +299,34 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
 
         if(!getCode(x, y).equals("Z")){
             //actionReady = true;
+            if(findViewById(R.id.inputcontainer)!=null){
+                EmptyFragment emptyFragment= new EmptyFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+                fragmentTransaction.commit();
+            }
+
+            if(sandstorm){
+                if(findViewById(R.id.infoframe)!=null){
+                    AutonFragment rocketFragment= new AutonFragment();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                    fragmentTransaction.commit();
+                }
+            }
+
             currentAction.actionCode = getCode(x, y);
+            if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
+                openRocket();
+            }
+            else if(findViewById(R.id.inputcontainer)!=null){
+                InputFragment inputFragment= new InputFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+                fragmentTransaction.commit();
+            }
         }
-        else if(getCode(x,y).equals("A")||getCode(x,y).equals("B")){
-            openRocket();
-        }
+
 
 
 
@@ -307,11 +369,11 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
         else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
             return "C8";
         }
-        else if(y > 330)
+        else if(x > topx)
+            return "Z";
+        else
             return "0";
 
-        else
-            return "Z";
     }
 
     @Override
@@ -433,6 +495,8 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
             fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
             fragmentTransaction.commit();
         }
+
+
     }
 
     @Override
@@ -455,20 +519,37 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
                         fragmentTransaction.commit();
                     }
                 }
+                break;
             case "1":
                 currentAction.actionCode = currentAction.actionCode+1;
+                break;
             case "2":
-                currentAction.actionCode = currentAction.actionCode+2;
+                currentAction.actionCode = currentAction.actionCode+2;break;
+
             case "3":
-                currentAction.actionCode = currentAction.actionCode+3;
+                currentAction.actionCode = currentAction.actionCode+3;break;
             case "4":
-                currentAction.actionCode = currentAction.actionCode+4;
+                currentAction.actionCode = currentAction.actionCode+4;break;
             case "5":
-                currentAction.actionCode = currentAction.actionCode+5;
+                currentAction.actionCode = currentAction.actionCode+5;break;
             case "6":
-                currentAction.actionCode = currentAction.actionCode+6;
+                currentAction.actionCode = currentAction.actionCode+6;break;
+
+
+
+
         }
+
+        if(findViewById(R.id.inputcontainer)!=null){
+            InputFragment inputFragment= new InputFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
+            fragmentTransaction.commit();
         }
+
+
+        }
+
 
     public int getpixelheight(){
         return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
@@ -484,37 +565,116 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     }
 
 
-    public void setBounds(){
-    int topx,topy,bttmx,bttmy;
-        topx = screenratio[0]/3;
-        topy = (screenratio[1]-getpixelheight())/2;
-        bttmx = screenratio[0];
-        bttmy = getpixelheight()+topy;
-        ROCKET1MIN [0] =topx+(int)(238*conversionfactor); ROCKET1MIN [1] =topy+(int)( 8*conversionfactor);
-        ROCKET1MAX [0] =topx+(int)( 345*conversionfactor); ROCKET1MAX [1] =topy+(int)( 75*conversionfactor);
-        ROCKET2MIN [0] =topx+(int)( 237*conversionfactor); ROCKET2MIN [1] =topy+(int)( 271*conversionfactor);
-        ROCKET2MAX [0] =topx+(int)( 345*conversionfactor); ROCKET2MAX [1] =topy+(int)( 348*conversionfactor);
-        CARGO1MIN [0] =topx+(int)( 225*conversionfactor);CARGO1MIN [1] =topy+(int)( 145*conversionfactor);
-        CARGO1MAX [0] =topx+(int)( 260*conversionfactor);CARGO1MAX [1] =topy+(int)( 180*conversionfactor);
-        CARGO2MIN [0] =topx+(int)( 280*conversionfactor);CARGO2MIN [1] =topy+(int)( 126*conversionfactor);
-        CARGO2MAX [0] =topx+(int)( 340*conversionfactor);CARGO2MAX [1] =topy+(int)( 160*conversionfactor);
-        CARGO3MIN [0] =topx+(int)( 360*conversionfactor);CARGO3MIN [1] =topy+(int)( 127*conversionfactor);
-        CARGO3MAX [0] =topx+(int)( 430*conversionfactor);CARGO3MAX [1] =topy+(int)( 160*conversionfactor);
-        CARGO4MIN [0] =topx+(int)( 467*conversionfactor);CARGO4MIN [1] =topy+(int)( 128*conversionfactor);
-        CARGO4MAX [0] =topx+(int)( 533*conversionfactor);CARGO4MAX [1] =topy+(int)( 163*conversionfactor);
-        CARGO5MIN [0] =topx+(int)( 225*conversionfactor);CARGO5MIN [1] =topy+(int)( 200*conversionfactor);
-        CARGO5MAX [0] =topx+(int)( 260*conversionfactor);CARGO5MAX [1] =topy+(int)( 225*conversionfactor);
-        CARGO6MIN [0] =topx+(int)( 280*conversionfactor);CARGO6MIN [1] =topy+(int)( 210*conversionfactor);
-        CARGO6MAX [0] =topx+(int)( 337*conversionfactor);CARGO6MAX [1] =topy+(int)( 244*conversionfactor);
-        CARGO7MIN [0] =topx+(int)( 365*conversionfactor);CARGO7MIN [1] =topy+(int)( 210*conversionfactor);
-        CARGO7MAX [0] =topx+(int)( 428*conversionfactor);CARGO7MAX [1] =topy+(int)( 244*conversionfactor);
-        CARGO8MIN [0] =topx+(int)( 471*conversionfactor);CARGO8MIN [1] =topy+(int)( 210*conversionfactor);
-        CARGO8MAX [0] =topx+ (int)( 530*conversionfactor);CARGO8MAX [1] =(int)( 245*conversionfactor);
-        HAB1MIN [0] =topx+(int)( 8*conversionfactor);   HAB1MIN [1] =topy+(int)(   58*conversionfactor);
-        HAB1MAX [0] =topx+(int)( 110*conversionfactor); HAB1MAX [1] =topy+(int)(    118*conversionfactor);
-        HAB2MAX [0] =topx+(int)( 110*conversionfactor); HAB2MAX [1] =topy+(int)(    238*conversionfactor);
-        HAB3MIN [0] =topx+(int)( 8*conversionfactor);   HAB3MIN [1] =topy+(int)(   242*conversionfactor);
-        HAB3MAX [0] =topx+(int)( 110*conversionfactor); HAB3MAX [1] =topy+(int)(    300*conversionfactor);
+    public void switchbounds(){
+        if(left) {
+            ROCKET1MIN[0] = 430;
+            ROCKET1MAX[0] = 624;
+            ROCKET2MIN[0] = 439;
+            ROCKET2MAX[0] = 624;
+            CARGO1MIN[0] = 659;
+            CARGO1MAX[0] = 749;
+            CARGO2MIN[0] = 542;
+            CARGO2MAX[0] = 621;
+            CARGO3MIN[0] = 446;
+            CARGO3MAX[0] = 529;
+            CARGO4MIN[0] = 348;
+            CARGO4MAX[0] = 427;
+            CARGO5MIN[0] = 654;
+            CARGO5MAX[0] = 751;
+            CARGO6MIN[0] = 547;
+            CARGO6MAX[0] = 623;
+            CARGO7MIN[0] = 442;
+            CARGO7MAX[0] = 522;
+            CARGO8MIN[0] = 347;
+            CARGO8MAX[0] = 422;
+            HAB1MIN[0] = 924;
+            HAB1MAX[0] = 1019;
+            HAB2MIN[0] = 929;
+            HAB2MAX[0] = 1019;
+            HAB3MIN[0] = 926;
+            HAB3MAX[0] = 1015;
+            ROCKET1MIN[1] = 456;
+            ROCKET1MAX[1] = 545;
+            ROCKET2MIN[1] = 100;
+            ROCKET2MAX[1] = 175;
+            CARGO1MIN[1] = 332;
+            CARGO1MAX[1] = 386;
+            CARGO2MIN[1] = 347;
+            CARGO2MAX[1] = 385;
+            CARGO3MIN[1] = 346;
+            CARGO3MAX[1] = 392;
+            CARGO4MIN[1] = 349;
+            CARGO4MAX[1] = 392;
+            CARGO5MIN[1] = 264;
+            CARGO5MAX[1] = 314;
+            CARGO6MIN[1] = 254;
+            CARGO6MAX[1] = 307;
+            CARGO7MIN[1] = 255;
+            CARGO7MAX[1] = 307;
+            CARGO8MIN[1] = 258;
+            CARGO8MAX[1] = 300;
+            HAB1MIN[1] = 359;
+            HAB1MAX[1] = 413;
+            HAB2MIN[1] = 293;
+            HAB2MAX[1] = 357;
+            HAB3MIN[1] = 237;
+            HAB3MAX[1] = 283;
+        }
+        else{
+            ROCKET1MIN[0] =   740; 
+            ROCKET1MAX[0] =   942; 
+            ROCKET2MIN[0] =   752; 
+            ROCKET2MAX[0] =   933; 
+            CARGO1MIN[0] =    614; 
+            CARGO1MAX[0] =    710; 
+            CARGO2MIN[0] =    743; 
+            CARGO2MAX[0] =    822; 
+            CARGO3MIN[0] =    840; 
+            CARGO3MAX[0] =    923; 
+            CARGO4MIN[0] =    936; 
+            CARGO4MAX[0] =    1018;
+            CARGO5MIN[0] =    614; 
+            CARGO5MAX[0] =    710; 
+            CARGO6MIN[0] =    743; 
+            CARGO6MAX[0] =    822; 
+            CARGO7MIN[0] =    840; 
+            CARGO7MAX[0] =    923; 
+            CARGO8MIN[0] =    936; 
+            CARGO8MAX[0] =    1018;
+            HAB1MIN[0] =      348; 
+            HAB1MAX[0] =      445; 
+            HAB2MIN[0] =      348; 
+            HAB2MAX[0] =      445; 
+            HAB3MIN[0] =      348; 
+            HAB3MAX[0] =      445; 
+            ROCKET1MIN[1] =   100;
+            ROCKET1MAX[1] =   195;
+            ROCKET2MIN[1] =   472;
+            ROCKET2MAX[1] =   545;
+            CARGO1MIN[1] =    265;
+            CARGO1MAX[1] =    321;
+            CARGO2MIN[1] =    255;
+            CARGO2MAX[1] =    300;
+            CARGO3MIN[1] =    260;
+            CARGO3MAX[1] =    300;
+            CARGO4MIN[1] =    260;
+            CARGO4MAX[1] =    299;
+            CARGO5MIN[1] =    329;
+            CARGO5MAX[1] =    377;
+            CARGO6MIN[1] =    342;
+            CARGO6MAX[1] =    396;
+            CARGO7MIN[1] =    342;
+            CARGO7MAX[1] =    396;
+            CARGO8MIN[1] =    342;
+            CARGO8MAX[1] =     396;
+            HAB1MIN[1] =      237;
+            HAB1MAX[1] =      293;
+            HAB2MIN[1] =      293;
+            HAB2MAX[1] =      362;
+            HAB3MIN[1] =      362;
+            HAB3MAX[1] =      413;
+        }
+        left = !left;
         
     }
 
@@ -522,12 +682,44 @@ public class MapView extends AppCompatActivity implements View.OnTouchListener, 
     public void hatch(Boolean b) {
         currentAction.hatch = b;
         actionMap.actions.add(currentAction);
+        currentAction = new RobotAction();
+        if(findViewById(R.id.inputcontainer)!=null){
+            EmptyFragment emptyFragment= new EmptyFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+            fragmentTransaction.commit();
+        }
+
+        if(sandstorm){
+            if(findViewById(R.id.infoframe)!=null){
+                AutonFragment rocketFragment= new AutonFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
+        }
+        else{
+            if(findViewById(R.id.infoframe)!=null){
+                TeleopFragment rocketFragment= new TeleopFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                fragmentTransaction.commit();
+            }
+        }
+        updateScreen();
+    }
+
+    public void updateScreen(){
+        cargoDisplay.setText(""+actionMap.totalhatches(false));
+        hatchDisplay.setText(""+actionMap.totalhatches(true));
     }
 
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-
+    }
 }
 
 
