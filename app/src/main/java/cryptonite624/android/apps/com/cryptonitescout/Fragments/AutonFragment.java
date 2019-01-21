@@ -1,5 +1,6 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,22 +8,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link rankings.OnFragmentInteractionListener} interface
+ * {@link AutonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link rankings#newInstance} factory method to
+ * Use the {@link AutonFragment#newInstance} factory method to
  * create an instance of this fragment.
- * This file matches the xml file (rankings.xml)
  */
-public class rankings extends Fragment {
+public class AutonFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    //class variable that is transferred to dataentry class
+
+    public Button toPrematch;
+    public Button toTeleop;
+    public AutonEntry autonEntry = new AutonEntry();
+    private String message;
+
+
+    //this is the object upon which data transfer is done
+
+    OnAutonReadListener autonReadListener;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -30,7 +45,7 @@ public class rankings extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public rankings() {
+    public AutonFragment() {
         // Required empty public constructor
     }
 
@@ -40,17 +55,19 @@ public class rankings extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment rankings.
+     * @return A new instance of fragment AutonFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static rankings newInstance(String param1, String param2) {
-        rankings fragment = new rankings();
+    public static AutonFragment newInstance(String param1, String param2) {
+        AutonFragment fragment = new AutonFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +78,42 @@ public class rankings extends Fragment {
         }
     }
 
+    //interface for data transfer between classes
+
+    public interface OnAutonReadListener{
+        public void OnAutonRead(String message);
+
+        public void LoadAutonData(AutonEntry a);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rankings, container, false);
+        View view =  inflater.inflate(R.layout.fragment_auton, container, false);
+
+        toPrematch = (Button)view.findViewById(R.id.auton_pregame);
+        toPrematch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "toPrematch";
+
+                autonReadListener.OnAutonRead(message);
+            }
+        });
+
+        toTeleop = (Button)view.findViewById(R.id.auton_teleop);
+        toTeleop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** TODO specialised code based on game challenge will be put here*/
+                autonReadListener.LoadAutonData(new AutonEntry(/**This is where*/));
+                message = "toTeleop";
+                autonReadListener.OnAutonRead(message);
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -78,17 +126,18 @@ public class rankings extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        Activity activity = (Activity)context;
+        try{
+            autonReadListener = (OnAutonReadListener) activity;
+        }catch(ClassCastException e){
+            throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
     }
 

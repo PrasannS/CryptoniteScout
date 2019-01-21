@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 
 
@@ -20,6 +21,10 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
  * to handle interaction events.
  * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * configuration database
+ * admin tab - usernames, position
+ * user data
+ * cycle times
  */
 public class DashboardFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

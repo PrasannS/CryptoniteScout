@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
@@ -35,7 +38,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
  *
  */
 
-public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
+public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
 
     DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
@@ -57,7 +60,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
             if(savedInstanceState!=null){
                 return;
             }
-            PregameFragment pregameFragment= new PregameFragment();
+            cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fragmentcontainer,pregameFragment,null);
             fragmentTransaction.commit();
@@ -80,7 +83,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         switch(message){
             case "toPrematch":
                 if(findViewById(R.id.fragmentcontainer)!=null){
-                    PregameFragment pregameFragment= new PregameFragment();
+                    cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentcontainer,pregameFragment,null);
                     fragmentTransaction.commit();
@@ -149,7 +152,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
                 break;
 
             default:
-
         }
     }
 

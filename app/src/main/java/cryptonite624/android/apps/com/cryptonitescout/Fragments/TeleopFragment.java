@@ -1,4 +1,4 @@
-package cryptonite624.android.apps.com.cryptonitescout;
+package cryptonite624.android.apps.com.cryptonitescout.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,45 +10,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.Match;
+import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MatchFragment.OnFragmentInteractionListener} interface
+ * {@link TeleopFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MatchFragment#newInstance} factory method to
+ * Use the {@link TeleopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MatchFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class TeleopFragment extends Fragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    OnTeleopReadListener teleopReadListener;
+
+    public Button toAuton;
+    public TeleopEntry teleopEntry;
+    public Button toEndgame;
+    public String message;
 
     private String mParam1;
     private String mParam2;
 
-    public Button toMatches;
-    public Button redteam1;
-    public Button toDashboard;
-    private String message;
+    private OnFragmentInteractionListener mListener;
 
-    OnMatchReadListener matchReadListener;
-
-    private AutonFragment.OnFragmentInteractionListener mListener;
-
-    public MatchFragment() {
+    public TeleopFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment TeleopFragment.
+     */
     // TODO: Rename and change types and number of parameters
-    public static MatchFragment newInstance(Match m) {
-        MatchFragment fragment = new MatchFragment();
+    public static TeleopFragment newInstance(String param1, String param2) {
+        TeleopFragment fragment = new TeleopFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,31 +70,36 @@ public class MatchFragment extends Fragment {
         }
     }
 
-    public interface OnMatchReadListener{
-        public void OnMatchRead(String message);
+    public interface OnTeleopReadListener{
+        public void OnTeleopRead(String message);
+
+        public void LoadTeleopData(TeleopEntry t);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_match, container, false);
+        View view = inflater.inflate(R.layout.fragment_teleop, container, false);
 
-        toDashboard = (Button)view.findViewById(R.id.toDashboard_match);
-        toDashboard.setOnClickListener(new View.OnClickListener() {
+
+        toAuton = (Button)view.findViewById(R.id.teleop_auton);
+        toAuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toDashboard";
-                matchReadListener.OnMatchRead(message);
+                message = "toAuton";
+                teleopReadListener.OnTeleopRead(message);
             }
         });
 
-        redteam1 = (Button)view.findViewById(R.id.redteam1);
-        redteam1.setOnClickListener(new View.OnClickListener() {
+        toEndgame = (Button)view.findViewById(R.id.teleop_endgame);
+        toEndgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toTeam";
-                matchReadListener.OnMatchRead(message);
+                /** TODO specialised code based on game challenge will be put here*/
+                teleopReadListener.LoadTeleopData(new TeleopEntry(/**This is where*/));
+                message = "toEndgame";
+                teleopReadListener.OnTeleopRead(message);
             }
         });
 
@@ -105,7 +118,7 @@ public class MatchFragment extends Fragment {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            matchReadListener = (OnMatchReadListener) activity;
+            teleopReadListener = (TeleopFragment.OnTeleopReadListener) activity;
         }catch(ClassCastException e){
             throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
         }
@@ -114,7 +127,6 @@ public class MatchFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
         mListener = null;
     }
 

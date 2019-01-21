@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AutonFragment">
+    tools:context=".RocketFragment">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -11,61 +11,76 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/autonguide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id = "@+id/autonguide"
-            android:text="    click on action location, then click whether hatch or cargo"/>
+            android:text="    click on action location on rocket, then click whether hatch or cargo" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2">
-
-            <Switch
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id = "@+id/baselinecrossed"
-                android:text = "    BASELINE CROSSED" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
-
-            <Switch
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id = "@+id/autosandstorm"
-                android:text = "    AUTONOMOUS SANDSTORM" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="horizontal">
+            android:layout_weight="1">
 
             <Button
-                android:id="@+id/auton_pregame"
+                android:id="@+id/tl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Pregame" />
+                android:text="tl" />
 
             <Button
-                android:id="@+id/auton_teleop"
+                android:id="@+id/tr"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="teleop" />
+                android:text="tr" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/ml"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="ml" />
+
+            <Button
+                android:id="@+id/mr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="mr" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/bl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="bl" />
+
+            <Button
+                android:id="@+id/br"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="br" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

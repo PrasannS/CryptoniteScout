@@ -32,6 +32,20 @@ public class pit_note extends AppCompatActivity {
     public Switch From_Cali;
     public Switch Penalties;
 
+    /**TODO
+     * all the stuff from the discord should be on there
+     * Go for Everything
+     * comments section call (other notes
+     * scouting map
+     *  reminder to add
+     *  green-scouted
+     *  yellow-partial
+     *  red-no data
+     *  server updates
+     *  excel
+
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,19 +89,19 @@ public class pit_note extends AppCompatActivity {
             }
         });
 
-        From_Cali = findViewById(R.id.From_Cali);
+        From_Cali = findViewById(R.id.Shifters);
         From_Cali.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.v("From Cali : ",""+isChecked);
+                Log.v("Shifters : ",""+isChecked);
             }
         });
 
-        Penalties = findViewById(R.id.Penalties);
+        Penalties = findViewById(R.id.CrossBaseline);
         Penalties.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.v("Penalties : ",""+isChecked);
+                Log.v("Cross Baseline : ",""+isChecked);
             }
         });
 
