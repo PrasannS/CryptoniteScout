@@ -46,7 +46,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public int numCIMS;
     public int numMiniCIMS;
     public double robotDimension;
-    
+
     public FloatingActionButton toCamera;
     public Switch Programmer_On_Site;
     public Switch LevTwoStart;
