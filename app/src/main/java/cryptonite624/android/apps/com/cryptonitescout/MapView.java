@@ -39,9 +39,6 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import java.util.Date;
 
@@ -164,6 +161,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public double cycletime = -1;
     public boolean stopwatch= false;
     public int totalcycles = 0;
+    private RelativeLayout mapview;
+    private TextView habDisplay;
 
     private Button cancel;
 
@@ -521,11 +520,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     @Override
-    public void LoadAutonData(AutonEntry a) {
-
-    }
-
-    @Override
     public void OnPregameRead(String message) {
         switch (message) {
             /*
@@ -541,11 +535,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             default:
 
         }
-    }
-
-    @Override
-    public void LoadPregameData(PregameEntry p) {
-        p.setTeamnum(0);
     }
 
     @Override
@@ -576,10 +565,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    @Override
-    public void LoadTeleopData(TeleopEntry t) {
 
-    }
 
     @Override
     public void OnEndgameRead(String message) {
@@ -598,10 +584,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    @Override
-    public void LoadEndgameData(EndgameEntry e) {
 
-    }
 
     public void openRocket() {
         if (findViewById(R.id.infoframe) != null) {
