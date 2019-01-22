@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -109,6 +110,15 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 message = "toMapview";
+                dashboardReadListener.OnDashboardRead(message);
+            }
+        });
+
+        toPitnotes = (Button)view.findViewById(R.id.pitnotebutton);
+        toPitnotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message = "toPitnote";
                 dashboardReadListener.OnDashboardRead(message);
             }
         });

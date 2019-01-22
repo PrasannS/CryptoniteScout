@@ -3,8 +3,6 @@ package cryptonite624.android.apps.com.cryptonitescout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -37,7 +35,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -68,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    public Button toPitnote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +94,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        toPitnote = findViewById(R.id.MoveToPitnote);
-        toPitnote.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPitnote();
-            }
-        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -213,10 +202,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    public void openPitnote(){
-        Intent intent1 = new Intent(this,pit_note.class);
-        startActivity(intent1);
-    }
 
 
     private boolean isEmailValid(String email) {
@@ -392,30 +377,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public static int REQUEST_ENABLE_BT = 1;
-
-    public void establishBTConn(){
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
-        }
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
-
-        //run through connected devices
-        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-
-        if (pairedDevices.size() > 0) {
-            // There are paired devices. Get the name and address of each paired device.
-            for (BluetoothDevice device : pairedDevices) {
-                String devizceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-            }
         }
     }
 }

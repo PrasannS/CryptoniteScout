@@ -5,8 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pit_note">
-
+    tools:context=".pitNote">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,8 +44,33 @@
 
             <EditText
                 android:id="@+id/matchnum"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:background="@android:color/white"
+                android:text="Language"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+            <Spinner
+                android:id="@+id/Programming_Language"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown">
+            </Spinner>
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:text="Other :"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+            <EditText
+                android:layout_width="500dp"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -53,57 +80,232 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@android:color/black"
-                android:text="Programmer"
-                android:textColor="@color/teamGreen"
-                android:textSize="40sp"/>
-
-            <Switch
-                android:id="@+id/Programmer_On_Site"
-                android:background="@android:color/black"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checked="false"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Penalties"
+                android:background="@android:color/white"
+                android:text="Programmer On Site "
                 android:textColor="@android:color/black"
                 android:textSize="40sp"/>
 
             <Switch
-                android:id="@+id/Penalties"
-                android:layout_marginLeft="60dp"
+                android:id="@+id/Programmer_On_Site"
+                android:background="@android:color/white"
+                android:layout_gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+
+            <TextView
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:text="Level 2 start"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/LevTwoStart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:checked="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cross Baseline"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/CrossBaseline"
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Shifters"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"/>
+
+            <Switch
+                android:id="@+id/Shifters"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="false"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@android:color/black">
+            android:background="@android:color/white">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:text="From Cali"
-                android:textColor="@color/teamGreen"
-                android:textSize="40sp"/>
+                android:text="#Batteries"
+                android:textColor="@android:color/black"
+                android:textSize="40dp"/>
 
-            <Switch
-                android:id="@+id/From_Cali"
-                android:layout_marginLeft="60dp"
+            <EditText
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:text="#Chargers"
+                android:textColor="@android:color/black"
+                android:textSize="40dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="#CIMS"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+
+            <EditText
+                android:layout_width="380dp"
+                android:layout_height="match_parent"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:text="#Mini CIMS"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:checked="false"/>
+                android:text=""/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:text="Hatch Intake"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+
+            <Spinner
+                android:id="@+id/HatchIntake"
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:text="Cargo Intake"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+
+            <Spinner
+                android:id="@+id/CargoIntake"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:text="Climb Level"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+
+            <Spinner
+                android:id="@+id/ClimbLevel"
+                android:layout_width="270dp"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:text="Layout"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+
+            <Spinner
+                android:id="@+id/LayoutSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:text="Robot Dimension"
+                android:textColor="@android:color/black"
+                android:textSize="40dp" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:text=""/>
+            <TextView
+                android:layout_width="260dp"
+                android:layout_height="match_parent"
+                android:text="Wheels"
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+
+            <Spinner
+                android:id="@+id/Wheels"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+            <TextView
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:text="Comment  : "
+                android:textSize="40dp"
+                android:textColor="@android:color/black"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,18 +320,25 @@
                 android:layout_margin="@dimen/fab_margin"
                 app:srcCompat="@drawable/camerabutton" />
 
+            <ImageView
+                android:id="@+id/pictureImage"
+                android:layout_width="750dp"
+                android:layout_height="500dp" />
+
             <Button
-                android:id="@+id/pit_note_nextPage"
+                android:id="@+id/toDashboardPage"
                 android:layout_width="200dp"
-                android:layout_marginLeft="130dp"
                 android:layout_height="match_parent"
                 android:textSize="30sp"
-                android:text="Next\nPage"
-                android:textColor="@color/teamGreen"
-                android:background="@android:color/black"/>
+                android:text="DashBoard"
+                android:textColor="@android:color/black"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
+
     </LinearLayout>
+</ScrollView>
+
 
 
 

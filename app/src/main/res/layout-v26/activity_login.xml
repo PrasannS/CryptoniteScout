@@ -109,7 +109,7 @@
                 android:textSize="15sp"/>
 
             <Button
-                android:id="@+id/MoveToPitnote"
+                android:id="@+id/ToPitnote"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="PitNote"
