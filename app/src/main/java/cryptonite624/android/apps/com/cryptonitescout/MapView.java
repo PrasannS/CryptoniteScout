@@ -131,6 +131,17 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int topx, topy, bttmx, bttmy;
     public int habLevel;
 
+    Button cargobutton1;
+    Button cargobutton2;
+    Button cargobutton3;
+    Button cargobutton4;
+    Button cargobutton5;
+    Button cargobutton6;
+    Button cargobutton7;
+    Button cargobutton8;
+
+
+
     CustomDrawableView mCustomDrawableView;
 
     private Canvas mCanvas;
@@ -144,7 +155,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     private int mOffset = OFFSET;
 
-    public boolean sandstorm = true;
+    public boolean sandstorm;
     public boolean rocket = false;
 
     CustomImageView customView;
@@ -172,6 +183,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
+
+        cargobutton1 = (Button)findViewById(R.id.cargobutton1);
+        cargobutton2 = (Button)findViewById(R.id.cargobutton2);
+        cargobutton3 = (Button)findViewById(R.id.cargobutton3);
+        cargobutton4 = (Button)findViewById(R.id.cargobutton4);
+        cargobutton5 = (Button)findViewById(R.id.cargobutton5);
+        cargobutton6 = (Button)findViewById(R.id.cargobutton6);
+        cargobutton7 = (Button)findViewById(R.id.cargobutton7);
+        cargobutton8 = (Button)findViewById(R.id.cargobutton8);
+
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -234,14 +255,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         //drawing = new Drawing(this);
         //setContentView(drawing);
 
-        mColorBackground = ResourcesCompat.getColor(getResources(),
-                R.color.colorBackground, null);
-        mColorRectangle = ResourcesCompat.getColor(getResources(),
-                R.color.colorRectangle, null);
-        mColorAccent = ResourcesCompat.getColor(getResources(),
-                R.color.colorAccent, null);
-        mPaint.setColor(mColorBackground);
-
         setScreenratio();
         setBounds();
         //mImageView = (ImageView) findViewById(R.id.mapview);
@@ -253,21 +266,26 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 matchStatus++;
                 if (matchStatus > 3) {
                     matchStatus = 0;
+                    sandstorm = false;
                 }
                 if (matchStatus == 0) {
                     statusButton.setText("Pregame");
                     changeFragment(matchStatus);
+                    sandstorm = false;
                 }
                 if (matchStatus == 1) {
                     statusButton.setText("Sandstorm");
+                    sandstorm = true;
                     changeFragment(matchStatus);
                 }
                 if (matchStatus == 2) {
                     statusButton.setText("Teleop");
+                    sandstorm = false;
                     changeFragment(matchStatus);
                 }
                 if (matchStatus == 3) {
                     statusButton.setText("Endgame");
+                    sandstorm = false;
                     changeFragment(matchStatus);
                 }
 
@@ -282,12 +300,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         x = (int) event.getX();
         y = (int) event.getY();
 
+        //cargobutton1.setBackgroundColor(Color.RED);
+
         //drawing = new Drawing(this);
 
-        if (actionReady) {
+        /*if (actionReady) {
             actionReady = false;
             actionMap.actions.add(new RobotAction(getCode(x, y), matchStatus));
-        }
+        }*/
 
         /*if(actionReady == false){
             customView.setClickLocation(x, y);
@@ -329,6 +349,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);
             fragmentTransaction.commit();
         }
+
+        currentAction.actionCode = getCode(x, y);
     }
 
 
@@ -662,6 +684,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
         }
         actionMap.actions.add(currentAction);
+        currentAction = new RobotAction();
         updateScreen();
     }
 
@@ -669,8 +692,39 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargoDisplay.setText("" + actionMap.totalhatches(false));
         hatchDisplay.setText("" + actionMap.totalhatches(true));
         habDisplay.setText("" + habLevel);
-        currentAction = new RobotAction();
-        System.out.println(actionMap.actions);
+        //System.out.println(actionMap.actions);
+        updateFilled();
+    }
+
+    public void updateFilled(){
+        //cargobutton5.setBackgroundColor(Color.BLUE);
+        for(int i = 0; i < actionMap.actions.size(); i++){
+            System.out.println(actionMap.actions.get(i));
+            if(actionMap.actions.get(i).actionCode.equals("C1")){
+                cargobutton1.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C2")){
+                cargobutton2.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C3")){
+                cargobutton3.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C4")){
+                cargobutton4.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C5")){
+                cargobutton5.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C6")){
+                cargobutton6.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C7")){
+                cargobutton7.setBackgroundColor(Color.YELLOW);
+            }
+            else if(actionMap.actions.get(i).actionCode.equals("C8")){
+                cargobutton8.setBackgroundColor(Color.YELLOW);
+            }
+        }
     }
 
     @Override

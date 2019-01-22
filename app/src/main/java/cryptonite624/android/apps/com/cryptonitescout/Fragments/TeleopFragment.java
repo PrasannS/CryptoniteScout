@@ -83,26 +83,6 @@ public class TeleopFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_teleop, container, false);
 
 
-        toAuton = (Button)view.findViewById(R.id.teleop_auton);
-        toAuton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                teleopReadListener.OnTeleopRead(message);
-            }
-        });
-
-        toEndgame = (Button)view.findViewById(R.id.teleop_endgame);
-        toEndgame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /** TODO specialised code based on game challenge will be put here*/
-                teleopReadListener.LoadTeleopData(new TeleopEntry(/**This is where*/));
-                message = "toEndgame";
-                teleopReadListener.OnTeleopRead(message);
-            }
-        });
-
         return view;
     }
 
