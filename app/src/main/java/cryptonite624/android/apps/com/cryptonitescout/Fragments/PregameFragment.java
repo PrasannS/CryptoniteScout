@@ -2,24 +2,14 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 
 
 /**
@@ -39,7 +29,6 @@ public class PregameFragment extends Fragment {
     public EditText matchNum;
     public String message;
     public EditText teamNum;
-    public PregameEntry pregameEntry = new PregameEntry();
 
     public TextView hatchDisplay;
 
@@ -69,8 +58,6 @@ public class PregameFragment extends Fragment {
 
     public interface OnPregameReadListener{
         public void OnPregameRead(String message);
-
-        public void LoadPregameData(PregameEntry p);
     }
 
     @Override

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
@@ -31,7 +30,6 @@ public class AutonFragment extends Fragment {
 
     public Button toPrematch;
     public Button toTeleop;
-    public AutonEntry autonEntry = new AutonEntry();
     private String message;
 
 
@@ -82,8 +80,6 @@ public class AutonFragment extends Fragment {
 
     public interface OnAutonReadListener{
         public void OnAutonRead(String message);
-
-        public void LoadAutonData(AutonEntry a);
     }
 
     @Override

@@ -37,13 +37,13 @@ public class ActionMap implements Parcelable{
     };
 
     //action code + match status
-    public int numScored(int [] codes, int [] matchStatus){
+    public int numScored(int [] basecodes, int [] matchStatus){
         int total = 0;
 
-        for(int c : codes) {
+        for(int c : basecodes) {
             for(int m : matchStatus) {
                 for (RobotAction i : actions) {
-                    if (i.actionCode.equals(c) && i.matchStatus == m) {
+                    if (i.actionCode.equals(c+i.matchStatus)) {
                         total++;
                     }
                 }
@@ -54,14 +54,15 @@ public class ActionMap implements Parcelable{
     }
 
     public int totalhatches(boolean b){
-        int count = 0;
-        for(RobotAction r: actions){
-            if(b==r.hatch){
+        int count =0;
+        for(RobotAction r : actions){
+            if(r.hatch==b){
                 count++;
             }
         }
         return count;
     }
+
 
     public int totalPoints(){
         return actions.size();
@@ -89,6 +90,14 @@ public class ActionMap implements Parcelable{
         else{
             return false;
         }
+    }
+
+    public String toString(){
+        String temp = "";
+        for(RobotAction r:actions){
+            temp+=r+",";
+        }
+        return temp;
     }
 
 

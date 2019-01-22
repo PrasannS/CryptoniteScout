@@ -7,26 +7,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.FinalDataEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Persistence.CryptoniteScoutDAO;
-import cryptonite624.android.apps.com.cryptonitescout.Persistence.CryptoniteScoutDBHelper;
 
 /**
  * Created by Belal on 1/27/2017.

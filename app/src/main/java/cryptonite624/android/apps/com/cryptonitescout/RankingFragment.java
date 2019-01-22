@@ -9,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -185,7 +182,5 @@ public class RankingFragment extends Fragment {
 
     public interface OnRankingRead{
         public void OnRankingRead(String message);
-
-        public void OnRankingRead(PregameEntry p);
     }
 }

@@ -11,17 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 
 /** TODO
  * field map analysis touch
@@ -39,8 +32,6 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
  */
 
 public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
-
-    public DataEntry dataEntry = new DataEntry(getteam());
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
 
@@ -101,10 +92,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         }
     }
 
-    @Override
-    public void LoadAutonData(AutonEntry a) {
-
-    }
 
     @Override
     public void OnPregameRead(String message) {
@@ -123,10 +110,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         }
     }
 
-    @Override
-    public void LoadPregameData(PregameEntry p) {
-        p.setTeamnum(0);
-    }
 
     @Override
     public void OnTeleopRead(String message) {
@@ -153,10 +136,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         }
     }
 
-    @Override
-    public void LoadTeleopData(TeleopEntry t) {
-
-    }
 
     @Override
     public void OnEndgameRead(String message) {
@@ -175,9 +154,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
 
     }
 
-    @Override
-    public void LoadEndgameData(EndgameEntry e) {
-    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

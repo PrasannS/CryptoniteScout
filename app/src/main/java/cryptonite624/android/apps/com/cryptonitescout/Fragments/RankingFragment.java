@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
 /**
@@ -186,6 +185,6 @@ public class RankingFragment extends Fragment {
     public interface OnRankingRead{
         public void OnRankingRead(String message);
 
-        public void OnRankingRead(PregameEntry p);
+
     }
 }

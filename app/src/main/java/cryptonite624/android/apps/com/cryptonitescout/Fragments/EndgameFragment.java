@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
@@ -29,7 +28,7 @@ public class EndgameFragment extends Fragment {
     public Button toTeleop;
     public Button submit;
     public String message;
-    public EndgameEntry endgameEntry = new EndgameEntry();
+
 
 
     OnEndgameReadListener endgameReadListener;
@@ -45,7 +44,7 @@ public class EndgameFragment extends Fragment {
 
     public interface OnEndgameReadListener{
         public void OnEndgameRead(String message);
-        public void LoadEndgameData(EndgameEntry e);
+
     }
 
     @Override
@@ -69,7 +68,7 @@ public class EndgameFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /** TODO specialised code based on game challenge will be put here*/
-                endgameReadListener.LoadEndgameData(new EndgameEntry());
+
             }
         });
 

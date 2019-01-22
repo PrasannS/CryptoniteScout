@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.MapView;
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
 

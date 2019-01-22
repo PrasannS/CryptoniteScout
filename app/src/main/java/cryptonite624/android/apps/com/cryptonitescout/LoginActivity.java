@@ -3,9 +3,10 @@ package cryptonite624.android.apps.com.cryptonitescout;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,8 +37,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.DataEntry;
+import java.util.Set;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -393,6 +392,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public static int REQUEST_ENABLE_BT = 1;
+
+    public void establishBTConn(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            // Device doesn't support Bluetooth
+        }
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
+        //run through connected devices
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+        if (pairedDevices.size() > 0) {
+            // There are paired devices. Get the name and address of each paired device.
+            for (BluetoothDevice device : pairedDevices) {
+                String devizceName = device.getName();
+                String deviceHardwareAddress = device.getAddress(); // MAC address
+            }
         }
     }
 }

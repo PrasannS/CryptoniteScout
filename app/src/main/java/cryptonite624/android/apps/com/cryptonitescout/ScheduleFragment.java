@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,8 +76,6 @@ public class ScheduleFragment extends Fragment {
 
     public interface OnScheduleRead{
         public void OnScheduleRead(String message);
-
-        public void OnScheduleRead(PregameEntry p);
     }
 
     @Override

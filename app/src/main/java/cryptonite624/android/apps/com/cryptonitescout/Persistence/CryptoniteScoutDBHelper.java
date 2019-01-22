@@ -7,34 +7,64 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.FinalDataEntry;
 
 public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "DB_CRYPTONITESCOUT";
     private static final int DATABASE_VERSION = 1;
-    public static final String FINALDE_TABLE_NAME = "TBL_FINAL_DE";
+    public static final String MATCHES_TABLE_NAME = "TBL_MATCHES";
+    public static final String RANKINGS_TABLE_NAME = "TBL_RANKINGS";
+    public static final String USERS_TABLE_NAME = "TBL_USERS";
+
+
 
     //CREATE TABLE FINALDE_TABLE_NAME(ID TEXT primary key,
 
-    private static final String FINALDE_TABLE_CREATE =
-            "CREATE TABLE " + FINALDE_TABLE_NAME + " (" +
-                    "ID" + " TEXT primary key, " +
-                    "Auton" + " TEXT, " +
-                    "Teleop" + " TEXT, " +
-                    "Endgame" + " TEXT, " +
-                    "Status" + " TINYINT, " +
-                    "Pregame" + " TEXT);";
+    private static final String MATCHES_TABLE_CREATE =
+            "CREATE TABLE " + MATCHES_TABLE_NAME + " (" +
+                    "Matchnum" + " INT primary key, " +
+                    "Teamnums" + " TEXT, "+
+                    "Matchdata" + " TEXT, " +
+                    "Comments" + " TEXT);";
+
+    private static final String USERS_TABLE_CREATE =
+            "CREATE TABLE " + USERS_TABLE_NAME + " (" +
+                    "Username" + " TEXT primary key, " +
+                    "Status" + " INT, " +
+                    "Type" + " TEXT, " +
+                    "Email" + " TEXT);";
+
+    private static final String RANKINGS_TABLE_CREATE =
+            "CREATE TABLE " + RANKINGS_TABLE_NAME + " (" +
+                    "Teamnum"                + " INT primary key, " +
+                    "Status"                + " INT, " +
+                    "MatchesPlayed"                + " INT, " +
+                    "CargoAvg"               + " DOUBLE, "+
+                    "HatchAvg"              + " DOUBLE, " +
+                    "SandstormHatchOne"     + " DOUBLE, " +
+                    "SandstormHatchTwo"     + " DOUBLE, " +
+                    "SandstormHatchThree"    + " DOUBLE, " +
+                    "SandstormCargoOne"     + " DOUBLE, " +
+                    "SandstormCargoTwo"     + " DOUBLE, " +
+                    "SandstormCargoThree"    + " DOUBLE, " +
+                    "TeleopCargoOne"        + " DOUBLE, " +
+                    "TeleopCargoTwo"        + " DOUBLE, " +
+                    "TeleopCargoThree"      + " DOUBLE, " +
+                    "TeleopHatchOne"         + " DOUBLE, " +
+                    "TeleopHatchTwo"        + " DOUBLE, " +
+                    "TeleopHatchThree"      + " DOUBLE, " +
+                    "ClimbOne"              + " DOUBLE, " +
+                    "ClimbTwo"              + " DOUBLE, " +
+                    "ClimbThree"            + " DOUBLE, " +
+                    "CxHatchCargoShip"      + " DOUBLE, " +
+                    "CxCargoCargoShip"      + " DOUBLE, " +
+                    "CxComboCargoShip"       + " DOUBLE, " +
+                    "CxCargoRocket"         +    " DOUBLE, " +
+                    "CxHatchRocket"         + " DOUBLE, " +
+                    "CxComboRocket"         + " DOUBLE);";
+
+
 
     CryptoniteScoutDBHelper (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,7 +73,9 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
     //create tables below
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL(FINALDE_TABLE_CREATE);
+        db.execSQL(MATCHES_TABLE_CREATE);
+        db.execSQL(RANKINGS_TABLE_CREATE);
+        db.execSQL(USERS_TABLE_CREATE);
         try{
             initialLoad(db);
         }
@@ -54,7 +86,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getAllData() {
-        String selectQuery = "Select * from "+FINALDE_TABLE_NAME;
+        String selectQuery = "Select * from "+MATCHES_TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;
@@ -65,19 +97,12 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i2) {
-        db.execSQL("DROP TABLE IF EXISTS " + FINALDE_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MATCHES_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + RANKINGS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE_NAME);
         onCreate(db);
     }
 
-    public void addFinalDataEntry(FinalDataEntry m,SQLiteDatabase database){
-        ContentValues values = new ContentValues();
-        String id = java.util.UUID.randomUUID().toString();
-        values.put("Auton",m.pregameEntry.toString());
-        values.put("Teleop",m.autonEntry.toString());
-        values.put("Endgame",m.pregameEntry.toString());
-        values.put("Pregame",m.teleopEntry.toString());
-        long insertID = database.insert(FINALDE_TABLE_NAME, null, values);
-    }
 
     public void initialLoad(SQLiteDatabase database)throws IOException{
 

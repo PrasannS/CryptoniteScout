@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
 
@@ -30,7 +29,6 @@ public class TeleopFragment extends Fragment {
     OnTeleopReadListener teleopReadListener;
 
     public Button toAuton;
-    public TeleopEntry teleopEntry;
     public Button toEndgame;
     public String message;
 
@@ -72,8 +70,6 @@ public class TeleopFragment extends Fragment {
 
     public interface OnTeleopReadListener{
         public void OnTeleopRead(String message);
-
-        public void LoadTeleopData(TeleopEntry t);
     }
 
     @Override
@@ -97,7 +93,6 @@ public class TeleopFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /** TODO specialised code based on game challenge will be put here*/
-                teleopReadListener.LoadTeleopData(new TeleopEntry(/**This is where*/));
                 message = "toEndgame";
                 teleopReadListener.OnTeleopRead(message);
             }

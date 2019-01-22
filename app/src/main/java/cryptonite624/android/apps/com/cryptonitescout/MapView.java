@@ -1,18 +1,12 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,14 +16,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -37,13 +28,9 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
-import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
-import cryptonite624.android.apps.com.cryptonitescout.Models.AutonEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.EndgameEntry;
-import cryptonite624.android.apps.com.cryptonitescout.Models.PregameEntry;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
-import cryptonite624.android.apps.com.cryptonitescout.Models.TeleopEntry;
+import java.util.Date;
 
 public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
 
@@ -116,6 +103,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] HAB3MAX =   {445, 413};
 
 
+
     public static int[] imageratio = {1,1};
 
     public static int[] screenratio = new int[2];
@@ -147,6 +135,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private int mColorRectangle;
     private int mColorAccent;
 
+    public long starttime;
+    public long endtime;
+    public double cycletime = -1;
+    public boolean stopwatch= false;
+    public int totalcycles = 0;
+
+    private Button cancel;
+
 
     private Button imageswitch;
     private int mOffset = OFFSET;
@@ -161,6 +157,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     TextView hatchDisplay;
     TextView cargoDisplay;
+    private Button b;
 
     public RobotAction currentAction = new RobotAction();
 
@@ -198,7 +195,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
+        cancel = (Button) findViewById(R.id.cancel);
 
+        stopwatch=false;
 
 
         //mCustomDrawableView = new CustomDrawableView(this);
@@ -280,11 +279,45 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @SuppressLint("WrongCall")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Date date = new Date();
+
         x = (int)event.getX();
         y = (int)event.getY();
+        cancel.setVisibility(View.VISIBLE);
 
-        //hatchDisplay.setText(""+x);
-        //cargoDisplay.setText(""+y);
+        cancel.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(findViewById(R.id.inputcontainer)!=null){
+                            EmptyFragment emptyFragment= new EmptyFragment();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
+                            fragmentTransaction.commit();
+                        }
+
+                        if(sandstorm){
+                            if(findViewById(R.id.infoframe)!=null){
+                                AutonFragment rocketFragment= new AutonFragment();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                                fragmentTransaction.commit();
+                            }
+                        }
+                        else{
+                            if(findViewById(R.id.infoframe)!=null){
+                                TeleopFragment rocketFragment= new TeleopFragment();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.infoframe,rocketFragment,null);
+                                fragmentTransaction.commit();
+                            }
+                        }
+                        currentAction = new RobotAction();
+                    }
+                }
+        );
+        hatchDisplay.setText(""+x);
+        cargoDisplay.setText(""+y);
 
         //drawing = new Drawing(this);
 
@@ -292,12 +325,27 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             actionReady = false;
             actionMap.actions.add(new RobotAction(getCode(x, y), matchStatus));
         }
-
         /*if(actionReady == false){
             customView.setClickLocation(x, y);
         }*/
 
         if(!getCode(x, y).equals("Z")){
+
+            if(!stopwatch||((endtime-starttime)/1000)<1){
+                starttime = date.getTime();
+                stopwatch=true;
+            }
+            else{
+                endtime = date.getTime();
+                if(cycletime==-1)
+                cycletime =(double) ((endtime-starttime)/1000);
+                else{
+                    cycletime =(cycletime*totalcycles)+(double) ((endtime-starttime)/1000)/(totalcycles+1);
+                }
+                totalcycles++;
+                stopwatch=false;
+            }
+
             //actionReady = true;
             if(findViewById(R.id.inputcontainer)!=null){
                 EmptyFragment emptyFragment= new EmptyFragment();
@@ -326,6 +374,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 fragmentTransaction.commit();
             }
         }
+
 
 
 
@@ -407,10 +456,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    @Override
-    public void LoadAutonData(AutonEntry a) {
 
-    }
 
     @Override
     public void OnPregameRead(String message) {
@@ -429,10 +475,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    @Override
-    public void LoadPregameData(PregameEntry p) {
-        p.setTeamnum(0);
-    }
+
 
     @Override
     public void OnTeleopRead(String message) {
@@ -461,10 +504,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    @Override
-    public void LoadTeleopData(TeleopEntry t) {
-
-    }
 
     @Override
     public void OnEndgameRead(String message) {
@@ -480,11 +519,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
             default:
         }
-
-    }
-
-    @Override
-    public void LoadEndgameData(EndgameEntry e) {
 
     }
 
@@ -621,32 +655,32 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB3MAX[1] = 283;
         }
         else{
-            ROCKET1MIN[0] =   740; 
-            ROCKET1MAX[0] =   942; 
-            ROCKET2MIN[0] =   752; 
-            ROCKET2MAX[0] =   933; 
-            CARGO1MIN[0] =    614; 
-            CARGO1MAX[0] =    710; 
-            CARGO2MIN[0] =    743; 
-            CARGO2MAX[0] =    822; 
-            CARGO3MIN[0] =    840; 
-            CARGO3MAX[0] =    923; 
-            CARGO4MIN[0] =    936; 
+            ROCKET1MIN[0] =   740;
+            ROCKET1MAX[0] =   942;
+            ROCKET2MIN[0] =   752;
+            ROCKET2MAX[0] =   933;
+            CARGO1MIN[0] =    614;
+            CARGO1MAX[0] =    710;
+            CARGO2MIN[0] =    743;
+            CARGO2MAX[0] =    822;
+            CARGO3MIN[0] =    840;
+            CARGO3MAX[0] =    923;
+            CARGO4MIN[0] =    936;
             CARGO4MAX[0] =    1018;
-            CARGO5MIN[0] =    614; 
-            CARGO5MAX[0] =    710; 
-            CARGO6MIN[0] =    743; 
-            CARGO6MAX[0] =    822; 
-            CARGO7MIN[0] =    840; 
-            CARGO7MAX[0] =    923; 
-            CARGO8MIN[0] =    936; 
+            CARGO5MIN[0] =    614;
+            CARGO5MAX[0] =    710;
+            CARGO6MIN[0] =    743;
+            CARGO6MAX[0] =    822;
+            CARGO7MIN[0] =    840;
+            CARGO7MAX[0] =    923;
+            CARGO8MIN[0] =    936;
             CARGO8MAX[0] =    1018;
-            HAB1MIN[0] =      348; 
-            HAB1MAX[0] =      445; 
-            HAB2MIN[0] =      348; 
-            HAB2MAX[0] =      445; 
-            HAB3MIN[0] =      348; 
-            HAB3MAX[0] =      445; 
+            HAB1MIN[0] =      348;
+            HAB1MAX[0] =      445;
+            HAB2MIN[0] =      348;
+            HAB2MAX[0] =      445;
+            HAB3MIN[0] =      348;
+            HAB3MAX[0] =      445;
             ROCKET1MIN[1] =   100;
             ROCKET1MAX[1] =   195;
             ROCKET2MIN[1] =   472;
@@ -675,7 +709,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB3MAX[1] =      413;
         }
         left = !left;
-        
+
     }
 
     @Override
@@ -706,12 +740,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 fragmentTransaction.commit();
             }
         }
+        cancel.setVisibility(View.GONE);
         updateScreen();
     }
 
     public void updateScreen(){
         cargoDisplay.setText(""+actionMap.totalhatches(false));
         hatchDisplay.setText(""+actionMap.totalhatches(true));
+        cargoDisplay.setText(cycletime+"");
     }
 
 
