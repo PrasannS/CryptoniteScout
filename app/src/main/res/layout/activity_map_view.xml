@@ -157,83 +157,77 @@
             android:background="@drawable/redright">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/cargobutton1"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/cargobutton2"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/cargobutton2"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="157dp"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/cargobutton3"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/button"
-                android:text="Button"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/button"
+                android:layout_alignTop="@+id/cargobutton1"
                 android:layout_marginStart="198dp"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/cargobutton4"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="275dp"
                 android:layout_marginTop="167dp"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/cargobutton5"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="158dp"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/cargobutton6"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignStart="@+id/button"
-                android:layout_alignTop="@+id/button5"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:layout_alignStart="@+id/cargobutton1"
+                android:layout_alignTop="@+id/cargobutton5"
+                android:layout_marginStart="97dp"
+                android:layout_marginTop="2dp"
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/cargobutton7"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignStart="@+id/button3"
-                android:layout_alignTop="@+id/button5"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:layout_alignStart="@+id/cargobutton3"
+                android:layout_alignTop="@+id/cargobutton5"
+                android:text="Button" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/cargobutton8"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/button4"
+                android:layout_alignStart="@+id/cargobutton4"
                 android:layout_marginBottom="168dp"
-                android:text="Button"
-                android:visibility="invisible" />
+                android:text="Button" />
 
             <Button
                 android:id="@+id/button9"
