@@ -839,6 +839,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
         }
         cancel.setVisibility(View.GONE);
+        currentAction.matchStatus= matchStatus;
         actionMap.actions.add(currentAction);
         currentAction = new RobotAction();
         updateScreen();
@@ -889,6 +890,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void changeFragment(int fragmentNum) {
+        if(fragmentNum==3){
+            matchStatus =-1;
+        }
+        matchStatus++;
         if (fragmentNum == 0) {
             if (findViewById(R.id.infoframe) != null) {
                 cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();

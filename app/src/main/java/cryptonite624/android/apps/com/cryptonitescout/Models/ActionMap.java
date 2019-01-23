@@ -10,6 +10,7 @@ import android.os.Parcelable;
 public class ActionMap implements Parcelable{
 
     public ArrayList<RobotAction> actions;
+    public int endclimb;
 
 
     public ActionMap(){
@@ -37,13 +38,14 @@ public class ActionMap implements Parcelable{
     };
 
     //action code + match status
-    public int numScored(int [] basecodes, int [] matchStatus){
+    public int numScored(String [] basecodes, int [] matchStatus, boolean hatch){
         int total = 0;
 
-        for(int c : basecodes) {
+        for(String c : basecodes) {
             for(int m : matchStatus) {
                 for (RobotAction i : actions) {
                     if (i.actionCode.equals(c+i.matchStatus)) {
+                        if(i.hatch==hatch)
                         total++;
                     }
                 }
@@ -97,7 +99,7 @@ public class ActionMap implements Parcelable{
         for(RobotAction r:actions){
             temp+=r+",";
         }
-        return temp;
+        return temp+endclimb;
     }
 
 

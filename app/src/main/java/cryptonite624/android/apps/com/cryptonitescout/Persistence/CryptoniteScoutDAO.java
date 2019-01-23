@@ -19,32 +19,32 @@ public class CryptoniteScoutDAO {
     private CryptoniteScoutDBHelper dbHelper;
 
     private String[] allRankingColumns = {
-            "Teamnum"            ,
-            "Status"             ,
-            "MatchesPlayed"      ,
-            "CargoAvg"           ,
-            "HatchAvg"           ,
-            "SandstormHatchOne"  ,
-            "SandstormHatchTwo"  ,
-            "SandstormHatchThree",
-            "SandstormCargoOne"  ,
-            "SandstormCargoTwo"  ,
-            "SandstormCargoThree",
-            "TeleopCargoOne"     ,
-            "TeleopCargoTwo"     ,
-            "TeleopCargoThree"   ,
-            "TeleopHatchOne"     ,
-            "TeleopHatchTwo"     ,
-            "TeleopHatchThree"   ,
-            "ClimbOne"           ,
-            "ClimbTwo"           ,
-            "ClimbThree"         ,
-            "CxHatchCargoShip"   ,
-            "CxCargoCargoShip"   ,
-            "CxComboCargoShip"   ,
-            "CxCargoRocket"      ,
-            "CxHatchRocket"      ,
-            "CxComboRocket"
+        "Teamnum"            ,
+        "Status"             ,
+        "MatchesPlayed"      ,
+        "CargoAvg"           ,
+        "HatchAvg"           ,
+        "SandstormHatchOne"  ,
+        "SandstormHatchTwo"  ,
+        "SandstormHatchThree",
+        "SandstormCargoOne"  ,
+        "SandstormCargoTwo"  ,
+        "SandstormCargoThree",
+        "TeleopCargoOne"     ,
+        "TeleopCargoTwo"     ,
+        "TeleopCargoThree"   ,
+        "TeleopHatchOne"     ,
+        "TeleopHatchTwo"     ,
+        "TeleopHatchThree"   ,
+        "ClimbOne"           ,
+        "ClimbTwo"           ,
+        "ClimbThree"         ,
+        "CxHatchCargoShip"   ,
+        "CxCargoCargoShip"   ,
+        "CxComboCargoShip"   ,
+        "CxCargoRocket"      ,
+        "CxHatchRocket"      ,
+        "CxComboRocket"
 
     };
 
@@ -70,10 +70,6 @@ public class CryptoniteScoutDAO {
         dbHelper.close();
     }
 
-    public String getInfo(String keyword){
-        return "Prasann is an amazing person.";
-    }
-
     public void addUser(User user){
         database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -82,6 +78,43 @@ public class CryptoniteScoutDAO {
         values.put("Type",user.type);
         values.put("Email",user.email);
         long insertID = database.insert(CryptoniteScoutDBHelper.USERS_TABLE_NAME, null, values);
+        database.close();
+    }
+
+    public void updateRankingData(RankingData r){
+        database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Teamnum"            ,r.Teamnum);
+        values.put("Status"             ,r.Status);
+        values.put("MatchesPlayed"      ,r.MatchesPlayed);
+        values.put("CargoAvg"           ,r.CargoAvg);
+        values.put("HatchAvg"           ,r.HatchAvg);
+        values.put("SandstormHatchOne"  ,r.SandstormHatchOne);
+        values.put("SandstormHatchTwo"  ,r.SandstormHatchTwo);
+        values.put("SandstormHatchThree",r.SandstormHatchThree);
+        values.put("SandstormCargoOne"  ,r.SandstormCargoOne);
+        values.put("SandstormCargoTwo"  ,r.SandstormCargoTwo);
+        values.put("SandstormCargoThree",r.SandstormCargoThree);
+        values.put("TeleopCargoOne"     ,r.TeleopCargoOne);
+        values.put("TeleopCargoTwo"     ,r.TeleopCargoTwo);
+        values.put("TeleopCargoThree"   ,r.TeleopCargoThree);
+        values.put("TeleopHatchOne"     ,r.TeleopHatchOne);
+        values.put("TeleopHatchTwo"     ,r.TeleopHatchTwo);
+        values.put("TeleopHatchThree"   ,r.TeleopHatchThree);
+        values.put("ClimbOne"           ,r.ClimbOne);
+        values.put("ClimbTwo"           ,r.ClimbTwo);
+        values.put("ClimbThree"         ,r.ClimbThree);
+        values.put("CxHatchCargoShip"   ,r.CxHatchCargoShip);
+        values.put("CxCargoCargoShip"   ,r.CxCargoCargoShip);
+        values.put("CxComboCargoShip"   ,r.CxComboCargoShip);
+        values.put("CxCargoRocket"      ,r.CxCargoRocket);
+        values.put("CxHatchRocket"      ,r.CxHatchRocket);
+        values.put("CxComboRocket"      ,r.CxComboRocket);
+
+        /**
+         * TODO
+         * Make sure to verify this*/
+        long insertID = database.update(CryptoniteScoutDBHelper.RANKINGS_TABLE_NAME, values,"WHERE Teamnum = "+r.Teamnum,null);
         database.close();
     }
 
@@ -129,12 +162,124 @@ public class CryptoniteScoutDAO {
         return r;
     }
 
+    public void getRankingStat(int teamnum,int colindex){
+
+    }
+
     public void addTeamData(ActionMap a, int teamnum){
+        String[] temparr = new String[4];
         RankingData r = getTeamStats(teamnum);
+        int cargototal=0;
+        int hatchtotal=0;
+        r.Teamnum=teamnum;
         r.Status =0;
         r.MatchesPlayed++;
-        r.CargoAvg = r.CargoAvg*r.MatchesPlayed+1;
+        temparr[0]="A1";
+        temparr[1]="B1";
+        temparr[2]="A2";
+        temparr[3]="B2";
+        int[] status = {1};
+        r.SandstormCargoOne+=a.numScored(temparr,status,false);
+        temparr[0]="A3";
+        temparr[1]="B3";
+        temparr[2]="A4";
+        temparr[3]="B4";
+        cargototal+=r.SandstormCargoOne;
+        r.SandstormCargoTwo+=a.numScored(temparr,status,false);
+        temparr[0]="A5";
+        temparr[1]="B5";
+        temparr[2]="A6";
+        temparr[3]="B6";
+        cargototal+=r.SandstormCargoTwo;
+        r.SandstormCargoThree+=a.numScored(temparr,status,false);
+        temparr[0]="A1";
+        temparr[1]="B1";
+        temparr[2]="A2";
+        temparr[3]="B2";
+        cargototal+=r.SandstormCargoThree;
+        r.SandstormHatchOne+=a.numScored(temparr,status,false);
+        temparr[0]="A3";
+        temparr[1]="B3";
+        temparr[2]="A4";
+        temparr[3]="B4";
+        hatchtotal+=r.SandstormHatchOne;
+        r.SandstormHatchTwo+=a.numScored(temparr,status,false);
+        temparr[0]="A5";
+        temparr[1]="B5";
+        temparr[2]="A6";
+        temparr[3]="B6";
+        hatchtotal+=r.SandstormHatchTwo;
+        r.SandstormHatchThree+=a.numScored(temparr,status,false);
+        temparr[0]="A1";
+        temparr[1]="B1";
+        temparr[2]="A2";
+        temparr[3]="B2";
+        status[0]=2;
+        hatchtotal+=r.SandstormHatchThree;
+        r.TeleopCargoOne+=a.numScored(temparr,status,false);
+        temparr[0]="A3";
+        temparr[1]="B3";
+        temparr[2]="A4";
+        temparr[3]="B4";
+        cargototal+=r.TeleopCargoOne;
+        r.TeleopCargoTwo+=a.numScored(temparr,status,false);
+        temparr[0]="A5";
+        temparr[1]="B5";
+        temparr[2]="A6";
+        temparr[3]="B6";
+        cargototal+=r.TeleopCargoTwo;
+        r.TeleopCargoThree+=a.numScored(temparr,status,false);
+        temparr[0]="A1";
+        temparr[1]="B1";
+        temparr[2]="A2";
+        temparr[3]="B2";
+        cargototal+=r.TeleopCargoThree;
+        r.TeleopHatchOne+=a.numScored(temparr,status,false);
+        temparr[0]="A3";
+        temparr[1]="B3";
+        temparr[2]="A4";
+        temparr[3]="B4";
+        hatchtotal+=r.TeleopHatchOne;
+        r.TeleopHatchTwo+=a.numScored(temparr,status,false);
+        temparr[0]="A5";
+        temparr[1]="B5";
+        temparr[2]="A6";
+        temparr[3]="B6";
+        hatchtotal+=r.TeleopHatchTwo;
+        r.TeleopHatchThree+=a.numScored(temparr,status,false);
+        hatchtotal+=r.TeleopHatchThree;
+        String[] cargoship = {"C1","C2","C3","C4","C5","C6"};
+        int[]all = {0,1,2,3};
+
+        r.CargoAvg = cargototal/(double)r.MatchesPlayed;
+        r.HatchAvg = hatchtotal/(double)r.MatchesPlayed;
+        r.CxCargoCargoShip=(r.CxCargoCargoShip*(r.MatchesPlayed-1)+a.numScored(cargoship,all,false))/(double)r.MatchesPlayed;
+        r.CxHatchCargoShip=(r.CxHatchCargoShip*(r.MatchesPlayed-1)+a.numScored(cargoship,all,true))/(double)r.MatchesPlayed;
+        r.CxCargoRocket = ((r.SandstormCargoOne+r.TeleopCargoOne)+(r.SandstormCargoTwo+r.TeleopCargoTwo)*1.5+(r.SandstormCargoThree+r.TeleopCargoThree)*2)/r.MatchesPlayed;
+        r.CxHatchRocket = ((r.SandstormHatchOne+r.TeleopHatchOne)+(r.SandstormHatchTwo+r.TeleopHatchTwo)*1.5+(r.SandstormHatchThree+r.TeleopHatchThree)*2)/r.MatchesPlayed;
+        r.CxComboRocket = r.CxCargoRocket+r.CxHatchRocket;
+        r.CxComboCargoShip = r.CxCargoCargoShip+r.CxHatchCargoShip;
+
+        if(a.endclimb!=0){
+            if (a.endclimb == 1) {
+                r.ClimbOne = (r.ClimbOne*(r.MatchesPlayed-1)+1)/r.MatchesPlayed;
+            }
+            if (a.endclimb == 2) {
+                r.ClimbTwo = (r.ClimbTwo*(r.MatchesPlayed-1)+1)/r.MatchesPlayed;
+            }
+            if (a.endclimb == 3) {
+                r.ClimbThree = (r.ClimbThree*(r.MatchesPlayed-1)+1)/r.MatchesPlayed;
+            }
+        }
+        updateRankingData(r);
+
     }
+
+    /**
+     * TODO
+     * Recheck all this stuff, not yet tested
+     * @param match
+     */
 
     public void updateTables(Match match){
         database = dbHelper.getWritableDatabase();
@@ -145,8 +290,8 @@ public class CryptoniteScoutDAO {
         values.put("Comments",match.apppendComments());
         long insertID = database.insert(CryptoniteScoutDBHelper.USERS_TABLE_NAME, null, values);
 
-        for(ActionMap actionMap:match.maps){
-
+        for(int i = 0; i<6;i++){
+            addTeamData(match.maps[i],match.teamNums[i]);
         }
     }
 }
