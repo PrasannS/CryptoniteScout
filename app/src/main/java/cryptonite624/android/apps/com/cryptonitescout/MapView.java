@@ -42,7 +42,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import java.util.Date;
 
-public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener{
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener {
 
 
     /**
@@ -226,6 +226,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.commit();
         }
 
+        if (findViewById(R.id.mapcontainer) != null) {
+            RightMapFragment emptyFragment = new RightMapFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.mapcontainer, emptyFragment, null);
+            fragmentTransaction.commit();
+        }
+
         switchbounds();
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
@@ -234,6 +241,28 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         stopwatch=false;
 
+        imageswitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchbounds();
+                if(left){
+                    if (findViewById(R.id.mapcontainer) != null) {
+                        RightMapFragment emptyFragment = new RightMapFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.mapcontainer, emptyFragment, null);
+                        fragmentTransaction.commit();
+                    }
+                }
+                else{
+                    if (findViewById(R.id.mapcontainer) != null) {
+                        LeftMapFragment emptyFragment = new LeftMapFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.mapcontainer, emptyFragment, null);
+                        fragmentTransaction.commit();
+                    }
+                }
+            }
+        });
 
         //mCustomDrawableView = new CustomDrawableView(this);
 
@@ -897,6 +926,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
 
 
+
+    }
+
+    @Override
+    public void OnLeftMapRead(int x, int y) {
+
+    }
+
+    @Override
+    public void OnRightMapRead(int x, int y) {
 
     }
 }

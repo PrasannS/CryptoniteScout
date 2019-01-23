@@ -31,7 +31,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
  *
  */
 
-public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener {
+public class DataEntryActivity extends AppCompatActivity implements EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener{
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
 
@@ -177,5 +177,4 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     public int getNumAutonHatches(){
         return 0;
     }
-
 }
