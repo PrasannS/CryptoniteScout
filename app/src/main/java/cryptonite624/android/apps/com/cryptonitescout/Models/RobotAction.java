@@ -9,6 +9,7 @@ public class RobotAction implements Parcelable{
     public String actionCode;
     public boolean hatch;
     public int habLevel;
+    public int time;
 
     public RobotAction(){
 
@@ -51,9 +52,11 @@ public class RobotAction implements Parcelable{
     }
 
     public String toString(){
-        if( hatch)
+        /*if( hatch)
         return actionCode + 0+""+matchStatus;
-        return actionCode+1+""+matchStatus;
+        return actionCode+1+""+matchStatus;*/
+        return actionCode + " " + hatch + " " + time + " seconds";
+
     }
 
 }
