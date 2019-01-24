@@ -1,12 +1,13 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DataAccessActivity extends AppCompatActivity implements DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener{
+public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener{
 
     public static FragmentManager fragmentManager;
 
@@ -115,5 +116,15 @@ public class DataAccessActivity extends AppCompatActivity implements DashboardFr
 
             default:
         }
+    }
+
+    @Override
+    public void OnLeftMapRead(int x, int y) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        
     }
 }

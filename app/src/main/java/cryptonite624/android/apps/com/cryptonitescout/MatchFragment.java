@@ -5,10 +5,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Match;
@@ -37,11 +40,13 @@ public class MatchFragment extends Fragment {
     private String message;
 
     OnMatchReadListener matchReadListener;
+    FragmentManager fragmentManager;
 
     private AutonFragment.OnFragmentInteractionListener mListener;
 
     public MatchFragment() {
         // Required empty public constructor
+
     }
 
     // TODO: Rename and change types and number of parameters
@@ -88,6 +93,15 @@ public class MatchFragment extends Fragment {
                 matchReadListener.OnMatchRead(message);
             }
         });
+
+        fragmentManager = getChildFragmentManager();
+        if(view.findViewById(R.id.mapdisplaycontainer)!=null){
+            MatchAccessFragment leftMapFragment= new MatchAccessFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.mapdisplaycontainer,leftMapFragment,null);
+            fragmentTransaction.commit();
+
+        }
 
         return view;
     }

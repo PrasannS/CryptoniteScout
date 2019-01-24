@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class MatchAccessFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    FragmentManager fragmentManager;
 
     public MatchAccessFragment() {
         // Required empty public constructor
@@ -58,13 +61,25 @@ public class MatchAccessFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match_access, container, false);
+        View view= inflater.inflate(R.layout.fragment_match_access, container, false);
+
+        fragmentManager = getChildFragmentManager();
+        if(view.findViewById(R.id.videomnapcontainer)!=null){
+            LeftMapFragment leftMapFragment= new LeftMapFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.videomnapcontainer,leftMapFragment,null);
+            fragmentTransaction.commit();
+
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
