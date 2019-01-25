@@ -6,9 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Range;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.jaygoo.widget.RangeSeekBar;
+
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.PregameFragment;
 
 
 /**
@@ -31,6 +42,16 @@ public class MatchAccessFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     FragmentManager fragmentManager;
+    public ActionMap map;
+    public int totalactions = 0;
+    public int currentaction = 0;
+    public RangeSeekBar rangeSeekBar;
+    public int timeinterval = 2;
+    public boolean cancel = false;
+    public Timer timer;
+    public Button playbutton;
+    public boolean play = false;
+    public RangeSeekBar intervalbar;
 
     public MatchAccessFragment() {
         // Required empty public constructor
@@ -64,6 +85,16 @@ public class MatchAccessFragment extends Fragment {
 
     }
 
+    public void setArguments(ActionMap actionMap) {
+        map = actionMap;
+        updateParams();
+    }
+
+    public void updateParams(){
+        totalactions = map.actions.size();
+        rangeSeekBar.setRange(0,totalactions,1);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +109,20 @@ public class MatchAccessFragment extends Fragment {
             fragmentTransaction.commit();
 
         }
+        rangeSeekBar=view.findViewById(R.id.matchscrubber);
+        playbutton=view.findViewById(R.id.playbutton);
+        intervalbar = view.findViewById(R.id.shiftspeed);
+        intervalbar.setRange(2,5,1,5);
+        playbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(play){
+                    runThroughActions();
+                }
+                else
+                    timer.cancel();
+            }
+        });
 
         return view;
     }
@@ -105,6 +150,23 @@ public class MatchAccessFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    public void runThroughActions(){
+        TimerTask repeatedTask = new TimerTask() {
+            public void run() {
+                currentaction++;
+                rangeSeekBar.setValue(currentaction);
+                //put all layout changing code here
+            }
+        };
+
+        timer = new Timer("Timer");
+
+        long delay  = timeinterval*1000;
+        long period = (totalactions-currentaction)*timeinterval*1000;
+        timer.scheduleAtFixedRate(repeatedTask, delay, period);
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

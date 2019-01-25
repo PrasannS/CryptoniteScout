@@ -52,8 +52,8 @@ public class RobotAction implements Parcelable{
 
     public String toString(){
         if( hatch)
-        return actionCode + 0+""+matchStatus;
-        return actionCode+1+""+matchStatus;
+        return actionCode+" " + 0+" "+matchStatus;
+        return actionCode+" "+1+" "+matchStatus;
     }
 
 }
