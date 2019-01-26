@@ -89,7 +89,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         View view = inflater.inflate(R.layout.fragment_right_map, container, false);
 
         //updateButtons();
-        /*
+
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_right);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_right);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_right);
@@ -179,7 +179,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
             }
         });
 
-*/
+
 
         return view;
     }

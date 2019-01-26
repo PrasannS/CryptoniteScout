@@ -485,11 +485,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
 
             currentAction.actionCode = getCode(x, y);
-            if (getCode(x, y).equals("H1") || currentAction.actionCode.equals("H3")) {
+            if (getCode(x, y).equals("H1") || getCode(x, y).equals("H3")) {
                 System.out.println("hab level 2");
                 habLevel = 2;
                 updateScreen();
-            } else if (currentAction.actionCode.equals("H2")) {
+            } else if (getCode(x, y).equals("H2")) {
                 System.out.println("hab level 3");
                 habLevel = 3;
                 updateScreen();
@@ -497,7 +497,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
             openRocket();
-        } else if (findViewById(R.id.inputcontainer) != null) {
+        } else if (findViewById(R.id.inputcontainer) != null && !("" + getCode(x, y).charAt(0)).equals("H")) {
             InputFragment inputFragment = new InputFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);

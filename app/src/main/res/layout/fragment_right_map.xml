@@ -16,7 +16,7 @@
             android:layout_height="460dp"
             android:background="@drawable/redright">
 
-            <!--
+
             <Button
                 android:id="@+id/cargobutton1_right"
                 android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                 android:text="Button"
                 android:visibility="invisible" />
 
-                -->
+
         </RelativeLayout>
     </LinearLayout>
 
