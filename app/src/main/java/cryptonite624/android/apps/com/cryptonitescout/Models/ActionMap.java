@@ -25,6 +25,10 @@ public class ActionMap implements Parcelable{
         actions = in.createTypedArrayList(RobotAction.CREATOR);
     }
 
+    public ActionMap(String str){
+        parseString(str);
+    }
+
     public static final Creator<ActionMap> CREATOR = new Creator<ActionMap>() {
         @Override
         public ActionMap createFromParcel(Parcel in) {
@@ -100,6 +104,14 @@ public class ActionMap implements Parcelable{
             temp+=r+",";
         }
         return temp+endclimb;
+    }
+
+    public void parseString(String s){
+        String [] parsed = s.split(" ");
+        for(int i = 0; i < parsed.length; i++){
+            RobotAction robotAction = new RobotAction(parsed[i]);
+
+        }
     }
 
 

@@ -86,7 +86,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
     
     public boolean red = true;
-    public boolean left = true;
+    public boolean left = false;
 
     public static int[] ROCKET1MIN ={740, 100};
     public static int[] ROCKET1MAX ={942, 195};
@@ -146,19 +146,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     Button cargobutton7;
     Button cargobutton8;
 
-
-
-    CustomDrawableView mCustomDrawableView;
-
-    private Canvas mCanvas;
-    private Paint mPaint = new Paint();
-    private Paint mPaintText = new Paint(Paint.UNDERLINE_TEXT_FLAG);
-    private Bitmap mBitmap;
-    private ImageView mImageView;
-    private int mColorBackground;
-    private int mColorRectangle;
-    private int mColorAccent;
-
     public long starttime;
     public long endtime;
     public double cycletime = -1;
@@ -204,7 +191,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
 
-        cargobutton1 = (Button)findViewById(R.id.cargobutton1);
+        /*cargobutton1 = (Button)findViewById(R.id.cargobutton1);
         cargobutton2 = (Button)findViewById(R.id.cargobutton2);
         cargobutton3 = (Button)findViewById(R.id.cargobutton3);
         cargobutton4 = (Button)findViewById(R.id.cargobutton4);
@@ -212,7 +199,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargobutton6 = (Button)findViewById(R.id.cargobutton6);
         cargobutton7 = (Button)findViewById(R.id.cargobutton7);
         cargobutton8 = (Button)findViewById(R.id.cargobutton8);
-
+        */
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -363,7 +350,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 startStop();
             }
         });
-
     }
 
     public void startStop(){
@@ -432,7 +418,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                             fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
                             fragmentTransaction.commit();
                         }
-
                         if(sandstorm){
                             if(findViewById(R.id.infoframe)!=null){
                                 AutonFragment rocketFragment= new AutonFragment();
@@ -874,7 +859,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void hatch(Boolean b) {
         currentAction.hatch = b;
 
-
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -910,6 +894,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         System.out.println(actionMap.actions);
         //updateFilled();
     }
+
+    public void updateFilled(){
+        System.out.println("IT WORKS!!");
+    }
+
 /*
     public void updateFilled(){
         //cargobutton5.setBackgroundColor(Color.BLUE);
@@ -945,6 +934,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public ActionMap getActionMap(){
+        return actionMap;
     }
 
     public void changeFragment(int fragmentNum) {

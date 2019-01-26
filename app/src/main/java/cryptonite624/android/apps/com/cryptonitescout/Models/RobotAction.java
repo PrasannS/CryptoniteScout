@@ -2,7 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RobotAction implements Parcelable{
+public class RobotAction extends ActionMap implements Parcelable{
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     //actionCode 0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
     public int matchStatus;
@@ -18,6 +18,10 @@ public class RobotAction implements Parcelable{
     public RobotAction(String ac, int ms){
         actionCode = ac;
         matchStatus = ms;
+    }
+
+    public RobotAction(String str){
+
     }
 
 
@@ -50,6 +54,39 @@ public class RobotAction implements Parcelable{
         dest.writeString(actionCode);
         dest.writeByte((byte) (hatch ? 1 : 0));
     }
+
+    public void parseString(String s){
+        String [] parsed = s.split(" ");
+        for(int i = 0; i < parsed.length; i++){
+            String [] parsed1 = parsed[i].split(",");
+            int counter = 0;
+
+            for(String str: parsed1){
+                if(counter == 0){
+                    matchStatus = Integer.parseInt(str);
+                    counter++;
+                }
+                else if(counter == 1){
+                    actionCode = str;
+                    counter++;
+                }
+                else if(counter == 2){
+                    if(Integer.parseInt(str) == 0){
+                        hatch = false;
+                        counter++;
+                    }
+                    else if(Integer.parseInt(str) == 1){
+                        hatch = true;
+                        counter++;
+                    }
+                }
+                else if(counter == 3){
+                    time = Integer.parseInt(str);
+                }
+            }
+        }
+    }
+
 
     public String toString(){
         /*if( hatch)

@@ -3,6 +3,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 
 
 /**
@@ -23,7 +26,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
  * Use the {@link RightMapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RightMapFragment extends Fragment {
+public class RightMapFragment extends Fragment implements InputFragment.OnInputReadListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -44,6 +47,8 @@ public class RightMapFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     OnRightMapReadListener rightMapReadListener;
+    
+    private ActionMap actionMap;
 
     public RightMapFragment() {
         // Required empty public constructor
@@ -83,20 +88,98 @@ public class RightMapFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_right_map, container, false);
 
-        cargobutton1 = (Button)view.findViewById(R.id.cargobutton1);
-        cargobutton2 = (Button)view.findViewById(R.id.cargobutton2);
-        cargobutton3 = (Button)view.findViewById(R.id.cargobutton3);
-        cargobutton4 = (Button)view.findViewById(R.id.cargobutton4);
-        cargobutton5 = (Button)view.findViewById(R.id.cargobutton5);
-        cargobutton6 = (Button)view.findViewById(R.id.cargobutton6);
-        cargobutton7 = (Button)view.findViewById(R.id.cargobutton7);
-        cargobutton8 = (Button)view.findViewById(R.id.cargobutton8);
+        //updateButtons();
+        /*
+        cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_right);
+        cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_right);
+        cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_right);
+        cargobutton4 = (Button)view.findViewById(R.id.cargobutton4_right);
+        cargobutton5 = (Button)view.findViewById(R.id.cargobutton5_right);
+        cargobutton6 = (Button)view.findViewById(R.id.cargobutton6_right);
+        cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_right);
+        cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_right);
+
 
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
             }
         });
+
+        cargobutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton2.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton3.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton4.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton5.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton6.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton7.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+        cargobutton8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //cargobutton8.setBackgroundColor(Color.RED);
+                Activity tempActivity = (MapView) getActivity();
+                actionMap = ((MapView)tempActivity).getActionMap();
+                updateButtons();
+            }
+        });
+
+*/
 
         return view;
     }
@@ -118,6 +201,12 @@ public class RightMapFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void hatch(Boolean b) {
+        System.out.println("IT REALLY WORKS!");
+        updateButtons();
+    }
+
     public interface OnRightMapReadListener{
         public void OnRightMapRead(int x, int y);
     }
@@ -135,5 +224,74 @@ public class RightMapFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void updateButtons() {
+        //Activity tempActivity = (MapView) getActivity();
+        //((MapView) tempActivity).updateFilled();
+        //actionMap = ((MapView)tempActivity).getActionMap();
+        if (actionMap != null) {
+            for (int i = 0; i < actionMap.actions.size(); i++) {
+                System.out.println(actionMap.actions.get(i));
+                if (actionMap.actions.get(i).actionCode.equals("C1")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton1.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton1.setBackgroundColor(Color.RED);
+                    }
+
+                } else if (actionMap.actions.get(i).actionCode.equals("C2")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton2.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton2.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C3")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton3.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton3.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C4")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton4.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton4.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C5")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton5.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton5.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C6")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton6.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton6.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C7")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton7.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton7.setBackgroundColor(Color.RED);
+                    }
+                } else if (actionMap.actions.get(i).actionCode.equals("C8")) {
+                    if(actionMap.actions.get(i).hatch){
+                        cargobutton8.setBackgroundColor(Color.YELLOW);
+                    }
+                    else{
+                        cargobutton8.setBackgroundColor(Color.RED);
+                    }
+                }
+            }
+        }
     }
 }

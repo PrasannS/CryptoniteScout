@@ -66,7 +66,6 @@ public class InputFragment extends Fragment {
 
     public interface OnInputReadListener{
         public void hatch(Boolean b);
-
     }
 
     @Override
