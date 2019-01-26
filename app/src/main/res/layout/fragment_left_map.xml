@@ -17,16 +17,16 @@
             android:background="@drawable/red">
 
             <Button
-                android:id="@+id/cargobutton1"
+                android:id="@+id/cargobutton1_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/cargobutton5"
+                android:layout_alignStart="@+id/cargobutton5_left"
                 android:layout_marginTop="175dp"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton2"
+                android:id="@+id/cargobutton2_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
@@ -36,58 +36,58 @@
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton3"
+                android:id="@+id/cargobutton3_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton2"
+                android:layout_alignTop="@+id/cargobutton2_left"
                 android:layout_marginEnd="102dp"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton4"
+                android:id="@+id/cargobutton4_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton2"
+                android:layout_alignTop="@+id/cargobutton2_left"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton5"
+                android:id="@+id/cargobutton5_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/cargobutton8"
+                android:layout_alignTop="@+id/cargobutton8_left"
                 android:layout_marginStart="284dp"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton6"
+                android:id="@+id/cargobutton6_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/cargobutton2"
+                android:layout_alignStart="@+id/cargobutton2_left"
                 android:layout_marginBottom="153dp"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton7"
+                android:id="@+id/cargobutton7_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignStart="@+id/cargobutton3"
-                android:layout_alignTop="@+id/cargobutton6"
+                android:layout_alignStart="@+id/cargobutton3_left"
+                android:layout_alignTop="@+id/cargobutton6_left"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/cargobutton8"
+                android:id="@+id/cargobutton8_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton6"
+                android:layout_alignTop="@+id/cargobutton6_left"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/button9_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -98,17 +98,17 @@
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/button11_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/button9"
+                android:layout_alignStart="@+id/button9_left"
                 android:layout_marginBottom="141dp"
                 android:text="Button"
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/button12_left"
                 android:layout_width="wrap_content"
                 android:layout_height="212dp"
                 android:layout_alignParentStart="true"
@@ -118,10 +118,10 @@
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/button10"
+                android:id="@+id/button10_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/button9"
+                android:layout_alignStart="@+id/button9_left"
                 android:layout_centerVertical="true"
                 android:text="Button" />
         </RelativeLayout>
