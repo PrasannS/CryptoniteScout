@@ -22,33 +22,39 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".pitNote"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".pitNotePageTwo"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+
         <activity android:name=".DataEntryActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+
         <activity android:name=".ScheduleActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+
+
+
+
         <activity android:name=".SettingsActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MapView"
             android:screenOrientation="landscape" />
-        <activity android:name=".DataAccessActivity">
-            android:screenOrientation="landscape"
-        </activity>
+        <activity android:name=".DataAccessActivity"
+            android:screenOrientation="landscape" ></activity>
         <receiver android:name=".NetworkStateChecker">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />

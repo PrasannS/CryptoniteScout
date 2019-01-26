@@ -83,14 +83,14 @@ public class LeftMapFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_left_map, container, false);
 
-        cargobutton1 = (Button)view.findViewById(R.id.cargobutton1);
-        cargobutton2 = (Button)view.findViewById(R.id.cargobutton2);
-        cargobutton3 = (Button)view.findViewById(R.id.cargobutton3);
-        cargobutton4 = (Button)view.findViewById(R.id.cargobutton4);
-        cargobutton5 = (Button)view.findViewById(R.id.cargobutton5);
-        cargobutton6 = (Button)view.findViewById(R.id.cargobutton6);
-        cargobutton7 = (Button)view.findViewById(R.id.cargobutton7);
-        cargobutton8 = (Button)view.findViewById(R.id.cargobutton8);
+        cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_left);
+        cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_left);
+        cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_left);
+        cargobutton4 = (Button)view.findViewById(R.id.cargobutton4_left);
+        cargobutton5 = (Button)view.findViewById(R.id.cargobutton5_left);
+        cargobutton6 = (Button)view.findViewById(R.id.cargobutton6_left);
+        cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_left);
+        cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_left);
 
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override

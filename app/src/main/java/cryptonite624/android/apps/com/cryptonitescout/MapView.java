@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -28,6 +29,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.w3c.dom.Text;
 
@@ -83,7 +86,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
     
     public boolean red = true;
-    public boolean left = true;
+    public boolean left = false;
 
     public static int[] ROCKET1MIN ={740, 100};
     public static int[] ROCKET1MAX ={942, 195};
@@ -143,19 +146,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     Button cargobutton7;
     Button cargobutton8;
 
-
-
-    CustomDrawableView mCustomDrawableView;
-
-    private Canvas mCanvas;
-    private Paint mPaint = new Paint();
-    private Paint mPaintText = new Paint(Paint.UNDERLINE_TEXT_FLAG);
-    private Bitmap mBitmap;
-    private ImageView mImageView;
-    private int mColorBackground;
-    private int mColorRectangle;
-    private int mColorAccent;
-
     public long starttime;
     public long endtime;
     public double cycletime = -1;
@@ -168,15 +158,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
 
     private Button imageswitch;
-    private int mOffset = OFFSET;
 
     public boolean sandstorm;
     public boolean rocket = false;
-
-    CustomImageView customView;
-
-    private Rect mRect = new Rect();
-    private Rect mBounds = new Rect();
 
     TextView hatchDisplay;
     TextView cargoDisplay;
@@ -187,6 +171,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     int status = 0;
 
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMilli = 150000;
+    private boolean timerRunning;
+    int minutes;
+    int seconds;
+
+    private TextView timerDisplay;
+    private Button timerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +191,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
 
-        cargobutton1 = (Button)findViewById(R.id.cargobutton1);
+        /*cargobutton1 = (Button)findViewById(R.id.cargobutton1);
         cargobutton2 = (Button)findViewById(R.id.cargobutton2);
         cargobutton3 = (Button)findViewById(R.id.cargobutton3);
         cargobutton4 = (Button)findViewById(R.id.cargobutton4);
@@ -207,7 +199,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargobutton6 = (Button)findViewById(R.id.cargobutton6);
         cargobutton7 = (Button)findViewById(R.id.cargobutton7);
         cargobutton8 = (Button)findViewById(R.id.cargobutton8);
-
+        */
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -307,14 +299,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         //drawing = new Drawing(this);
         //setContentView(drawing);
 
-        mColorBackground = ResourcesCompat.getColor(getResources(),
-                R.color.colorBackground, null);
-        mColorRectangle = ResourcesCompat.getColor(getResources(),
-                R.color.colorRectangle, null);
-        mColorAccent = ResourcesCompat.getColor(getResources(),
-                R.color.colorAccent, null);
-        mPaint.setColor(mColorBackground);
-
 
         //mImageView = (ImageView) findViewById(R.id.mapview);
 
@@ -325,32 +309,94 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 matchStatus++;
                 if (matchStatus > 3) {
                     matchStatus = 0;
-                    sandstorm = false;
+                    //sandstorm = false;
                 }
                 if (matchStatus == 0) {
                     statusButton.setText("Pregame");
                     changeFragment(matchStatus);
                     sandstorm = false;
+
                 }
                 if (matchStatus == 1) {
                     statusButton.setText("Sandstorm");
                     sandstorm = true;
                     changeFragment(matchStatus);
+
                 }
                 if (matchStatus == 2) {
                     statusButton.setText("Teleop");
                     sandstorm = false;
                     changeFragment(matchStatus);
+
                 }
                 if (matchStatus == 3) {
                     statusButton.setText("Endgame");
                     sandstorm = false;
                     changeFragment(matchStatus);
+
+
                 }
 
             }
         });
 
+        timerDisplay = (TextView) findViewById(R.id.timerdisplay);
+
+        timerButton = (Button) findViewById(R.id.timerbutton);
+
+        timerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startStop();
+            }
+        });
+    }
+
+    public void startStop(){
+        if(timerRunning){
+            stopTimer();
+        }
+        else{
+            startTimer();
+        }
+    }
+
+    public void startTimer(){
+        countDownTimer = new CountDownTimer(timeLeftInMilli, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftInMilli = l;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+
+        timerButton.setText("PAUSE");
+        timerRunning = true;
+    }
+
+    public void stopTimer(){
+        countDownTimer.cancel();
+        timerRunning = false;
+
+        timerButton.setText("START");
+    }
+
+    public void updateTimer(){
+        minutes = (int) timeLeftInMilli / 60000;
+        seconds = (int) timeLeftInMilli % 60000 / 1000;
+
+        String timeLeftText;
+
+        timeLeftText = "" + minutes + ":";
+        if(seconds < 10) timeLeftText += "0";
+        timeLeftText += seconds;
+
+        timerDisplay.setText(timeLeftText);
     }
 
     @SuppressLint("WrongCall")
@@ -372,7 +418,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                             fragmentTransaction.replace(R.id.inputcontainer,emptyFragment,null);
                             fragmentTransaction.commit();
                         }
-
                         if(sandstorm){
                             if(findViewById(R.id.infoframe)!=null){
                                 AutonFragment rocketFragment= new AutonFragment();
@@ -393,8 +438,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     }
                 }
         );
-        hatchDisplay.setText(""+x);
-        cargoDisplay.setText(""+y);
+        //hatchDisplay.setText(""+x);
+        //cargoDisplay.setText(""+y);
 
         //drawing = new Drawing(this);
 
@@ -440,11 +485,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
 
             currentAction.actionCode = getCode(x, y);
-            if (getCode(x, y).equals("H1") || currentAction.actionCode.equals("H3")) {
+            if (getCode(x, y).equals("H1") || getCode(x, y).equals("H3")) {
                 System.out.println("hab level 2");
                 habLevel = 2;
                 updateScreen();
-            } else if (currentAction.actionCode.equals("H2")) {
+            } else if (getCode(x, y).equals("H2")) {
                 System.out.println("hab level 3");
                 habLevel = 3;
                 updateScreen();
@@ -452,16 +497,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
             openRocket();
-        } else if (findViewById(R.id.inputcontainer) != null) {
+        } else if (findViewById(R.id.inputcontainer) != null && !("" + getCode(x, y).charAt(0)).equals("H")) {
             InputFragment inputFragment = new InputFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);
             fragmentTransaction.commit();
         }
 
-
-
+        currentAction.time = (int)(timeLeftInMilli/1000);
         currentAction.actionCode = getCode(x, y);
+
     }
 
 
@@ -680,8 +725,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.replace(R.id.inputcontainer,inputFragment,null);
             fragmentTransaction.commit();
         }
-
-
         }
 
 
@@ -816,7 +859,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void hatch(Boolean b) {
         currentAction.hatch = b;
 
-
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -849,10 +891,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargoDisplay.setText("" + actionMap.totalhatches(false));
         hatchDisplay.setText("" + actionMap.totalhatches(true));
         habDisplay.setText("" + habLevel);
-        //System.out.println(actionMap.actions);
-        updateFilled();
+        System.out.println(actionMap.actions);
+        //updateFilled();
     }
 
+    public void updateFilled(){
+        System.out.println("IT WORKS!!");
+    }
+
+/*
     public void updateFilled(){
         //cargobutton5.setBackgroundColor(Color.BLUE);
         for(int i = 0; i < actionMap.actions.size(); i++){
@@ -883,17 +930,21 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
         }
     }
-
+*/
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
+    public ActionMap getActionMap(){
+        return actionMap;
+    }
+
     public void changeFragment(int fragmentNum) {
-        if(fragmentNum==3){
-            matchStatus =-1;
-        }
-        matchStatus++;
+        /*if (fragmentNum == 3) {
+            matchStatus = -1;
+        }*/
+        //matchStatus++;
         if (fragmentNum == 0) {
             if (findViewById(R.id.infoframe) != null) {
                 cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
@@ -902,36 +953,31 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 fragmentTransaction.commit();
             }
         }
-            if (fragmentNum == 1) {
-                if (findViewById(R.id.infoframe) != null) {
-                    AutonFragment autonFragment = new AutonFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe, autonFragment, null);
-                    fragmentTransaction.commit();
-                }
+        if (fragmentNum == 1) {
+            if (findViewById(R.id.infoframe) != null) {
+                AutonFragment autonFragment = new AutonFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe, autonFragment, null);
+                fragmentTransaction.commit();
             }
-            if (fragmentNum == 2) {
-                if (findViewById(R.id.infoframe) != null) {
-                    TeleopFragment teleopFragment = new TeleopFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe, teleopFragment, null);
-                    fragmentTransaction.commit();
-                    sandstorm = false;
-                }
+        }
+        if (fragmentNum == 2) {
+            if (findViewById(R.id.infoframe) != null) {
+                TeleopFragment teleopFragment = new TeleopFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe, teleopFragment, null);
+                fragmentTransaction.commit();
+                sandstorm = false;
             }
-            if (fragmentNum == 3) {
-                if (findViewById(R.id.infoframe) != null) {
-                    EndgameFragment endgameFragment = new EndgameFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe, endgameFragment, null);
-                    fragmentTransaction.commit();
-                    }
-                }
-
-
-
-
-
+        }
+        if (fragmentNum == 3) {
+            if (findViewById(R.id.infoframe) != null) {
+                EndgameFragment endgameFragment = new EndgameFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe, endgameFragment, null);
+                fragmentTransaction.commit();
+            }
+        }
     }
 
     @Override
