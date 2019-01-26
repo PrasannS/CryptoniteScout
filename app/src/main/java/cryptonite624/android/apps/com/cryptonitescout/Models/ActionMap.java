@@ -9,7 +9,7 @@ import android.os.Parcelable;
 @SuppressLint("ParcelCreator")
 public class ActionMap implements Parcelable{
 
-    public ArrayList<RobotAction> actions;
+    public ArrayList<RobotAction> actions = new ArrayList<>();
     public int endclimb;
 
 

@@ -125,6 +125,6 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        
+
     }
 }
