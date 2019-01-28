@@ -44,7 +44,12 @@ public class BarChartActivity extends AppCompatActivity {
         theTeams.add("TeamD");
         theTeams.add("TeamE");
 
-        BarData barData = new BarData(barDataSet);
+        BarData barData = new BarData(theTeams,barDataSet);
+        barChart.setData(barData);
+
+        barChart.setTouchEnabled(true);
+        barChart.setDragEnabled(true);
+        barChart.setScaleEnabled(true);
 
 
 
