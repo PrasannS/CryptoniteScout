@@ -21,6 +21,7 @@ public class RobotAction extends ActionMap implements Parcelable{
     }
 
     public RobotAction(String str){
+        parseString(str);
 
     }
 
@@ -92,7 +93,7 @@ public class RobotAction extends ActionMap implements Parcelable{
         /*if( hatch)
         return actionCode + 0+""+matchStatus;
         return actionCode+1+""+matchStatus;*/
-        return actionCode + " " + hatch + " " + time + " seconds";
+        return actionCode + " " + hatch + " " + time;
 
     }
 

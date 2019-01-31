@@ -2,10 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/pitnote_menu"
+        android:title="Pit Note"
+        app:showAsAction="always"/>
+    <item android:id="@+id/matches_menu"
+        android:title="Matches"
+        app:showAsAction="always"/>
+    <item android:id="@+id/rankings_menu"
+        android:title="Ranking"
+        app:showAsAction="always"/>
+    <item android:id="@+id/newEntry_menu"
+        android:title="New Entry"
+        app:showAsAction="always"/>
     <item android:id="@+id/settings"
-        android:icon="@drawable/ic_icon"
-        android:title="Settings"
-        app:showAsAction="never"/>
+        android:title="Setting"
+        app:showAsAction="always"/>
 
 
 

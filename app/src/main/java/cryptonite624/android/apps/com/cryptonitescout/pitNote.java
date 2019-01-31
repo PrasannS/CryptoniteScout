@@ -118,14 +118,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         });
         imageview = findViewById(R.id.pictureImage);
 
-        toDashboard = findViewById(R.id.toDashboardPage);
-        toDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDashboard();
-            }
-        });
-
 
         //Button that opens up the default camera app
         toCamera = findViewById(R.id.fab);
