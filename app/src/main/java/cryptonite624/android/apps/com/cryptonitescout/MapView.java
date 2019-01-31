@@ -86,7 +86,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] BLUESWITCH2MAX = {1240, 825};*/
     
     public boolean red = true;
-    public boolean left = false;
+    public boolean left = true;
 
     public static int[] ROCKET1MIN ={740, 100};
     public static int[] ROCKET1MAX ={942, 195};
@@ -156,6 +156,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     private Button cancel;
 
+    public LeftMapFragment leftMapFragment;
+    public RightMapFragment rightMapFragment;
+
 
     private Button imageswitch;
 
@@ -219,9 +222,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
 
         if (findViewById(R.id.mapcontainer) != null) {
-            RightMapFragment emptyFragment = new RightMapFragment();
+            rightMapFragment = new RightMapFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.mapcontainer, emptyFragment, null);
+            fragmentTransaction.add(R.id.mapcontainer, rightMapFragment, null);
             fragmentTransaction.commit();
         }
 
@@ -239,20 +242,24 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 switchbounds();
                 if(left){
                     if (findViewById(R.id.mapcontainer) != null) {
-                        RightMapFragment emptyFragment = new RightMapFragment();
+                        rightMapFragment = new RightMapFragment();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.mapcontainer, emptyFragment, null);
+                        fragmentTransaction.replace(R.id.mapcontainer, rightMapFragment, null);
                         fragmentTransaction.commit();
+                        rightMapFragment = rightMapFragment;
                     }
                 }
                 else{
                     if (findViewById(R.id.mapcontainer) != null) {
-                        LeftMapFragment emptyFragment = new LeftMapFragment();
+                        leftMapFragment = new LeftMapFragment();
+                        leftMapFragment = leftMapFragment;
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.mapcontainer, emptyFragment, null);
+                        fragmentTransaction.replace(R.id.mapcontainer, leftMapFragment, null);
                         fragmentTransaction.commit();
+
                     }
                 }
+
             }
         });
 
@@ -639,8 +646,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-
-
     @Override
     public void OnEndgameRead(String message) {
         switch (message) {
@@ -884,6 +889,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         currentAction.matchStatus= matchStatus;
         actionMap.actions.add(currentAction);
         currentAction = new RobotAction();
+        if(left){
+
+        }
+        else{
+            rightMapFragment.updateButtons();
+        }
         updateScreen();
     }
 

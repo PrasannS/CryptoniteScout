@@ -35,7 +35,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    /*
+
     Button cargobutton1;
     Button cargobutton2;
     Button cargobutton3;
@@ -44,7 +44,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
     Button cargobutton6;
     Button cargobutton7;
     Button cargobutton8;
-    */
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -92,7 +92,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
 
         //updateButtons();
 
-        /*
+
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_right);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_right);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_right);
@@ -102,7 +102,9 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_right);
         cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_right);
 
+        cargobutton1.setBackgroundColor(Color.RED);
 
+        /*
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +183,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
                 updateButtons();
             }
         });
-    */
+        */
 
 
         return view;
@@ -229,11 +231,14 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         void onFragmentInteraction(Uri uri);
     }
 
-    /*
+
     public void updateButtons() {
         //Activity tempActivity = (MapView) getActivity();
         //((MapView) tempActivity).updateFilled();
         //actionMap = ((MapView)tempActivity).getActionMap();
+        Activity tempActivity = (MapView) getActivity();
+        actionMap = ((MapView)tempActivity).getActionMap();
+
         if (actionMap != null) {
             for (int i = 0; i < actionMap.actions.size(); i++) {
                 System.out.println(actionMap.actions.get(i));
@@ -297,5 +302,5 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
                 }
             }
         }
-    }*/
+    }
 }
