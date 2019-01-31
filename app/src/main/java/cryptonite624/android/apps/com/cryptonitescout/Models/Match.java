@@ -11,9 +11,12 @@ public class Match {
 
     public String toString() {
         String temp  = "";
+        temp+=matchNum+"!@#";
+        temp+=getTeamsString()+"!@#";
         for(int i = 0;i<6;i++){
             temp+=maps[i].toString()+"!@#"+"\n";
         }
+        temp+=apppendComments();
         return temp;
     }
 
@@ -31,5 +34,17 @@ public class Match {
             temp+=i+"&";
         }
         return temp;
+    }
+
+    public void update(Match m){
+        if(teamNums.equals(m.teamNums)&&matchNum==m.matchNum)
+        for(int i =0;i<6;i++){
+            if(maps[i]==null&&m.maps[i]!=null){
+                maps[i] = m.maps[i];
+            }
+            if(comments[i]==""&&m.comments[i]!=""){
+                comments[i] = m.comments[i];
+            }
+        }
     }
 }

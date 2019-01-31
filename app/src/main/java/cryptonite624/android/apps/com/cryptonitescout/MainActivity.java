@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
     String readMessage;
     String writeMessage;
 
+    public static String[] MACADDRESSES = {
+            "boom",
+            "yeaboyz"
+    };
+
+
     private Handler handler = new Handler(new Handler.Callback() {
 
         @Override
