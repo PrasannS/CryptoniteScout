@@ -102,8 +102,6 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_right);
         cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_right);
 
-        cargobutton1.setBackgroundColor(Color.RED);
-
         /*
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override
