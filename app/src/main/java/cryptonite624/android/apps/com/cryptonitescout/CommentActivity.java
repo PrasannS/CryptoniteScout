@@ -14,6 +14,7 @@ public class CommentActivity extends AppCompatActivity {
     private String comment;
     private EditText teamnameget;
     private String teamname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

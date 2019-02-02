@@ -42,8 +42,8 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                
+                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Team #"
@@ -56,17 +56,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="200dp"
+                    android:layout_width="260dp"
                     android:layout_height="70dp"
                     android:background="@android:color/white"
                     android:text="Language"
                     android:textSize="40dp"
                     android:textColor="@android:color/black"/>
                 <Spinner
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:id="@+id/Programming_Language"
                     android:layout_width="250dp"
                     android:layout_height="match_parent"
@@ -80,8 +76,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
                     android:text="Other :"
@@ -89,8 +83,8 @@
                     android:textColor="@android:color/black"
                     android:background="@android:color/white"/>
                 <EditText
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    
+                    
                     android:layout_width="500dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -101,8 +95,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Cross Baseline"
@@ -110,10 +102,8 @@
                     android:background="@android:color/white"
                     android:textSize="40sp"/>
                 <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:id="@+id/CrossBaseline"
-                    android:layout_width="10dp"
+                    android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:checked="false"/>
             </LinearLayout>
@@ -123,8 +113,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:text="#Batteries"
@@ -133,9 +121,57 @@
                     android:textSize="40dp"/>
 
                 <EditText
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="330dp"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="#Chargers"
+                    android:textColor="@android:color/black"
+                    android:textSize="40dp"/>
+
+                <EditText
+                    android:layout_width="330dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text="Layout"
+                    android:textSize="40dp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/LayoutSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"
+                    android:background="@android:drawable/btn_dropdown"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:layout_width="330dp"
+                    android:layout_height="match_parent"
+                    android:text="Robot Dimension"
+                    android:textColor="@color/teamGreen"
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:layout_width="200dp"
                     android:layout_height="match_parent"
                     android:text=""/>
             </LinearLayout>
@@ -154,8 +190,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
@@ -164,255 +198,170 @@
                     android:textSize="40sp"/>
 
                 <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:id="@+id/Programmer_On_Site"
                     android:background="@android:color/white"
                     android:layout_gravity="center"
-                    android:layout_width="160dp"
+                    android:layout_width="140dp"
                     android:layout_height="match_parent"
                     android:checked="false"/>
-                </LinearLayout>
+            </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    <TextView
+                        android:layout_width="350dp"
+                        android:layout_height="match_parent"
+                        android:text="Shifters"
+                        android:textColor="@android:color/black"
+                        android:background="@android:color/white"
+                        android:textSize="40sp"/>
+                    <Switch
+                        android:id="@+id/Shifters"
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent"
+                        android:checked="false"/>
+                </LinearLayout>
+            
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Shifters"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40sp"/>
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/Shifters"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:checked="false"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="270dp"
+                        android:layout_height="match_parent"
+                        android:text="Level 2 start"
+                        android:textColor="@android:color/black"
+                        android:background="@android:color/white"
+                        android:textSize="40sp"/>
+
+                    <Switch
+                        android:id="@+id/LevTwoStart"
+                        android:layout_width="240dp"
+                        android:layout_height="match_parent"
+                        android:checked="false"/>
                 </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="270dp"
+                    android:layout_width="250dp"
                     android:layout_height="match_parent"
-                    android:text="Level 2 start"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40sp"/>
+                    android:text="#Mini CIMS"
+                    android:textSize="40dp"
+                    android:textColor="@android:color/black"/>
+                <EditText
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+            </LinearLayout>
 
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/LevTwoStart"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="#CIMS"
+                    android:textColor="@android:color/black"
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:layout_width="380dp"
+                    android:layout_height="match_parent"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text="Hatch Intake"
+                    android:textSize="40dp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/HatchIntake"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:checked="false"/>
-
+                    android:spinnerMode="dropdown"
+                    android:background="@android:drawable/btn_dropdown"/>
             </LinearLayout>
-        </LinearLayout>
 
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@android:color/white">
-
-
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="#Chargers"
-                android:textColor="@android:color/black"
-                android:textSize="40dp"/>
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="70dp">
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text="Cargo Intake"
+                    android:textSize="40dp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/CargoIntake"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"
+                    android:background="@android:drawable/btn_dropdown"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text="Climb Level"
+                    android:textSize="40dp"
+                    android:textColor="@android:color/black"/>
+
+                <Spinner
+                    android:id="@+id/ClimbLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"
+                    android:background="@android:drawable/btn_dropdown"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:layout_width="260dp"
+                    android:layout_height="match_parent"
+                    android:text="Wheels"
+                    android:textSize="40dp"
+                    android:textColor="@color/teamGreen"/>
+
+                <Spinner
+                    android:id="@+id/Wheels"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dropdown"
+                    android:background="@android:drawable/btn_dropdown"/>
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="#CIMS"
-                android:textColor="@android:color/black"
-                android:textSize="40dp" />
-
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="380dp"
-                android:layout_height="match_parent"
-                android:text=""/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:text="#Mini CIMS"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Hatch Intake"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/HatchIntake"
-                android:layout_width="270dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Cargo Intake"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/CargoIntake"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Climb Level"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/ClimbLevel"
-                android:layout_width="270dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Layout"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/LayoutSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
+        
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp">
             <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="330dp"
-                android:layout_height="match_parent"
-                android:text="Robot Dimension"
-                android:textColor="@color/teamGreen"
-                android:textSize="40dp" />
-
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text=""/>
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Wheels"
-                android:textSize="40dp"
-                android:textColor="@color/teamGreen"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/Wheels"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_width="240dp"
                 android:layout_height="match_parent"
                 android:text="Comment  : "
                 android:textSize="40dp"
                 android:textColor="@android:color/black"/>
             <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text=""/>
@@ -437,7 +386,7 @@
                 android:layout_height="500dp" />
 
         </LinearLayout>
-
+    </LinearLayout>
 </ScrollView>
 
 

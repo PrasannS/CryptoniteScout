@@ -6,42 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".CommentActivity">
 
-
+    <!-- Big boi Vertical Linear layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:text="commments"
-            android:id="@+id/commentsave"/>
+            android:layout_height="100dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@color/teamGreen"
+                android:text="Team# : "
+                android:textSize="40dp"
+                android:textColor="@android:color/black"
+                android:gravity="center"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="90dp"
+                android:textSize="40dp"
+                android:id="@+id/TeamName"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <EditText
+                android:id="@+id/commentsave"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:text="Team Name:"
-                android:id="@+id/TeamName"/>
+                android:layout_height="360dp"
+                android:text="commments"
+                android:gravity="center"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:id="@+id/Submitcomments"
+                android:text="Submit"
+                android:background="@color/teamGreen"/>
         </LinearLayout>
-
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/Submitcomments"
-            android:text="Submit"/>
-
-
-
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
