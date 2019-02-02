@@ -32,6 +32,7 @@ public class LeftMapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    /*
     Button cargobutton1;
     Button cargobutton2;
     Button cargobutton3;
@@ -40,7 +41,7 @@ public class LeftMapFragment extends Fragment {
     Button cargobutton6;
     Button cargobutton7;
     Button cargobutton8;
-
+    */
     private OnFragmentInteractionListener mListener;
 
     OnLeftMapReadListener leftMapReadListener;
@@ -83,6 +84,7 @@ public class LeftMapFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_left_map, container, false);
 
+        /*
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_left);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_left);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_left);
@@ -97,7 +99,7 @@ public class LeftMapFragment extends Fragment {
             public void onClick(View v) {
             }
         });
-
+        */
         return view;
     }
 
