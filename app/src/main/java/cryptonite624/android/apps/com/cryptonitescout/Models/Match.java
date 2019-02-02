@@ -1,7 +1,9 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
+import java.util.StringTokenizer;
+
 public class Match {
-    public int [] teamNums = new int[6];
+    public String [] teamNums = new String[6];
     public int matchNum;
     public ActionMap [] maps = new ActionMap[6];
     public String[] comments = new String[6];
@@ -20,6 +22,22 @@ public class Match {
         return temp;
     }
 
+    public static Match parseMatch(String s){
+        StringTokenizer stringTokenizer = new StringTokenizer("!@#");
+        Match m = new Match();
+        m.matchNum = Integer.parseInt(stringTokenizer.nextToken());
+        m.teamNums = stringTokenizer.nextToken().split("&");
+        ActionMap temp = new ActionMap();
+        for (int i = 0; i<6;i++){
+            temp.parseString(stringTokenizer.nextToken());
+            m.maps[i] = temp;
+        }
+        for (int i = 0; i<6;i++){
+            m.comments[i] = stringTokenizer.nextToken();
+        }
+        return m;
+    }
+
     public String apppendComments(){
         String temp  = "";
         for(int i = 0;i<6;i++){
@@ -30,7 +48,7 @@ public class Match {
 
     public String getTeamsString(){
         String temp = "";
-        for(int i:teamNums){
+        for(String i:teamNums){
             temp+=i+"&";
         }
         return temp;

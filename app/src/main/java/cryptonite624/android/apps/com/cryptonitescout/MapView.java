@@ -18,6 +18,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
@@ -43,6 +44,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -175,10 +181,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     byte[] readBuf = (byte[]) msg.obj;
 
                     readMessage = new String(readBuf, 0, msg.arg1);
+                    //TODO add isfull()
                     loadstatus++;
-                    if(loadstatus==12)
-                        writeable=false;
+                    if(loadstatus==12) {
+                        writeable = false;
+                    }
                     //handle reading logic here
+                    endmatch.update(Match.parseMatch(readMessage));
+                    if(writeable)
+                    sendMessage(endmatch.toString());
 
                     break;
                 case MESSAGE_DEVICE_NAME:
@@ -1267,4 +1278,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             chatService.stop();
     }
     //bluetooth
+    //TODO do this method done, updates to current match based on matches db
+    public void getCurrentMatch(boolean useless){
+
+    }
+
+
 }

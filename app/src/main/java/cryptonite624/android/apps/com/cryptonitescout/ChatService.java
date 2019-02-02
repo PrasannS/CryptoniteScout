@@ -31,6 +31,8 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 public class ChatService {
+
+    //TODO add function for bluetooth to configurations that'll retrieve the relevant input and output devices
 	private static final String NAME_SECURE = "BluetoothChatSecure";
 	private static final String NAME_INSECURE = "BluetoothChatInsecure";
 
@@ -349,8 +351,8 @@ public class ChatService {
 	// runs during a connection with a remote device
 	private class ConnectedThread extends Thread {
 		private final BluetoothSocket bluetoothSocket;
-		private final InputStream inputStream;
-		private final OutputStream outputStream;
+		private final InputStream inputStream ;
+		private final OutputStream outputStream ;
 
 		public ConnectedThread(BluetoothSocket socket, String socketType) {
 			this.bluetoothSocket = socket;
@@ -363,8 +365,19 @@ public class ChatService {
 			} catch (IOException e) {
 			}
 
-			inputStream = tmpIn;
-			outputStream = tmpOut;
+			if(socket.getRemoteDevice().getAddress().equals("sending MAC")){
+				inputStream = tmpIn;
+				outputStream = null;
+			}
+			else if(socket.getRemoteDevice().getAddress().equals("recieving MAC")) {
+				outputStream = tmpOut;
+				inputStream=null;
+			}
+			else {
+				inputStream=null;
+				outputStream=null;
+			}
+
 		}
 
 		public void run() {

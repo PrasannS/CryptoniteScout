@@ -16,6 +16,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
     public static final String MATCHES_TABLE_NAME = "TBL_MATCHES";
     public static final String RANKINGS_TABLE_NAME = "TBL_RANKINGS";
     public static final String USERS_TABLE_NAME = "TBL_USERS";
+    public static final String CONFIG_TABLE_NAME = "TBL_CONFIG";
 
 
 
@@ -34,6 +35,13 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
                     "Status" + " INT, " +
                     "Type" + " TEXT, " +
                     "Email" + " TEXT);";
+
+    private static final String CONFIG_TABLE_CREATE =
+            "CREATE TABLE " + CONFIG_TABLE_NAME + " (" +
+                    "User" + " TEXT primary key, " +
+                    "Admin" + " BOOLEAN, " +
+                    "Comment" + " BOOLEAN, " +
+                    "MacAddress" + " TEXT);";
 
     private static final String RANKINGS_TABLE_CREATE =
             "CREATE TABLE " + RANKINGS_TABLE_NAME + " (" +
@@ -76,6 +84,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
         db.execSQL(MATCHES_TABLE_CREATE);
         db.execSQL(RANKINGS_TABLE_CREATE);
         db.execSQL(USERS_TABLE_CREATE);
+        db.execSQL(CONFIG_TABLE_CREATE);
         try{
             initialLoad(db);
         }
@@ -100,6 +109,7 @@ public class CryptoniteScoutDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MATCHES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + RANKINGS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + USERS_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + CONFIG_TABLE_NAME);
         onCreate(db);
     }
 

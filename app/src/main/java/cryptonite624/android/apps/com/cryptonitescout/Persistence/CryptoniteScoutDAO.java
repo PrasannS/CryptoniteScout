@@ -166,12 +166,12 @@ public class CryptoniteScoutDAO {
 
     }
 
-    public void addTeamData(ActionMap a, int teamnum){
+    public void addTeamData(ActionMap a, String teamnum){
         String[] temparr = new String[4];
-        RankingData r = getTeamStats(teamnum);
+        RankingData r = getTeamStats(Integer.parseInt(teamnum));
         int cargototal=0;
         int hatchtotal=0;
-        r.Teamnum=teamnum;
+        r.Teamnum=Integer.parseInt(teamnum);
         r.Status =0;
         r.MatchesPlayed++;
         temparr[0]="A1";

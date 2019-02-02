@@ -70,6 +70,7 @@ public class ActionMap implements Parcelable{
     }
 
 
+
     public int totalPoints(){
         return actions.size();
     }
@@ -107,7 +108,7 @@ public class ActionMap implements Parcelable{
     }
 
     public void parseString(String s){
-        String [] parsed = s.split(" ");
+        String [] parsed = s.split(",");
         for(int i = 0; i < parsed.length; i++){
             RobotAction robotAction = new RobotAction(parsed[i]);
 
