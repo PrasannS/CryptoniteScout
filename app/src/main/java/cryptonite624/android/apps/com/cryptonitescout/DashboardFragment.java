@@ -146,8 +146,6 @@ public class DashboardFragment extends Fragment {
         });*/
 
         AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
-        //anyChartView.setProgressBar(view.findViewById(R.id.progress_bar));
-
         Cartesian cartesian = AnyChart.line();
 
         cartesian.animation(true);
