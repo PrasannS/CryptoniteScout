@@ -60,7 +60,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             if(findViewById(R.id.fragmentcontainer)!=null){
                 MatchFragment matchFragment= new MatchFragment();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer,matchFragment,null);
+                fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
                 fragmentTransaction.commit();
             }
             return true;
