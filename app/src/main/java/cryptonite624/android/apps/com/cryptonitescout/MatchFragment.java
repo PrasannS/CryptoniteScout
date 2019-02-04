@@ -76,7 +76,7 @@ public class MatchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        toDashboard = (Button)view.findViewById(R.id.toDashboard_match);
+        /*toDashboard = (Button)view.findViewById(R.id.toDashboard_match);
         toDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +101,7 @@ public class MatchFragment extends Fragment {
             fragmentTransaction.add(R.id.mapdisplaycontainer,leftMapFragment,null);
             fragmentTransaction.commit();
 
-        }
+        }*/
 
         return view;
     }

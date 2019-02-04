@@ -1,5 +1,6 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -7,6 +8,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -24,6 +26,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +46,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.nearby.Nearby;
+import com.google.android.gms.nearby.messages.MessageListener;
+import com.google.android.gms.nearby.messages.MessagesClient;
+import com.google.android.gms.nearby.messages.MessagesOptions;
+import com.google.android.gms.nearby.messages.NearbyPermissions;
+import com.google.android.gms.nearby.messages.Strategy;
+import com.google.android.gms.nearby.messages.SubscribeOptions;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -134,7 +145,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private String connectedDeviceName = null;
     private StringBuffer outStringBuffer;
     private BluetoothAdapter bluetoothAdapter = null;
-    private ChatService chatService = null;
+
     private ChatArrayAdapter chatArrayAdapter;
     String readMessage;
     String writeMessage;
@@ -149,65 +160,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
 
-    private Handler handler = new Handler(new Handler.Callback() {
-
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_STATE_CHANGE:
-                    switch (msg.arg1) {
-                        case ChatService.STATE_CONNECTED:
-                            setStatus(getString(R.string.title_connected_to,
-                                    connectedDeviceName));
-//                            chatArrayAdapter.clear();
-                            break;
-                        case ChatService.STATE_CONNECTING:
-                            setStatus(R.string.title_connecting);
-                            break;
-                        case ChatService.STATE_LISTEN:
-                        case ChatService.STATE_NONE:
-                            setStatus(R.string.title_not_connected);
-                            break;
-                    }
-                    break;
-                case MESSAGE_WRITE:
-                    byte[] writeBuf = (byte[]) msg.obj;
-
-                    writeMessage = new String(writeBuf);
-                    // handle writing logic here
-
-                    break;
-                case MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-
-                    readMessage = new String(readBuf, 0, msg.arg1);
-                    //TODO add isfull()
-                    loadstatus++;
-                    if(loadstatus==12) {
-                        writeable = false;
-                    }
-                    //handle reading logic here
-                    endmatch.update(Match.parseMatch(readMessage));
-                    if(writeable)
-                    sendMessage(endmatch.toString());
-
-                    break;
-                case MESSAGE_DEVICE_NAME:
-
-                    connectedDeviceName = msg.getData().getString(DEVICE_NAME);
-                    Toast.makeText(getApplicationContext(),
-                            "Connected to " + connectedDeviceName,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case MESSAGE_TOAST:
-                    Toast.makeText(getApplicationContext(),
-                            msg.getData().getString(TOAST), Toast.LENGTH_SHORT)
-                            .show();
-                    break;
-            }
-            return false;
-        }
-    });
 
     //bluetooth
     
@@ -309,6 +261,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private TextView timerDisplay;
     private Button timerButton;
 
+    public MessagesClient mMessagesClient;
+    public com.google.android.gms.nearby.messages.Message mMessage;
+    public MessageListener messageListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //RelativeLayout layout = (RelativeLayout)findViewById(R.id.mapview);
@@ -329,6 +285,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargobutton7 = (Button)findViewById(R.id.cargobutton7);
         cargobutton8 = (Button)findViewById(R.id.cargobutton8);
         */
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMessagesClient = Nearby.getMessagesClient(this, new MessagesOptions.Builder()
+                    .setPermissions(NearbyPermissions.BLE)
+                    .build());
+        }
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -487,6 +450,35 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         });
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        messageListener = new MessageListener() {
+            @Override
+            public void onFound(com.google.android.gms.nearby.messages.Message message) {
+                unpublish();
+                String foundmessage = new String(message.getContent());
+                Log.d("MESSAGEFOUND", "Found message: " + foundmessage);
+                Match temp = Match.parseMatch(foundmessage);
+                endmatch.update(temp);
+                //TODO make sure to finish up this code, add status int
+                //publish(endmatch.toString());
+            }
+
+            @Override
+            public void onLost(com.google.android.gms.nearby.messages.Message message) {
+                Log.d("MESSAGELOST", "Lost sight of message: " + new String(message.getContent()));
+            }
+        };
+
+        subscribe();
+    }
+
+    // Subscribe to receive messages.
+    private void subscribe() {
+        Log.i("SUBSCRIBING", "Subscribing.");
+        SubscribeOptions options = new SubscribeOptions.Builder()
+                .setStrategy(Strategy.BLE_ONLY)
+                .build();
+        Nearby.getMessagesClient(this).subscribe(messageListener,options );
     }
 
     public void startStop(){
@@ -1159,12 +1151,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         String address = data.getExtras().getString(
                 DeviceListActivity.DEVICE_ADDRESS);
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
-        chatService.connect(device, secure);
+
     }
 
     public void connectDevice(String address){
         BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
-        chatService.connect(device, true);
+
     }
 
     @Override
@@ -1205,19 +1197,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     private void sendMessage(String message) {
-        if (chatService.getState() != ChatService.STATE_CONNECTED) {
-            Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT)
-                    .show();
-            return;
-        }
 
-        if (message.length() > 0) {
-            byte[] send = message.getBytes();
-            chatService.write(send);
-
-            outStringBuffer.setLength(0);
-            etMain.setText(outStringBuffer);
-        }
     }
 
     private final void setStatus(int resId) {
@@ -1231,22 +1211,31 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     private void setupChat() {
-
-        chatService = new ChatService(this, handler);
-        outStringBuffer = new StringBuffer("");
     }
 
     @Override
     public void onStart() {
         super.onStart();
+    }
 
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-        } else {
-            if (chatService == null)
-                setupChat();
+    @Override
+    public void onStop() {
+        Nearby.getMessagesClient(this).unpublish(mMessage);
+        Nearby.getMessagesClient(this).unsubscribe(messageListener);
+        super.onStop();
+    }
+
+    public void publish(String message) {
+        Log.i("MESSAGE", "Publishing message: " + message);
+        mMessage = new com.google.android.gms.nearby.messages.Message(message.getBytes());
+        Nearby.getMessagesClient(this).publish(mMessage);
+    }
+
+    private void unpublish() {
+        Log.i("MESSAGE", "Unpublishing.");
+        if (mMessage != null) {
+            Nearby.getMessagesClient(this).unpublish(mMessage);
+            mMessage = null;
         }
     }
 
@@ -1254,11 +1243,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public synchronized void onResume() {
         super.onResume();
 
-        if (chatService != null) {
-            if (chatService.getState() == ChatService.STATE_NONE) {
-                chatService.start();
-            }
-        }
     }
 
     @Override
@@ -1267,15 +1251,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
-        if (chatService != null)
-            chatService.stop();
     }
     //bluetooth
     //TODO do this method done, updates to current match based on matches db
