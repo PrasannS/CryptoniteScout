@@ -122,11 +122,10 @@
         tools:layout_editor_absoluteX="12dp"
         tools:layout_editor_absoluteY="305dp">
 
-        <com.anychart.AnyChartView
-            android:id="@+id/match_piechart1"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:src="@drawable/redright"/>
     </FrameLayout>
 
     <FrameLayout
@@ -163,7 +162,8 @@
 
     </FrameLayout>
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_comments"
         android:layout_width="299dp"
         android:layout_height="266dp"
         android:layout_alignParentEnd="true"
@@ -171,6 +171,6 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp">
 
-    </FrameLayout>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

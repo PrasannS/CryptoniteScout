@@ -10,6 +10,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Line;
+import com.anychart.data.Mapping;
+import com.anychart.data.Set;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.MarkerType;
+import com.anychart.enums.TooltipPositionMode;
+import com.anychart.graphics.vector.Stroke;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 
 
@@ -65,32 +81,108 @@ public class TeamFragment extends Fragment {
         public void OnTeamRead(String message);
     }
 
+    private class CustomDataEntry extends ValueDataEntry {
+
+        CustomDataEntry(String x, Number value, Number value2, Number value3) {
+            super(x, value);
+            setValue("value2", value2);
+            setValue("value3", value3);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_team, container, false);
 
-        toDashboard = (Button)view.findViewById(R.id.toDashboard_team);
-        toDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toDashboard";
 
-                teamReadListener.OnTeamRead(message);
-            }
-        });
+        AnyChartView lineGraphView = view.findViewById(R.id.team_line_graph);
 
-        toMatch = (Button)view.findViewById(R.id.toMatch_team);
-        toMatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toMatch";
-                teamReadListener.OnTeamRead(message);
-            }
-        });
+        Cartesian cartesian = AnyChart.line();
+
+        lineGraphView.setChart(cartesian);
+
+
+
+        cartesian.animation(true);
+
+        cartesian.padding(10d, 20d, 5d, 20d);
+
+        cartesian.crosshair().enabled(true);
+        cartesian.crosshair()
+                .yLabel(true)
+                // TODO ystroke
+                .yStroke((Stroke) null, null, null, (String) null, (String) null);
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+
+        cartesian.title("Scores per Match");
+
+        cartesian.yAxis(0).title("Score");
+        cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
+
+        List<DataEntry> seriesData = new ArrayList<>();
+        seriesData.add(new TeamFragment.CustomDataEntry("1", 3.6, 2.3, 2.8));
+        seriesData.add(new TeamFragment.CustomDataEntry("2", 7.1, 4.0, 4.1));
+        seriesData.add(new TeamFragment.CustomDataEntry("3", 8.5, 6.2, 5.1));
+        seriesData.add(new TeamFragment.CustomDataEntry("4", 9.2, 11.8, 6.5));
+        seriesData.add(new TeamFragment.CustomDataEntry("5", 10.1, 13.0, 12.5));
+        seriesData.add(new TeamFragment.CustomDataEntry("6", 11.6, 13.9, 18.0));
+        seriesData.add(new TeamFragment.CustomDataEntry("7", 16.4, 18.0, 21.0));
+        seriesData.add(new TeamFragment.CustomDataEntry("8", 18.0, 23.3, 20.3));
+        seriesData.add(new TeamFragment.CustomDataEntry("9", 13.2, 24.7, 19.2));
+        seriesData.add(new TeamFragment.CustomDataEntry("10", 12.0, 18.0, 14.4));
+
+        Set set = Set.instantiate();
+        set.data(seriesData);
+        Mapping series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");
+        Mapping series2Mapping = set.mapAs("{ x: 'x', value: 'value2' }");
+        Mapping series3Mapping = set.mapAs("{ x: 'x', value: 'value3' }");
+
+        Line series1 = cartesian.line(series1Mapping);
+        series1.name("624");
+        series1.hovered().markers().enabled(true);
+        series1.hovered().markers()
+                .type(MarkerType.CIRCLE)
+                .size(4d);
+        series1.tooltip()
+                .position("right")
+                .anchor(Anchor.LEFT_CENTER)
+                .offsetX(5d)
+                .offsetY(5d);
+
+        Line series2 = cartesian.line(series2Mapping);
+        series2.name("118");
+        series2.hovered().markers().enabled(true);
+        series2.hovered().markers()
+                .type(MarkerType.CIRCLE)
+                .size(4d);
+        series2.tooltip()
+                .position("right")
+                .anchor(Anchor.LEFT_CENTER)
+                .offsetX(5d)
+                .offsetY(5d);
+
+        Line series3 = cartesian.line(series3Mapping);
+        series3.name("3310");
+        series3.hovered().markers().enabled(true);
+        series3.hovered().markers()
+                .type(MarkerType.CIRCLE)
+                .size(4d);
+        series3.tooltip()
+                .position("right")
+                .anchor(Anchor.LEFT_CENTER)
+                .offsetX(5d)
+                .offsetY(5d);
+
+        cartesian.legend().enabled(true);
+        cartesian.legend().fontSize(13d);
+        cartesian.legend().padding(0d, 0d, 10d, 0d);
 
         return view;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

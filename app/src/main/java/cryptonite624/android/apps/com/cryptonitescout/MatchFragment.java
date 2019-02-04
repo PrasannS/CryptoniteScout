@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,12 @@ public class MatchFragment extends Fragment {
     public Button redteam1;
     public Button toDashboard;
     private String message;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private ArrayList<String> comms = new ArrayList<String>();
+
 
     OnMatchReadListener matchReadListener;
     FragmentManager fragmentManager;
@@ -90,6 +98,14 @@ public class MatchFragment extends Fragment {
         public void OnMatchRead(String message);
     }
 
+    private void initRecyclerView(){
+        comms.add("This is a test commentsss");
+        comms.add("Test comment 2");
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), comms);
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,6 +129,8 @@ public class MatchFragment extends Fragment {
                 matchReadListener.OnMatchRead(message);
             }
         });*/
+        mRecyclerView = view.findViewById(R.id.recyclerview_comments);
+        initRecyclerView();
 
 
         //pie chart
@@ -145,37 +163,13 @@ public class MatchFragment extends Fragment {
         anyChartView.setChart(pie);
 
 
-        //pie chart
-
-        Pie pie1 = AnyChart.pie();
-
-        List<DataEntry> data1 = new ArrayList<>();
-        data1.add(new ValueDataEntry("123", 10000));
-        data1.add(new ValueDataEntry("456", 12000));
-        data1.add(new ValueDataEntry("789", 18000));
-
-        pie1.data(data1);
-
-        pie1.title("Teams Contribution in Alliance");
-
-        pie1.labels().position("outside");
-
-        pie1.legend().title().enabled(true);
-        pie1.legend().title()
-                .text("Teams1")
-                .padding(0d, 0d, 10d, 0d);
-
-        pie1.legend()
-                .position("center-bottom")
-                .itemsLayout(LegendLayout.HORIZONTAL)
-                .align(Align.CENTER);
-        AnyChartView anyChartView1 = (AnyChartView) view.findViewById(R.id.match_piechart1);
-        anyChartView1.setChart(pie1);
 
         //line graph
 
         /*
-        AnyChartView lineGraphView = view.findViewById(R.id.any_chart_view_match);
+
+
+        lineGraphView.setChart(cartesian); AnyChartView lineGraphView = view.findViewById(R.id.any_chart_view_match);
         Cartesian cartesian = AnyChart.line();
 
         cartesian.animation(true);
@@ -253,10 +247,7 @@ public class MatchFragment extends Fragment {
         cartesian.legend().fontSize(13d);
         cartesian.legend().padding(0d, 0d, 10d, 0d);
 
-        lineGraphView.setChart(cartesian);
-
 */
-
 
         return view;
 

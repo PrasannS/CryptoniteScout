@@ -11,6 +11,9 @@
     <item android:id="@+id/rankings_menu"
         android:title="Ranking"
         app:showAsAction="always"/>
+    <item android:id="@+id/stratboard"
+        android:title="Strat Board"
+        app:showAsAction="always"/>
     <item android:id="@+id/newEntry_menu"
         android:title="New Entry"
         app:showAsAction="always"/>

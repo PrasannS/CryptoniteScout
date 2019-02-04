@@ -74,6 +74,16 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
             return true;
         }
+        if (id == R.id.stratboard) {
+            Toast.makeText(DataAccessActivity.this, "strategy board", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                StrategyBoard strategyBoard= new StrategyBoard();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, strategyBoard,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
         if (id == R.id.settings) {
             Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
             return true;
