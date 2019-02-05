@@ -120,12 +120,10 @@
         android:layout_marginStart="315dp"
         android:layout_marginBottom="199dp"
         tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="305dp">
+        tools:layout_editor_absoluteY="305dp"
+        android:id="@+id/match_access_layout">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/redright"/>
+
     </FrameLayout>
 
     <FrameLayout

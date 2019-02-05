@@ -52,6 +52,7 @@ public class MatchAccessFragment extends Fragment {
     public Button playbutton;
     public boolean play = false;
     public RangeSeekBar intervalbar;
+    public LeftMapFragment leftMapFragment;
 
     public MatchAccessFragment() {
         // Required empty public constructor
@@ -103,11 +104,10 @@ public class MatchAccessFragment extends Fragment {
 
         fragmentManager = getChildFragmentManager();
         if(view.findViewById(R.id.videomnapcontainer)!=null){
-            LeftMapFragment leftMapFragment= new LeftMapFragment();
+            leftMapFragment= new LeftMapFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.videomnapcontainer,leftMapFragment,null);
             fragmentTransaction.commit();
-
         }
         rangeSeekBar=view.findViewById(R.id.matchscrubber);
         playbutton=view.findViewById(R.id.playbutton);
@@ -123,6 +123,8 @@ public class MatchAccessFragment extends Fragment {
                     timer.cancel();
             }
         });
+
+
 
         return view;
     }
@@ -157,6 +159,7 @@ public class MatchAccessFragment extends Fragment {
                 currentaction++;
                 rangeSeekBar.setValue(currentaction);
                 //put all layout changing code here
+                leftMapFragment.individualButton(map.actions.get(currentaction));
             }
         };
 

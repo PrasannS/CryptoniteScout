@@ -1,6 +1,8 @@
+package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,6 +18,7 @@ public class PaintView extends View {
     public static final float TOUCH_TOLERANCE = 10;
 
     private Bitmap bitmap;
+    private Bitmap mutableBitmap;
     private Canvas bitmapCanvas;
     private Paint paintScreen;
     private Paint paintLine;
@@ -34,7 +37,7 @@ public class PaintView extends View {
 
         paintLine = new Paint();
         paintLine.setAntiAlias(true);
-        paintLine.setColor(Color.BLACK);
+        paintLine.setColor(Color.GREEN);
         paintLine.setStrokeWidth(7);
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setStrokeCap(Paint.Cap.ROUND);
@@ -46,9 +49,11 @@ public class PaintView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        bitmapCanvas = new Canvas(bitmap);
-        bitmap.eraseColor(Color.WHITE);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.redright);
+        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        //mutableBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        bitmapCanvas = new Canvas(mutableBitmap);
+        //mutableBitmap.eraseColor(Color.WHITE);
     }
 
     @Override
@@ -70,7 +75,15 @@ public class PaintView extends View {
         invalidate();
 
         return true;
+    }
 
+    public void clear(){
+        pathMap.clear();
+        previousPointMap.clear();
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.redright);
+        mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        bitmapCanvas = new Canvas(mutableBitmap);
+        invalidate();
     }
 
     private void touchMoved(MotionEvent event) {
@@ -124,7 +137,7 @@ public class PaintView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, paintScreen);
+        canvas.drawBitmap(mutableBitmap, 0, 0, paintScreen);
 
         for(Integer key : pathMap.keySet()){
             canvas.drawPath(pathMap.get(key), paintLine);

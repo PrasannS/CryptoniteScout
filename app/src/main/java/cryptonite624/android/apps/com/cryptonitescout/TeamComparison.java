@@ -4,21 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MapDrawFragment.OnFragmentInteractionListener} interface
+ * {@link TeamComparison.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MapDrawFragment#newInstance} factory method to
+ * Use the {@link TeamComparison#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapDrawFragment extends Fragment {
+public class TeamComparison extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,12 +31,14 @@ public class MapDrawFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public Button addTeam;
+    public SearchView teamSearch;
+
     private OnFragmentInteractionListener mListener;
 
-    Button clearButton;
-    PaintView paintView;
+    public FragmentManager fragmentManager;
 
-    public MapDrawFragment() {
+    public TeamComparison() {
         // Required empty public constructor
     }
 
@@ -43,11 +48,11 @@ public class MapDrawFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MapDrawFragment.
+     * @return A new instance of fragment TeamComparison.
      */
     // TODO: Rename and change types and number of parameters
-    public static MapDrawFragment newInstance(String param1, String param2) {
-        MapDrawFragment fragment = new MapDrawFragment();
+    public static TeamComparison newInstance(String param1, String param2) {
+        TeamComparison fragment = new TeamComparison();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,19 +72,32 @@ public class MapDrawFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_map_draw, container, false);
 
-        paintView = (PaintView)view.findViewById(R.id.paint_view);
+        View view = inflater.inflate(R.layout.fragment_team_comparison, container, false);
 
-        clearButton = (Button)view.findViewById(R.id.drawing_clear);
-        clearButton.setOnClickListener(new View.OnClickListener() {
+        fragmentManager = getChildFragmentManager();
+        if(view.findViewById(R.id.team_container)!=null){
+            TeamFragment teamFragment= new TeamFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.team_container,teamFragment,null);
+            fragmentTransaction.commit();
+        }
+
+
+        addTeam = view.findViewById(R.id.addteambutton);
+        addTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paintView.clear();
+
             }
         });
 
+        teamSearch = view.findViewById(R.id.teamsearch);
+
+
+
+
+        // Inflate the layout for this fragment
         return view;
     }
 
@@ -93,13 +111,12 @@ public class MapDrawFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
