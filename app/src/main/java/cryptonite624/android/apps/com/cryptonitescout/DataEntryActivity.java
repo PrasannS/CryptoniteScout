@@ -40,10 +40,6 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_entry);
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.darktheme);
-        }
-        else setTheme(R.style.lighttheme);
 
         //this is the initial code that generates the pregame fragment and adds it to the layout
         fragmentManager = getSupportFragmentManager();

@@ -2,25 +2,71 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.support.v7.app.ActionBarDrawerToggle;
 
 public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener{
 
     public static FragmentManager fragmentManager;
 
+    private DrawerLayout dl;
+    private ActionBarDrawerToggle t;
+    private NavigationView nv;
+
+    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.TaskbarTheme);
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_access);
 
+        dl = (DrawerLayout)findViewById(R.id.drawer_layout);
+        t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        nv = (NavigationView)findViewById(R.id.nv);
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch(id)
+                {
+                    case R.id.account:
+                        Toast.makeText(DataAccessActivity.this, "My Account",Toast.LENGTH_SHORT).show();
+                    case R.id.settings:
+                        Toast.makeText(DataAccessActivity.this, "Settings",Toast.LENGTH_SHORT).show();
+                    case R.id.mycart:
+                        Toast.makeText(DataAccessActivity.this, "My Cart",Toast.LENGTH_SHORT).show();
+                    default:
+                        return true;
+                }
+            }
+        });
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.fragmentcontainer)!=null){
             if(savedInstanceState!=null){
@@ -34,6 +80,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         }
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -42,11 +90,21 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        t.syncState();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if(t.onOptionsItemSelected(item)){
+            return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.pitnote_menu) {
@@ -99,6 +157,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
