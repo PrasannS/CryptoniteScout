@@ -94,7 +94,7 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_team, container, false);
-
+    /*
 
         AnyChartView lineGraphView = view.findViewById(R.id.team_line_graph);
 
@@ -178,8 +178,9 @@ public class TeamFragment extends Fragment {
         cartesian.legend().enabled(true);
         cartesian.legend().fontSize(13d);
         cartesian.legend().padding(0d, 0d, 10d, 0d);
-
+*/
         return view;
+
     }
 
 

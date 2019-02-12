@@ -53,18 +53,66 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
                 int id = item.getItemId();
-                switch(id)
-                {
-                    case R.id.account:
-                        Toast.makeText(DataAccessActivity.this, "My Account",Toast.LENGTH_SHORT).show();
-                    case R.id.settings:
-                        Toast.makeText(DataAccessActivity.this, "Settings",Toast.LENGTH_SHORT).show();
-                    case R.id.mycart:
-                        Toast.makeText(DataAccessActivity.this, "My Cart",Toast.LENGTH_SHORT).show();
-                    default:
-                        return true;
+
+                if (id == R.id.nav_home) {
+                    Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        TeamFragment teamFragment = new TeamFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, teamFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                    return true;
                 }
+                /*
+                if (id == R.id.nav_home) {
+                    Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        DashboardFragment dashboardFragment = new DashboardFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, dashboardFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                    return true;
+                }*/
+                if (id == R.id.nav_matches) {
+                    Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        MatchFragment matchFragment= new MatchFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                    return true;
+                }
+                if (id == R.id.nav_newentry) {
+                    Toast.makeText(DataAccessActivity.this, "new entry", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(DataAccessActivity.this, MapView.class));
+                    return true;
+                }
+                if (id == R.id.nav_rankings) {
+                    Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                if (id == R.id.nav_sketchmap) {
+                    Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        MapDrawFragment mapDrawFragment = new MapDrawFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
+                        fragmentTransaction.commit();
+                    }
+                    return true;
+                }
+                if (id == R.id.nav_settings) {
+                    Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+
+                return true;
             }
         });
         fragmentManager = getSupportFragmentManager();
@@ -106,7 +154,53 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             return true;
         }
 
+        /*
+        if (id == R.id.nav_home) {
+            Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, dashboardFragment,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
+        if (id == R.id.nav_matches) {
+            Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                MatchFragment matchFragment= new MatchFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
+        if (id == R.id.nav_newentry) {
+            Toast.makeText(DataAccessActivity.this, "new entry", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(DataAccessActivity.this, MapView.class));
+            return true;
+        }
+        if (id == R.id.nav_rankings) {
+            Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.nav_sketchmap) {
+            Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                MapDrawFragment mapDrawFragment = new MapDrawFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
+        if (id == R.id.nav_settings) {
+            Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
+        /*
         if (id == R.id.pitnote_menu) {
             Toast.makeText(DataAccessActivity.this, "pitnote", Toast.LENGTH_LONG).show();
             startActivity(new Intent(DataAccessActivity.this, pitNote.class));
@@ -156,7 +250,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         if (id == R.id.settings) {
             Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

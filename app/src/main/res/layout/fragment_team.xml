@@ -4,126 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataAccessActivity">
+    tools:context=".DataAccessActivity"
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="Team Number"
-                android:textSize="40sp"
-                android:layout_weight="1"/>
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="30sp"
-                    android:text="Average Cargo Scored: "/>
+                    android:gravity="left"
+                    android:textSize="25sp"
+                    android:text="Team Name"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:textSize="25sp"
+                    android:text="#3"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="30sp"
-                    android:text="Average Hatches Scored: "/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                    android:textSize="25sp"
+                    android:gravity="left"
+                    android:text="Team Number"
+                    android:layout_weight="1"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="30sp"
-                    android:text="Average Score per Match"/>
+                    android:textSize="25sp"
+                    android:gravity="right"
+                    android:text="6 RP"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="30sp"
-                    android:text="Average Number of Penalties"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="30sp"
-                    android:text="Climbing Ability"/>
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="30dp"
-                android:text="Matches"
-                android:layout_weight="1"/>
-
-            <FrameLayout
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Cargo Average"
+                android:gravity="center_horizontal" />
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Hatch Average"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Average Contribution"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Climb Level"
+                android:gravity="center_horizontal" />
 
-                <com.anychart.AnyChartView
-                    android:id="@+id/team_line_graph"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+        </LinearLayout>
 
-            </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,18 +115,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Pitnote Comment"/>
-                <EditText
+                    android:textSize="35sp"
+                    android:text="QUICK PITNOTE INFO"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/pitnote_comment"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:textSize="35sp"
+                    android:text="MATCH HISTORY RECYCLER VIEW"/>
             </LinearLayout>
+
         </LinearLayout>
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

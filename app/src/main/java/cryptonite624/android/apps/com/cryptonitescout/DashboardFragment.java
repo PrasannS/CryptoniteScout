@@ -113,7 +113,7 @@ public class DashboardFragment extends Fragment {
 
 
 
-        /* AnyChartView anyChartView = view.view.findViewById(R.id.any_chart_view);
+         AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
         Cartesian cartesian = AnyChart.line();
 
         cartesian.animation(true);
@@ -193,7 +193,7 @@ public class DashboardFragment extends Fragment {
 
         anyChartView.setChart(cartesian);
 
-        */
+
         
 
         return view;
