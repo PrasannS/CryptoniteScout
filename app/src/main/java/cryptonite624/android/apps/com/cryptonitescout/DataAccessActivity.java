@@ -51,25 +51,54 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         //noinspection SimplifiableIfStatement
         if (id == R.id.pitnote_menu) {
             Toast.makeText(DataAccessActivity.this, "pitnote", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(DataAccessActivity.this, pitNote.class));
             return true;
         }
-        /*
+
         if (id == R.id.matches_menu) {
             Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                MatchFragment matchFragment= new MatchFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
+                fragmentTransaction.commit();
+            }
             return true;
         }
         if (id == R.id.newEntry_menu) {
             Toast.makeText(DataAccessActivity.this, "new entry", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(DataAccessActivity.this, MapView.class));
             return true;
         }
         if (id == R.id.rankings_menu) {
             Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
             return true;
         }
+        if (id == R.id.stratboard) {
+            Toast.makeText(DataAccessActivity.this, "strategy board", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                StrategyBoard strategyBoard= new StrategyBoard();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, strategyBoard,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
+
+        if (id == R.id.mapdraw) {
+            Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                MapDrawFragment mapDrawFragment = new MapDrawFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
         if (id == R.id.settings) {
             Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
             return true;
-        }*/
+        }
         return super.onOptionsItemSelected(item);
     }
 

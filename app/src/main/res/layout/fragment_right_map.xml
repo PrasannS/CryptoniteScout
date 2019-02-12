@@ -14,10 +14,14 @@
             android:id="@+id/mapview"
             android:layout_width="690dp"
             android:layout_height="460dp"
-            android:background="@drawable/redright">
+            android:background="@drawable/redright"
+            android:descendantFocusability="blocksDescendants">
 
-        <!--
+
+
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton1_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -25,9 +29,11 @@
                 android:layout_alignTop="@+id/cargobutton2_right"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="-12dp"
-                android:text="Button" />
+                android:text="1" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton2_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -35,18 +41,22 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="201dp"
                 android:layout_marginTop="0dp"
-                android:text="Button" />
+                android:text="2" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton3_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargobutton4_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="106dp"
-                android:text="Button" />
+                android:text="3" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton4_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -54,9 +64,11 @@
                 android:layout_marginEnd="-99dp"
                 android:layout_marginBottom="152dp"
                 android:layout_toStartOf="@+id/cargobutton7_right"
-                android:text="Button" />
+                android:text="4" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton5_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -64,35 +76,43 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="169dp"
                 android:layout_marginEnd="280dp"
-                android:text="Button" />
+                android:text="5" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton6_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargobutton8_right"
                 android:layout_toEndOf="@+id/cargobutton3_right"
-                android:text="Button" />
+                android:text="6" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton7_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargobutton6_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="98dp"
-                android:text="Button" />
+                android:text="7" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/cargobutton8_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="154dp"
-                android:text="Button" />
+                android:text="8" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/button9_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,6 +123,8 @@
                 android:visibility="invisible" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/button10_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +133,8 @@
                 android:text="Button" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/button11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,6 +145,8 @@
                 android:visibility="invisible" />
 
             <Button
+                android:enabled="false"
+                android:clickable="false"
                 android:id="@+id/button12_right"
                 android:layout_width="wrap_content"
                 android:layout_height="212dp"
@@ -130,7 +156,7 @@
                 android:text="Button"
                 android:visibility="invisible" />
 
-            -->
+
 
 
         </RelativeLayout>
