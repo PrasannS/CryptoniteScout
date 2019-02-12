@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataAccessActivity">
+    tools:context=".DataAccessActivity"
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,18 +20,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/colorselector"
-                android:text="Color Selector"/>
+                android:text="Color Selector"
+                android:backgroundTint="@color/colorPrimary"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Save"
-                android:id="@+id/saveButton"/>
+                android:id="@+id/saveButton"
+                android:backgroundTint="@color/colorPrimary" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/drawing_clear"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Clear"/>
         </LinearLayout>
         <cryptonite624.android.apps.com.cryptonitescout.PaintView
