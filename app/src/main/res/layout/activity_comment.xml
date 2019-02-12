@@ -92,6 +92,4 @@
                 android:background="@color/teamGreen"/>
         </LinearLayout>
     </LinearLayout>
-
-
 </android.support.constraint.ConstraintLayout>

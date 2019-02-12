@@ -15,7 +15,7 @@
             android:layout_width="690dp"
             android:layout_height="460dp"
             android:background="@drawable/red">
-
+<!--
             <Button
                 android:id="@+id/cargobutton1_left"
                 android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                 android:layout_centerVertical="true"
                 android:text="Button" />
 
-
+-->
         </RelativeLayout>
     </LinearLayout>
 

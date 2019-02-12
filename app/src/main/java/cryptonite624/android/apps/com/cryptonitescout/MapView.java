@@ -893,7 +893,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         }
         else{
-            rightMapFragment.updateButtons();
+            //rightMapFragment.updateButtons();
         }
         updateScreen();
     }

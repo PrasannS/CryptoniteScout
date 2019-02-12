@@ -112,12 +112,12 @@ public class MatchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        if (view.findViewById(R.id.match_access_layout) != null) {
+        /*if (view.findViewById(R.id.match_access_layout) != null) {
             MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.match_access_layout, matchAccessFragment , null);
-            fragmentTransaction.commit();
-        }
+            fragmentTransaction.add(R.id.match_access_layout, matchAccessFragment , null);
+            fragmentTransaction.commit();*
+        }*/
 
         mRecyclerView = view.findViewById(R.id.recyclerview_comments);
         initRecyclerView();
