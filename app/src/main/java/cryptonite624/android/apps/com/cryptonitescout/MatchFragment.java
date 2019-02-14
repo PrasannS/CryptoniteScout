@@ -111,15 +111,15 @@ public class MatchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
-
+        /*
         if (view.findViewById(R.id.match_access_layout) != null) {
             MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.match_access_layout, matchAccessFragment , null);
             fragmentTransaction.commit();
-        }
+        }*/
 
-        mRecyclerView = view.findViewById(R.id.recyclerview_comments);
+        //mRecyclerView = view.findViewById(R.id.recyclerview_comments);
         initRecyclerView();
 
 
@@ -132,7 +132,7 @@ public class MatchFragment extends Fragment {
         data.add(new ValueDataEntry("118", 12000));
         data.add(new ValueDataEntry("3310", 18000));
         pie.data(data);
-        AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.match_piechart);
+        //AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.match_piechart);
 
         pie.data(data);
 
@@ -150,7 +150,7 @@ public class MatchFragment extends Fragment {
                 .itemsLayout(LegendLayout.HORIZONTAL)
                 .align(Align.CENTER);
 
-        anyChartView.setChart(pie);
+        //anyChartView.setChart(pie);
 
 
 

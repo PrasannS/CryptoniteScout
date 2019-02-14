@@ -50,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             comment = itemView.findViewById(R.id.comment);
-            parentLayout = itemView.findViewById(R.id.recyclerview_comments);
+            //parentLayout = itemView.findViewById(R.id.recyclerview_comments);
         }
     }
 
