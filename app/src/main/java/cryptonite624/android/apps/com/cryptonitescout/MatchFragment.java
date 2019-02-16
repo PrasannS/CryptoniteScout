@@ -111,24 +111,14 @@ public class MatchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
-        /*
-        toDashboard = (Button)view.findViewById(R.id.toDashboard_match);
-        toDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toDashboard";
-                matchReadListener.OnMatchRead(message);
-            }
-        });
 
-        redteam1 = (Button)view.findViewById(R.id.redteam1);
-        redteam1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toTeam";
-                matchReadListener.OnMatchRead(message);
-            }
-        });*/
+        /*if (view.findViewById(R.id.match_access_layout) != null) {
+            MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.match_access_layout, matchAccessFragment , null);
+            fragmentTransaction.commit();*
+        }*/
+
         mRecyclerView = view.findViewById(R.id.recyclerview_comments);
         initRecyclerView();
 

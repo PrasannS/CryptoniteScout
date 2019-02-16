@@ -73,9 +73,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         if (id == R.id.rankings_menu) {
             Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
             return true;
-        }/**
-         TODO fix this up, IDK what the issue is here
-        if (id == R.id.) {
+        }
+        if (id == R.id.stratboard) {
             Toast.makeText(DataAccessActivity.this, "strategy board", Toast.LENGTH_LONG).show();
             if(findViewById(R.id.fragmentcontainer)!=null){
                 StrategyBoard strategyBoard= new StrategyBoard();
@@ -84,7 +83,18 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                 fragmentTransaction.commit();
             }
             return true;
-        }*/
+        }
+
+        if (id == R.id.mapdraw) {
+            Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
+            if(findViewById(R.id.fragmentcontainer)!=null){
+                MapDrawFragment mapDrawFragment = new MapDrawFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
+                fragmentTransaction.commit();
+            }
+            return true;
+        }
         if (id == R.id.settings) {
             Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
             return true;

@@ -30,7 +30,46 @@
                 android:layout_height="90dp"
                 android:textSize="40dp"
                 android:id="@+id/TeamName"/>
-
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="Rating"
+                android:textSize="30dp"
+                android:textColor="@color/teamGreen"
+                android:gravity="center"/>
+            <Spinner
+                android:id="@+id/Rating"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="Driver"
+                android:textSize="30dp"
+                android:textColor="@color/teamGreen"
+                android:gravity="center"/>
+            <Spinner
+                android:id="@+id/DriverRating"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown"/>
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="Defense"
+                android:textSize="30dp"
+                android:textColor="@color/teamGreen"
+                android:gravity="center"/>
+            <Spinner
+                android:id="@+id/DefenseRating"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
+                android:background="@android:drawable/btn_dropdown">
+            </Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -53,6 +92,4 @@
                 android:background="@color/teamGreen"/>
         </LinearLayout>
     </LinearLayout>
-
-
 </android.support.constraint.ConstraintLayout>

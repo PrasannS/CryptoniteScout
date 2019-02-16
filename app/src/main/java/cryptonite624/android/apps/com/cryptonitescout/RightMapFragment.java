@@ -92,7 +92,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
 
         //updateButtons();
 
-
+        /*
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_right);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_right);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_right);
@@ -101,7 +101,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         cargobutton6 = (Button)view.findViewById(R.id.cargobutton6_right);
         cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_right);
         cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_right);
-
+        */
         /*
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,8 +228,69 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    
+    public void individualButton(String code, boolean hatch){
+        if (code.equals("C1")) {
+            if(hatch){
+                cargobutton1.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton1.setBackgroundColor(Color.RED);
+            }
 
+        } else if (code.equals("C2")) {
+            if(hatch){
+                cargobutton2.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton2.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C3")) {
+            if(hatch){
+                cargobutton3.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton3.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C4")) {
+            if(hatch){
+                cargobutton4.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton4.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C5")) {
+            if(hatch){
+                cargobutton5.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton5.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C6")) {
+            if(hatch){
+                cargobutton6.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton6.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C7")) {
+            if(hatch){
+                cargobutton7.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton7.setBackgroundColor(Color.RED);
+            }
+        } else if (code.equals("C8")) {
+            if(hatch){
+                cargobutton8.setBackgroundColor(Color.YELLOW);
+            }
+            else{
+                cargobutton8.setBackgroundColor(Color.RED);
+            }
+        }
+    }
 
+/*
     public void updateButtons() {
         //Activity tempActivity = (MapView) getActivity();
         //((MapView) tempActivity).updateFilled();
@@ -300,5 +361,5 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
                 }
             }
         }
-    }
+    }*/
 }

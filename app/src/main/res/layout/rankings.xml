@@ -1,115 +1,478 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".rankings">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Big boi linear layout -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
 
+        <!-- Tab bar linear layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
 
-    <ScrollView
-        android:id="@+id/horizontalScrollviewForRank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical|horizontal">
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Rankings"
+                    android:textColor="@color/TextColor"
+                    android:textSize="40dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/toDashBoard"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="Dash Board"
+                    android:textColor="@color/TextColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/toReplayView"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="Replay View"
+                    android:textColor="@color/TextColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/toPitnotePage"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="Pit Notes"
+                    android:textColor="@color/TextColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/toComments"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="Comments"
+                    android:textColor="@color/TextColor"
+                    android:textSize="20sp"
+                    tools:ignore="InvalidId" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/toBluetoothChat"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/colorPrimary"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Rankings Chart -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
+            android:orientation="vertical">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/black"
-                android:text="Team\nNumber"
-                android:textColor="@android:color/white" />
+                android:layout_height="20dp"/>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/scrollGray"
-                android:text="Team\nName"
-                android:textColor="@android:color/white" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="40dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="Ranks"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="Team"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="Win Rate"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="Rank Points"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="Phases"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center" />
+                </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="BaseLine\nPercent"
-                android:textColor="@android:color/white" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="40dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="624"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="100%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Auto\nSwitch\"
-                android:textColor="@android:color/white" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="2"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="118"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="99%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="303"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="98%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
 
-            <Button
-                android:layout_width="578dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Auton\nScale"
-                android:textColor="@android:color/white" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nOwn"
-                android:textColor="@android:color/white" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="4"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="404"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="97%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="505"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="96%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nOppo"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nExchange"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nScale"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nSwitch"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Teleop\nMax"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray"
-                android:text="Climb/nRate"
-                android:textColor="@android:color/white" />
-
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp">
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="6"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorPrimary"/>
+                    <Button
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
+                        android:text="606"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="95%"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:text="PlaceHolder"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:text="1"
+                        android:textSize="30dp"
+                        android:textColor="@color/TextColor"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 
 
-</FrameLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
