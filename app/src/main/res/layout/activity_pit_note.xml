@@ -24,9 +24,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/black"
+                    android:background="@color/colorPrimaryDark"
                     android:text="Pitnote"
-                    android:textColor="@color/teamGreen"
+                    android:textColor="@color/textColor"
                     android:textSize="40sp" />
             </LinearLayout>
 
@@ -35,7 +35,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary">
 
                 <!--Left small boy Linear Layout-->
                 <LinearLayout
@@ -47,9 +48,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/white"
+                        android:background="@color/colorPrimary"
                         android:text="Team #"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textColor"
                         android:textSize="40sp" />
 
                     <LinearLayout
@@ -60,9 +61,9 @@
                         <TextView
                             android:layout_width="260dp"
                             android:layout_height="70dp"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Language"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -70,7 +71,8 @@
                             android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown"></Spinner>
+                            android:spinnerMode="dropdown">
+                        </Spinner>
                     </LinearLayout>
 
                     <LinearLayout
@@ -81,9 +83,9 @@
                         <TextView
                             android:layout_width="130dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Other :"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <EditText
@@ -102,9 +104,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Cross Baseline"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40sp" />
 
                         <Switch
@@ -122,9 +124,9 @@
                         <TextView
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="#Batteries"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <EditText
@@ -136,13 +138,13 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="70dp"
-                        android:background="@android:color/white">
+                        android:background="@color/colorPrimary">
 
                         <TextView
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
                             android:text="#Chargers"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <EditText
@@ -159,7 +161,8 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="Layout"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
+                            android:background="@color/colorPrimary"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -178,13 +181,20 @@
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
                             android:text="Robot Dimension"
-                            android:textColor="@color/teamGreen"
-                            android:textSize="40dp" />
+                            android:textColor="@color/textColor"
+                            android:textSize="40dp"
+                            android:background="@color/colorPrimary"/>
 
                         <EditText
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
-                            android:text="" />
+                            android:text=""
+                            android:background="@color/colorPrimary"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary">
                     </LinearLayout>
 
                 </LinearLayout>
@@ -204,9 +214,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Programmer On Site "
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40sp" />
 
                         <Switch
@@ -214,7 +224,7 @@
                             android:layout_width="140dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:checked="false" />
                     </LinearLayout>
 
@@ -226,9 +236,9 @@
                         <TextView
                             android:layout_width="350dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Shifters"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40sp" />
 
                         <Switch
@@ -245,9 +255,9 @@
                         <TextView
                             android:layout_width="270dp"
                             android:layout_height="match_parent"
-                            android:background="@android:color/white"
+                            android:background="@color/colorPrimary"
                             android:text="Level 2 start"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40sp" />
 
                         <Switch
@@ -265,7 +275,7 @@
                             android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:text="#Mini CIMS"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <EditText
@@ -282,7 +292,7 @@
                             android:layout_width="150dp"
                             android:layout_height="match_parent"
                             android:text="#CIMS"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <EditText
@@ -299,7 +309,7 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="Hatch Intake"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -318,7 +328,7 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="Cargo Intake"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -337,7 +347,7 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="Climb Level"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -356,7 +366,7 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="Wheels"
-                            android:textColor="@color/teamGreen"
+                            android:textColor="@color/textColor"
                             android:textSize="40dp" />
 
                         <Spinner
@@ -379,19 +389,23 @@
                     android:layout_width="240dp"
                     android:layout_height="match_parent"
                     android:text="Comment  : "
-                    android:textColor="@android:color/black"
-                    android:textSize="40dp" />
+                    android:textColor="@color/textColor"
+                    android:textSize="40dp"
+                    android:background="@color/colorPrimary"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/textColor"
+                    android:background="@color/colorPrimary"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary">
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/fab"
@@ -411,9 +425,10 @@
                     android:layout_height="70dp"
                     android:text="Submit"
                     android:textSize="30dp"
-                    android:textColor="@color/teamGreen"
+                    android:textColor="@color/textColor"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="30dp" />
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/colorPrimary"/>
 
             </LinearLayout>
         </LinearLayout>
