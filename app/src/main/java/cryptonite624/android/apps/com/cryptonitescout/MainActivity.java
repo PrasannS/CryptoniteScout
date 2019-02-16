@@ -1,68 +1,38 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
-import android.text.TextUtils;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.connection.Payload;
-import com.google.android.gms.nearby.messages.Message;
-import com.google.android.gms.nearby.messages.MessageListener;
-import com.google.android.gms.nearby.messages.Messages;
-import com.google.android.gms.nearby.messages.PublishCallback;
-import com.google.android.gms.nearby.messages.PublishOptions;
-import com.google.android.gms.nearby.messages.Strategy;
-import com.google.android.gms.nearby.messages.SubscribeCallback;
-import com.google.android.gms.nearby.messages.SubscribeOptions;
-
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import java.util.Set;
-import java.util.UUID;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int MESSAGE_STATE_CHANGE = 1;
-    public static final int MESSAGE_READ = 2;
-    public static final int MESSAGE_WRITE = 3;
-    public static final int MESSAGE_DEVICE_NAME = 4;
-    public static final int MESSAGE_TOAST = 5;
+    public Map<String,String> lastmessages  = new HashMap<>();
 
-    public static final String DEVICE_NAME = "device_name";
-    public static final String TOAST = "toast";
-
+    public static String regex = "0624";
     private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
     private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
     private static final int REQUEST_ENABLE_BT = 3;
@@ -70,15 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvMainChat;
     private EditText etMain;
     private ImageView btnSend;
-
-    private String connectedDeviceName = null;
-    private StringBuffer outStringBuffer;
     private BluetoothAdapter bluetoothAdapter = null;
     private ChatArrayAdapter chatArrayAdapter;
-    String readMessage;
     String writeMessage;
-
-    public Set<ConnectionManager.Endpoint> endpoints;
 
 
 
@@ -88,37 +52,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        startDiscovery();
+        bluetoothAdapter.setName("Cryptonite");
 
-        ConnectionManager connectionManager = new ConnectionManager() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            protected String getName() {
-                return null;
+            public void run() {
+                // Your database code here
+                startDiscovery();
+                ensureDiscoverable();
             }
-
-            @Override
-            protected String getServiceId() {
-                return null;
-            }
-
-            @Override
-            protected com.google.android.gms.nearby.connection.Strategy getStrategy() {
-                return null;
-            }
-
-            @Override
-            protected void onReceive(Endpoint endpoint, Payload payload) {
-                String newmessage = new String(payload.asBytes());
-                chatArrayAdapter.add(new ChatMessage(true,newmessage));
-            }
-        };
-
-        connectionManager.onCreate(savedInstanceState);
-
-        connectionManager.startDiscovering();
-        connectionManager.startAdvertising();
-
-
-
+        }, 3*1000, 3*1000);
         /*getWidgetReferences*/
         lvMainChat = (ListView) findViewById(R.id.lvMainChat);
         etMain = (EditText) findViewById(R.id.etMain);
@@ -132,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Payload payload = Payload.fromBytes(etMain.getText().toString().getBytes());
-                connectionManager.send(payload);
+                writeMessage = etMain.getText().toString();
+                sendMessage(writeMessage);
+                ChatMessage m = new ChatMessage(false,writeMessage);
+                chatArrayAdapter.add(m);
+                etMain.setText("");
             }
         });
 
@@ -149,7 +97,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Register for broadcasts when a device is discovered.
+        //IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        //registerReceiver(mReceiver, filter);
 
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_NAME_CHANGED);
+        this.registerReceiver(mReceiver, filter);
 
         if (bluetoothAdapter == null) {
             Toast.makeText(this, "Bluetooth is not available",
@@ -157,35 +110,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CONNECT_DEVICE_SECURE:
-                if (resultCode == Activity.RESULT_OK) {
-                    connectDevice(data, true);
-                }
-                break;
-            case REQUEST_CONNECT_DEVICE_INSECURE:
-                if (resultCode == Activity.RESULT_OK) {
-                    connectDevice(data, false);
-                }
-                break;
-            case REQUEST_ENABLE_BT:
-                if (resultCode == Activity.RESULT_OK) {
-                    setupChat();
-                } else {
-                    Toast.makeText(this, R.string.bt_not_enabled_leaving,
-                            Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-        }
-    }
-
-    private void connectDevice(Intent data, boolean secure) {
-        String address = data.getExtras().getString(
-                DeviceListActivity.DEVICE_ADDRESS);
-        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
     }
 
     @Override
@@ -220,33 +144,48 @@ public class MainActivity extends AppCompatActivity {
             Intent discoverableIntent = new Intent(
                     BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             discoverableIntent.putExtra(
-                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
             startActivity(discoverableIntent);
         }
     }
 
     private void sendMessage(String message) {
-
-        if (message.length() > 0) {
-            byte[] send = message.getBytes();
-
-            outStringBuffer.setLength(0);
-            etMain.setText(outStringBuffer);
+        final String sNewName = "0624"+message;
+        final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
+        final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
+        if (myBTAdapter != null)
+        {
+            String sOldName = myBTAdapter.getName();
+            if (sOldName.equalsIgnoreCase(sNewName) == false)
+            {
+                final Handler myTimerHandler = new Handler();
+                myBTAdapter.enable();
+                myTimerHandler.postDelayed(
+                        new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                if (myBTAdapter.isEnabled())
+                                {
+                                    myBTAdapter.setName(sNewName);
+                                    if (sNewName.equalsIgnoreCase(myBTAdapter.getName()))
+                                    {
+                                        Log.i("hi", "Updated BT Name to " + myBTAdapter.getName());
+                                    }
+                                }
+                                if ((sNewName.equalsIgnoreCase(myBTAdapter.getName()) == false) && (System.currentTimeMillis() < lTimeToGiveUp_ms))
+                                {
+                                    myTimerHandler.postDelayed(this, 500);
+                                    if (myBTAdapter.isEnabled())
+                                        Log.i("hi", "Update BT Name: waiting on BT Enable");
+                                    else
+                                        Log.i("hi", "Update BT Name: waiting for Name (" + sNewName + ") to set in");
+                                }
+                            }
+                        } , 500);
+            }
         }
-    }
-
-    private final void setStatus(int resId) {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setSubtitle(resId);
-    }
-
-    private final void setStatus(CharSequence subTitle) {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setSubtitle(subTitle);
-    }
-
-    private void setupChat() {
-        outStringBuffer = new StringBuffer("");
     }
 
     @Override
@@ -257,14 +196,145 @@ public class MainActivity extends AppCompatActivity {
             Intent enableIntent = new Intent(
                     BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-        } else {
         }
     }
 
-    @Override
-    public synchronized void onResume() {
-        super.onResume();
+
+    private void startDiscovery() {
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+
+        bluetoothAdapter.startDiscovery();
     }
+
+    private final BroadcastReceiver mBroadcastReceiver2 = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            startFetch(bluetoothDevice);
+            String temp;
+            String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+            if(name!=null)
+                if(name.contains(regex)){
+                    temp = lastmessages.put(bluetoothDevice.getAddress(),name);
+                    if(temp==null){
+                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                        chatArrayAdapter.add(message);
+                    }
+                    else if(!temp.equals(name)){
+                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                        chatArrayAdapter.add(message);
+                    }
+                }
+        }
+    };
+
+    public List<BluetoothDevice> mNewDevicesArrayAdapter = new ArrayList<BluetoothDevice>();
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            // When discovery finds a device
+            String temp;
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                // Get the BluetoothDevice object from the Intent
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                startFetch(device);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                if(name!=null)
+                    if(name.contains(regex)){
+                        temp = lastmessages.put(device.getAddress(),name);
+                        if(temp==null){
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                            chatArrayAdapter.add(message);
+                        }
+                        else if(!temp.equals(name)){
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                            chatArrayAdapter.add(message);
+                        }
+                    }
+                Log.d("mReceiver","ACTION_FOUND:"+device.getAddress()+" :"+device.getName());
+                // If it's already paired, skip it, because it's been listed already
+
+                if(device.getName()==null)
+                { //when name is null, skip
+                    //But if you want to make lists asap, comment out this block.
+                }
+                else
+                {
+                    if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                        //mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                        boolean listed = false;
+                        for (BluetoothDevice bd:mNewDevicesArrayAdapter) {
+                            String address = bd.getAddress();
+                            if (device.getAddress().equals(address)) {
+                                Log.d("mReceiver", "ACTION_FOUND: replace the item of lists");
+                                mNewDevicesArrayAdapter.remove(bd);
+                                mNewDevicesArrayAdapter.add(device);
+                                listed = true;
+                                break;
+                            }
+                        }
+                        if(listed==false)
+                        {//if it is new device( not in lists), add it.
+                            mNewDevicesArrayAdapter.add(device);
+                        }
+                    }
+                }
+
+            }else if(BluetoothDevice.ACTION_NAME_CHANGED.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                startFetch(device);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                if(name!=null)
+                    if(name.contains(regex)){
+                        temp = lastmessages.put(device.getAddress(),name);
+                        if(temp==null){
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                            chatArrayAdapter.add(message);
+                        }
+                        else if(!temp.equals(name)){
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
+                            chatArrayAdapter.add(message);
+                        }
+                    }
+                Log.d("mReceiver", "NAME_CHANGED:" + device.getAddress() + " :" + device.getName());
+                if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                    boolean listed = false;
+                    for (BluetoothDevice bd:mNewDevicesArrayAdapter) {
+                        String address = bd.getAddress();
+                        if (device.getAddress().equals(address)) {
+                            Log.d("mReceiver", "NAME_CHANGED: replace the item of lists");
+                            mNewDevicesArrayAdapter.remove(bd);
+                            mNewDevicesArrayAdapter.add(device);
+                            listed = true;
+                            break;
+                        }
+                    }
+                    if(listed==false)
+                    {//if it is new device( not in lists), add it.
+                        mNewDevicesArrayAdapter.add(device);
+                    }
+                }
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                setProgressBarIndeterminateVisibility(false);
+                setTitle(R.string.select_device);
+                if (mNewDevicesArrayAdapter.size() == 0) {
+                    mNewDevicesArrayAdapter.add(null);
+                }
+            }
+        }
+    };
+
+
+    public void updatePending(){
+        //TODO Place Pending Logic over here
+    }
+
 
     @Override
     public synchronized void onPause() {
@@ -279,6 +349,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Don't forget to unregister the ACTION_FOUND receiver.
+        unregisterReceiver(mBroadcastReceiver2);
+    }
+
+    public static void startFetch( BluetoothDevice device ) {
+        // Need to use reflection prior to API 15
+        Class cl = null;
+        try {
+            cl = Class.forName("android.bluetooth.BluetoothDevice");
+        } catch( ClassNotFoundException exc ) {
+            Log.e("hiya", "android.bluetooth.BluetoothDevice not found." );
+        }
+        if (null != cl) {
+            Class[] param = {};
+            Method method = null;
+            try {
+                method = cl.getMethod("fetchUuidsWithSdp", param);
+            } catch( NoSuchMethodException exc ) {
+                Log.e("hiya", "fetchUuidsWithSdp not found." );
+            }
+            if (null != method) {
+                Object[] args = {};
+                try {
+                    method.invoke(device, args);
+                } catch (Exception exc) {
+                    Log.e("hiya", "Failed to invoke fetchUuidsWithSdp method." );
+                }
+            }
+        }
     }
 
 }
