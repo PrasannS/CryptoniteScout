@@ -4,7 +4,7 @@ import com.orm.SugarRecord;
 
 public class User extends SugarRecord<User> {
      String username;
-     int status;
+     int loggedin;
      String type;
      String email;
      int currency;
