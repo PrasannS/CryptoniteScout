@@ -21,9 +21,9 @@ public class ActionMap{
         actions = acts;
     }
 
-    protected ActionMap(Parcel in) {
+    /*protected ActionMap(Parcel in) {
         actions = in.createTypedArrayList(RobotAction.CREATOR);
-    }
+    }*/
 
     /*public ActionMap(String str){
         parseString(str);

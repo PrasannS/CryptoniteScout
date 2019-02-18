@@ -2,7 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RobotAction extends ActionMap implements Parcelable{
+public class RobotAction extends ActionMap {
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     //actionCode 0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
     public int matchStatus;
@@ -24,13 +24,14 @@ public class RobotAction extends ActionMap implements Parcelable{
 
     }
 
-
+    /*
     protected RobotAction(Parcel in) {
         matchStatus = in.readInt();
         actionCode = in.readString();
         hatch = in.readByte() != 0;
     }
 
+    /*
     public static final Creator<RobotAction> CREATOR = new Creator<RobotAction>() {
         @Override
         public RobotAction createFromParcel(Parcel in) {
@@ -53,7 +54,7 @@ public class RobotAction extends ActionMap implements Parcelable{
         dest.writeInt(matchStatus);
         dest.writeString(actionCode);
         dest.writeByte((byte) (hatch ? 1 : 0));
-    }
+    }*/
 
     public void parseString(String s){
         String [] parsed = s.split(" ");
