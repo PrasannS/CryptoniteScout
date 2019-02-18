@@ -7,7 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SuppressLint("ParcelCreator")
-public class ActionMap implements Parcelable{
+public class ActionMap{
 
     public ArrayList<RobotAction> actions = new ArrayList<>();
     public int endclimb;
@@ -25,10 +25,11 @@ public class ActionMap implements Parcelable{
         actions = in.createTypedArrayList(RobotAction.CREATOR);
     }
 
-    public ActionMap(String str){
+    /*public ActionMap(String str){
         parseString(str);
-    }
+    }*/
 
+    /*
     public static final Creator<ActionMap> CREATOR = new Creator<ActionMap>() {
         @Override
         public ActionMap createFromParcel(Parcel in) {
@@ -39,64 +40,20 @@ public class ActionMap implements Parcelable{
         public ActionMap[] newArray(int size) {
             return new ActionMap[size];
         }
-    };
+    };*/
 
     //action code + match status
-    public int numScored(String [] basecodes, int [] matchStatus, boolean hatch){
-        int total = 0;
-
-        for(String c : basecodes) {
-            for(int m : matchStatus) {
-                for (RobotAction i : actions) {
-                    if (i.actionCode.equals(c+i.matchStatus)) {
-                        if(i.hatch==hatch)
-                        total++;
-                    }
-                }
-            }
-        }
-
-        return total;
-    }
-
-    public int totalhatches(boolean b){
-        int count =0;
-        for(RobotAction r : actions){
-            if(r.hatch==b){
-                count++;
-            }
-        }
-        return count;
-    }
 
 
-    public int totalPoints(){
-        return actions.size();
-    }
+
 
     /*
         actionCode, 0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
         matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
      */
-    public ActionMap getMiniMap(int code, int ms){
-        ArrayList<RobotAction> acts = new ArrayList<>();
-        for(RobotAction i : actions){
-            if(i.actionCode.equals(code) && i.matchStatus == ms){
-                acts.add(i);
-            }
-        }
 
-        return new ActionMap(acts);
-    }
 
-    public boolean isFilled(String code){
-        if(actions.contains(code)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
 
     public String toString(){
         String temp = "";
@@ -106,15 +63,9 @@ public class ActionMap implements Parcelable{
         return temp+endclimb;
     }
 
-    public void parseString(String s){
-        String [] parsed = s.split(" ");
-        for(int i = 0; i < parsed.length; i++){
-            RobotAction robotAction = new RobotAction(parsed[i]);
-
-        }
-    }
 
 
+/*
     @Override
     public int describeContents() {
         return 0;
@@ -123,5 +74,5 @@ public class ActionMap implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(actions);
-    }
+    }*/
 }
