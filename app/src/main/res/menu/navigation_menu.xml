@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"
+        android:title="Home" />
+
+    <item android:id="@+id/nav_newentry"
+        android:title="New Entry"/>
+
+    <item android:id="@+id/nav_pitnote"
+        android:title="Pitnotes"/>
+
+    <item android:id="@+id/nav_rankings"
+        android:title="Rankings"/>
+
+    <item android:id="@+id/nav_matches"
+        android:title="Matches"/>
+
+    <item android:id="@+id/nav_sketchmap"
+        android:title="Sketch Map"/>
+
+    <item android:id="@+id/nav_replayview"
+        android:title="Replay View"/>
+
+    <item android:id="@+id/nav_settings"
+        android:title="Settings"/>
+
+</menu>

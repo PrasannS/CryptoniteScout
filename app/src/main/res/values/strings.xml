@@ -2,6 +2,9 @@
     <string name="app_name">CryptoniteScout</string>
     <string name="title_activity_login">Sign in</string>
 
+    <string name="Open">NavBar</string>
+    <string name="Close">NavBar</string>
+
     <string-array name="ProgrammingLanguages">
         <item>Java</item>
         <item>LabView</item>

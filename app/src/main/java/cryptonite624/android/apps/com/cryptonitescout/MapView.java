@@ -45,7 +45,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import java.util.Date;
 
-public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener {
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener {
 
 
     public int x, y;
@@ -111,7 +111,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     public int matchStatus = 0;;
     public int habLevel;
-
     public long starttime;
     public long endtime;
     public double cycletime = -1;
@@ -510,7 +509,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnEndgameRead(String message) {
         switch (message) {
-            case "submit":
+
+            case "toReview":
+                if(findViewById(R.id.mapcontainer)!=null){
+                    SubmissionReviewFragment submissionReviewFragment= new SubmissionReviewFragment();
+                    submissionReviewFragment.setArguments(actionMap);
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.mapcontainer,submissionReviewFragment,null);
+                    fragmentTransaction.commit();
+                }
                 startDiscovery();
                 sendMessage();
                 Timer timer = new Timer();
@@ -523,6 +530,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     }
                 }, 3*1000, 3*1000);
                 break;
+
             default:
                 break;
         }
@@ -816,6 +824,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void OnRightMapRead(int x, int y) {
+
+    }
+
+    @Override
+    public void OnSubmissionRead(String message) {
 
     }
 

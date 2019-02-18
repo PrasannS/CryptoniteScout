@@ -1,6 +1,8 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,7 +33,18 @@ public class MapDrawFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     Button clearButton;
-    PaintView paintView;
+    Button colorSelector;
+    Button saveButton;
+    private PaintView paintView;
+    private AlertDialog dialogColor;
+    private AlertDialog.Builder currentAlertDialog;
+    Button greenButton;
+    Button redButton;
+    Button blueButton;
+    Button blackButton;
+    Button whiteButton;
+
+
 
     public MapDrawFragment() {
         // Required empty public constructor
@@ -72,11 +85,29 @@ public class MapDrawFragment extends Fragment {
 
         paintView = (PaintView)view.findViewById(R.id.paint_view);
 
+        colorSelector = (Button) view.findViewById(R.id.colorselector);
+
+        saveButton = (Button)view.findViewById(R.id.saveButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.saveToInternalStorage();
+            }
+        });
+
         clearButton = (Button)view.findViewById(R.id.drawing_clear);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 paintView.clear();
+            }
+        });
+
+        colorSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showColorSelectorDialog();
             }
         });
 
@@ -100,6 +131,66 @@ public class MapDrawFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }*/
+    }
+
+    void showColorSelectorDialog(){
+        currentAlertDialog = new AlertDialog.Builder(this.getContext());
+        View view = getLayoutInflater().inflate(R.layout.color_dialog, null);
+
+        greenButton = (Button)view.findViewById(R.id.greenButton);
+        redButton = (Button)view.findViewById(R.id.redButton);
+        blueButton = (Button)view.findViewById(R.id.blueButton);
+        blackButton = (Button)view.findViewById(R.id.blackButton);
+        whiteButton = (Button)view.findViewById(R.id.whiteButton);
+
+        greenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.setDrawingColor(Color.GREEN);
+                dialogColor.dismiss();
+                currentAlertDialog = null;
+            }
+        });
+
+        redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.setDrawingColor(Color.RED);
+                dialogColor.dismiss();
+                currentAlertDialog = null;
+            }
+        });
+        blueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.setDrawingColor(Color.BLUE);
+                dialogColor.dismiss();
+                currentAlertDialog = null;
+            }
+        });
+        blackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.setDrawingColor(Color.BLACK);
+                dialogColor.dismiss();
+                currentAlertDialog = null;
+            }
+        });
+        whiteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paintView.setDrawingColor(Color.WHITE);
+                dialogColor.dismiss();
+                currentAlertDialog = null;
+            }
+        });
+
+        currentAlertDialog.setView(view);
+
+        dialogColor = currentAlertDialog.create();
+        dialogColor.show();
+
+
     }
 
     @Override

@@ -5,11 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+
+import android.support.design.widget.NavigationView;
+
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.widget.Toast;
+
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -96,58 +110,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-        /*
-
-        toPitnotes = (Button)view.findViewById(R.id.pitnotebutton);
-        toPitnotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toPitnotes";
-
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-
-        toMatches = (Button)view.findViewById(R.id.matchesbutton);
-        toMatches.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toMatch";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-
-        toRankings = (Button)view.findViewById(R.id.rankingbutton);
-        toRankings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toRankings";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-
-        toMapview = (Button)view.findViewById(R.id.newentrybutton);
-        toMapview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toMapview";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });
-
-        toPitnotes = (Button)view.findViewById(R.id.pitnotebutton);
-        toPitnotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                message = "toPitnote";
-                dashboardReadListener.OnDashboardRead(message);
-            }
-        });*/
-
-        AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
-        //anyChartView.setProgressBar(view.findViewById(R.id.progress_bar));
-
+        AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
         Cartesian cartesian = AnyChart.line();
 
         cartesian.animation(true);
@@ -225,9 +188,23 @@ public class DashboardFragment extends Fragment {
         cartesian.legend().fontSize(13d);
         cartesian.legend().padding(0d, 0d, 10d, 0d);
 
+        cartesian.background().fill("#292B3A");
+
         anyChartView.setChart(cartesian);
 
-        
+        //matchlist recylcer view
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("524");
+        names.add("624");
+        names.add("118");
+        names.add("254");
+
+        RecyclerView recyclerView = view.findViewById(R.id.matchlist_recylcerview);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), names);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
         
 
         return view;

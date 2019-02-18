@@ -6,25 +6,37 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.chart.common.listener.ListenersInterface;
+import com.anychart.charts.Cartesian;
 import com.anychart.charts.Pie;
+import com.anychart.core.cartesian.series.Line;
+import com.anychart.data.Mapping;
+import com.anychart.data.Set;
 import com.anychart.enums.Align;
+import com.anychart.enums.Anchor;
 import com.anychart.enums.LegendLayout;
+import com.anychart.enums.MarkerType;
+import com.anychart.enums.TooltipPositionMode;
+import com.anychart.graphics.vector.Stroke;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Match;
 
 
 /**
@@ -99,15 +111,15 @@ public class MatchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
-
-        /*if (view.findViewById(R.id.match_access_layout) != null) {
+        /*
+        if (view.findViewById(R.id.match_access_layout) != null) {
             MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.match_access_layout, matchAccessFragment , null);
-            fragmentTransaction.commit();*
+            fragmentTransaction.replace(R.id.match_access_layout, matchAccessFragment , null);
+            fragmentTransaction.commit();
         }*/
 
-        mRecyclerView = view.findViewById(R.id.recyclerview_comments);
+        //mRecyclerView = view.findViewById(R.id.recyclerview_comments);
         initRecyclerView();
 
 
@@ -120,7 +132,7 @@ public class MatchFragment extends Fragment {
         data.add(new ValueDataEntry("118", 12000));
         data.add(new ValueDataEntry("3310", 18000));
         pie.data(data);
-        AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.match_piechart);
+        //AnyChartView anyChartView = (AnyChartView) view.findViewById(R.id.match_piechart);
 
         pie.data(data);
 
@@ -138,7 +150,7 @@ public class MatchFragment extends Fragment {
                 .itemsLayout(LegendLayout.HORIZONTAL)
                 .align(Align.CENTER);
 
-        anyChartView.setChart(pie);
+        //anyChartView.setChart(pie);
 
 
 
