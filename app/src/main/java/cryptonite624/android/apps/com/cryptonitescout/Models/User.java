@@ -1,10 +1,13 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-public class User {
-    public String username;
-    public int status;
-    public String type;
-    public String email;
+import com.orm.SugarRecord;
+
+public class User extends SugarRecord<User> {
+    String username;
+    int loggedin;
+    String type;
+    String email;
+    int currency;
 
     public User(){
 

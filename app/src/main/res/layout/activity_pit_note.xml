@@ -8,437 +8,416 @@
     tools:context=".pitNote">
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/black"
+                    android:text="Pitnote"
+                    android:textColor="@color/teamGreen"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+
+            <!-- Big boy Linear Layout-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Pitnote"
-                android:textColor="@color/teamGreen"
-                android:background="@android:color/black"
-                android:textSize="40sp"/>
-        </LinearLayout>
-
-
-     <!-- Big boy Linear Layout-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <!--Left small boy Linear Layout-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Team #"
-                android:textColor="@android:color/black"
-                android:background="@android:color/white"
-                android:textSize="40sp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="200dp"
-                    android:layout_height="70dp"
-                    android:background="@android:color/white"
-                    android:text="Language"
-                    android:textSize="40dp"
-                    android:textColor="@android:color/black"/>
-                <Spinner
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/Programming_Language"
-                    android:layout_width="250dp"
-                    android:layout_height="match_parent"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:spinnerMode="dropdown">
-                </Spinner>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="130dp"
-                    android:layout_height="match_parent"
-                    android:text="Other :"
-                    android:textSize="40dp"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"/>
-                <EditText
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="500dp"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Cross Baseline"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40sp"/>
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/CrossBaseline"
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"
-                    android:checked="false"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    android:text="#Batteries"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40dp"/>
-
-                <EditText
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="330dp"
-                    android:layout_height="match_parent"
-                    android:text=""/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- Right small boy Linear Layout-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white"
-                    android:text="Programmer On Site "
-                    android:textColor="@android:color/black"
-                    android:textSize="40sp"/>
-
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/Programmer_On_Site"
-                    android:background="@android:color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
-                    android:checked="false"/>
-                </LinearLayout>
-
+                <!--Left small boy Linear Layout-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Shifters"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40sp"/>
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/Shifters"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:checked="false"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:text="Team #"
+                        android:textColor="@android:color/black"
+                        android:textSize="40sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="70dp"
+                            android:background="@android:color/white"
+                            android:text="Language"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/Programming_Language"
+                            android:layout_width="250dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown"></Spinner>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="Other :"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <EditText
+
+
+                            android:layout_width="500dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="Cross Baseline"
+                            android:textColor="@android:color/black"
+                            android:textSize="40sp" />
+
+                        <Switch
+                            android:id="@+id/CrossBaseline"
+                            android:layout_width="250dp"
+                            android:layout_height="match_parent"
+                            android:checked="false" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="#Batteries"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <EditText
+                            android:layout_width="330dp"
+                            android:layout_height="match_parent"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:text="#Chargers"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <EditText
+                            android:layout_width="330dp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="Layout"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/LayoutSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="330dp"
+                            android:layout_height="match_parent"
+                            android:text="Robot Dimension"
+                            android:textColor="@color/teamGreen"
+                            android:textSize="40dp" />
+
+                        <EditText
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:text="" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_width="270dp"
-                    android:layout_height="match_parent"
-                    android:text="Level 2 start"
-                    android:textColor="@android:color/black"
-                    android:background="@android:color/white"
-                    android:textSize="40sp"/>
-
-                <Switch
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/LevTwoStart"
+                <!-- Right small boy Linear Layout-->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:checked="false"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="Programmer On Site "
+                            android:textColor="@android:color/black"
+                            android:textSize="40sp" />
+
+                        <Switch
+                            android:id="@+id/Programmer_On_Site"
+                            android:layout_width="140dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="@android:color/white"
+                            android:checked="false" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="350dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="Shifters"
+                            android:textColor="@android:color/black"
+                            android:textSize="40sp" />
+
+                        <Switch
+                            android:id="@+id/Shifters"
+                            android:layout_width="160dp"
+                            android:layout_height="match_parent"
+                            android:checked="false" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="270dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/white"
+                            android:text="Level 2 start"
+                            android:textColor="@android:color/black"
+                            android:textSize="40sp" />
+
+                        <Switch
+                            android:id="@+id/LevTwoStart"
+                            android:layout_width="240dp"
+                            android:layout_height="match_parent"
+                            android:checked="false" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="250dp"
+                            android:layout_height="match_parent"
+                            android:text="#Mini CIMS"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <EditText
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="#CIMS"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <EditText
+                            android:layout_width="380dp"
+                            android:layout_height="match_parent"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="Hatch Intake"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/HatchIntake"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="Cargo Intake"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/CargoIntake"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="Climb Level"
+                            android:textColor="@android:color/black"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/ClimbLevel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <TextView
+                            android:layout_width="260dp"
+                            android:layout_height="match_parent"
+                            android:text="Wheels"
+                            android:textColor="@color/teamGreen"
+                            android:textSize="40dp" />
+
+                        <Spinner
+                            android:id="@+id/Wheels"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:text="Comment  : "
+                    android:textColor="@android:color/black"
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="@dimen/fab_margin"
+                    app:srcCompat="@drawable/camerabutton" />
+
+                <ImageView
+                    android:id="@+id/pictureImage"
+                    android:layout_width="750dp"
+                    android:layout_height="500dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:text="Submit"
+                    android:textSize="30dp"
+                    android:textColor="@color/teamGreen"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp" />
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@android:color/white">
-
-
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text="#Chargers"
-                android:textColor="@android:color/black"
-                android:textSize="40dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="#CIMS"
-                android:textColor="@android:color/black"
-                android:textSize="40dp" />
-
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="380dp"
-                android:layout_height="match_parent"
-                android:text=""/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:text="#Mini CIMS"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Hatch Intake"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/HatchIntake"
-                android:layout_width="270dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Cargo Intake"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/CargoIntake"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Climb Level"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/ClimbLevel"
-                android:layout_width="270dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Layout"
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/LayoutSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="330dp"
-                android:layout_height="match_parent"
-                android:text="Robot Dimension"
-                android:textColor="@color/teamGreen"
-                android:textSize="40dp" />
-
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:text=""/>
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:text="Wheels"
-                android:textSize="40dp"
-                android:textColor="@color/teamGreen"/>
-
-            <Spinner
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:id="@+id/Wheels"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <TextView
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="240dp"
-                android:layout_height="match_parent"
-                android:text="Comment  : "
-                android:textSize="40dp"
-                android:textColor="@android:color/black"/>
-            <EditText
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                app:srcCompat="@drawable/camerabutton" />
-
-            <ImageView
-                android:id="@+id/pictureImage"
-                android:layout_width="750dp"
-                android:layout_height="500dp" />
-
-        </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
 
 
 

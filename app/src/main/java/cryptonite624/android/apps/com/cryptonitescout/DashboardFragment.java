@@ -74,7 +74,6 @@ public class DashboardFragment extends Fragment {
 
     OnDashboardReadListener dashboardReadListener;
 
-
     private AutonFragment.OnFragmentInteractionListener mListener;
 
     public DashboardFragment() {
@@ -111,7 +110,6 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
-
         AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
         Cartesian cartesian = AnyChart.line();
 
