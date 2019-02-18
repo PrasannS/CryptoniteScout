@@ -91,7 +91,7 @@ public class PregameFragment extends Fragment {
             }
         });*/
 
-        matchNum = (EditText) view.findViewById(R.id.matchnum);
+        //matchNum = (EditText) view.findViewById(R.id.matchnum);
 
 
         return view;

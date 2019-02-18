@@ -113,7 +113,7 @@ public class DashboardFragment extends Fragment {
 
 
 
-         AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
+        AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
         Cartesian cartesian = AnyChart.line();
 
         cartesian.animation(true);
@@ -190,6 +190,8 @@ public class DashboardFragment extends Fragment {
         cartesian.legend().enabled(true);
         cartesian.legend().fontSize(13d);
         cartesian.legend().padding(0d, 0d, 10d, 0d);
+
+        cartesian.background().fill("#292B3A");
 
         anyChartView.setChart(cartesian);
 
