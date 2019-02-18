@@ -36,6 +36,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:padding="25dp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -49,10 +50,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="3">
-            <TextView
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Recycler view with a list of matches would go here"/>
+                android:id="@+id/matchlist_recylcerview">
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </LinearLayout>

@@ -14,18 +14,18 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private ArrayList<String> comments = new ArrayList<>();
+    private ArrayList<String> teams = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> comments){
+    public RecyclerViewAdapter(Context context, ArrayList<String> teams){
         mContext = context;
-        this.comments = comments;
+        this.teams = teams;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_listitem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_dashboard_matchlist, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -33,7 +33,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         final int position = i;
-        holder.comment.setText(comments.get(position));
+        holder.team1.setText(teams.get(position));
+        holder.team2.setText(teams.get(position));
+        holder.team3.setText(teams.get(position));
+        holder.team4.setText(teams.get(position));
+        holder.team5.setText(teams.get(position));
+        holder.team6.setText(teams.get(position));
 
 
 
@@ -41,15 +46,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        return teams.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView comment;
+        TextView team1;
+        TextView team2;
+        TextView team3;
+        TextView team4;
+        TextView team5;
+        TextView team6;
         RelativeLayout parentLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            comment = itemView.findViewById(R.id.comment);
+            team1 = itemView.findViewById(R.id.matchlist_team1);
+            team2 = itemView.findViewById(R.id.matchlist_team2);
+            team3 = itemView.findViewById(R.id.matchlist_team3);
+            team4 = itemView.findViewById(R.id.matchlist_team4);
+            team5 = itemView.findViewById(R.id.matchlist_team5);
+            team6 = itemView.findViewById(R.id.matchlist_team6);
             //parentLayout = itemView.findViewById(R.id.recyclerview_comments);
         }
     }

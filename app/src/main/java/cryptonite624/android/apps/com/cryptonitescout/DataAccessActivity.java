@@ -107,6 +107,12 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     }
                     return true;
                 }
+                if (id == R.id.nav_replayview) {
+                    Toast.makeText(DataAccessActivity.this, "replayview", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(DataAccessActivity.this, ReplayViewPage.class));
+
+                    return true;
+                }
                 if (id == R.id.nav_settings) {
                     Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
                     return true;

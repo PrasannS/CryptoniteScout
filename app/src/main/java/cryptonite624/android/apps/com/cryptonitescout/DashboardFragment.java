@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,9 +112,6 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-
-
-
         AnyChartView anyChartView = view.findViewById(R.id.dashboard_chart);
         Cartesian cartesian = AnyChart.line();
 
@@ -194,6 +193,18 @@ public class DashboardFragment extends Fragment {
         cartesian.background().fill("#292B3A");
 
         anyChartView.setChart(cartesian);
+
+        //matchlist recylcer view
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("524");
+        names.add("624");
+        names.add("118");
+        names.add("254");
+
+        RecyclerView recyclerView = view.findViewById(R.id.matchlist_recylcerview);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), names);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
 
         
