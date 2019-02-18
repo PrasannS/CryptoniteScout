@@ -2,77 +2,45 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.messages.MessageListener;
 import com.google.android.gms.nearby.messages.MessagesClient;
 import com.google.android.gms.nearby.messages.MessagesOptions;
 import com.google.android.gms.nearby.messages.NearbyPermissions;
-import com.google.android.gms.nearby.messages.Strategy;
-import com.google.android.gms.nearby.messages.SubscribeOptions;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
-import cryptonite624.android.apps.com.cryptonitescout.Models.Match;
-import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import java.util.Date;
@@ -80,89 +48,28 @@ import java.util.Date;
 public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener {
 
 
-    /**
-     *
-     * TODO
-     * popup on click for hatch, cargo, successful\
-     * rocket, 12 buttons?
-     * total hatches, total cargo
-     * forward cycle?
-     *
-     * PICTURE!!!
-     * already done display
-     * - make button slightly different
-     * - show preinstalled as different
-     *
-     * two color versions, make map look nice
-     * calibration
-     *
-     * dylan - superscout
-     *record preloads
-     * easy touch targets
-     * 
-     *
-     */
     public int x, y;
-    TextView xDisplay, yDisplay, CodeDisplay;
-    /*public static int[] REDSWITCH1MIN = {530, 530};
-    public static int[] REDSWITCH1MAX = {630, 610};
-    public static int[] BLUESWITCH1MIN = {530, 750};
-    public static int[] BLUESWITCH1MAX = {630, 810};
-    public static int[] BLUESCALEMIN = {840, 475};
-    public static int[] BLUESCALEMAX = {945, 565};
-    public static int[] REDSCALEMIN = {840, 770};
-    public static int[] REDSCALEMAX = {945, 850};
-    public static int[] REDSWITCH2MIN = {1130, 530};
-    public static int[] REDSWITCH2MAX = {1240, 615};
-    public static int[] BLUESWITCH2MIN = {1130, 750};
-    public static int[] BLUESWITCH2MAX = {1240, 825};*/
 
-    //bluetooth
-
-    public static final int MESSAGE_STATE_CHANGE = 1;
-    public static final int MESSAGE_READ = 2;
-    public static final int MESSAGE_WRITE = 3;
-    public static final int MESSAGE_DEVICE_NAME = 4;
-    public static final int MESSAGE_TOAST = 5;
+    public Map<String,String> lastmessages  = new HashMap<>();
+    public static String regex = "0624";
 
     public Match endmatch = new Match();
-
-    public boolean writeable = true;
-
-    public int loadstatus = 0;
-
-    public static final String DEVICE_NAME = "device_name";
-    public static final String TOAST = "toast";
-
-    private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
-    private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
-    private static final int REQUEST_ENABLE_BT = 3;
-
-    private ListView lvMainChat;
-    private EditText etMain;
-    private ImageView btnSend;
-
-    private String connectedDeviceName = null;
-    private StringBuffer outStringBuffer;
     private BluetoothAdapter bluetoothAdapter = null;
-
-    private ChatArrayAdapter chatArrayAdapter;
-    String readMessage;
-    String writeMessage;
-
-    public static String[] MACADDRESSES = {
-            "boom",
-            "yeaboyz"
-    };
+    public int topx;
 
     public Match getCurrentMatch(){
         return new Match();
     }
 
+    public int recordeddevices = 0;
+
+    public int commnum = 0;
+    public int mapnum = 0;
+
 
 
     //bluetooth
-    
+
     public boolean red = true;
     public boolean left = true;
 
@@ -202,27 +109,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
-    public int matchStatus = 0;
-    public Button statusForward, statusBack;
-    public TextView statusDisplay;
-    public static String[] statusStrings = {"pregame", "auton", "teleop", "endgame"};
-    public boolean actionReady;
-    public int tempX, tempY;
-    public TextView totalDisplay;
-    public static int[] ALLCODES = {1, 2, 3, 4, 5, 6};
-    public static int[] ALLSTATUS = {1, 2, 3};
-    private static final int OFFSET = 120;
-    public static int topx, topy, bttmx, bttmy;
+    public int matchStatus = 0;;
     public int habLevel;
-
-    Button cargobutton1;
-    Button cargobutton2;
-    Button cargobutton3;
-    Button cargobutton4;
-    Button cargobutton5;
-    Button cargobutton6;
-    Button cargobutton7;
-    Button cargobutton8;
 
     public long starttime;
     public long endtime;
@@ -245,7 +133,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     TextView hatchDisplay;
     TextView cargoDisplay;
-    private Button b;
 
     public RobotAction currentAction = new RobotAction();
     Button statusButton;
@@ -262,29 +149,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private Button timerButton;
 
     public MessagesClient mMessagesClient;
-    public com.google.android.gms.nearby.messages.Message mMessage;
-    public MessageListener messageListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //RelativeLayout layout = (RelativeLayout)findViewById(R.id.mapview);
+
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
-        //customView = (CustomImageView) findViewById(R.id.drawview);
+
 
         setContentView(R.layout.activity_map_view);
-        //setContentView(view);
-
-        /*cargobutton1 = (Button)findViewById(R.id.cargobutton1);
-        cargobutton2 = (Button)findViewById(R.id.cargobutton2);
-        cargobutton3 = (Button)findViewById(R.id.cargobutton3);
-        cargobutton4 = (Button)findViewById(R.id.cargobutton4);
-        cargobutton5 = (Button)findViewById(R.id.cargobutton5);
-        cargobutton6 = (Button)findViewById(R.id.cargobutton6);
-        cargobutton7 = (Button)findViewById(R.id.cargobutton7);
-        cargobutton8 = (Button)findViewById(R.id.cargobutton8);
-        */
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -354,51 +228,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
         });
 
-        //mCustomDrawableView = new CustomDrawableView(this);
-
-        //setContentView(mCustomDrawableView);
-
 
         cargoDisplay = (TextView) findViewById(R.id.cargodisplay);
         hatchDisplay = (TextView) findViewById(R.id.hatchdisplay);
         habDisplay = (TextView) findViewById(R.id.hableveldisplay);
-
-
-        //xDisplay = (TextView)findViewById(R.id.XDisplay);
-        //yDisplay = (TextView)findViewById(R.id.YDisplay);
-        //CodeDisplay = (TextView)findViewById(R.id.CodeDisplay);
-        /*statusDisplay = (TextView)findViewById(R.id.StatusDisplay);
-        totalDisplay = (TextView)findViewById(R.id.TotalDisplay);
-
-        statusForward = (Button)findViewById(R.id.StatusButtonForward);
-        statusForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(matchStatus < 3) {
-                    matchStatus++;
-                    updateDisplay();
-                }
-            }
-        });
-
-        statusBack = (Button)findViewById(R.id.StatusButtonBack);
-        statusBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(matchStatus > 0) {
-                    matchStatus--;
-                    updateDisplay();
-                }
-            }
-        });*/
-
-        //drawing = (Drawing) findViewById(R.id.)
-
-        //drawing = new Drawing(this);
-        //setContentView(drawing);
-
-
-        //mImageView = (ImageView) findViewById(R.id.mapview);
 
         statusButton = (Button) findViewById(R.id.statuschanger);
         statusButton.setOnClickListener(new View.OnClickListener() {
@@ -450,36 +283,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         });
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        messageListener = new MessageListener() {
-            @Override
-            public void onFound(com.google.android.gms.nearby.messages.Message message) {
-                unpublish();
-                String foundmessage = new String(message.getContent());
-                Log.d("MESSAGEFOUND", "Found message: " + foundmessage);
-                Match temp = Match.parseMatch(foundmessage);
-                endmatch.update(temp);
-                //TODO make sure to finish up this code, add status int
-                //publish(endmatch.toString());
-            }
-
-            @Override
-            public void onLost(com.google.android.gms.nearby.messages.Message message) {
-                Log.d("MESSAGELOST", "Lost sight of message: " + new String(message.getContent()));
-            }
-        };
-
-        subscribe();
     }
 
-    // Subscribe to receive messages.
-    private void subscribe() {
-        Log.i("SUBSCRIBING", "Subscribing.");
-        SubscribeOptions options = new SubscribeOptions.Builder()
-                .setStrategy(Strategy.BLE_ONLY)
-                .build();
-        Nearby.getMessagesClient(this).subscribe(messageListener,options );
-    }
 
     public void startStop(){
         if(timerRunning){
@@ -567,19 +372,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     }
                 }
         );
-        //hatchDisplay.setText(""+x);
-        //cargoDisplay.setText(""+y);
-
-        //drawing = new Drawing(this);
-
-        /*if (actionReady) {
-            actionReady = false;
-            actionMap.actions.add(new RobotAction(getCode(x, y), matchStatus));
-        }*/
-
-        /*if(actionReady == false){
-            customView.setClickLocation(x, y);
-        }*/
 
         if(!getCode(x, y).equals("Z")){
 
@@ -637,11 +429,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         currentAction.actionCode = getCode(x, y);
 
     }
-
-
-        //xDisplay.setText("" + x);
-        //yDisplay.setText("" + y);
-        //CodeDisplay.setText("" + getCode(x, y));
         return false;
     }
 
@@ -698,26 +485,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnAutonRead(String message) {
         switch (message) {
-            /*
-            case "toPrematch":
-                if(findViewById(R.id.infoframe)!=null){
-                    cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment= new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,pregameFragment,null);
-                    fragmentTransaction.commit();
-                }
-                break;
-
-            case "toTeleop":
-                if(findViewById(R.id.infoframe)!=null){
-                    TeleopFragment teleopFragment= new TeleopFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,teleopFragment,null);
-                    fragmentTransaction.commit();
-                    sandstorm=false;
-                }
-                break;*/
-
             default:
         }
     }
@@ -725,15 +492,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnPregameRead(String message) {
         switch (message) {
-            /*
-            case "toAuton":
-                if(findViewById(R.id.infoframe)!=null){
-                    AutonFragment autonFragment= new AutonFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,autonFragment,null);
-                    fragmentTransaction.commit();
-                }
-                break;*/
 
             default:
 
@@ -743,25 +501,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnTeleopRead(String message) {
         switch (message) {
-            /*
-            case "toAuton":
-                if(findViewById(R.id.infoframe)!=null){
-                    AutonFragment autonFragment = new AutonFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,autonFragment,null);
-                    fragmentTransaction.commit();
-                    sandstorm=true;
-                }
-                break;
-
-            case "toEndgame":
-                if(findViewById(R.id.infoframe)!=null){
-                    EndgameFragment endgameFragment= new EndgameFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,endgameFragment,null);
-                    fragmentTransaction.commit();
-                }
-                break;*/
 
             default:
 
@@ -771,17 +510,31 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnEndgameRead(String message) {
         switch (message) {
-            /*
-            case "toTeleop":
-                if(findViewById(R.id.infoframe)!=null){
-                    TeleopFragment teleopFragment= new TeleopFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.infoframe,teleopFragment,null);
-                    fragmentTransaction.commit();
-                }
-                break;*/
-
+            case "submit":
+                startDiscovery();
+                sendMessage();
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // Your database code here
+                        startDiscovery();
+                        ensureDiscoverable();
+                    }
+                }, 3*1000, 3*1000);
+                break;
             default:
+                break;
+        }
+    }
+
+    private void ensureDiscoverable() {
+        if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+            Intent discoverableIntent = new Intent(
+                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            discoverableIntent.putExtra(
+                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
+            startActivity(discoverableIntent);
         }
     }
 
@@ -853,20 +606,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.commit();
         }
         }
-
-
-    public int getpixelheight() {
-        return (int) ((int) ((double) imageratio[1] * ((double) 2 / 3) * screenratio[0]) / (double) imageratio[0]);
-    }
-    public void setScreenratio(){
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        screenratio[0]= size.x;
-        screenratio[1] = size.y;
-        conversionfactor = screenratio[0]/imageratio[0];
-        Log.e("ScreenRatio*&*%F&^%", "" + Arrays.toString(screenratio));
-    }
 
 
     public void switchbounds(){
@@ -1028,56 +767,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         //updateFilled();
     }
 
-    public void updateFilled(){
-        System.out.println("IT WORKS!!");
-    }
 
-/*
-    public void updateFilled(){
-        //cargobutton5.setBackgroundColor(Color.BLUE);
-        for(int i = 0; i < actionMap.actions.size(); i++){
-            System.out.println(actionMap.actions.get(i));
-            if(actionMap.actions.get(i).actionCode.equals("C1")){
-                cargobutton1.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C2")){
-                cargobutton2.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C3")){
-                cargobutton3.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C4")){
-                cargobutton4.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C5")){
-                cargobutton5.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C6")){
-                cargobutton6.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C7")){
-                cargobutton7.setBackgroundColor(Color.YELLOW);
-            }
-            else if(actionMap.actions.get(i).actionCode.equals("C8")){
-                cargobutton8.setBackgroundColor(Color.YELLOW);
-            }
-        }
-    }
-*/
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
-    public ActionMap getActionMap(){
-        return actionMap;
-    }
-
     public void changeFragment(int fragmentNum) {
-        /*if (fragmentNum == 3) {
-            matchStatus = -1;
-        }*/
-        //matchStatus++;
         if (fragmentNum == 0) {
             if (findViewById(R.id.infoframe) != null) {
                 cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
@@ -1123,138 +819,235 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     }
 
-    //bluetooth
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_CONNECT_DEVICE_SECURE:
-                if (resultCode == Activity.RESULT_OK) {
-                    connectDevice(data, true);
+    /******************************************************************************************************************/
+
+    private void sendMessage() {
+        final String sNewName = "0624"+'m'+actionMap.toString();
+        final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
+        final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
+        if (myBTAdapter != null)
+        {
+            String sOldName = myBTAdapter.getName();
+            if (sOldName.equalsIgnoreCase(sNewName) == false)
+            {
+                final Handler myTimerHandler = new Handler();
+                myBTAdapter.enable();
+                myTimerHandler.postDelayed(
+                        new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                if (myBTAdapter.isEnabled())
+                                {
+                                    myBTAdapter.setName(sNewName);
+                                    if (sNewName.equalsIgnoreCase(myBTAdapter.getName()))
+                                    {
+                                        Log.i("hi", "Updated BT Name to " + myBTAdapter.getName());
+                                    }
+                                }
+                                if ((sNewName.equalsIgnoreCase(myBTAdapter.getName()) == false) && (System.currentTimeMillis() < lTimeToGiveUp_ms))
+                                {
+                                    myTimerHandler.postDelayed(this, 500);
+                                    if (myBTAdapter.isEnabled())
+                                        Log.i("hi", "Update BT Name: waiting on BT Enable");
+                                    else
+                                        Log.i("hi", "Update BT Name: waiting for Name (" + sNewName + ") to set in");
+                                }
+                            }
+                        } , 500);
+            }
+        }
+    }
+
+    private void startDiscovery() {
+        if (bluetoothAdapter.isDiscovering()) {
+            bluetoothAdapter.cancelDiscovery();
+        }
+
+        bluetoothAdapter.startDiscovery();
+    }
+
+    private final BroadcastReceiver mBroadcastReceiver2 = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            startFetch(bluetoothDevice);
+            ActionMap tempmap = new ActionMap();
+            String temp;
+            String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+            if(name!=null)
+                if(name.contains(regex)){
+                    temp = lastmessages.put(bluetoothDevice.getAddress(),name);
+                    if(temp==null){
+                        if (name.charAt(regex.length()) == 'm') {
+                            tempmap.parseString(name.substring(regex.length()));
+                            recordeddevices++;
+                        }
+                    }
+                    else if(!temp.equals(name)){
+                        if (name.charAt(regex.length()) == 'm') {
+                            tempmap.parseString(name.substring(regex.length()));
+                            recordeddevices++;
+                        }
+                    }
                 }
-                break;
-            case REQUEST_CONNECT_DEVICE_INSECURE:
-                if (resultCode == Activity.RESULT_OK) {
-                    connectDevice(data, false);
+        }
+    };
+
+    public List<BluetoothDevice> mNewDevicesArrayAdapter = new ArrayList<BluetoothDevice>();
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            // When discovery finds a device
+            String temp;
+            ActionMap tempmap = new ActionMap();
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                // Get the BluetoothDevice object from the Intent
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                startFetch(device);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                if(name!=null)
+                    if(name.contains(regex)){
+                        temp = lastmessages.put(device.getAddress(),name);
+                        if(temp==null){
+                            if (name.charAt(regex.length()) == 'm') {
+                                tempmap.parseString(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+                        }
+                        else if(!temp.equals(name)) {
+                            if (name.charAt(regex.length()) == 'm') {
+                                tempmap.parseString(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+                        }
+                    }
+                Log.d("mReceiver","ACTION_FOUND:"+device.getAddress()+" :"+device.getName());
+                // If it's already paired, skip it, because it's been listed already
+
+                if(device.getName()==null)
+                { //when name is null, skip
+                    //But if you want to make lists asap, comment out this block.
                 }
-                break;
-            case REQUEST_ENABLE_BT:
-                if (resultCode == Activity.RESULT_OK) {
-                    setupChat();
-                } else {
-                    Toast.makeText(this, R.string.bt_not_enabled_leaving,
-                            Toast.LENGTH_SHORT).show();
-                    finish();
+                else
+                {
+                    if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                        //mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                        boolean listed = false;
+                        for (BluetoothDevice bd:mNewDevicesArrayAdapter) {
+                            String address = bd.getAddress();
+                            if (device.getAddress().equals(address)) {
+                                Log.d("mReceiver", "ACTION_FOUND: replace the item of lists");
+                                mNewDevicesArrayAdapter.remove(bd);
+                                mNewDevicesArrayAdapter.add(device);
+                                listed = true;
+                                break;
+                            }
+                        }
+                        if(listed==false)
+                        {//if it is new device( not in lists), add it.
+                            mNewDevicesArrayAdapter.add(device);
+                        }
+                    }
                 }
+
+            }else if(BluetoothDevice.ACTION_NAME_CHANGED.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                startFetch(device);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                if(name!=null)
+                    if(name.contains(regex)){
+                        temp = lastmessages.put(device.getAddress(),name);
+                        /**TODO check this out after finishing bluetooth output system*/
+                        if(temp==null){
+                            if (name.charAt(regex.length()) == 'm') {
+                                tempmap.parseString(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+
+                        }
+                        else if(!temp.equals(name)){
+                            if (name.charAt(regex.length()) == 'm') {
+                                tempmap.parseString(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+                        }
+                    }
+                Log.d("mReceiver", "NAME_CHANGED:" + device.getAddress() + " :" + device.getName());
+                if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+                    boolean listed = false;
+                    for (BluetoothDevice bd:mNewDevicesArrayAdapter) {
+                        String address = bd.getAddress();
+                        if (device.getAddress().equals(address)) {
+                            Log.d("mReceiver", "NAME_CHANGED: replace the item of lists");
+                            mNewDevicesArrayAdapter.remove(bd);
+                            mNewDevicesArrayAdapter.add(device);
+                            listed = true;
+                            break;
+                        }
+                    }
+                    if(listed==false)
+                    {//if it is new device( not in lists), add it.
+                        mNewDevicesArrayAdapter.add(device);
+                    }
+                }
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                setProgressBarIndeterminateVisibility(false);
+                setTitle(R.string.select_device);
+                if (mNewDevicesArrayAdapter.size() == 0) {
+                    mNewDevicesArrayAdapter.add(null);
+                }
+            }
         }
-    }
+    };
 
-    private void connectDevice(Intent data, boolean secure) {
-        String address = data.getExtras().getString(
-                DeviceListActivity.DEVICE_ADDRESS);
-        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
-
-    }
-
-    public void connectDevice(String address){
-        BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent serverIntent = null;
-        switch (item.getItemId()) {
-            case R.id.secure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-                return true;
-            case R.id.insecure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent,
-                        REQUEST_CONNECT_DEVICE_INSECURE);
-                return true;
-            case R.id.discoverable:
-                ensureDiscoverable();
-                return true;
-        }
-        return false;
-    }
-
-    private void ensureDiscoverable() {
-        if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(
-                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-            startActivity(discoverableIntent);
-        }
-    }
-
-    private void sendMessage(String message) {
-
-    }
-
-    private final void setStatus(int resId) {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setSubtitle(resId);
-    }
-
-    private final void setStatus(CharSequence subTitle) {
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setSubtitle(subTitle);
-    }
-
-    private void setupChat() {
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        Nearby.getMessagesClient(this).unpublish(mMessage);
-        Nearby.getMessagesClient(this).unsubscribe(messageListener);
-        super.onStop();
-    }
-
-    public void publish(String message) {
-        Log.i("MESSAGE", "Publishing message: " + message);
-        mMessage = new com.google.android.gms.nearby.messages.Message(message.getBytes());
-        Nearby.getMessagesClient(this).publish(mMessage);
-    }
-
-    private void unpublish() {
-        Log.i("MESSAGE", "Unpublishing.");
-        if (mMessage != null) {
-            Nearby.getMessagesClient(this).unpublish(mMessage);
-            mMessage = null;
-        }
-    }
-
-    @Override
-    public synchronized void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public synchronized void onPause() {
-        super.onPause();
+    public void updatePending(){
+        //TODO Place Pending Logic over here
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        // Don't forget to unregister the ACTION_FOUND receiver.
+        unregisterReceiver(mBroadcastReceiver2);
+        bluetoothAdapter.cancelDiscovery();
     }
-    //bluetooth
+
+    public static void startFetch( BluetoothDevice device ) {
+        // Need to use reflection prior to API 15
+        Class cl = null;
+        try {
+            cl = Class.forName("android.bluetooth.BluetoothDevice");
+        } catch( ClassNotFoundException exc ) {
+            Log.e("hiya", "android.bluetooth.BluetoothDevice not found." );
+        }
+        if (null != cl) {
+            Class[] param = {};
+            Method method = null;
+            try {
+                method = cl.getMethod("fetchUuidsWithSdp", param);
+            } catch( NoSuchMethodException exc ) {
+                Log.e("hiya", "fetchUuidsWithSdp not found." );
+            }
+            if (null != method) {
+                Object[] args = {};
+                try {
+                    method.invoke(device, args);
+                } catch (Exception exc) {
+                    Log.e("hiya", "Failed to invoke fetchUuidsWithSdp method." );
+                }
+            }
+        }
+    }
+
+    /******************************************************************************************************************/
+
+
     //TODO do this method done, updates to current match based on matches db
     public void getCurrentMatch(boolean useless){
 

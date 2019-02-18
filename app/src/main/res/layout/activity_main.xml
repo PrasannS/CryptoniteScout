@@ -36,8 +36,8 @@
             android:inputType="textMultiLine"
             android:padding="5dp"
             android:maxLines="4"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"/>
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"/>
 
         <ImageView
             android:id="@+id/btnSend"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:src="@android:drawable/ic_menu_send"
-            android:tint="@color/colorWhite"
+            android:tint="@android:color/white"
             android:text="@string/send" />
     </LinearLayout>
 

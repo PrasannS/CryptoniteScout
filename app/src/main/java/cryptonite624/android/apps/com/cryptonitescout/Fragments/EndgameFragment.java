@@ -18,7 +18,7 @@ import cryptonite624.android.apps.com.cryptonitescout.R;
  * Activities that contain this fragment must implement the
  * {@link EndgameFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EndgameFragment#newInstance} factory method to
+ * Use the {@link EndgameFragment} factory method to
  * create an instance of this fragment.
  */
 public class EndgameFragment extends Fragment {
@@ -68,7 +68,7 @@ public class EndgameFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /** TODO specialised code based on game challenge will be put here*/
-
+                endgameReadListener.OnEndgameRead("submit");
             }
         });
 

@@ -40,7 +40,6 @@ public class InputFragment extends Fragment {
     
     private Button hatch;
     private Button cargo;
-    boolean hatchSelected;
 
     public InputFragment() {
         // Required empty public constructor

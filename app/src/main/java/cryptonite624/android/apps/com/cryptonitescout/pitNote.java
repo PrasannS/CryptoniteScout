@@ -30,22 +30,14 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
+
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     //Class variables that'll help(?) Prasann with the database
-    public int matchNum;
-    public String Comment;
-    public boolean ProgrammerOnSite;
-    public boolean LevelTwoStart;
-    public boolean CrossBase;
-    public boolean shifter;
-    public int numBaerries;
-    public int numChargers;
-    public int numCIMS;
-    public int numMiniCIMS;
-    public double robotDimension;
+    public PitnoteData data = new PitnoteData();
 
     public FloatingActionButton toCamera;
     public Switch Programmer_On_Site;

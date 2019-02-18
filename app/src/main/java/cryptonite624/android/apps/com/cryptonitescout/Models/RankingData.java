@@ -1,6 +1,8 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-public class RankingData {
+import com.orm.SugarRecord;
+
+public class RankingData extends SugarRecord<RankingData> {
     
      public int Teamnum             ;
      public int Status              ;

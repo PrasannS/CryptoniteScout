@@ -30,7 +30,7 @@ import cryptonite624.android.apps.com.cryptonitescout.PregameFragment;
  * Use the {@link MatchAccessFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MatchAccessFragment extends Fragment {
+public class MatchAccessFragment extends Fragment implements LeftMapFragment.OnLeftMapReadListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -168,6 +168,11 @@ public class MatchAccessFragment extends Fragment {
         long delay  = timeinterval*1000;
         long period = (totalactions-currentaction)*timeinterval*1000;
         timer.scheduleAtFixedRate(repeatedTask, delay, period);
+    }
+
+    @Override
+    public void OnLeftMapRead(int x, int y) {
+
     }
 
 

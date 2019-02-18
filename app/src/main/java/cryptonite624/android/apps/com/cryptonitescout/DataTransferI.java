@@ -1,6 +1,5 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-import cryptonite624.android.apps.com.cryptonitescout.Models.BasicMatchEntry;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

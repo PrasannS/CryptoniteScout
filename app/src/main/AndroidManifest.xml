@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cryptonite624.android.apps.com.cryptonitescout">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -21,7 +22,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:name="com.orm.SugarApp"
+        tools:replace="android:icon">
+
+        <meta-data android:name="DATABASE" android:value="cryptonitescout.db" />
+        <meta-data android:name="VERSION" android:value="0" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="cryptonite634.android.apps.com.cryptonitescout" />
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"

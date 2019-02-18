@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message) {
-        final String sNewName = "0624"+message;
+        final String sNewName = "0624"+"c"+message;
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
@@ -220,12 +220,14 @@ public class MainActivity extends AppCompatActivity {
                 if(name.contains(regex)){
                     temp = lastmessages.put(bluetoothDevice.getAddress(),name);
                     if(temp==null){
-                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                        chatArrayAdapter.add(message);
+                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
+                        if(name.charAt(regex.length())=='c')
+                            chatArrayAdapter.add(message);
                     }
                     else if(!temp.equals(name)){
-                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                        chatArrayAdapter.add(message);
+                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
+                        if(name.charAt(regex.length())=='c')
+                            chatArrayAdapter.add(message);
                     }
                 }
         }
@@ -249,12 +251,14 @@ public class MainActivity extends AppCompatActivity {
                     if(name.contains(regex)){
                         temp = lastmessages.put(device.getAddress(),name);
                         if(temp==null){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                            chatArrayAdapter.add(message);
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
+                            if(name.charAt(regex.length())=='c')
+                                chatArrayAdapter.add(message);
                         }
                         else if(!temp.equals(name)){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                            chatArrayAdapter.add(message);
+                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
+                            if(name.charAt(regex.length())=='c')
+                                chatArrayAdapter.add(message);
                         }
                     }
                 Log.d("mReceiver","ACTION_FOUND:"+device.getAddress()+" :"+device.getName());
