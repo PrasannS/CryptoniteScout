@@ -1064,5 +1064,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     }
 
+    public void saveEntry(String entrymessage){
+
+    }
+
+
+
 
 }
