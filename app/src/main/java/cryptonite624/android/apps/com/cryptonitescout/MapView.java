@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.service.autofill.FieldClassification;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +38,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
+
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
@@ -46,7 +50,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import java.util.Date;
 
-public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener {
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener, HabTimerFragment.OnHabTimerReadListener {
 
 
     public int x, y;
@@ -62,6 +66,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public int commnum = 0;
     public int mapnum = 0;
 
+    public CountUpTimer timer;
+
+    public int climbTime;
 
 
     //bluetooth
@@ -190,7 +197,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         switchbounds();
 
-        endmatch = getCurrentMatch();
+        //endmatch = getCurrentMatch(true);
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
@@ -406,7 +413,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             if (getCode(x, y).equals("H1") || getCode(x, y).equals("H3")) {
                 System.out.println("hab level 2");
                 habLevel = 2;
-                updateScreen();
+                if (findViewById(R.id.infoframe) != null) {
+                    RocketFragment rocketFragment = new RocketFragment();
+                    rocketFragment.setArguments(actionMap);
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.infoframe, rocketFragment, null);
+                    fragmentTransaction.commit();
+                }
+
             } else if (getCode(x, y).equals("H2")) {
                 System.out.println("hab level 3");
                 habLevel = 3;
@@ -613,6 +627,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
         }
 
+    @Override
+    public void OnHabTimerRead(String message) {
+        climbTime = Integer.parseInt(message);
+        actionMap.climbTime = this.climbTime;
+    }
+
 
     public void switchbounds(){
         if(left) {
@@ -765,9 +785,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         updateScreen();
     }
 
+
+
     public void updateScreen() {
-        cargoDisplay.setText("" +);
-        hatchDisplay.setText("" + actionMap.totalhatches(true));
+        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.actions));
+        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.actions) );
         habDisplay.setText("" + habLevel);
         System.out.println(actionMap.actions);
         //updateFilled();
@@ -828,6 +850,31 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     @Override
     public void OnSubmissionRead(String message) {
 
+    }
+
+
+
+    public abstract class CountUpTimer extends CountDownTimer {
+        private static final long INTERVAL_MS = 1000;
+        private final long duration;
+
+        protected CountUpTimer(long durationMs) {
+            super(durationMs, INTERVAL_MS);
+            this.duration = durationMs;
+        }
+
+        public abstract void onTick(int second);
+
+        @Override
+        public void onTick(long msUntilFinished) {
+            int second = (int) ((duration - msUntilFinished) / 1000);
+            onTick(second);
+        }
+
+        @Override
+        public void onFinish() {
+            onTick(duration / 1000);
+        }
     }
 
     /******************************************************************************************************************/
@@ -893,13 +940,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     temp = lastmessages.put(bluetoothDevice.getAddress(),name);
                     if(temp==null){
                         if (name.charAt(regex.length()) == 'm') {
-                            tempmap.parseString(name.substring(regex.length()));
+                            //tempmap.parseString(name.substring(regex.length()));
+                            ActionMapUtils.parseActionMap(name.substring(regex.length()));
                             recordeddevices++;
                         }
                     }
                     else if(!temp.equals(name)){
                         if (name.charAt(regex.length()) == 'm') {
-                            tempmap.parseString(name.substring(regex.length()));
+                            ActionMapUtils.parseActionMap(name.substring(regex.length()));
                             recordeddevices++;
                         }
                     }
@@ -927,13 +975,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                         temp = lastmessages.put(device.getAddress(),name);
                         if(temp==null){
                             if (name.charAt(regex.length()) == 'm') {
-                                tempmap.parseString(name.substring(regex.length()));
+                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
                         else if(!temp.equals(name)) {
                             if (name.charAt(regex.length()) == 'm') {
-                                tempmap.parseString(name.substring(regex.length()));
+                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
@@ -977,14 +1025,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                         /**TODO check this out after finishing bluetooth output system*/
                         if(temp==null){
                             if (name.charAt(regex.length()) == 'm') {
-                                tempmap.parseString(name.substring(regex.length()));
+                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
                                 recordeddevices++;
                             }
 
                         }
                         else if(!temp.equals(name)){
                             if (name.charAt(regex.length()) == 'm') {
-                                tempmap.parseString(name.substring(regex.length()));
+                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
