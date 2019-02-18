@@ -43,6 +43,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import java.util.Date;
 
 public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener {
@@ -53,13 +54,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
 
-    public Match endmatch = new Match();
     private BluetoothAdapter bluetoothAdapter = null;
     public int topx;
-
-    public Match getCurrentMatch(){
-        return new Match();
-    }
 
     public int recordeddevices = 0;
 
@@ -118,6 +114,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public int totalcycles = 0;
     private RelativeLayout mapview;
     private TextView habDisplay;
+
+
 
     private Button cancel;
 
@@ -768,7 +766,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateScreen() {
-        cargoDisplay.setText("" + actionMap.totalhatches(false));
+        cargoDisplay.setText("" +);
         hatchDisplay.setText("" + actionMap.totalhatches(true));
         habDisplay.setText("" + habLevel);
         System.out.println(actionMap.actions);

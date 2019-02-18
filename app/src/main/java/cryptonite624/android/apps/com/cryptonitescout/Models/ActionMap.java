@@ -17,7 +17,7 @@ public class ActionMap extends SugarRecord<ActionMap>{
 
 
     public ActionMap(){
-
+        actions = new ArrayList<>();
     }
 
 
