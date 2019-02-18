@@ -4,25 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-
-import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
-import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SubmissionReviewFragment.OnFragmentInteractionListener} interface
+ * {@link HabTimerFragment.OnHabTimerReadListener} interface
  * to handle interaction events.
- * Use the {@link SubmissionReviewFragment#newInstance} factory method to
+ * Use the {@link HabTimerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SubmissionReviewFragment extends Fragment {
+public class HabTimerFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,26 +31,20 @@ public class SubmissionReviewFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    //private OnFragmentInteractionListener mListener;
+    public TextView timeDisplay;
+    public Button timerStop;
+    public String message;
+    public CountUpTimer timer;
 
-    OnSubmissionListener submissionReadListener;
+    OnHabTimerReadListener onHabTimerReadListener;
 
-    private TextView totalHatches;
-    private TextView totalCargos;
-    private ActionMap map;
+    public interface OnHabTimerReadListener{
+        public void OnHabTimerRead(String message);
+    }
 
-    public SubmissionReviewFragment() {
+    public HabTimerFragment() {
         // Required empty public constructor
     }
-
-    public interface OnSubmissionListener{
-        public void OnSubmissionRead(String message);
-    }
-    public void setArguments(ActionMap actionMap) {
-        map = actionMap;
-    }
-
-
 
     /**
      * Use this factory method to create a new instance of
@@ -59,11 +52,11 @@ public class SubmissionReviewFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SubmissionReviewFragment.
+     * @return A new instance of fragment HabTimerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SubmissionReviewFragment newInstance(String param1, String param2) {
-        SubmissionReviewFragment fragment = new SubmissionReviewFragment();
+    public static HabTimerFragment newInstance(String param1, String param2) {
+        HabTimerFragment fragment = new HabTimerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,33 +76,36 @@ public class SubmissionReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_submission_review, container, false);
+        View view = inflater.inflate(R.layout.fragment_hab_timer, container, false);
 
-        totalHatches = view.findViewById(R.id.submission_hatchnum);
-        totalCargos = view.findViewById(R.id.submission_cargonum);
+        timeDisplay = view.findViewById(R.id.habtimer_display);
+        timerStop = view.findViewById(R.id.habtimer_stop);
 
-        totalHatches.setText("" + ActionMapUtils.totalhatches(true, map.actions));
-        totalCargos.setText("" + ActionMapUtils.totalhatches(false, map.actions));
+        timer = new CountUpTimer(30000) {
+            public void onTick(int second) {
+                timeDisplay.setText(String.valueOf(second));
+            }
+        };
 
-        // Inflate the layout for this fragment
+        timer.start();
+
+        timerStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message = "" + timer.toString();
+            }
+        });
+
+
         return view;
-
     }
-
-    /*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }*/
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         Activity activity = (Activity)context;
         try{
-            submissionReadListener = (cryptonite624.android.apps.com.cryptonitescout.SubmissionReviewFragment.OnSubmissionListener) activity;
+            onHabTimerReadListener = (cryptonite624.android.apps.com.cryptonitescout.HabTimerFragment.OnHabTimerReadListener) activity;
         }catch(ClassCastException e){
             throw new ClassCastException(activity.toString()+"must override onKeyboardOneRead");
         }
@@ -118,8 +114,30 @@ public class SubmissionReviewFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        submissionReadListener= null;
+        onHabTimerReadListener = null;
     }
+
+    public abstract class CountUpTimer extends CountDownTimer {
+        private static final long INTERVAL_MS = 1000;
+        private final long duration;
+
+        protected CountUpTimer(long durationMs) {
+            super(durationMs, INTERVAL_MS);
+            this.duration = durationMs;
+        }
+
+        public abstract void onTick(int second);
+
+        @Override
+        public void onTick(long msUntilFinished) {
+            int second = (int) ((duration - msUntilFinished) / 1000);
+            onTick(second);
+        }
+
+        @Override
+        public void onFinish() {
+            onTick(duration / 1000);
+        }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -131,8 +149,9 @@ public class SubmissionReviewFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+    /*
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-}
+    }*/
+}}
