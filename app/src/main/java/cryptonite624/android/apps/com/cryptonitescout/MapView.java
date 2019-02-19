@@ -533,6 +533,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 startDiscovery();
                 sendMessage();
                 Timer timer = new Timer();
+                actionMap.save();
                 timer.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
@@ -975,13 +976,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                         temp = lastmessages.put(device.getAddress(),name);
                         if(temp==null){
                             if (name.charAt(regex.length()) == 'm') {
-                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
+                                saveEntry(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
                         else if(!temp.equals(name)) {
                             if (name.charAt(regex.length()) == 'm') {
-                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
+                                saveEntry(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
@@ -1025,14 +1026,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                         /**TODO check this out after finishing bluetooth output system*/
                         if(temp==null){
                             if (name.charAt(regex.length()) == 'm') {
-                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
+                                saveEntry(name.substring(regex.length()));
                                 recordeddevices++;
                             }
 
                         }
                         else if(!temp.equals(name)){
                             if (name.charAt(regex.length()) == 'm') {
-                                ActionMapUtils.parseActionMap(name.substring(regex.length()));
+                                saveEntry(name.substring(regex.length()));
                                 recordeddevices++;
                             }
                         }
@@ -1111,6 +1112,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void getCurrentMatch(boolean useless){
 
     }
+
+    public void saveEntry(String entrymessage){
+        ActionMap a = ActionMapUtils.parseActionMap(entrymessage);
+        a.save();
+    }
+
+
 
 
 }
