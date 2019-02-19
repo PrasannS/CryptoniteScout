@@ -44,14 +44,25 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
-                        android:text="Team #"
-                        android:textColor="@color/textColor"
-                        android:textSize="40sp" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:text="Team #"
+                            android:textColor="@color/textColor"
+                            android:textSize="40sp" />
+
+                        <EditText
+                            android:id="@+id/teamNum_pitnote"
+                            android:layout_width="500dp"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -89,8 +100,7 @@
                             android:textSize="40dp" />
 
                         <EditText
-
-
+                            android:id="@+id/Other_pitnote"
                             android:layout_width="500dp"
                             android:layout_height="match_parent" />
                     </LinearLayout>
@@ -130,6 +140,7 @@
                             android:textSize="40dp" />
 
                         <EditText
+                            android:id="@+id/numBatteries_pitnote"
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
                             android:text="" />
@@ -148,8 +159,10 @@
                             android:textSize="40dp" />
 
                         <EditText
+                            android:id="@+id/numChargers_pitnote"
                             android:layout_width="330dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text=""/>
 
                     </LinearLayout>
 
@@ -186,6 +199,7 @@
                             android:background="@color/colorPrimary"/>
 
                         <EditText
+                            android:id="@+id/RobotDimension_pitnote"
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
                             android:text=""
@@ -279,6 +293,7 @@
                             android:textSize="40dp" />
 
                         <EditText
+                            android:id="@+id/numMiniCIMS_pitnote"
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:text="" />
@@ -296,6 +311,7 @@
                             android:textSize="40dp" />
 
                         <EditText
+                            android:id="@+id/numCIMS_pitnote"
                             android:layout_width="380dp"
                             android:layout_height="match_parent"
                             android:text="" />
@@ -394,6 +410,7 @@
                     android:background="@color/colorPrimary"/>
 
                 <EditText
+                    android:id="@+id/Comment_pitnote"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text=""
@@ -421,14 +438,15 @@
                     android:layout_height="500dp" />
 
                 <Button
+                    android:id="@+id/submit_pitnote"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:text="Submit"
                     android:textSize="30dp"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/colorPrimary"
                     android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/colorPrimary"/>
+                    android:background="@color/textColor"/>
 
             </LinearLayout>
         </LinearLayout>

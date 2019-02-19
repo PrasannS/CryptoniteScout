@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
@@ -25,35 +26,53 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     //Class variables that'll help(?) Prasann with the database
-    public int matchNum;
-    public String Comment;
-    public boolean ProgrammerOnSite;
-    public boolean LevelTwoStart;
-    public boolean CrossBase;
-    public boolean shifter;
-    public int numBaerries;
-    public int numChargers;
-    public int numCIMS;
-    public int numMiniCIMS;
-    public double robotDimension;
 
+    public int matchNum = 0;
+    public String Comment = "";
+    public boolean ProgrammerOnSite = false;
+    public boolean LevelTwoStart = false;
+    public boolean CrossBase = false;
+    public boolean shifter = false;
+    public int numBatteries = 0;
+    public int numChargers = 0;
+    public int numCIMS = 0;
+    public int numMiniCIMS = 0;
+    public double robotDimension = 0;
+    public String currentLanguage = "Java";
+    public String currentWheel = "Roughtop";
+    public String currentClimbLevel = "Level 1";
+    public String currentIntake = "Floor";
+    public String currentLayout = "4WD";
+
+
+    public EditText matchNumber;
+    public EditText Other;
     public FloatingActionButton toCamera;
     public Switch Programmer_On_Site;
     public Switch LevTwoStart;
     public Switch CrossBaseLine;
     public Switch Shifters;
     public ImageView imageview;
-    public Button toDashboard;
+    public EditText numBatterie;
+    public EditText numCharger;
+    public EditText robotDimensions;
+    public EditText CIMS;
+    public EditText miniCIMS;
+    public EditText Comments;
+    public Button Submit;
 
     //Spinner variables for the wheels
     public Spinner wheelSpinner;
@@ -66,7 +85,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public static String [] layoutArr = {"4WD", "6WD", "8WD", "10WD", "Swerve", "Tank", "2+2", "Rhino", "Kiwi", "H","Comment"};
 
     //Spinner variables for Climbing Levels
-    public Spinner ClimibLevels;
+    public Spinner ClimbLevels;
     public String Levels;
     public static String [] levels = {"Level 1","Level 2","Level 3","Buddy to one"};
 
@@ -97,7 +116,8 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
      *  excel
      */
 
-    @Override
+    public PitnoteData data;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_note);
@@ -154,6 +174,32 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             }
         });
 
+        Submit = findViewById(R.id.submit_pitnote);
+        Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                matchNum = Integer.parseInt(matchNumber.getText().toString());
+                Comment = Comments.getText().toString();
+                ProgrammerOnSite = Programmer_On_Site.isChecked();
+                LevelTwoStart = LevTwoStart.isChecked();
+                CrossBase = CrossBaseLine.isChecked();
+                shifter = Shifters.isChecked();
+                numBatteries = Integer.parseInt(numBatterie.getText().toString());
+                numChargers = Integer.parseInt(numCharger.getText().toString());
+                numCIMS = Integer.parseInt(CIMS.getText().toString());
+                numMiniCIMS = Integer.parseInt(miniCIMS.getText().toString());
+                robotDimension = Double.parseDouble(robotDimensions.getText().toString());
+                currentLanguage = pgLanguage.getTransitionName();
+                currentWheel = wheelSpinner.getTransitionName();
+                currentClimbLevel = ClimbLevels.getTransitionName();
+                currentIntake = cargoIntake.getTransitionName();
+                currentLayout = layoutSpinner.getTransitionName();
+
+                data = new PitnoteData(matchNum, Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
+                        numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage);
+            }
+        });
+
         pgLanguage = findViewById(R.id.Programming_Language);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,languages);
         pgLanguage.setAdapter(adapter);
@@ -166,9 +212,9 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
         cargoIntake.setAdapter(adapter2);
 
-        ClimibLevels = findViewById(R.id.ClimbLevel);
+        ClimbLevels = findViewById(R.id.ClimbLevel);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
-        ClimibLevels.setAdapter(adapter3);
+        ClimbLevels.setAdapter(adapter3);
 
         layoutSpinner = findViewById(R.id.LayoutSpinner);
         ArrayAdapter<String> adapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, layoutArr);
@@ -178,6 +224,19 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         ArrayAdapter<String> adapter5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, wheelArr);
         wheelSpinner.setAdapter(adapter5);
 
+        numBatterie = findViewById(R.id.numBatteries_pitnote);
+
+        numCharger = findViewById(R.id.numChargers_pitnote);
+
+        robotDimensions = findViewById(R.id.RobotDimension_pitnote);
+
+        CIMS = findViewById(R.id.numCIMS_pitnote);
+
+        miniCIMS = findViewById(R.id.numMiniCIMS_pitnote);
+
+        Comments = findViewById(R.id.Comment_pitnote);
+
+        matchNumber = findViewById(R.id.teamNum_pitnote);
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;

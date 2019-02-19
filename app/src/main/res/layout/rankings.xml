@@ -196,6 +196,7 @@
                         android:textColor="@color/textColor"
                         android:gravity="center"
                         android:background="@color/colorPrimary"/>
+
                 </LinearLayout>
 
                 <LinearLayout
