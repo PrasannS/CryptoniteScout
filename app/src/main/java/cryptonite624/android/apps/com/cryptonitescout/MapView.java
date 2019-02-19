@@ -881,7 +881,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     /******************************************************************************************************************/
 
     private void sendMessage() {
-        final String sNewName = "0624"+'m'+actionMap.toString();
+        final String sNewName = "0624"+'c'+actionMap.toString();
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
