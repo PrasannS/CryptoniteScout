@@ -71,8 +71,11 @@
             android:screenOrientation="landscape" />
         <activity android:name=".DataAccessActivity"
             android:screenOrientation="landscape" ></activity>
+        <activity android:name=".CommentActivity"
+            android:screenOrientation="landscape" ></activity>
 
         <activity android:name=".ReplayViewPage"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommentActivity">
+    tools:context=".CommentActivity"
+    android:background="@color/colorPrimaryDark">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- Big boi Vertical Linear layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,76 +24,114 @@
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:background="@color/teamGreen"
+                android:background="@color/colorPrimary"
                 android:text="Team# : "
                 android:textSize="40dp"
-                android:textColor="@android:color/black"
                 android:gravity="center"/>
-            <EditText
-                android:layout_width="200dp"
-                android:layout_height="90dp"
-                android:textSize="40dp"
-                android:id="@+id/TeamName"/>
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:text="Rating"
-                android:textSize="30dp"
-                android:textColor="@color/teamGreen"
-                android:gravity="center"/>
-            <Spinner
-                android:id="@+id/Rating"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:text="Driver"
-                android:textSize="30dp"
-                android:textColor="@color/teamGreen"
-                android:gravity="center"/>
-            <Spinner
-                android:id="@+id/DriverRating"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown"/>
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:text="Defense"
-                android:textSize="30dp"
-                android:textColor="@color/teamGreen"
-                android:gravity="center"/>
-            <Spinner
-                android:id="@+id/DefenseRating"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
-                android:background="@android:drawable/btn_dropdown">
-            </Spinner>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <EditText
                 android:id="@+id/commentsave"
                 android:layout_width="match_parent"
                 android:layout_height="360dp"
-                android:text="commments"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="commments"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:id="@+id/Submitcomments"
                 android:text="Submit"
-                android:background="@color/teamGreen"/>
+                android:background="@color/colorPrimary"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:text="Hatch Efficiency"/>
+                <com.jaygoo.widget.RangeSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rsb_mode="single"
+                    android:layout_weight="1"
+                    app:rsb_min="0"
+                    app:rsb_max="10"
+                    android:id="@+id/hatchefficiency_seekbar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:text="Cargo Efficiency"/>
+                <com.jaygoo.widget.RangeSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rsb_mode="single"
+                    android:layout_weight="1"
+                    app:rsb_min="0"
+                    app:rsb_max="10"
+                    android:id="@+id/cargoefficiency_seekbar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:text="Defense Efficiency"/>
+                <com.jaygoo.widget.RangeSeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rsb_mode="single"
+                    android:layout_weight="1"
+                    app:rsb_min="0"
+                    app:rsb_max="10"
+                    android:id="@+id/defenseeffeciency_seekbar"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="Broken"
+                    android:id="@+id/brokenswitch"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Why Broken?"
+                    android:layout_weight="2"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/whybroken_edittext"/>
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

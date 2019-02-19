@@ -1,20 +1,21 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-public class Comment {
+import com.orm.SugarRecord;
 
-    String comment;
-    int teamnum;
-    int matchnum;
-    int pos;
-    int hatchefficiency;
-    int cargoefficiency;
-    int climbefficiency;
-    int defense;
-    boolean excessivefouls;
-    boolean broken;
-    String whybroken;
+public class Comment extends SugarRecord<Comment> {
+
+    public String comment;
+    public int teamnum;
+    public int matchnum;
+    public int pos;
+    public int hatchefficiency;
+    public int cargoefficiency;
+    //public int climbefficiency;
+    public int defense;
+    public boolean excessivefouls;
+    public boolean broken;
+    public String whybroken;
 
     public Comment(){
-
     }
 }
