@@ -12,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaygoo.widget.OnRangeChangedListener;
+import com.jaygoo.widget.RangeSeekBar;
+
 public class CommentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener{
     private Button submit;
     private EditText commentget;
@@ -27,9 +30,20 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     private String DriverRatings;
     private String [] DriverRatingLevels = {"1","2","3","4","5","6"};
 
-    private Spinner Defense;
-    private String DefenseRatings;
+    //private Spinner Defense;
+    //private String DefenseRatings;
     private String [] DefenseRatingLevels = {"1","2","3","4","5","6"};
+
+    private int HatchEfficiency;
+    private int CargoEfficiency;
+    private boolean ExcessiveFoul;
+    private String BrokenComment;
+
+    private RangeSeekBar hatchefficiencySeekbar;
+    private RangeSeekBar cargoefficiencySeekbar;
+    private RangeSeekBar defenseratingSeekbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +54,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         submit= (Button)findViewById(R.id.Submitcomments);
         commentget= (EditText)findViewById(R.id.commentsave);
         comment = commentget.getText().toString();
-        teamnameget = (EditText) findViewById(R.id.TeamName);
-        teamname = teamnameget.getText().toString();
+        //teamnameget = (EditText) findViewById(R.id.TeamName);
+        //teamname = teamnameget.getText().toString();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,19 +63,29 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
-        Rating = findViewById(R.id.Rating);
+        /*Rating = findViewById(R.id.Rating);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Levels);
         Rating.setAdapter(adapter);
 
         Driver = findViewById(R.id.DriverRating);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,DriverRatingLevels);
         Driver.setAdapter(adapter1);
+*/
+        //Defense = findViewById(R.id.DefenseRating);
+        //ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,DefenseRatingLevels);
+        //Defense.setAdapter(adapter2);
 
-        Defense = findViewById(R.id.DefenseRating);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,DefenseRatingLevels);
-        Defense.setAdapter(adapter2);
+        hatchefficiencySeekbar = findViewById(R.id.hatchefficiency_seekbar);
+        hatchefficiencySeekbar.setRange(1f, 10f);
+        hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
+        hatchefficiencySeekbar = findViewById(R.id.cargoefficiency_seekbar);
+        hatchefficiencySeekbar.setRange(1f, 10f);
+        hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
+        hatchefficiencySeekbar = findViewById(R.id.defenseeffeciency_seekbar);
+        hatchefficiencySeekbar.setRange(1f, 10f);
+        hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
     }
     public void goToDashboard()
     {
@@ -80,8 +104,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         Toast.makeText(parent.getContext(), DriverRatings, Toast.LENGTH_SHORT).show();
 
         //setting the dropdown elements and displaying the texts for the cargo intakes
-        DefenseRatings = DefenseRatingLevels[position];
-        Toast.makeText(parent.getContext(), DefenseRatings, Toast.LENGTH_SHORT).show();
+        //DefenseRatings = DefenseRatingLevels[position];
+        //Toast.makeText(parent.getContext(), DefenseRatings, Toast.LENGTH_SHORT).show();
     }
 
 
