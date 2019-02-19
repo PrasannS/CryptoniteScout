@@ -6,7 +6,13 @@ public class Comment {
     int teamnum;
     int matchnum;
     int pos;
-
+    int hatchefficiency;
+    int cargoefficiency;
+    int climbefficiency;
+    int defense;
+    boolean excessivefouls;
+    boolean broken;
+    String whybroken;
 
     public Comment(){
 
