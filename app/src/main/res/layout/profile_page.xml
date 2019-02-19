@@ -59,7 +59,7 @@
                     android:layout_height="60dp"
                     android:text="Taemin Ha"
                     android:textSize="40dp"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:gravity="center"/>
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                     android:layout_height="30dp"
                     android:text="tommy7507@gmail.com"
                     android:textSize="20dp"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:gravity="center"/>
             </LinearLayout>
 
@@ -85,7 +85,7 @@
                     android:layout_height="30dp"
                     android:text="$500"
                     android:textSize="25dp"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:gravity="center"/>
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:text="Dash Board"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:textSize="20sp" />
 
                 <Button
@@ -118,7 +118,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:text="Replay View"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:textSize="20sp" />
 
                 <Button
@@ -127,7 +127,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:text="Pit Notes"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:textSize="20sp" />
 
                 <Button
@@ -136,7 +136,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:text="Comments"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:textSize="20sp"
                     tools:ignore="InvalidId" />
             </LinearLayout>
@@ -151,7 +151,7 @@
                     android:layout_height="match_parent"
                     android:text="Scouting Position"
                     android:textSize="20dp"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -193,7 +193,7 @@
                     android:layout_height="match_parent"
                     android:text="Upcoming Match"
                     android:textSize="20dp"
-                    android:textColor="@color/TextColor"
+                    android:textColor="@color/textColor"
                     android:gravity="center" />
             </LinearLayout>
 

@@ -117,6 +117,9 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
                     return true;
                 }
+                if (id == R.id.nav_pitnote) {
+                    Toast.makeText(DataAccessActivity.this, "pitnotes", Toast.LENGTH_LONG).show();
+                }
 
                 return true;
             }
