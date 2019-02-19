@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jaygoo.widget.OnRangeChangedListener;
 import com.jaygoo.widget.RangeSeekBar;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.Comment;
 
 public class CommentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener{
     private Button submit;
@@ -38,10 +41,14 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     private int CargoEfficiency;
     private boolean ExcessiveFoul;
     private String BrokenComment;
+    private EditText WhyBroken;
+    private Switch brokenswitch;
 
     private RangeSeekBar hatchefficiencySeekbar;
     private RangeSeekBar cargoefficiencySeekbar;
     private RangeSeekBar defenseratingSeekbar;
+
+    public Comment comm;
 
 
 
@@ -50,19 +57,73 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
+        comm = new Comment();
 
         submit= (Button)findViewById(R.id.Submitcomments);
         commentget= (EditText)findViewById(R.id.commentsave);
         comment = commentget.getText().toString();
+        brokenswitch = findViewById(R.id.brokenswitch);
         //teamnameget = (EditText) findViewById(R.id.TeamName);
         //teamname = teamnameget.getText().toString();
+        cargoefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
+            @Override
+            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
+                comm.cargoefficiency = (int)rightValue;
+            }
+
+            @Override
+            public void onStartTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //start tracking touch
+            }
+
+            @Override
+            public void onStopTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //stop tracking touch
+            }
+        });
+        hatchefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
+            @Override
+            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
+                comm.hatchefficiency = (int)rightValue;
+            }
+
+            @Override
+            public void onStartTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //start tracking touch
+            }
+
+            @Override
+            public void onStopTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //stop tracking touch
+            }
+        });
+        defenseratingSeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
+            @Override
+            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
+                comm.defense = (int)rightValue;
+            }
+
+            @Override
+            public void onStartTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //start tracking touch
+            }
+
+            @Override
+            public void onStopTrackingTouch(RangeSeekBar view,  boolean isLeft) {
+                //stop tracking touch
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToDashboard();
+
+                comm.comment = commentget.getText().toString();
+                comm.whybroken = WhyBroken.getText().toString();
+                comm.broken = brokenswitch.isChecked();
+
+                comm.save();
             }
         });
-
         /*Rating = findViewById(R.id.Rating);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Levels);
         Rating.setAdapter(adapter);
@@ -79,19 +140,19 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         hatchefficiencySeekbar.setRange(1f, 10f);
         hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
-        hatchefficiencySeekbar = findViewById(R.id.cargoefficiency_seekbar);
+        cargoefficiencySeekbar = findViewById(R.id.cargoefficiency_seekbar);
         hatchefficiencySeekbar.setRange(1f, 10f);
         hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
-        hatchefficiencySeekbar = findViewById(R.id.defenseeffeciency_seekbar);
+        defenseratingSeekbar = findViewById(R.id.defenseeffeciency_seekbar);
         hatchefficiencySeekbar.setRange(1f, 10f);
         hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
     }
-    public void goToDashboard()
+    /*public void goToDashboard()
     {
         Intent intent1 = new Intent(this, MapView.class);
         startActivity(intent1);
-    }
+    }*/
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
