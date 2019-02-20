@@ -2,11 +2,11 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -99,11 +99,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] HAB3MAX =   {445, 413};
 
 
-    public static int[] imageratio = {1,1};
-
-    public static int[] screenratio = new int[2];
-    public static double conversionfactor;
-
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
@@ -125,6 +120,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public RightMapFragment rightMapFragment;
 
 
+
+
     private Button imageswitch;
 
     public boolean sandstorm;
@@ -136,8 +133,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public RobotAction currentAction = new RobotAction();
     Button statusButton;
 
-    int status = 0;
-
     private CountDownTimer countDownTimer;
     private long timeLeftInMilli = 150000;
     private boolean timerRunning;
@@ -147,7 +142,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private TextView timerDisplay;
     private Button timerButton;
 
-    public MessagesClient mMessagesClient;
+    public BluetoothHandler bluetoothHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,15 +151,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
 
+        bluetoothHandler = new BluetoothHandler(this);
+
 
         setContentView(R.layout.activity_map_view);
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mMessagesClient = Nearby.getMessagesClient(this, new MessagesOptions.Builder()
-                    .setPermissions(NearbyPermissions.BLE)
-                    .build());
-        }
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -210,13 +200,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.mapcontainer, rightMapFragment, null);
                         fragmentTransaction.commit();
-                        rightMapFragment = rightMapFragment;
                     }
                 }
                 else{
                     if (findViewById(R.id.mapcontainer) != null) {
                         leftMapFragment = new LeftMapFragment();
-                        leftMapFragment = leftMapFragment;
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.mapcontainer, leftMapFragment, null);
                         fragmentTransaction.commit();
@@ -279,10 +267,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             public void onClick(View v) {
                 startStop();
             }
-        });
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        });
     }
+
+
 
 
     public void startStop(){
@@ -525,18 +514,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     fragmentTransaction.replace(R.id.mapcontainer,submissionReviewFragment,null);
                     fragmentTransaction.commit();
                 }
-                startDiscovery();
-                sendMessage();
-                Timer timer = new Timer();
+                bluetoothHandler.startlooking();
+                bluetoothHandler.sendMessage('m',actionMap.toString());
                 actionMap.save();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // Your database code here
-                        startDiscovery();
-                        ensureDiscoverable();
-                    }
-                }, 3*1000, 3*1000);
                 break;
 
             default:
@@ -544,15 +524,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    private void ensureDiscoverable() {
-        if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(
-                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
-            startActivity(discoverableIntent);
-        }
-    }
 
 
 
@@ -853,6 +824,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     }
 
+    @Override
+    public void start(Intent intent) {
+
+    }
+
 
     public abstract class CountUpTimer extends CountDownTimer {
         private static final long INTERVAL_MS = 1000;
@@ -877,11 +853,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
     }
 
-    /******************************************************************************************************************/
-
-
-
-    /******************************************************************************************************************/
 
 
     //TODO do this method done, updates to current match based on matches db
@@ -889,9 +860,5 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     }
 
-    public void saveEntry(String entrymessage){
-        ActionMap a = ActionMapUtils.parseActionMap(entrymessage);
-        a.save();
-    }
 
 }

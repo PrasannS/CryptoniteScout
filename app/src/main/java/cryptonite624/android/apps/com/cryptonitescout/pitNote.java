@@ -117,6 +117,8 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
      *  excel
      */
 
+    public BluetoothHandler bluetoothHandler;
+
     public PitnoteData data;
     FloatingActionButton fab ;
 
@@ -133,6 +135,9 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+        bluetoothHandler = new BluetoothHandler(this);
+        bluetoothHandler.startlooking();
         setSupportActionBar(toolbar);
         List<PitnoteData> temp = PitnoteData.find(PitnoteData.class, "Teamnum = ?",getTeamNum()+"" );
         if(temp.size()!=0){
@@ -216,6 +221,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 data = new PitnoteData(data.teamnum, Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage);
                 data.save();
+                bluetoothHandler.sendMessage('p',data.toString());
 
             }
         });
@@ -394,5 +400,12 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //Nothing goes here
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Don't forget to unregister the ACTION_FOUND receiver.
+        bluetoothHandler.endstuff();
     }
 }

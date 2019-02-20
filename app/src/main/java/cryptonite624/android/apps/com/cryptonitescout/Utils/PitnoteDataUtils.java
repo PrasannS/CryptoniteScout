@@ -24,7 +24,7 @@ public class PitnoteDataUtils {
     public String language;
 
     public static String toSTring(PitnoteData data){
-        String temp = data.matchNum+" "+data.Comment+" "+data.ProgrammerOnSite+" "+data.LevelTwoStart+" "+data.CrossBase+" "+data.shifter+
+        String temp = data.teamnum+" "+data.Comment+" "+data.ProgrammerOnSite+" "+data.LevelTwoStart+" "+data.CrossBase+" "+data.shifter+
                 " "+data.numBatteries+" "+data.numChargers+" "+data.numCIMS+" "+data.numMiniCIMS+" "+data.robotDimension+" "+data.wheels+
                 " "+data.layouts+" "+data.Levels+" "+data.Intake+" "+data.language;
         return temp;
@@ -33,7 +33,7 @@ public class PitnoteDataUtils {
     public static PitnoteData parsePitnoteData(String temp){
         StringTokenizer st = new StringTokenizer(temp," ");
         PitnoteData pitnote = new PitnoteData();
-        pitnote.matchNum = Integer.parseInt(st.nextToken());
+        pitnote.teamnum = Integer.parseInt(st.nextToken());
         pitnote.Comment = st.nextToken();
         pitnote.ProgrammerOnSite = Boolean.parseBoolean(st.nextToken());
         pitnote.LevelTwoStart = Boolean.parseBoolean(st.nextToken());
