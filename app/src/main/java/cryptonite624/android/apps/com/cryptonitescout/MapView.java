@@ -705,7 +705,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             CARGO7MIN[0] =    85;
             CARGO7MAX[0] =    145;
             CARGO8MIN[0] =    10;
-            CARGO8MAX[0] =    75;
+/.            CARGO8MAX[0] =    75;
             HAB1MIN[0] =      530;
             HAB1MAX[0] =      600;
             HAB2MIN[0] =      530;
