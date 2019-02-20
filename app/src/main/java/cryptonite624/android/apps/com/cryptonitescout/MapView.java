@@ -330,6 +330,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         y = (int)event.getY();
         cancel.setVisibility(View.VISIBLE);
 
+        hatchDisplay.setText("" + x);
+        cargoDisplay.setText("" + y);
+
         cancel.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -464,9 +467,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             return "H2";
         }else if (x > HAB3MIN[0] && x < HAB3MAX[0] && y > HAB3MIN[1] && y < HAB3MAX[1]) {
             return "H3";
-        } else if (x > topx) {
+        } /*else if (x > topx) {
             return "Z";
-        }
+        }*/
         else
             return "Z";
 
@@ -603,58 +606,58 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     public void switchbounds(){
         if(left) {
-            ROCKET1MIN[0] = 170;
-            ROCKET1MAX[0] = 260;
-            ROCKET2MIN[0] = 170;
-            ROCKET2MAX[0] = 260;
-            CARGO1MIN[0] = 280;
-            CARGO1MAX[0] = 340;
-            CARGO2MIN[0] = 380;
-            CARGO2MAX[0] = 440;
-            CARGO3MIN[0] = 450;
-            CARGO3MAX[0] = 520;
-            CARGO4MIN[0] = 520;
-            CARGO4MAX[0] = 590;
-            CARGO5MIN[0] = 280;
-            CARGO5MAX[0] = 340;
-            CARGO6MIN[0] = 380;
-            CARGO6MAX[0] = 440;
-            CARGO7MIN[0] = 450;
-            CARGO7MAX[0] = 520;
-            CARGO8MIN[0] = 520;
-            CARGO8MAX[0] = 590;
-            HAB1MIN[0] = 0;
-            HAB1MAX[0] = 70;
-            HAB2MIN[0] = 0;
-            HAB2MAX[0] = 70;
-            HAB3MIN[0] = 0;
-            HAB3MAX[0] = 70;
-            ROCKET1MIN[1] = 0;
-            ROCKET1MAX[1] = 125;
-            ROCKET2MIN[1] = 275;
-            ROCKET2MAX[1] = 400;
-            CARGO1MIN[1] = 120;
-            CARGO1MAX[1] = 195;
-            CARGO2MIN[1] = 115;
-            CARGO2MAX[1] = 150;
-            CARGO3MIN[1] = 115;
-            CARGO3MAX[1] = 150;
-            CARGO4MIN[1] = 115;
-            CARGO4MAX[1] = 150;
-            CARGO5MIN[1] = 240;
-            CARGO5MAX[1] = 280;
-            CARGO6MIN[1] = 240;
-            CARGO6MAX[1] = 280;
-            CARGO7MIN[1] = 240;
-            CARGO7MAX[1] = 280;
-            CARGO8MIN[1] = 240;
-            CARGO8MAX[1] = 280;
-            HAB1MIN[1] = 110;
-            HAB1MAX[1] = 165;
-            HAB2MIN[1] = 165;
-            HAB2MAX[1] = 235;
-            HAB3MIN[1] = 235;
-            HAB3MAX[1] = 290;
+            ROCKET1MIN[0] = 170 + 260;
+            ROCKET1MAX[0] = 260 + 260;
+            ROCKET2MIN[0] = 170 + 260;
+            ROCKET2MAX[0] = 260 + 260;
+            CARGO1MIN[0] = 280 + 260;
+            CARGO1MAX[0] = 340 + 260;
+            CARGO2MIN[0] = 380 + 260;
+            CARGO2MAX[0] = 440 + 260;
+            CARGO3MIN[0] = 450 + 260;
+            CARGO3MAX[0] = 520 + 260;
+            CARGO4MIN[0] = 520 + 260;
+            CARGO4MAX[0] = 590 + 260;
+            CARGO5MIN[0] = 280 + 260;
+            CARGO5MAX[0] = 340 + 260;
+            CARGO6MIN[0] = 380 + 260;
+            CARGO6MAX[0] = 440 + 260;
+            CARGO7MIN[0] = 450 + 260;
+            CARGO7MAX[0] = 520 + 260;
+            CARGO8MIN[0] = 520 + 260;
+            CARGO8MAX[0] = 590 + 260;
+            HAB1MIN[0] = 0 + 260;
+            HAB1MAX[0] = 70 + 260;
+            HAB2MIN[0] = 0 + 260;
+            HAB2MAX[0] = 70 + 260;
+            HAB3MIN[0] = 0 + 260;
+            HAB3MAX[0] = 70 + 260;
+            ROCKET1MIN[1] = 0 + 110;
+            ROCKET1MAX[1] = 125 + 110;
+            ROCKET2MIN[1] = 275 + 110;
+            ROCKET2MAX[1] = 400 + 110;
+            CARGO1MIN[1] = 120 + 110;
+            CARGO1MAX[1] = 195 + 110;
+            CARGO2MIN[1] = 115 + 110;
+            CARGO2MAX[1] = 150 + 110;
+            CARGO3MIN[1] = 115 + 110;
+            CARGO3MAX[1] = 150 + 110;
+            CARGO4MIN[1] = 115 + 110;
+            CARGO4MAX[1] = 150 + 110;
+            CARGO5MIN[1] = 240 + 110;
+            CARGO5MAX[1] = 280 + 110;
+            CARGO6MIN[1] = 240 + 110;
+            CARGO6MAX[1] = 280 + 110;
+            CARGO7MIN[1] = 240 + 110;
+            CARGO7MAX[1] = 280 + 110;
+            CARGO8MIN[1] = 240 + 110;
+            CARGO8MAX[1] = 280 + 110;
+            HAB1MIN[1] = 110 + 110;
+            HAB1MAX[1] = 165 + 110;
+            HAB2MIN[1] = 165 + 110;
+            HAB2MAX[1] = 235 + 110;
+            HAB3MIN[1] = 235 + 110;
+            HAB3MAX[1] = 290 + 110;
         }
         else{
             ROCKET1MIN[0] =   330;
@@ -676,7 +679,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             CARGO7MIN[0] =    85;
             CARGO7MAX[0] =    145;
             CARGO8MIN[0] =    10;
-/.            CARGO8MAX[0] =    75;
+           CARGO8MAX[0] =    75;
             HAB1MIN[0] =      530;
             HAB1MAX[0] =      600;
             HAB2MIN[0] =      530;
