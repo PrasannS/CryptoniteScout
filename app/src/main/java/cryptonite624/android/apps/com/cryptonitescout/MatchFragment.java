@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.anychart.AnyChart;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 
 /**
@@ -53,6 +56,27 @@ public class MatchFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private ArrayList<String> comms = new ArrayList<String>();
+    
+    public TextView redtotalpoints1;
+    public TextView redtotalhatch1;
+    public TextView redtotalcargo1;
+    public TextView redtotalpoints2;
+    public TextView redtotalhatch2;
+    public TextView redtotalcargo2;
+    public TextView redtotalpoints3;
+    public TextView redtotalhatch3;
+    public TextView redtotalcargo3;
+
+    public TextView bluetotalpoints1;
+    public TextView bluetotalhatch1;
+    public TextView bluetotalcargo1;
+    public TextView bluetotalpoints2;
+    public TextView bluetotalhatch2;
+    public TextView bluetotalcargo2;
+    public TextView bluetotalpoints3;
+    public TextView bluetotalhatch3;
+    public TextView bluetotalcargo3;
+    
 
 
     OnMatchReadListener matchReadListener;
@@ -255,6 +279,32 @@ public class MatchFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+    
+    public void loadData(ArrayList<ActionMap> mapList){
+        redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).actions));
+        redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).actions));
+        redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).actions));
+
+        redtotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(1).actions));
+        redtotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(1).actions));
+        redtotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(1).actions));
+
+        redtotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(2).actions));
+        redtotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(2).actions));
+        redtotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(2).actions));
+
+        bluetotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(3).actions));
+        bluetotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(3).actions));
+        bluetotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(3).actions));
+
+        bluetotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(4).actions));
+        bluetotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(4).actions));
+        bluetotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(4).actions));
+
+        bluetotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(5).actions));
+        bluetotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(5).actions));
+        bluetotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(5).actions));
     }
 
     @Override

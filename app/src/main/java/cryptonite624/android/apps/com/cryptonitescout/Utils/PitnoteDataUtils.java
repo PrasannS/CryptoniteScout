@@ -6,7 +6,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 
 public class PitnoteDataUtils {
 
-    public int matchNum;
+    public int teamnum;
     public String Comment;
     public boolean ProgrammerOnSite;
     public boolean LevelTwoStart;

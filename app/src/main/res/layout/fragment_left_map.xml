@@ -14,7 +14,7 @@
             android:id="@+id/mapview"
             android:layout_width="690dp"
             android:layout_height="460dp"
-            android:background="@drawable/red">
+            android:background="@drawable/redleft">
 <!--
             <Button
                 android:id="@+id/cargobutton1_left"
@@ -23,7 +23,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignStart="@+id/cargobutton5_left"
                 android:layout_marginTop="175dp"
-                android:text="Button" />
+                android:text="1" />
 
             <Button
                 android:id="@+id/cargobutton2_left"
