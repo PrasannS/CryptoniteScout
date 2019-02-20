@@ -4,6 +4,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import android.Manifest;
 import android.content.Intent;
@@ -117,17 +118,35 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
      */
 
     public PitnoteData data;
+    FloatingActionButton fab ;
+
+    public int getTeamNum(){
+        //TODO
+        return 624;
+    }
+
+    public void updateDatasToPrev(){
+        //TODO this method will take the public pitnote data, and update all of the layout datas from that @Taemin
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        List<PitnoteData> temp = PitnoteData.find(PitnoteData.class, "Teamnum = ?",getTeamNum()+"" );
+        if(temp.size()!=0){
+            data = temp.get(0);
+        }
+        else{
+            data.teamnum = getTeamNum();
+        }
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+
         if(Build.VERSION.SDK_INT>=23){
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2 );
         }
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,7 +197,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                matchNum = Integer.parseInt(matchNumber.getText().toString());
                 Comment = Comments.getText().toString();
                 ProgrammerOnSite = Programmer_On_Site.isChecked();
                 LevelTwoStart = LevTwoStart.isChecked();
@@ -195,8 +213,10 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 currentIntake = cargoIntake.getTransitionName();
                 currentLayout = layoutSpinner.getTransitionName();
 
-                data = new PitnoteData(matchNum, Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
+                data = new PitnoteData(data.teamnum, Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage);
+                data.save();
+
             }
         });
 

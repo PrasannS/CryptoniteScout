@@ -1,6 +1,8 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-public class Schedule {
+import com.orm.SugarRecord;
+
+public class Schedule extends SugarRecord<Schedule> {
 
     public Schedule(){
 

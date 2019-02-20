@@ -5,153 +5,57 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.DataSetObserver;
-import android.location.OnNmeaMessageListener;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements BluetoothHandler.BluetoothListener{
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
+public class BluetoothHandler {
+
+    BluetoothListener bluetoothListener;
     public Map<String,String> lastmessages  = new HashMap<>();
-
     public static String regex = "0624";
-    private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
-    private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
-    private static final int REQUEST_ENABLE_BT = 3;
 
-    private ListView lvMainChat;
-    private EditText etMain;
-    private ImageView btnSend;
     private BluetoothAdapter bluetoothAdapter = null;
-    private ChatArrayAdapter chatArrayAdapter;
-    String writeMessage;
 
+    public BluetoothHandler(){
 
+    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        startDiscovery();
-        bluetoothAdapter.setName("Cryptonite");
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                // Your database code here
-                startDiscovery();
-                ensureDiscoverable();
-            }
-        }, 3*1000, 3*1000);
-        /*getWidgetReferences*/
-        lvMainChat = (ListView) findViewById(R.id.lvMainChat);
-        etMain = (EditText) findViewById(R.id.etMain);
-        btnSend = (ImageView) findViewById(R.id.btnSend);
-
-
-        chatArrayAdapter = new ChatArrayAdapter(getApplicationContext(), R.layout.message);
-        lvMainChat.setAdapter(chatArrayAdapter);
-
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                writeMessage = etMain.getText().toString();
-                sendMessage(writeMessage);
-                ChatMessage m = new ChatMessage(false,writeMessage);
-                chatArrayAdapter.add(m);
-                etMain.setText("");
-            }
-        });
-
-        lvMainChat.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        lvMainChat.setAdapter(chatArrayAdapter);
-
-        //to scroll the list view to bottom on data change
-        chatArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                lvMainChat.setSelection(chatArrayAdapter.getCount() - 1);
-            }
-        });
-
-        // Register for broadcasts when a device is discovered.
-        //IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        //registerReceiver(mReceiver, filter);
-
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_NAME_CHANGED);
-        this.registerReceiver(mReceiver, filter);
-
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not available",
-                    Toast.LENGTH_LONG).show();
-            finish();
-            return;
+    public void handleMessage(String s){
+        char i = s.charAt(0);
+        switch (i){
+            case 'm':
+                ActionMapUtils.parseActionMap(s.substring(1)).save();
+                bluetoothListener.OnBluetoothRead("datasaved");
+                break;
+            case 'f':
+                CommentUtils.parseComment(s.substring(1)).save();
+                bluetoothListener.OnBluetoothRead("commentsaved");
+                break;
+            case 'c':
+                bluetoothListener.OnBluetoothRead("chatter"+s.substring(1));
+                break;
+            default:
+                break;
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu, menu);
-        return true;
+    public interface BluetoothListener{
+        public void OnBluetoothRead(String message);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent serverIntent = null;
-        switch (item.getItemId()) {
-            case R.id.secure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-                return true;
-            case R.id.insecure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent,
-                        REQUEST_CONNECT_DEVICE_INSECURE);
-                return true;
-            case R.id.discoverable:
-                ensureDiscoverable();
-                return true;
-        }
-        return false;
-    }
 
-    private void ensureDiscoverable() {
-        if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(
-                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
-            startActivity(discoverableIntent);
-        }
-    }
-
-    private void sendMessage(String message) {
-        final String sNewName = "0624"+"c"+message;
+    private void sendMessage(char type, String message) {
+        final String sNewName = regex+type+message;
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
@@ -189,18 +93,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-        }
-    }
-
-
     private void startDiscovery() {
         if (bluetoothAdapter.isDiscovering()) {
             bluetoothAdapter.cancelDiscovery();
@@ -208,31 +100,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
 
         bluetoothAdapter.startDiscovery();
     }
-
-    private final BroadcastReceiver mBroadcastReceiver2 = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            startFetch(bluetoothDevice);
-            String temp;
-            String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-            if(name!=null)
-                if(name.contains(regex)){
-                    temp = lastmessages.put(bluetoothDevice.getAddress(),name);
-                    if(temp==null){
-                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
-                        if(name.charAt(regex.length())=='c')
-                            chatArrayAdapter.add(message);
-                    }
-                    else if(!temp.equals(name)){
-                        ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
-                        if(name.charAt(regex.length())=='c')
-                            chatArrayAdapter.add(message);
-                    }
-                }
-        }
-    };
 
     public List<BluetoothDevice> mNewDevicesArrayAdapter = new ArrayList<BluetoothDevice>();
 
@@ -243,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
 
             // When discovery finds a device
             String temp;
+            ActionMap tempmap = new ActionMap();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -252,14 +120,17 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
                     if(name.contains(regex)){
                         temp = lastmessages.put(device.getAddress(),name);
                         if(temp==null){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
-                            if(name.charAt(regex.length())=='c')
-                                chatArrayAdapter.add(message);
+                            if (name.charAt(regex.length()) == 'm') {
+                                handleMessage(name.substring(regex.length()));
+                            }
+                            else
                         }
-                        else if(!temp.equals(name)){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()+1));
-                            if(name.charAt(regex.length())=='c')
-                                chatArrayAdapter.add(message);
+                        else if(!temp.equals(name)) {
+                            if (name.charAt(regex.length()) == 'm') {
+                                ActionMapUtils.parseActionMap(name.substring(regex.length())).save();
+                                bluetoothListener.OnBluetoothRead("newdata");
+                            }
+                            else
                         }
                     }
                 Log.d("mReceiver","ACTION_FOUND:"+device.getAddress()+" :"+device.getName());
@@ -298,13 +169,21 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
                 if(name!=null)
                     if(name.contains(regex)){
                         temp = lastmessages.put(device.getAddress(),name);
+                        /**TODO check this out after finishing bluetooth output system*/
                         if(temp==null){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                            chatArrayAdapter.add(message);
+                            if (name.charAt(regex.length()) == 'm') {
+                                saveEntry(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+                            else
+
                         }
                         else if(!temp.equals(name)){
-                            ChatMessage message = new ChatMessage(true,name.substring(regex.length()));
-                            chatArrayAdapter.add(message);
+                            if (name.charAt(regex.length()) == 'm') {
+                                saveEntry(name.substring(regex.length()));
+                                recordeddevices++;
+                            }
+                            else
                         }
                     }
                 Log.d("mReceiver", "NAME_CHANGED:" + device.getAddress() + " :" + device.getName());
@@ -335,20 +214,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         }
     };
 
-
     public void updatePending(){
         //TODO Place Pending Logic over here
-    }
-
-
-    @Override
-    public synchronized void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -356,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         super.onDestroy();
         // Don't forget to unregister the ACTION_FOUND receiver.
         unregisterReceiver(mBroadcastReceiver2);
+        bluetoothAdapter.cancelDiscovery();
     }
 
     public static void startFetch( BluetoothDevice device ) {
@@ -385,8 +253,5 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         }
     }
 
-    @Override
-    public void OnBluetoothRead(String message) {
 
-    }
 }

@@ -34,8 +34,9 @@ import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
-public class CommentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener{
+public class CommentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener,BluetoothHandler.BluetoothListener{
     private Button submit;
     private EditText commentget;
     private String comment;
@@ -217,7 +218,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     /******************************************************************************************************************/
 
     private void sendMessage() {
-        final String sNewName = "0624"+'f'+actionMap.toString();
+        final String sNewName = "0624"+'f'+comment.toString();
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
@@ -269,7 +270,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         public void onReceive(Context context, Intent intent) {
             BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             startFetch(bluetoothDevice);
-            ActionMap tempmap = new ActionMap();
             String temp;
             String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
             if(name!=null)
@@ -278,7 +278,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                     if(temp==null){
                         if (name.charAt(regex.length()) == 'f') {
                             //tempmap.parseString(name.substring(regex.length()));
-                            ActionMapUtils.parseActionMap(name.substring(regex.length()));
+                            Comment comment3 = CommentUtils.parseComment(name.substring(regex.length()));
+                            comment3.save();
                             recordeddevices++;
                         }
                     }
@@ -466,5 +467,10 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     public void saveEntry(String entrymessage){
         ActionMap a = ActionMapUtils.parseActionMap(entrymessage);
         a.save();
+    }
+
+    @Override
+    public void OnBluetoothRead(String message) {
+
     }
 }

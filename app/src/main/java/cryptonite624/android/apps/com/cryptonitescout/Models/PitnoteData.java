@@ -1,8 +1,10 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-public class PitnoteData {
+import com.orm.SugarRecord;
 
-    public int matchNum;
+public class PitnoteData extends SugarRecord<PitnoteData> {
+
+    public int teamnum;
     public String Comment;
     public boolean ProgrammerOnSite;
     public boolean LevelTwoStart;
@@ -26,7 +28,7 @@ public class PitnoteData {
     public PitnoteData(int num, String comm, boolean onSite, boolean lvTwoStart, boolean crossBase,
                        boolean shift, int numBar, int numCharge, int CIMS, int minCIMS, double Demension,
                        String wheel, String layout, String leve, String intake, String languages ){
-        num = matchNum;
+        num = teamnum;
         comm = Comment;
         onSite = ProgrammerOnSite;
         lvTwoStart = LevelTwoStart;

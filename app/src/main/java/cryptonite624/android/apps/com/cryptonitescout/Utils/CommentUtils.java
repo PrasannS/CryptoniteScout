@@ -6,7 +6,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.Comment;
 
 public class CommentUtils {
 
-    public Comment parseComment(String s){
+    public static Comment parseComment(String s){
         Comment c = new Comment();
         StringTokenizer st = new StringTokenizer(s, ";~");
         c.comment = st.nextToken();
@@ -22,7 +22,7 @@ public class CommentUtils {
         return c;
     }
 
-    public String toString(Comment c){
+    public static String toString(Comment c){
         String temp = "";
         temp += c.comment + ";~" + c.teamnum + ";~" + c.pos + ";~" + c.hatchefficiency + ";~" + c.cargoefficiency + ";~" + c.defense + ";~" + c.excessivefouls + ";~" + c.broken + ";~" + c.whybroken + ";~";
         return temp;

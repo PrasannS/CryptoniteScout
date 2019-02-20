@@ -8,4 +8,5 @@ public class Config extends SugarRecord<Config> {
     }
     boolean commentscout;
     String currentuser;
+    int currentmatch;
 }
