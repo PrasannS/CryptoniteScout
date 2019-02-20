@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,12 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.R;
+import cryptonite624.android.apps.com.cryptonitescout.RankingFragment;
 
 
 /**
@@ -85,6 +91,10 @@ public class ScheduleFragment extends Fragment {
     public interface OnScheduleRead{
         public void OnScheduleRead(String message);
     }
+
+    public FragmentManager fragmentManager;
+    public View view2;
+
 
     public void setArgument(Schedule data ){
         matchnum.setText(data.matchnum);
@@ -170,7 +180,7 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
-
+        view2 = view;
         return view;
 
 

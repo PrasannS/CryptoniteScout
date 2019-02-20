@@ -14,7 +14,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary">
             <TextView
                 android:id="@+id/Match_num_schedule"
                 android:layout_width="300dp"
