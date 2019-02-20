@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
 import android.util.Log;
 
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
@@ -23,11 +26,32 @@ public class BluetoothHandler {
     BluetoothListener bluetoothListener;
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
+    public Timer timer = new Timer();
+    public Context curcontext;
 
     private BluetoothAdapter bluetoothAdapter = null;
 
-    public BluetoothHandler(){
+    public BluetoothHandler(Context context){
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        startDiscovery();
+        bluetoothAdapter.setName("Cryptonite");
+        curcontext = context;
+        openreceiver();
+    }
 
+    public void openreceiver(){
+        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_NAME_CHANGED);
+        curcontext.registerReceiver(mReceiver, filter);
+    }
+
+    private void ensureDiscoverable() {
+        if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+            Intent discoverableIntent = new Intent(
+                    BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            discoverableIntent.putExtra(
+                    BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
+            bluetoothListener.start(discoverableIntent);
+        }
     }
 
     public void handleMessage(String s){
@@ -36,6 +60,10 @@ public class BluetoothHandler {
             case 'm':
                 ActionMapUtils.parseActionMap(s.substring(1)).save();
                 bluetoothListener.OnBluetoothRead("datasaved");
+                break;
+            case 'p':
+                ActionMapUtils.parseActionMap(s.substring(1)).save();
+                bluetoothListener.OnBluetoothRead("pitnotesaved");
                 break;
             case 'f':
                 CommentUtils.parseComment(s.substring(1)).save();
@@ -51,10 +79,27 @@ public class BluetoothHandler {
 
     public interface BluetoothListener{
         public void OnBluetoothRead(String message);
+        //TODO get this setup too
+        public void start(Intent intent);
+    }
+
+    public void startlooking(){
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                // Your database code here
+                startDiscovery();
+                ensureDiscoverable();
+            }
+        }, 3*1000, 3*1000);
+    }
+
+    public void stoplooking(){
+        timer.cancel();
     }
 
 
-    private void sendMessage(char type, String message) {
+    public void sendMessage(char type, String message) {
         final String sNewName = regex+type+message;
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
@@ -120,17 +165,10 @@ public class BluetoothHandler {
                     if(name.contains(regex)){
                         temp = lastmessages.put(device.getAddress(),name);
                         if(temp==null){
-                            if (name.charAt(regex.length()) == 'm') {
-                                handleMessage(name.substring(regex.length()));
-                            }
-                            else
+                            handleMessage(name.substring(regex.length()));
                         }
                         else if(!temp.equals(name)) {
-                            if (name.charAt(regex.length()) == 'm') {
-                                ActionMapUtils.parseActionMap(name.substring(regex.length())).save();
-                                bluetoothListener.OnBluetoothRead("newdata");
-                            }
-                            else
+                            handleMessage(name.substring(regex.length()));
                         }
                     }
                 Log.d("mReceiver","ACTION_FOUND:"+device.getAddress()+" :"+device.getName());
@@ -171,19 +209,11 @@ public class BluetoothHandler {
                         temp = lastmessages.put(device.getAddress(),name);
                         /**TODO check this out after finishing bluetooth output system*/
                         if(temp==null){
-                            if (name.charAt(regex.length()) == 'm') {
-                                saveEntry(name.substring(regex.length()));
-                                recordeddevices++;
-                            }
-                            else
+                            handleMessage(name.substring(regex.length()));
 
                         }
                         else if(!temp.equals(name)){
-                            if (name.charAt(regex.length()) == 'm') {
-                                saveEntry(name.substring(regex.length()));
-                                recordeddevices++;
-                            }
-                            else
+                            handleMessage(name.substring(regex.length()));
                         }
                     }
                 Log.d("mReceiver", "NAME_CHANGED:" + device.getAddress() + " :" + device.getName());
@@ -204,12 +234,6 @@ public class BluetoothHandler {
                         mNewDevicesArrayAdapter.add(device);
                     }
                 }
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                setProgressBarIndeterminateVisibility(false);
-                setTitle(R.string.select_device);
-                if (mNewDevicesArrayAdapter.size() == 0) {
-                    mNewDevicesArrayAdapter.add(null);
-                }
             }
         }
     };
@@ -218,11 +242,9 @@ public class BluetoothHandler {
         //TODO Place Pending Logic over here
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // Don't forget to unregister the ACTION_FOUND receiver.
-        unregisterReceiver(mBroadcastReceiver2);
+    public void endstuff(){
+        //TODO set up stuff for this
+        bluetoothListener.OnBluetoothRead("endthings");
         bluetoothAdapter.cancelDiscovery();
     }
 
