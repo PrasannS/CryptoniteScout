@@ -41,7 +41,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     //Class variables that'll help(?) Prasann with the database
 
-    public int matchNum = 0;
+    public int teamnum = 0;
     public String Comment = "";
     public boolean ProgrammerOnSite = false;
     public boolean LevelTwoStart = false;
@@ -127,6 +127,22 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void updateDatasToPrev(){
         //TODO this method will take the public pitnote data, and update all of the layout datas from that @Taemin
+        teamnum = data.teamnum;
+        Comment = data.Comment;
+        ProgrammerOnSite = data.ProgrammerOnSite;
+        LevelTwoStart = data.LevelTwoStart;
+        CrossBase = data.CrossBase;
+        shifter = data.shifter;
+        numBatteries = data.numBatteries;
+        numBatteries = data.numChargers;
+        numCIMS = data.numCIMS;
+        numMiniCIMS = data.numMiniCIMS;
+        robotDimension = data.robotDimension;
+        currentLanguage = data.language;
+        currentClimbLevel = data.Levels;
+        currentWheel = data.wheels;
+        currentIntake = data.Intake;
+        currentLayout = data.layouts;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
