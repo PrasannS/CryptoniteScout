@@ -3,7 +3,12 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import com.orm.SugarRecord;
 
 public class RankingData extends SugarRecord<RankingData> {
-    
+
+     public String placeHolder         ;
+     public String phase            ;
+     public int RankPoint           ;
+     public int Ranking             ;
+     public int winRate             ;
      public int Teamnum             ;
      public int Status              ;
      public int MatchesPlayed       ;
@@ -31,6 +36,8 @@ public class RankingData extends SugarRecord<RankingData> {
      public double  CxHatchRocket   ;
      public double  CxComboRocket   ;
 
-    public RankingData(){}
+    public RankingData(){
+
+    }
 
 }

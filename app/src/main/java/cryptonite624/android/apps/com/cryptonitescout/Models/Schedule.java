@@ -8,5 +8,5 @@ public class Schedule extends SugarRecord<Schedule> {
 
     }
 
-    int r1,r2,r3,b1,b2,b3,matchnum;
+    public int r1,r2,r3,b1,b2,b3,matchnum;
 }
