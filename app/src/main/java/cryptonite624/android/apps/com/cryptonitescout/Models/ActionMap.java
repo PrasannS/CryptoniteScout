@@ -75,7 +75,7 @@ public class ActionMap implements Parcelable{
     }
 
     /*
-        actionCode, 0 = not on switch, 1 = red switch 1, 2 = blue switch1, 3 = blue scale, 4 = red scale, 5 = red switch2, 6 = blue switch, 7 = invalid click
+        actionCode, 0 = not on switch, 1 = jankredleft switch 1, 2 = jankblueleft switch1, 3 = jankblueleft scale, 4 = jankredleft scale, 5 = jankredleft switch2, 6 = jankblueleft switch, 7 = invalid click
         matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
      */
     public ActionMap getMiniMap(int code, int ms){

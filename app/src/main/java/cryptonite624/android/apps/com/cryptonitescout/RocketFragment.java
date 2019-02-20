@@ -222,7 +222,7 @@ public class RocketFragment extends Fragment {
             }
         });
 
-        //if the hatch is in, it's red. if the cargo is in, it's yellow. if both, it's green
+        //if the hatch is in, it's jankredleft. if the cargo is in, it's yellow. if both, it's green
 
         if(brhf){
             br.setBackgroundColor(Color.RED);
