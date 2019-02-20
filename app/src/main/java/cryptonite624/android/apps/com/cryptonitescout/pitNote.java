@@ -41,7 +41,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     //Class variables that'll help(?) Prasann with the database
 
-    public int matchNum = 0;
+    public int teamnum = 0;
     public String Comment = "";
     public boolean ProgrammerOnSite = false;
     public boolean LevelTwoStart = false;
@@ -125,8 +125,34 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         return 624;
     }
 
+    public static int getIndexOfArray(String [] s, String target){
+        for(int i=0;i<s.length;i++){
+            if(s[i].equalsIgnoreCase(target)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void updateDatasToPrev(){
         //TODO this method will take the public pitnote data, and update all of the layout datas from that @Taemin
+        matchNumber.setText(data.teamnum);
+        Comments.setText(data.Comment);
+        Programmer_On_Site.setChecked(data.ProgrammerOnSite);
+        LevTwoStart.setChecked(data.LevelTwoStart);
+        CrossBaseLine.setChecked(data.CrossBase);
+        Shifters.setChecked(data.shifter);
+        numBatterie.setText(data.numBatteries);
+        numCharger.setText(data.numChargers);
+        CIMS.setText(data.numCIMS);
+        miniCIMS.setText(data.numMiniCIMS);
+        robotDimensions.setText(data.robotDimension+"");
+        pgLanguage.setSelection(getIndexOfArray(languages, language));
+        hatchIntake.setSelection(getIndexOfArray(Intakes, Intake));
+        wheelSpinner.setSelection(getIndexOfArray(wheelArr, wheels));
+        cargoIntake.setSelection(getIndexOfArray(Intakes, Intake2));
+        ClimbLevels.setSelection(getIndexOfArray(levels, Levels));
+        layoutSpinner.setSelection(getIndexOfArray(layoutArr, layouts));
     }
 
     protected void onCreate(Bundle savedInstanceState) {
