@@ -17,7 +17,7 @@
             android:background="@drawable/jankredright"
             android:descendantFocusability="blocksDescendants">
 
-
+<!--
 
             <Button
                 android:enabled="false"
@@ -156,7 +156,7 @@
                 android:text="Button"
                 android:visibility="invisible" />
 
-
+-->
 
 
         </RelativeLayout>
