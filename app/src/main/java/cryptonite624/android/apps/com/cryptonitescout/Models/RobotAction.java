@@ -15,6 +15,46 @@ public class RobotAction extends SugarRecord{
     public int habLevel;
     public int time;
 
+    public int getMatchStatus() {
+        return matchStatus;
+    }
+
+    public void setMatchStatus(int matchStatus) {
+        this.matchStatus = matchStatus;
+    }
+
+    public String getActionCode() {
+        return actionCode;
+    }
+
+    public void setActionCode(String actionCode) {
+        this.actionCode = actionCode;
+    }
+
+    public boolean isHatch() {
+        return hatch;
+    }
+
+    public void setHatch(boolean hatch) {
+        this.hatch = hatch;
+    }
+
+    public int getHabLevel() {
+        return habLevel;
+    }
+
+    public void setHabLevel(int habLevel) {
+        this.habLevel = habLevel;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     public RobotAction(){
     }
 
