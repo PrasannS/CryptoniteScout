@@ -25,11 +25,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.messages.MessagesClient;
-import com.google.android.gms.nearby.messages.MessagesOptions;
-import com.google.android.gms.nearby.messages.NearbyPermissions;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;

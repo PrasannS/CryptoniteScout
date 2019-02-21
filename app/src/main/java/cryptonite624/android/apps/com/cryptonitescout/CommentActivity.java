@@ -68,10 +68,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public Comment comm;
 
-
-
-    public int recordeddevices = 0;
-
     public BluetoothHandler bluetoothHandler;
 
 
