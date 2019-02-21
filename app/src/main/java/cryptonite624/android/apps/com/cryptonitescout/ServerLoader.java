@@ -1,5 +1,7 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 
@@ -11,6 +13,12 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
 
 public class ServerLoader {
+
+    ServerLoadListener serverLoadListener = new ServerLoadListener() {
+        @Override
+        public void onServerLoad() {
+        }
+    };
 
     public TBA tba;
     public static String event = "2019week0";
@@ -43,9 +51,14 @@ public class ServerLoader {
             return null;
         }
 
-        protected void onPostExecute(Long result) {
-            
+        @Override
+        protected void onPostExecute(Void v) {
+            serverLoadListener.onServerLoad();
         }
+    }
+
+    public interface ServerLoadListener{
+        void onServerLoad();
     }
 
 
