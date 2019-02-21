@@ -85,12 +85,12 @@ public class RankingFragment extends Fragment {
     }
 
     public void setArguments(RankingData rankdata){
-        Rankings_ranking.setText(rankdata.Ranking);
-        Teamnum_rankings.setText(rankdata.Teamnum);
-        Winrate_rankings.setText(rankdata.winRate);
-        RankPoints_rankings.setText(rankdata.RankPoint);
-        Phasese_rankings.setText(rankdata.phase);
-        PlaceHolder_rankings.setText(rankdata.placeHolder);
+        Rankings_ranking.setText(rankdata.getRanking());
+        Teamnum_rankings.setText(rankdata.getTeamnum());
+        Winrate_rankings.setText(rankdata.getWinRate());
+        RankPoints_rankings.setText(rankdata.getRankPoint());
+        Phasese_rankings.setText(rankdata.getPhase());
+        PlaceHolder_rankings.setText(rankdata.getPlaceHolder());
     }
 
     @Override
