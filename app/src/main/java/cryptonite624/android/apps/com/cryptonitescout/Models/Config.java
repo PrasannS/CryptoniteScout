@@ -3,19 +3,12 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import com.orm.SugarRecord;
 
 public class Config extends SugarRecord{
-    public boolean isCommentscout() {
-        return commentscout;
-    }
 
-    public void setCommentscout(boolean commentscout) {
-        this.commentscout = commentscout;
-    }
-
-    public String getCurrentuser() {
+    public User getCurrentuser() {
         return currentuser;
     }
 
-    public void setCurrentuser(String currentuser) {
+    public void setCurrentuser(User currentuser) {
         this.currentuser = currentuser;
     }
 
@@ -38,8 +31,7 @@ public class Config extends SugarRecord{
     public Config(){
 
     }
-    boolean commentscout;
-    String currentuser;
+    User currentuser;
     int currentmatch;
     String eventkey;
 

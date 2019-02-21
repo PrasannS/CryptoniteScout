@@ -6,8 +6,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.drm.DrmStore;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
+
+import com.orm.SugarRecord;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
@@ -34,19 +40,32 @@ public class BluetoothHandler {
 
         }
     };
+
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
     public Timer timer = new Timer();
     public Context curcontext;
+    public Config configuration;
+    public Map<Character,Boolean> updated;
 
     private BluetoothAdapter bluetoothAdapter = null;
 
     public BluetoothHandler(Context context){
+        if(Config.listAll(Config.class).size()==0)
+            configuration = new Config();
+        else
+            configuration = Config.findById(Config.class,Long.valueOf(1));
+        configuration.save();
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         startDiscovery();
         bluetoothAdapter.setName("Cryptonite");
         curcontext = context;
         openreceiver();
+        updated.put('m',true);
+        updated.put('p',true);
+        updated.put('f',true);
+        updated.put('c',true);
+        updated.put('n',true);
     }
 
     public void openreceiver(){
@@ -82,6 +101,29 @@ public class BluetoothHandler {
             case 'c':
                 bluetoothListener.OnBluetoothRead("chatter"+s.substring(1));
                 break;
+            case 'n':
+                bluetoothListener.OnBluetoothRead("currentnum");
+                if(Integer.parseInt(s.substring(1))> configuration.getCurrentmatch()){
+                    updatePending('n');
+                    if(Integer.parseInt(s.substring(1))+1==configuration.getCurrentmatch()){
+                        sendMessage('w',s.substring(1));
+                    }
+                }
+                else if(Integer.parseInt(s.substring(1))< configuration.getCurrentmatch()){
+                    sendMessage('n', Schedule.findById(Schedule.class,Long.valueOf(Integer.parseInt(s.substring(1))+1))+"");
+                }
+                break;
+            /*case 'w':
+                bluetoothListener.OnBluetoothRead("requestmade");
+                String temp = "";
+                List<ActionMap> maplist = ActionMap.find(ActionMap.class,"Teamnum = ?",Integer.parseInt(s.substring(1))+"");
+                for(ActionMap a :maplist){
+                    temp+=a.toString()+',';
+                }
+                sendMessage('u',temp);
+                break;
+            case 'u':
+                if()*/
             default:
                 break;
         }
@@ -248,8 +290,10 @@ public class BluetoothHandler {
         }
     };
 
-    public void updatePending(){
+    public void updatePending(char type){
         //TODO Place Pending Logic over here
+        sendMessage(type,configuration.getCurrentmatch()+"");
+        updated.put(type,false);
     }
 
     public void endstuff(){
