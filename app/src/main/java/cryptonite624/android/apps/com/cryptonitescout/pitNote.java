@@ -112,7 +112,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
      *  reminder to add
      *  green-scouted
      *  yellow-partial
-     *  red-no data
+     *  jankredleft-no data
      *  server updates
      *  excel
      */

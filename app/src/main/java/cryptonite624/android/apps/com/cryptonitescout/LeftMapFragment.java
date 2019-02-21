@@ -89,7 +89,7 @@ public class LeftMapFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_left_map, container, false);
 
-/*
+        /*
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_left);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_left);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_left);
@@ -198,7 +198,8 @@ public class LeftMapFragment extends Fragment{
             }
         }
     }
-/*
+
+    /*
     public void updateButtons() {
         //Activity tempActivity = (MapView) getActivity();
         //((MapView) tempActivity).updateFilled();
