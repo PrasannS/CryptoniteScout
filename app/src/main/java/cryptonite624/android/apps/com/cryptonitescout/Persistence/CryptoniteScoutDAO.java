@@ -60,102 +60,102 @@ public class CryptoniteScoutDAO {
         int hatchtotal=0;
         r.get(0).Teamnum=teamnum;
         r.get(0).Status =0;
-        r.get(0).MatchesPlayed++;
+        r.get(0).getMatchesPlayed();
         temparr[0]="A1";
         temparr[1]="B1";
         temparr[2]="A2";
         temparr[3]="B2";
         int[] status = {1};
-        r.get(0).SandstormCargoOne+=ActionMapUtils.numScored(temparr, status, false, a.actions); 
+        r.get(0).getSandstormCargoOne()+=ActionMapUtils.numScored(temparr, status, false, a.getActions()); 
         temparr[0]="A3";
         temparr[1]="B3";
         temparr[2]="A4";
         temparr[3]="B4";
-        cargototal+=r.get(0).SandstormCargoOne;
-        r.get(0).SandstormCargoTwo+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getSandstormCargoOne;
+        r.get(0).getSandstormCargoTwo+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A5";
         temparr[1]="B5";
         temparr[2]="A6";
         temparr[3]="B6";
-        cargototal+=r.get(0).SandstormCargoTwo;
-        r.get(0).SandstormCargoThree+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getSandstormCargoTwo;
+        r.get(0).getSandstormCargoThree()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A1";
         temparr[1]="B1";
         temparr[2]="A2";
         temparr[3]="B2";
-        cargototal+=r.get(0).SandstormCargoThree;
-        r.get(0).SandstormHatchOne+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getSandstormCargoThree;
+        r.get(0).getSandstormHatchOne()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A3";
         temparr[1]="B3";
         temparr[2]="A4";
         temparr[3]="B4";
-        hatchtotal+=r.get(0).SandstormHatchOne;
-        r.get(0).SandstormHatchTwo+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        hatchtotal+=r.get(0).getSandstormHatchOne;
+        r.get(0).getSandstormHatchTwo+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A5";
         temparr[1]="B5";
         temparr[2]="A6";
         temparr[3]="B6";
-        hatchtotal+=r.get(0).SandstormHatchTwo;
-        r.get(0).SandstormHatchThree+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        hatchtotal+=r.get(0).getSandstormHatchTwo;
+        r.get(0).getSandstormHatchThree()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A1";
         temparr[1]="B1";
         temparr[2]="A2";
         temparr[3]="B2";
         status[0]=2;
-        hatchtotal+=r.get(0).SandstormHatchThree;
-        r.get(0).TeleopCargoOne+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        hatchtotal+=r.get(0).getSandstormHatchThree;
+        r.get(0).getTeleopCargoOne()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A3";
         temparr[1]="B3";
         temparr[2]="A4";
         temparr[3]="B4";
-        cargototal+=r.get(0).TeleopCargoOne;
-        r.get(0).TeleopCargoTwo+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getTeleopCargoOne;
+        r.get(0).getTeleopCargoTwo+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A5";
         temparr[1]="B5";
         temparr[2]="A6";
         temparr[3]="B6";
-        cargototal+=r.get(0).TeleopCargoTwo;
-        r.get(0).TeleopCargoThree+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getTeleopCargoTwo;
+        r.get(0).getTeleopCargoThree()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A1";
         temparr[1]="B1";
         temparr[2]="A2";
         temparr[3]="B2";
-        cargototal+=r.get(0).TeleopCargoThree;
-        r.get(0).TeleopHatchOne+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        cargototal+=r.get(0).getTeleopCargoThree;
+        r.get(0).getTeleopHatchOne()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A3";
         temparr[1]="B3";
         temparr[2]="A4";
         temparr[3]="B4";
-        hatchtotal+=r.get(0).TeleopHatchOne;
-        r.get(0).TeleopHatchTwo+=ActionMapUtils.numScored(temparr, status, false, a.actions);
+        hatchtotal+=r.get(0).getTeleopHatchOne;
+        r.get(0).getTeleopHatchTwo+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
         temparr[0]="A5";
         temparr[1]="B5";
         temparr[2]="A6";
         temparr[3]="B6";
-        hatchtotal+=r.get(0).TeleopHatchTwo;
-        r.get(0).TeleopHatchThree+=ActionMapUtils.numScored(temparr, status, false, a.actions);
-        hatchtotal+=r.get(0).TeleopHatchThree;
+        hatchtotal+=r.get(0).getTeleopHatchTwo;
+        r.get(0).getTeleopHatchThree()+=ActionMapUtils.numScored(temparr, status, false, a.getActions());
+        hatchtotal+=r.get(0).getTeleopHatchThree;
         String[] cargoship = {"C1","C2","C3","C4","C5","C6"};
         int[]all = {0,1,2,3};
 
-        r.get(0).CargoAvg = cargototal/(double)r.get(0).MatchesPlayed;
-        r.get(0).HatchAvg = hatchtotal/(double)r.get(0).MatchesPlayed;
-        r.get(0).CxCargoCargoShip=(r.get(0).CxCargoCargoShip*(r.get(0).MatchesPlayed-1)+ActionMapUtils.numScored(cargoship, all, false, a.actions)/(double)r.get(0).MatchesPlayed);
-        r.get(0).CxHatchCargoShip=(r.get(0).CxHatchCargoShip*(r.get(0).MatchesPlayed-1)+ActionMapUtils.numScored(cargoship, all, false, a.actions)/(double)r.get(0).MatchesPlayed);
-        r.get(0).CxCargoRocket = ((r.get(0).SandstormCargoOne+r.get(0).TeleopCargoOne)+(r.get(0).SandstormCargoTwo+r.get(0).TeleopCargoTwo)*1.5+(r.get(0).SandstormCargoThree+r.get(0).TeleopCargoThree)*2)/r.get(0).MatchesPlayed;
-        r.get(0).CxHatchRocket = ((r.get(0).SandstormHatchOne+r.get(0).TeleopHatchOne)+(r.get(0).SandstormHatchTwo+r.get(0).TeleopHatchTwo)*1.5+(r.get(0).SandstormHatchThree+r.get(0).TeleopHatchThree)*2)/r.get(0).MatchesPlayed;
-        r.get(0).CxComboRocket = r.get(0).CxCargoRocket+r.get(0).CxHatchRocket;
-        r.get(0).CxComboCargoShip = r.get(0).CxCargoCargoShip+r.get(0).CxHatchCargoShip;
+        r.get(0).setCargoAvg = cargototal/(double)r.get(0).getMatchesPlayed();
+        r.get(0).setHatchAvg = hatchtotal/(double)r.get(0).getMatchesPlayed();
+        r.get(0).setCxCargoCargoShip=(r.get(0).CxCargoCargoShip*(r.get(0).getMatchesPlayed()-1)+ActionMapUtils.numScored(cargoship, all, false, a.actions)/(double)r.get(0).getMatchesPlayed());
+        r.get(0).setCxHatchCargoShip=(r.get(0).CxHatchCargoShip*(r.get(0).getMatchesPlayed()-1)+ActionMapUtils.numScored(cargoship, all, false, a.actions)/(double)r.get(0).getMatchesPlayed());
+        r.get(0).setCxCargoRocket = ((r.get(0).SandstormCargoOne+r.get(0).TeleopCargoOne)+(r.get(0).SandstormCargoTwo+r.get(0).TeleopCargoTwo)*1.5+(r.get(0).SandstormCargoThree+r.get(0).TeleopCargoThree)*2)/r.get(0).getMatchesPlayed();
+        r.get(0).setCxHatchRocket = ((r.get(0).SandstormHatchOne+r.get(0).TeleopHatchOne)+(r.get(0).SandstormHatchTwo+r.get(0).TeleopHatchTwo)*1.5+(r.get(0).SandstormHatchThree+r.get(0).TeleopHatchThree)*2)/r.get(0).getMatchesPlayed();
+        r.get(0).setCxComboRocket = r.get(0).CxCargoRocket+r.get(0).CxHatchRocket;
+        r.get(0).setCxComboCargoShip = r.get(0).CxCargoCargoShip+r.get(0).CxHatchCargoShip;
 
-        if(a.endclimb!=0){
-            if (a.endclimb == 1) {
-                r.get(0).ClimbOne = (r.get(0).ClimbOne*(r.get(0).MatchesPlayed-1)+1)/r.get(0).MatchesPlayed;
+        if(a.getEndclimb()!=0){
+            if (a.getEndclimb() == 1) {
+                r.get(0).getClimbOne() = (r.get(0).getClimbOne()*(r.get(0).getMatchesPlayed()-1)+1)/r.get(0).getMatchesPlayed();
             }
-            if (a.endclimb == 2) {
-                r.get(0).ClimbTwo = (r.get(0).ClimbTwo*(r.get(0).MatchesPlayed-1)+1)/r.get(0).MatchesPlayed;
+            if (a.getEndclimb() == 2) {
+                r.get(0).ClimbTwo = (r.get(0).ClimbTwo*(r.get(0).getMatchesPlayed()-1)+1)/r.get(0).getMatchesPlayed();
             }
-            if (a.endclimb == 3) {
-                r.get(0).ClimbThree = (r.get(0).ClimbThree*(r.get(0).MatchesPlayed-1)+1)/r.get(0).MatchesPlayed;
+            if (a.getEndclimb() == 3) {
+                r.get(0).ClimbThree = (r.get(0).ClimbThree*(r.get(0).getMatchesPlayed()-1)+1)/r.get(0).getMatchesPlayed();
             }
         }
         r.get(0).save();

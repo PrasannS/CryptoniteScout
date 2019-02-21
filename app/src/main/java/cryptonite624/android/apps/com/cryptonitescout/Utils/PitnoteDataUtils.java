@@ -6,49 +6,49 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 
 public class PitnoteDataUtils {
 
-    public int teamnum;
-    public String Comment;
-    public boolean ProgrammerOnSite;
-    public boolean LevelTwoStart;
-    public boolean CrossBase;
-    public boolean shifter;
-    public int numBatteries;
-    public int numChargers;
-    public int numCIMS;
-    public int numMiniCIMS;
-    public double robotDimension;
-    public String wheels;
-    public String layouts;
-    public String Levels;
-    public String Intake;
-    public String language;
+    int teamnum;
+    String Comment;
+    boolean ProgrammerOnSite;
+    boolean LevelTwoStart;
+    boolean CrossBase;
+    boolean shifter;
+    int numBatteries;
+    int numChargers;
+    int numCIMS;
+    int numMiniCIMS;
+    double robotDimension;
+    String wheels;
+    String layouts;
+    String Levels;
+    String Intake;
+    String language;
 
     public static String toSTring(PitnoteData data){
-        String temp = data.teamnum+" "+data.Comment+" "+data.ProgrammerOnSite+" "+data.LevelTwoStart+" "+data.CrossBase+" "+data.shifter+
-                " "+data.numBatteries+" "+data.numChargers+" "+data.numCIMS+" "+data.numMiniCIMS+" "+data.robotDimension+" "+data.wheels+
-                " "+data.layouts+" "+data.Levels+" "+data.Intake+" "+data.language;
+        String temp = data.getTeamnum()+" "+data.getComment()+" "+data.isProgrammerOnSite()+" "+data.isLevelTwoStart()+" "+data.isCrossBase()+" "+data.isShifter()+
+                " "+data.getNumBatteries()+" "+data.getNumChargers()+" "+data.getNumCIMS()+" "+data.getNumMiniCIMS()+" "+data.getRobotDimension()+" "+data.getWheels()+
+                " "+data.getLayouts()+" "+data.getLevels()+" "+data.getIntake()+" "+data.getLanguage();
         return temp;
     }
 
     public static PitnoteData parsePitnoteData(String temp){
         StringTokenizer st = new StringTokenizer(temp," ");
         PitnoteData pitnote = new PitnoteData();
-        pitnote.teamnum = Integer.parseInt(st.nextToken());
-        pitnote.Comment = st.nextToken();
-        pitnote.ProgrammerOnSite = Boolean.parseBoolean(st.nextToken());
-        pitnote.LevelTwoStart = Boolean.parseBoolean(st.nextToken());
-        pitnote.CrossBase = Boolean.parseBoolean(st.nextToken());
-        pitnote.shifter = Boolean.parseBoolean(st.nextToken());
-        pitnote.numBatteries = Integer.parseInt(st.nextToken());
-        pitnote.numChargers = Integer.parseInt(st.nextToken());
-        pitnote.numCIMS = Integer.parseInt(st.nextToken());
-        pitnote.numMiniCIMS = Integer.parseInt(st.nextToken());
-        pitnote.robotDimension = Double.parseDouble(st.nextToken());
-        pitnote.wheels = st.nextToken();
-        pitnote.layouts = st.nextToken();
-        pitnote.Levels = st.nextToken();
-        pitnote.Intake = st.nextToken();
-        pitnote.language = st.nextToken();
+        pitnote.setTeamnum(Integer.parseInt(st.nextToken()));
+        pitnote.setComment(st.nextToken());
+        pitnote.setProgrammerOnSite(Boolean.parseBoolean(st.nextToken()));
+        pitnote.setLevelTwoStart(Boolean.parseBoolean(st.nextToken()));
+        pitnote.setCrossBase(Boolean.parseBoolean(st.nextToken()));
+        pitnote.setShifter(Boolean.parseBoolean(st.nextToken()));
+        pitnote.setNumBatteries(Integer.parseInt(st.nextToken()));
+        pitnote.setNumChargers(Integer.parseInt(st.nextToken()));
+        pitnote.setNumCIMS(Integer.parseInt(st.nextToken()));
+        pitnote.setNumMiniCIMS(Integer.parseInt(st.nextToken()));
+        pitnote.setRobotDimension(Double.parseDouble(st.nextToken()));
+        pitnote.setWheels(st.nextToken());
+        pitnote.setLayouts(st.nextToken());
+        pitnote.setLevels( st.nextToken());
+        pitnote.setIntake(st.nextToken());
+        pitnote.setLanguage(st.nextToken());
 
         return pitnote;
     }

@@ -64,41 +64,41 @@ public class RocketFragment extends Fragment {
 
     public void setArguments(ActionMap actionMap) {
         map = actionMap;
-        for(int i = 0; i < actionMap.actions.size(); i++){
-            if(actionMap.actions.get(i).actionCode.equals("A1") && actionMap.actions.get(i).hatch){
+        for(int i = 0; i < actionMap.getActions().size(); i++){
+            if(actionMap.getActions().get(i).getActionCode().equals("A1") && actionMap.getActions().get(i).isHatch()){
                 brhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A2")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& actionMap.getActions().get(i).isHatch()){
                 blhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A3")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& actionMap.getActions().get(i).isHatch()){
                 mrhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A4")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& actionMap.getActions().get(i).isHatch()){
                 mlhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A5")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& actionMap.getActions().get(i).isHatch()){
                 trhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A6")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& actionMap.getActions().get(i).isHatch()){
                 tlhf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A1")&& actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A1")&& actionMap.getActions().get(i).isHatch()){
                 brcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A2")&& !actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& !actionMap.getActions().get(i).isHatch()){
                 blcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A3")&& !actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& !actionMap.getActions().get(i).isHatch()){
                 mrcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A4")&& !actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& !actionMap.getActions().get(i).isHatch()){
                 mlcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A5")&& !actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& !actionMap.getActions().get(i).isHatch()){
                 trcf = true;
             }
-            else if(actionMap.actions.get(i).actionCode.equals("A6")&& !actionMap.actions.get(i).hatch){
+            else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& !actionMap.getActions().get(i).isHatch()){
                 tlcf = true;
             }
         }
@@ -153,7 +153,7 @@ public class RocketFragment extends Fragment {
             }
         });
 
-        rocketHatch = (Button)view.findViewById(R.id.rockethatch);
+        rocketHatch = (Button)view.findViewById(R.id.rocketisHatch());
         rocketHatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,7 +222,7 @@ public class RocketFragment extends Fragment {
             }
         });
 
-        //if the hatch is in, it's jankredleft. if the cargo is in, it's yellow. if both, it's green
+        //if the isHatch() is in, it's jankredleft. if the cargo is in, it's yellow. if both, it's green
 
         if(brhf){
             br.setBackgroundColor(Color.RED);

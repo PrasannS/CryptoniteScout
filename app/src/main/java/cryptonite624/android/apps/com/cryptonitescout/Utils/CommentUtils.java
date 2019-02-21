@@ -9,22 +9,22 @@ public class CommentUtils {
     public static Comment parseComment(String s){
         Comment c = new Comment();
         StringTokenizer st = new StringTokenizer(s, ";~");
-        c.comment = st.nextToken();
-        c.teamnum = Integer.parseInt(st.nextToken());
-        c.pos = Integer.parseInt(st.nextToken());
-        c.hatchefficiency = Integer.parseInt(st.nextToken());
-        c.cargoefficiency = Integer.parseInt(st.nextToken());
-        c.defense = Integer.parseInt(st.nextToken());
-        c.excessivefouls = Boolean.parseBoolean(st.nextToken());
-        c.broken = Boolean.parseBoolean(st.nextToken());
-        c.whybroken = st.nextToken();
+        c.setComment( st.nextToken());
+        c.setTeamnum( Integer.parseInt(st.nextToken()));
+        c.setPos( Integer.parseInt(st.nextToken()));
+        c.setHatchefficiency( Integer.parseInt(st.nextToken()));
+        c.setCargoefficiency( Integer.parseInt(st.nextToken()));
+        c.setDefense( Integer.parseInt(st.nextToken()));
+        c.setExcessivefouls(Boolean.parseBoolean(st.nextToken()));
+        c.setBroken(Boolean.parseBoolean(st.nextToken()));
+        c.setWhybroken( st.nextToken());
 
         return c;
     }
 
     public static String toString(Comment c){
         String temp = "";
-        temp += c.comment + ";~" + c.teamnum + ";~" + c.pos + ";~" + c.hatchefficiency + ";~" + c.cargoefficiency + ";~" + c.defense + ";~" + c.excessivefouls + ";~" + c.broken + ";~" + c.whybroken + ";~";
+        temp += c.getComment() + ";~" + c.getTeamnum() + ";~" + c.getPos() + ";~" + c.getHatchefficiency() + ";~" + c.getCargoefficiency() + ";~" + c.getDefense() + ";~" + c.isExcessivefouls() + ";~" + c.isBroken() + ";~" + c.getWhybroken() + ";~";
         return temp;
     }
 }
