@@ -23,7 +23,17 @@ import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
 public class BluetoothHandler {
 
-    BluetoothListener bluetoothListener;
+    BluetoothListener bluetoothListener = new BluetoothListener() {
+        @Override
+        public void OnBluetoothRead(String message) {
+
+        }
+
+        @Override
+        public void start(Intent intent) {
+
+        }
+    };
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
     public Timer timer = new Timer();

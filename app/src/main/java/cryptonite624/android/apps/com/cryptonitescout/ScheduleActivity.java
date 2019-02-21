@@ -9,10 +9,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
-public class ScheduleActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity implements ServerLoader.ServerLoadListener {
 
     public ServerLoader serverLoader ;
     public static FragmentManager fragmentManager;
@@ -20,6 +21,7 @@ public class ScheduleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        serverLoader = new ServerLoader();
         serverLoader.loadFromTBA();
 
         fragmentManager = getSupportFragmentManager();
@@ -44,7 +46,7 @@ public class ScheduleActivity extends AppCompatActivity {
         return view2;
     }
 
-    public void addAllRows(ArrayList<Schedule> data) {
+    public void addAllRows(List<Schedule> data) {
         cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment temp;
         for(Schedule s:data){
             temp = new cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment();
@@ -56,5 +58,10 @@ public class ScheduleActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
             }
         }
+    }
+
+    @Override
+    public void onServerLoad() {
+        addAllRows(Schedule.listAll(Schedule.class));
     }
 }
