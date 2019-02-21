@@ -42,6 +42,10 @@ public class ServerLoader {
             }
             return null;
         }
+
+        protected void onPostExecute(Long result) {
+            
+        }
     }
 
 

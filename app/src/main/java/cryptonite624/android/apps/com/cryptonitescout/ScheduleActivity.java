@@ -14,10 +14,13 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
 public class ScheduleActivity extends AppCompatActivity {
 
+    public ServerLoader serverLoader ;
     public static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        serverLoader.loadFromTBA();
 
         fragmentManager = getSupportFragmentManager();
         if(findViewById(R.id.fragmentcontainer)!=null){
