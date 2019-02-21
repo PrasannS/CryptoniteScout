@@ -14,17 +14,14 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
 public class ServerLoader {
 
-    ServerLoadListener serverLoadListener = new ServerLoadListener() {
-        @Override
-        public void onServerLoad() {
-        }
-    };
+    ServerLoadListener serverLoadListener;
 
     public TBA tba;
     public static String event = "2019week0";
 
-    public ServerLoader(){
+    public ServerLoader(ServerLoadListener sl){
         // Set TBA auth token
+        serverLoadListener =sl;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
         StrictMode.setThreadPolicy(policy);
         TBA.setAuthToken("7pMGgXcAgBXg3hN4mchVQo67y6bi0bmWJv7S7YLU2mw8hre3B98frdj49mxlk7QR");
@@ -54,6 +51,7 @@ public class ServerLoader {
 
         @Override
         protected void onPostExecute(Void v) {
+
             serverLoadListener.onServerLoad();
         }
     }

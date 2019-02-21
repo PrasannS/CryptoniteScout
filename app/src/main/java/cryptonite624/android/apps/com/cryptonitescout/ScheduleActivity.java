@@ -21,7 +21,7 @@ public class ScheduleActivity extends AppCompatActivity implements ServerLoader.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        serverLoader = new ServerLoader();
+        serverLoader = new ServerLoader(this);
         serverLoader.loadFromTBA();
 
         fragmentManager = getSupportFragmentManager();
@@ -62,6 +62,7 @@ public class ScheduleActivity extends AppCompatActivity implements ServerLoader.
 
     @Override
     public void onServerLoad() {
+
         addAllRows(Schedule.listAll(Schedule.class));
     }
 }
