@@ -2,7 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 import com.orm.SugarRecord;
 
-public class Comment extends SugarRecord<Comment> {
+public class Comment extends SugarRecord {
 
     public String comment;
     public int teamnum;

@@ -2,7 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 import com.orm.SugarRecord;
 
-public class RankingData extends SugarRecord<RankingData> {
+public class RankingData extends SugarRecord{
 
      public String placeHolder         ;
      public String phase            ;

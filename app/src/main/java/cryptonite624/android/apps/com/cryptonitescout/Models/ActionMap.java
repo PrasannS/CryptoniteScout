@@ -10,7 +10,7 @@ import android.os.Parcelable;
 import com.orm.SugarRecord;
 
 
-public class ActionMap extends SugarRecord<ActionMap>{
+public class ActionMap extends SugarRecord{
 
     public ArrayList<RobotAction> actions;
     public int endclimb;
