@@ -40,7 +40,8 @@ public class ServerLoader {
     private class LoadAllMatches extends AsyncTask<String,Void,Void>{
         @Override
         protected Void doInBackground(String... strings) {
-            Schedule.deleteAll(Schedule.class);
+            //if(Schedule.listAll(Schedule.class).size() > 0)
+            //Schedule.deleteAll(Schedule.class);
             Match[] matches = tba.getMatches("2019week0");
             TBA.sort(matches, SortingType.DATE);
             int cur = 0;

@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+
 public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener{
 
     public static FragmentManager fragmentManager;
@@ -79,13 +81,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     return true;
                 }*/
                 if (id == R.id.nav_matches) {
-                    Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
-                    if(findViewById(R.id.fragmentcontainer)!=null){
-                        MatchFragment matchFragment= new MatchFragment();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
-                        fragmentTransaction.commit();
-                    }
+                    Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(DataAccessActivity.this, ScheduleActivity.class));
                     return true;
                 }
                 if (id == R.id.nav_newentry) {
