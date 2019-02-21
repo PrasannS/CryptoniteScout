@@ -90,9 +90,9 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_right_map, container, false);
 
-        updateButtons();
+     /*   updateButtons();
 
-
+    /*
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_right);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_right);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_right);
@@ -101,14 +101,14 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         cargobutton6 = (Button)view.findViewById(R.id.cargobutton6_right);
         cargobutton7 = (Button)view.findViewById(R.id.cargobutton7_right);
         cargobutton8 = (Button)view.findViewById(R.id.cargobutton8_right);
-
-
+*/
+/*
         cargobutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Activity tempActivity = (MapView) getActivity();
                 actionMap = ((MapView)tempActivity).getActionMap();
-                updateButtons();
+                //updateButtons();
             }
         });
 
@@ -180,7 +180,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
                 actionMap = ((MapView)tempActivity).getActionMap();
                 updateButtons();
             }
-        });
+        });*/
 
 
 
@@ -290,7 +290,7 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         }
     }
 
-
+/*
     public void updateButtons() {
         //Activity tempActivity = (MapView) getActivity();
         //((MapView) tempActivity).updateFilled();
@@ -361,5 +361,5 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
                 }
             }
         }
-    }
+    }*/
 }

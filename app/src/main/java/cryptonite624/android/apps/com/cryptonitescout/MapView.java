@@ -1042,7 +1042,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void hatch(Boolean b) {
-        currentAction.hatch = b;
+        ActionMapUtils.totalhatches (true, actionMap.getActions());
 
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
