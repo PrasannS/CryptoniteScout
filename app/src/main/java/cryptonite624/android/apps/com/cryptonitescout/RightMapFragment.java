@@ -299,60 +299,60 @@ public class RightMapFragment extends Fragment implements InputFragment.OnInputR
         actionMap = ((MapView)tempActivity).getActionMap();
 
         if (actionMap != null) {
-            for (int i = 0; i < actionMap.actions.size(); i++) {
-                System.out.println(actionMap.actions.get(i));
-                if (actionMap.actions.get(i).actionCode.equals("C1")) {
-                    if(actionMap.actions.get(i).hatch){
+            for (int i = 0; i < actionMap.getActions().size(); i++) {
+                System.out.println(actionMap.getActions().get(i));
+                if (actionMap.getActions().get(i).getActionCode().equals("C1")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton1.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton1.setBackgroundColor(Color.RED);
                     }
 
-                } else if (actionMap.actions.get(i).actionCode.equals("C2")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C2")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton2.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton2.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C3")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C3")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton3.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton3.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C4")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C4")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton4.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton4.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C5")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C5")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton5.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton5.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C6")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C6")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton6.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton6.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C7")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C7")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton7.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton7.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C8")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.getActions().get(i).getActionCode().equals("C8")) {
+                    if(actionMap.getActions().get(i).isHatch()){
                         cargobutton8.setBackgroundColor(Color.YELLOW);
                     }
                     else{

@@ -88,8 +88,8 @@ public class SubmissionReviewFragment extends Fragment {
         totalHatches = view.findViewById(R.id.submission_hatchnum);
         totalCargos = view.findViewById(R.id.submission_cargonum);
 
-        totalHatches.setText("" + ActionMapUtils.totalhatches(false, map.actions));
-        totalCargos.setText("" + ActionMapUtils.totalhatches(true, map.actions));
+        totalHatches.setText("" + ActionMapUtils.totalisHatch(false, map.getActions()));
+        totalCargos.setText("" + ActionMapUtils.totalisHatch(true, map.getActions()));
 
         // Inflate the layout for this fragment
         return view;
