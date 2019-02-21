@@ -4,22 +4,22 @@ import com.orm.SugarRecord;
 
 public class PitnoteData extends SugarRecord {
 
-    public int teamnum;
-    public String Comment;
-    public boolean ProgrammerOnSite;
-    public boolean LevelTwoStart;
-    public boolean CrossBase;
-    public boolean shifter;
-    public int numBatteries;
-    public int numChargers;
-    public int numCIMS;
-    public int numMiniCIMS;
-    public double robotDimension;
-    public String wheels;
-    public String layouts;
-    public String Levels;
-    public String Intake;
-    public String language;
+    int teamnum;
+    String Comment;
+    boolean ProgrammerOnSite;
+    boolean LevelTwoStart;
+    boolean CrossBase;
+    boolean shifter;
+    int numBatteries;
+    int numChargers;
+    int numCIMS;
+    int numMiniCIMS;
+    double robotDimension;
+    String wheels;
+    String layouts;
+    String Levels;
+    String Intake;
+    String language;
 
     public PitnoteData(){
 

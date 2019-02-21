@@ -138,23 +138,23 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void updateDatasToPrev(){
         //TODO this method will take the public pitnote data, and update all of the layout datas from that @Taemin
-        matchNumber.setText(data.teamnum);
-        Comments.setText(data.Comment);
-        Programmer_On_Site.setChecked(data.ProgrammerOnSite);
-        LevTwoStart.setChecked(data.LevelTwoStart);
-        CrossBaseLine.setChecked(data.CrossBase);
-        Shifters.setChecked(data.shifter);
-        numBatterie.setText(data.numBatteries);
-        numCharger.setText(data.numChargers);
-        CIMS.setText(data.numCIMS);
-        miniCIMS.setText(data.numMiniCIMS);
-        robotDimensions.setText(data.robotDimension+"");
-        pgLanguage.setSelection(getIndexOfArray(languages, language));
-        hatchIntake.setSelection(getIndexOfArray(Intakes, Intake));
-        wheelSpinner.setSelection(getIndexOfArray(wheelArr, wheels));
-        cargoIntake.setSelection(getIndexOfArray(Intakes, Intake2));
-        ClimbLevels.setSelection(getIndexOfArray(levels, Levels));
-        layoutSpinner.setSelection(getIndexOfArray(layoutArr, layouts));
+        matchNumber.setText(data.getTeamnum());
+        Comments.setText(data.getComment());
+        Programmer_On_Site.setChecked(data.isProgrammerOnSite());
+        LevTwoStart.setChecked(data.isLevelTwoStart());
+        CrossBaseLine.setChecked(data.isCrossBase());
+        Shifters.setChecked(data.isShifter());
+        numBatterie.setText(data.getNumBatteries());
+        numCharger.setText(data.getNumChargers());
+        CIMS.setText(data.getNumCIMS());
+        miniCIMS.setText(data.getNumMiniCIMS());
+        robotDimensions.setText(data.getRobotDimension()+"");
+        pgLanguage.setSelection(getIndexOfArray(languages, data.getLanguage()));
+        hatchIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
+        wheelSpinner.setSelection(getIndexOfArray(wheelArr, data.getWheels()));
+        cargoIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
+        ClimbLevels.setSelection(getIndexOfArray(levels, data.getLevels()));
+        layoutSpinner.setSelection(getIndexOfArray(layoutArr, data.getLayouts()));
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +170,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             data = temp.get(0);
         }
         else{
-            data.teamnum = getTeamNum();
+            data.setTeamnum(getTeamNum());
         }
 
 
@@ -244,7 +244,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 currentIntake = cargoIntake.getTransitionName();
                 currentLayout = layoutSpinner.getTransitionName();
 
-                data = new PitnoteData(data.teamnum, Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
+                data = new PitnoteData(data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage);
                 data.save();
                 bluetoothHandler.sendMessage('p',data.toString());

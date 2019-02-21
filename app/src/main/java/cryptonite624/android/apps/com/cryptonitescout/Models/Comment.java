@@ -4,14 +4,14 @@ import com.orm.SugarRecord;
 
 public class Comment extends SugarRecord {
 
-    public String comment;
-    public int teamnum;
-    public int matchnum;
-    public int pos;
-    public int hatchefficiency;
-    public int cargoefficiency;
-    //public int climbefficiency;
-    public int defense;
+     String comment;
+     int teamnum;
+     int matchnum;
+     int pos;
+     int hatchefficiency;
+     int cargoefficiency;
+    //ic int climbefficiency;
+     int defense;
 
     public String getComment() {
         return comment;
@@ -93,9 +93,9 @@ public class Comment extends SugarRecord {
         this.whybroken = whybroken;
     }
 
-    public boolean excessivefouls;
-    public boolean broken;
-    public String whybroken;
+     boolean excessivefouls;
+     boolean broken;
+     String whybroken;
 
     public Comment(){
     }
