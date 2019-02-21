@@ -43,6 +43,8 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
+
 import java.util.Date;
 
 public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener {
@@ -496,11 +498,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
 
             currentAction.actionCode = getCode(x, y);
-            if (getCode(x, y).equals("H1") || getCode(x, y).equals("H3")) {
+            if (getCode(x, y).equals("H2")) {
                 System.out.println("hab level 2");
                 habLevel = 2;
                 updateScreen();
-            } else if (getCode(x, y).equals("H2")) {
+            } else if (getCode(x, y).equals("H3")) {
                 System.out.println("hab level 3");
                 habLevel = 3;
                 updateScreen();
@@ -558,12 +560,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
         else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
             return "C8";
-        }else if (x > HAB1MIN[0] && x < HAB1MAX[0] && y > HAB2MIN[1] && y < HAB2MAX[1]) {
-            return "H1";
-        }else if (x > HAB2MIN[0] && x < HAB2MAX[0] && y > HAB2MIN[1] && y < HAB2MAX[1]) {
+        }else if (x > HAB1MIN[0] && x < HAB1MAX[0] && y > HAB1MIN[1] && y < HAB1MAX[1]) {
             return "H2";
-        }else if (x > HAB3MIN[0] && x < HAB3MAX[0] && y > HAB3MIN[1] && y < HAB3MAX[1]) {
+        }else if (x > HAB2MIN[0] && x < HAB2MAX[0] && y > HAB2MIN[1] && y < HAB2MAX[1]) {
             return "H3";
+        }else if (x > HAB3MIN[0] && x < HAB3MAX[0] && y > HAB3MIN[1] && y < HAB3MAX[1]) {
+            return "H2";
         } else if (x > topx) {
             return "Z";
         }
@@ -1066,8 +1068,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateScreen() {
-        cargoDisplay.setText("" + actionMap.totalhatches(false));
-        hatchDisplay.setText("" + actionMap.totalhatches(true));
+        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.actions));
+        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.actions));
         habDisplay.setText("" + habLevel);
         System.out.println(actionMap.actions);
         //updateFilled();

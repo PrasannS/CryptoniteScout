@@ -16,6 +16,21 @@ public class Match {
         }
         return temp;
     }
+    public String apppendComments(){
+        String temp  = "";
+        for(int i = 0;i<6;i++){
+            temp+=comments[i]+"!@#"+"\n";
+        }
+        return temp;
+    }
+
+    public String getTeamsString(){
+        String temp = "";
+        for(int i:teamNums){
+            temp+=i+"&";
+        }
+        return temp;
+    }
 
 
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 
 /**
@@ -87,8 +88,8 @@ public class SubmissionReviewFragment extends Fragment {
         totalHatches = view.findViewById(R.id.submission_hatchnum);
         totalCargos = view.findViewById(R.id.submission_cargonum);
 
-        totalHatches.setText("" + map.totalhatches(true));
-        totalCargos.setText("" + map.totalhatches(false));
+        totalHatches.setText("" + ActionMapUtils.totalhatches(false, map.actions));
+        totalCargos.setText("" + ActionMapUtils.totalhatches(true, map.actions));
 
         // Inflate the layout for this fragment
         return view;

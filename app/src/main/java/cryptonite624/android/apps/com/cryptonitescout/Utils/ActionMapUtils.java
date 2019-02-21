@@ -24,7 +24,7 @@ public class ActionMapUtils {
         }
     }
 
-    public int numScored(String [] basecodes, int [] matchStatus, boolean hatch, ArrayList<RobotAction> actions){
+    public static int numScored(String [] basecodes, int [] matchStatus, boolean hatch, ArrayList<RobotAction> actions){
         int total = 0;
 
         for(String c : basecodes) {
@@ -40,7 +40,7 @@ public class ActionMapUtils {
         return total;
     }
 
-    public int totalhatches(boolean b, ArrayList<RobotAction> actions){
+    public static int totalhatches(boolean b, ArrayList<RobotAction> actions){
         int count =0;
         for(RobotAction r : actions){
             if(r.hatch==b){
