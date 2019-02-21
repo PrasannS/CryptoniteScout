@@ -68,7 +68,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".MapView"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/ModernTheme"/>
         <activity android:name=".DataAccessActivity"
             android:screenOrientation="landscape" ></activity>
         <activity android:name=".CommentActivity"
