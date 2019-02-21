@@ -29,6 +29,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -1065,6 +1067,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             //rightMapFragment.updateButtons();
         }
         updateScreen();
+
+
     }
 
     public void updateScreen() {
