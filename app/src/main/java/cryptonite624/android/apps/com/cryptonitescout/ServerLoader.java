@@ -49,12 +49,12 @@ public class ServerLoader {
                 Schedule.addScheduleFromAPI(m,cur);
                 cur++;
             }
+            serverLoadListener.onServerLoad();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void v) {
-            serverLoadListener.onServerLoad();
         }
     }
 
