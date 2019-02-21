@@ -16,7 +16,7 @@
             android:layout_height="460dp"
             android:background="@drawable/jankredright"
             android:descendantFocusability="blocksDescendants">
-
+<!--
             <Button
                 android:enabled="false"
                 android:focusable="false"
@@ -167,7 +167,7 @@ android:focusable="false"
                 android:visibility="invisible" />
 
 
-
+-->
 
         </RelativeLayout>
     </LinearLayout>

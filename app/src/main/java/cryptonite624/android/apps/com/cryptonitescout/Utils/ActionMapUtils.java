@@ -44,7 +44,7 @@ public class ActionMapUtils {
         return total;
     }
 
-    public static int totalisHatch(boolean b, List<RobotAction> actions){
+    public static int totalhatches(boolean b, List<RobotAction> actions){
         int count =0;
         for(RobotAction r : actions){
             if(r.isHatch()==b){

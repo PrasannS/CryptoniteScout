@@ -24,7 +24,6 @@ public class ActionMap extends SugarRecord{
     }
 
 
-
     public String toString(){
         String temp = "";
         temp += endclimb + ";" + matchnum + ";" + pos + ";";
