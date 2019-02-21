@@ -21,6 +21,9 @@
     <item android:id="@+id/nav_replayview"
         android:title="Replay View"/>
 
+    <item android:id="@+id/nav_commentscout"
+        android:title="Comment Scout"/>
+
     <item android:id="@+id/nav_settings"
         android:title="Settings"/>
 

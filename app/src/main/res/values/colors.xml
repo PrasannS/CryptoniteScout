@@ -2,11 +2,15 @@
 <resources>
     <color name="colorPrimary">#2F3243</color>
     <color name="colorPrimaryDark">#292B3A</color>
+    <color name="TextColor">#2194F0</color>
+    <color name="lightestBlue">#7FBBFF</color>
     <color name="colorAccent">#FF4081</color>
     <color name="teamGreen">#26d31f</color>
     <color name="scrollGray">#333333</color>
     <color name="colorRectangle">#455A64</color>
     <color name="colorBackground">#FFFFD600</color>
+    <color name="charButton">#A7E0A5</color>
+
     <color name="textColor">#2196F3</color>
     <color name="redTeamColor">#FF7F8A</color>
     <color name="blueTeamColor">#7FBBFF</color>
