@@ -56,7 +56,6 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
                 int id = item.getItemId();
 
                 if (id == R.id.nav_home) {

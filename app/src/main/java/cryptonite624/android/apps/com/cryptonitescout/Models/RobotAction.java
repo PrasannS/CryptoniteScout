@@ -6,7 +6,7 @@ import com.orm.SugarRecord;
 
 import java.util.StringTokenizer;
 
-public class RobotAction extends SugarRecord<RobotAction>{
+public class RobotAction extends SugarRecord{
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     //actionCode 0 = not on switch, 1 = jankredleft switch 1, 2 = jankblueleft switch1, 3 = jankblueleft scale, 4 = jankredleft scale, 5 = jankredleft switch2, 6 = jankblueleft switch, 7 = invalid click
     public int matchStatus;
@@ -14,6 +14,46 @@ public class RobotAction extends SugarRecord<RobotAction>{
     public boolean hatch;
     public int habLevel;
     public int time;
+
+    public int getMatchStatus() {
+        return matchStatus;
+    }
+
+    public void setMatchStatus(int matchStatus) {
+        this.matchStatus = matchStatus;
+    }
+
+    public String getActionCode() {
+        return actionCode;
+    }
+
+    public void setActionCode(String actionCode) {
+        this.actionCode = actionCode;
+    }
+
+    public boolean isHatch() {
+        return hatch;
+    }
+
+    public void setHatch(boolean hatch) {
+        this.hatch = hatch;
+    }
+
+    public int getHabLevel() {
+        return habLevel;
+    }
+
+    public void setHabLevel(int habLevel) {
+        this.habLevel = habLevel;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public RobotAction(){
     }

@@ -29,6 +29,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -116,6 +118,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] HAB2MAX = {940, 360};
     public static int[] HAB3MIN = {850, 360};
     public static int[] HAB3MAX = {940, 460};
+    public static int[] HAB4MIN = {750, 255};
+    public static int[] HAB4MAX = {845, 430};
 
 
     public static int[] imageratio = {1,1};
@@ -506,6 +510,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 System.out.println("hab level 3");
                 habLevel = 3;
                 updateScreen();
+            } else if(getCode(x, y).equals("H1")){
+                System.out.println("hab level 1");
+                habLevel = 1;
+                updateScreen();
             }
 
         if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
@@ -536,29 +544,21 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
         if(x > ROCKET2MIN[0] && x < ROCKET2MAX[0] && y > ROCKET2MIN[1] && y < ROCKET2MAX[1]){
             return "B";
-        }
-        else if(x > CARGO1MIN[0] && x < CARGO1MAX[0] && y > CARGO1MIN[1] && y < CARGO1MAX[1]){
+        } else if(x > CARGO1MIN[0] && x < CARGO1MAX[0] && y > CARGO1MIN[1] && y < CARGO1MAX[1]){
             return "C1";
-        }
-        else if(x > CARGO2MIN[0] && x < CARGO2MAX[0] && y > CARGO2MIN[1] && y < CARGO2MAX[1]){
+        } else if(x > CARGO2MIN[0] && x < CARGO2MAX[0] && y > CARGO2MIN[1] && y < CARGO2MAX[1]){
             return "C2";
-        }
-        else if(x > CARGO3MIN[0] && x < CARGO3MAX[0] && y > CARGO3MIN[1] && y < CARGO3MAX[1]){
+        } else if(x > CARGO3MIN[0] && x < CARGO3MAX[0] && y > CARGO3MIN[1] && y < CARGO3MAX[1]){
             return "C3";
-        }
-        else if(x > CARGO4MIN[0] && x < CARGO4MAX[0] && y > CARGO4MIN[1] && y < CARGO4MAX[1]){
+        } else if(x > CARGO4MIN[0] && x < CARGO4MAX[0] && y > CARGO4MIN[1] && y < CARGO4MAX[1]){
             return "C4";
-        }
-        else if(x > CARGO5MIN[0] && x < CARGO5MAX[0] && y > CARGO5MIN[1] && y < CARGO5MAX[1]){
+        } else if(x > CARGO5MIN[0] && x < CARGO5MAX[0] && y > CARGO5MIN[1] && y < CARGO5MAX[1]){
             return "C5";
-        }
-        else if(x > CARGO6MIN[0] && x < CARGO6MAX[0] && y > CARGO6MIN[1] && y < CARGO6MAX[1]){
+        } else if(x > CARGO6MIN[0] && x < CARGO6MAX[0] && y > CARGO6MIN[1] && y < CARGO6MAX[1]){
             return "C6";
-        }
-        else if(x > CARGO7MIN[0] && x < CARGO7MAX[0] && y > CARGO7MIN[1] && y < CARGO7MAX[1]){
+        } else if(x > CARGO7MIN[0] && x < CARGO7MAX[0] && y > CARGO7MIN[1] && y < CARGO7MAX[1]){
             return "C7";
-        }
-        else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
+        } else if(x > CARGO8MIN[0] && x < CARGO8MAX[0] && y > CARGO8MIN[1] && y < CARGO8MAX[1]){
             return "C8";
         }else if (x > HAB1MIN[0] && x < HAB1MAX[0] && y > HAB1MIN[1] && y < HAB1MAX[1]) {
             return "H2";
@@ -566,6 +566,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             return "H3";
         }else if (x > HAB3MIN[0] && x < HAB3MAX[0] && y > HAB3MIN[1] && y < HAB3MAX[1]) {
             return "H2";
+        }else if (x > HAB4MIN[0] && x < HAB4MAX[0] && y > HAB4MIN[1] && y < HAB4MAX[1]) {
+            return "H1";
         } else if (x > topx) {
             return "Z";
         }
@@ -866,8 +868,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             //setBounds();
             ROCKET1MIN[0] = 690;
             ROCKET1MAX[0] = 850;
-            ROCKET2MIN[0] = 490;
-            ROCKET2MAX[0] = 550;
+            ROCKET2MIN[0] = 690;
+            ROCKET2MAX[0] = 850;
             CARGO1MIN[0] = 540;
             CARGO1MAX[0] = 640;
             CARGO2MIN[0] = 670;
@@ -890,6 +892,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[0] = 360;
             HAB3MIN[0] = 260;
             HAB3MAX[0] = 360;
+            HAB4MIN[0] = 750;
+            HAB4MAX[0] = 845;
+
             ROCKET1MIN[1] = 100;
             ROCKET1MAX[1] = 160;
             ROCKET2MIN[1] = 490;
@@ -916,6 +921,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[1] = 360;
             HAB3MIN[1] = 360;
             HAB3MAX[1] = 460;
+            HAB4MIN[1] = 225;
+            HAB4MAX[1] = 430;
 
         }
         else{
@@ -998,6 +1005,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[0] = 940;
             HAB3MIN[0] = 850;
             HAB3MAX[0] = 940;
+            HAB4MIN[0] =370;
+            HAB4MAX[0] = 455;
             ROCKET1MIN[1] = 90;
             ROCKET1MAX[1] = 150;
             ROCKET2MIN[1] = 500;
@@ -1024,6 +1033,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[1] = 360;
             HAB3MIN[1] = 360;
             HAB3MAX[1] = 460;
+            HAB4MIN[1] = 230;
+            HAB4MAX[1] = 450;
         }
         left = !left;
 
@@ -1065,6 +1076,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             //rightMapFragment.updateButtons();
         }
         updateScreen();
+
+
     }
 
     public void updateScreen() {

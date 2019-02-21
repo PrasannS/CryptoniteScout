@@ -97,13 +97,13 @@ public class ScheduleFragment extends Fragment {
 
 
     public void setArgument(Schedule data ){
-        matchnum.setText(data.matchnum);
-        red1.setText(data.r1);
-        red2.setText(data.r2);
-        red3.setText(data.r3);
-        blue1.setText(data.b1);
-        blue2.setText(data.b2);
-        blue3.setText(data.b3);
+        matchnum.setText(data.getMatchnum());
+        red1.setText(data.getR1());
+        red2.setText(data.getR2());
+        red3.setText(data.getR3());
+        blue1.setText(data.getB1());
+        blue2.setText(data.getB2());
+        blue3.setText(data.getB3());
     }
 
     @Override
