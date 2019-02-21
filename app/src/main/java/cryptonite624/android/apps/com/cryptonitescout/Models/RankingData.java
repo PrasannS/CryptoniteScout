@@ -35,6 +35,7 @@ public class RankingData extends SugarRecord<RankingData> {
      public double  CxCargoRocket   ;
      public double  CxHatchRocket   ;
      public double  CxComboRocket   ;
+     public String teamkey;
 
     public RankingData(){
 
