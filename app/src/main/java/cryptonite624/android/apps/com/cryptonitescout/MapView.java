@@ -1067,6 +1067,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
         cancel.setVisibility(View.GONE);
         currentAction.setMatchStatus( matchStatus);
+        currentAction.setHatch(b);
         actionMap.getActions().add(currentAction);
         currentAction = new RobotAction();
         if(left){
