@@ -59,7 +59,6 @@ public class ScheduleFragment extends Fragment {
     private Button blue2;
     private Button blue3;
 
-    private String MatchNum;
 
     public String message;
 

@@ -75,13 +75,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="vertical"
                 android:id="@+id/rowframe">
 
-            </LinearLayout>
+            </FrameLayout>
         </ScrollView>
     </LinearLayout>
 

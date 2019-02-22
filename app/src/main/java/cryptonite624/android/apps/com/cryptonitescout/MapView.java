@@ -1081,8 +1081,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateScreen() {
-        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActions()));
-        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActions()));
+        //cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActions()));
+        //hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActions()));
         habDisplay.setText("" + habLevel);
         System.out.println(actionMap.getActions());
         //updateFilled();

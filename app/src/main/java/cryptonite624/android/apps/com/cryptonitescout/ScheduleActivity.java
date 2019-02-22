@@ -50,12 +50,11 @@ public class ScheduleActivity extends AppCompatActivity implements ServerLoader.
         cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment temp;
         for(Schedule s:data){
             temp = new cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment();
-            temp.setArgument(s);
-            if (view2.findViewById(R.id.infoframe) != null) {
-                cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
+            if (findViewById(R.id.rowframe) != null) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.infoframe, pregameFragment, null);
+                fragmentTransaction.add(R.id.rowframe, temp, null);
                 fragmentTransaction.commit();
+                temp.setArgument(s);
             }
         }
     }
