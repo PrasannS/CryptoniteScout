@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,7 @@ import com.google.android.gms.nearby.messages.NearbyPermissions;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +101,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public static int[] HAB3MIN =   {348, 362};
     public static int[] HAB3MAX =   {445, 413};
 
+    public static int[] imageratio = {620,357};
+
+    public static int[] screenratio = new int[2];
+    public static double conversionfactor;
+
 
     public static FragmentManager fragmentManager;
     public ActionMap actionMap = new ActionMap();
@@ -150,6 +158,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
+
+        setScreenratio();
+        setBounds();
 
         bluetoothHandler = new BluetoothHandler(this);
 
@@ -606,58 +617,58 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     public void switchbounds(){
         if(left) {
-            ROCKET1MIN[0] = 170 + 260;
-            ROCKET1MAX[0] = 260 + 260;
-            ROCKET2MIN[0] = 170 + 260;
-            ROCKET2MAX[0] = 260 + 260;
-            CARGO1MIN[0] = 280 + 260;
-            CARGO1MAX[0] = 340 + 260;
-            CARGO2MIN[0] = 380 + 260;
-            CARGO2MAX[0] = 440 + 260;
-            CARGO3MIN[0] = 450 + 260;
-            CARGO3MAX[0] = 520 + 260;
-            CARGO4MIN[0] = 520 + 260;
-            CARGO4MAX[0] = 590 + 260;
-            CARGO5MIN[0] = 280 + 260;
-            CARGO5MAX[0] = 340 + 260;
-            CARGO6MIN[0] = 380 + 260;
-            CARGO6MAX[0] = 440 + 260;
-            CARGO7MIN[0] = 450 + 260;
-            CARGO7MAX[0] = 520 + 260;
-            CARGO8MIN[0] = 520 + 260;
-            CARGO8MAX[0] = 590 + 260;
-            HAB1MIN[0] = 0 + 260;
-            HAB1MAX[0] = 70 + 260;
-            HAB2MIN[0] = 0 + 260;
-            HAB2MAX[0] = 70 + 260;
-            HAB3MIN[0] = 0 + 260;
-            HAB3MAX[0] = 70 + 260;
-            ROCKET1MIN[1] = 0 + 110;
-            ROCKET1MAX[1] = 125 + 110;
-            ROCKET2MIN[1] = 275 + 110;
-            ROCKET2MAX[1] = 400 + 110;
-            CARGO1MIN[1] = 120 + 110;
-            CARGO1MAX[1] = 195 + 110;
-            CARGO2MIN[1] = 115 + 110;
-            CARGO2MAX[1] = 150 + 110;
-            CARGO3MIN[1] = 115 + 110;
-            CARGO3MAX[1] = 150 + 110;
-            CARGO4MIN[1] = 115 + 110;
-            CARGO4MAX[1] = 150 + 110;
-            CARGO5MIN[1] = 240 + 110;
-            CARGO5MAX[1] = 280 + 110;
-            CARGO6MIN[1] = 240 + 110;
-            CARGO6MAX[1] = 280 + 110;
-            CARGO7MIN[1] = 240 + 110;
-            CARGO7MAX[1] = 280 + 110;
-            CARGO8MIN[1] = 240 + 110;
-            CARGO8MAX[1] = 280 + 110;
-            HAB1MIN[1] = 110 + 110;
-            HAB1MAX[1] = 165 + 110;
-            HAB2MIN[1] = 165 + 110;
-            HAB2MAX[1] = 235 + 110;
-            HAB3MIN[1] = 235 + 110;
-            HAB3MAX[1] = 290 + 110;
+            ROCKET1MIN[0] = 170 ;
+            ROCKET1MAX[0] = 260 ;
+            ROCKET2MIN[0] = 170 ;
+            ROCKET2MAX[0] = 260 ;
+            CARGO1MIN[0] = 280 ;
+            CARGO1MAX[0] = 340 ;
+            CARGO2MIN[0] = 380 ;
+            CARGO2MAX[0] = 440 ;
+            CARGO3MIN[0] = 450 ;
+            CARGO3MAX[0] = 520 ;
+            CARGO4MIN[0] = 520 ;
+            CARGO4MAX[0] = 590 ;
+            CARGO5MIN[0] = 280 ;
+            CARGO5MAX[0] = 340 ;
+            CARGO6MIN[0] = 380 ;
+            CARGO6MAX[0] = 440 ;
+            CARGO7MIN[0] = 450 ;
+            CARGO7MAX[0] = 520 ;
+            CARGO8MIN[0] = 520 ;
+            CARGO8MAX[0] = 590 ;
+            HAB1MIN[0] = 0 ;
+            HAB1MAX[0] = 70 ;
+            HAB2MIN[0] = 0 ;
+            HAB2MAX[0] = 70 ;
+            HAB3MIN[0] = 0 ;
+            HAB3MAX[0] = 70 ;
+            ROCKET1MIN[1] = 0 ;
+            ROCKET1MAX[1] = 125 ;
+            ROCKET2MIN[1] = 275 ;
+            ROCKET2MAX[1] = 400 ;
+            CARGO1MIN[1] = 120 ;
+            CARGO1MAX[1] = 195 ;
+            CARGO2MIN[1] = 115 ;
+            CARGO2MAX[1] = 150 ;
+            CARGO3MIN[1] = 115 ;
+            CARGO3MAX[1] = 150 ;
+            CARGO4MIN[1] = 115 ;
+            CARGO4MAX[1] = 150 ;
+            CARGO5MIN[1] = 240 ;
+            CARGO5MAX[1] = 280 ;
+            CARGO6MIN[1] = 240 ;
+            CARGO6MAX[1] = 280 ;
+            CARGO7MIN[1] = 240 ;
+            CARGO7MAX[1] = 280 ;
+            CARGO8MIN[1] = 240 ;
+            CARGO8MAX[1] = 280 ;
+            HAB1MIN[1] = 110 ;
+            HAB1MAX[1] = 165 ;
+            HAB2MIN[1] = 165 ;
+            HAB2MAX[1] = 235 ;
+            HAB3MIN[1] = 235 ;
+            HAB3MAX[1] = 290 ;
         }
         else{
             ROCKET1MIN[0] =   330;
@@ -709,13 +720,59 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB1MIN[1] =      110;
             HAB1MAX[1] =      165;
             HAB2MIN[1] =      165;
-            HAB2MAX[1] =      235;
-            HAB3MIN[1] =      235;
-            HAB3MAX[1] =      290;
+            HAB2MAX[1] = 235;
+            HAB3MIN[1] = 235;
+            HAB3MAX[1] = 290;
         }
         left = !left;
-
     }
+
+    public int getpixelheight(){
+        return (int)((int)((double)imageratio[1]*((double)2/3)*screenratio[0])/(double)imageratio[0]);
+    }
+    public void setScreenratio(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenratio[0]= size.x;
+        screenratio[1] = size.y;
+        conversionfactor = screenratio[0]/imageratio[0];
+        Log.e("ScreenRatio*&*%F&^%", "" + Arrays.toString(screenratio));
+    }
+
+    public void setBounds(){
+        int topx,topy,bttmx,bttmy;
+        topx = screenratio[0]/3;
+        topy = (screenratio[1]-getpixelheight())/2;
+        bttmx = screenratio[0];
+        bttmy = getpixelheight()+topy;
+        ROCKET1MIN [0] =topx+(int)(ROCKET1MIN [0]*conversionfactor); ROCKET1MIN [1] =topy+(int)( ROCKET1MIN[1]*conversionfactor);
+        ROCKET1MAX [0] =topx+(int)( ROCKET1MAX [0]*conversionfactor); ROCKET1MAX [1] =topy+(int)( ROCKET1MAX[1]*conversionfactor);
+        ROCKET2MIN [0] =topx+(int)( ROCKET2MIN[0]*conversionfactor); ROCKET2MIN [1] =topy+(int)( ROCKET2MAX[1]*conversionfactor);
+        ROCKET2MAX [0] =topx+(int)( ROCKET2MAX[0]*conversionfactor); ROCKET2MAX [1] =topy+(int)( ROCKET2MAX[1]*conversionfactor);
+        CARGO1MIN [0] =topx+(int)( CARGO1MIN[0]*conversionfactor);CARGO1MIN [1] =topy+(int)( CARGO1MIN [1]*conversionfactor);
+        CARGO1MAX [0] =topx+(int)( CARGO1MAX[0]*conversionfactor);CARGO1MAX [1] =topy+(int)( CARGO1MAX[1]*conversionfactor);
+        CARGO2MIN [0] =topx+(int)( CARGO2MIN[0]*conversionfactor);CARGO2MIN [1] =topy+(int)( CARGO2MIN [1]*conversionfactor);
+        CARGO2MAX [0] =topx+(int)( CARGO2MAX[0]*conversionfactor);CARGO2MAX [1] =topy+(int)( CARGO2MAX [1]*conversionfactor);
+        CARGO3MIN [0] =topx+(int)( CARGO3MIN[0]*conversionfactor);CARGO3MIN [1] =topy+(int)( CARGO3MIN [1]*conversionfactor);
+        CARGO3MAX [0] =topx+(int)( CARGO3MAX[0]*conversionfactor);CARGO3MAX [1] =topy+(int)( CARGO3MAX [1]*conversionfactor);
+        CARGO4MIN [0] =topx+(int)( CARGO4MIN[0]*conversionfactor);CARGO4MIN [1] =topy+(int)( CARGO4MIN [1]*conversionfactor);
+        CARGO4MAX [0] =topx+(int)( CARGO4MAX[0]*conversionfactor);CARGO4MAX [1] =topy+(int)( CARGO4MAX [1]*conversionfactor);
+        CARGO5MIN [0] =topx+(int)( CARGO5MIN[0]*conversionfactor);CARGO5MIN [1] =topy+(int)( CARGO5MIN [1]*conversionfactor);
+        CARGO5MAX [0] =topx+(int)( CARGO5MAX[0]*conversionfactor);CARGO5MAX [1] =topy+(int)( CARGO5MAX [1]*conversionfactor);
+        CARGO6MIN [0] =topx+(int)( CARGO6MIN[0]*conversionfactor);CARGO6MIN [1] =topy+(int)( CARGO6MIN [1]*conversionfactor);
+        CARGO6MAX [0] =topx+(int)( CARGO6MAX[0]*conversionfactor);CARGO6MAX [1] =topy+(int)( CARGO6MAX [1]*conversionfactor);
+        CARGO7MIN [0] =topx+(int)( CARGO7MIN[0]*conversionfactor);CARGO7MIN [1] =topy+(int)( CARGO7MIN [1]*conversionfactor);
+        CARGO7MAX [0] =topx+(int)( CARGO7MAX[0]*conversionfactor);CARGO7MAX [1] =topy+(int)( CARGO7MAX [1]*conversionfactor);
+        CARGO8MIN [0] =topx+(int)( CARGO8MIN[0]*conversionfactor);CARGO8MIN [1] =topy+(int)( CARGO8MIN [1]*conversionfactor);
+        CARGO8MAX [0] =topx+ (int)( CARGO8MAX[0]*conversionfactor);CARGO8MAX [1] =(int)( CARGO8MAX [1]*conversionfactor);
+        HAB1MIN [0] =topx+(int)( 8*conversionfactor);   HAB1MIN [1] =topy+(int)(   58*conversionfactor);
+        HAB1MAX [0] =topx+(int)( 110*conversionfactor); HAB1MAX [1] =topy+(int)(    118*conversionfactor);
+        HAB2MAX [0] =topx+(int)( 110*conversionfactor); HAB2MAX [1] =topy+(int)(    238*conversionfactor);
+        HAB3MIN [0] =topx+(int)( 8*conversionfactor);   HAB3MIN [1] =topy+(int)(   242*conversionfactor);
+        HAB3MAX [0] =topx+(int)( 110*conversionfactor); HAB3MAX [1] =topy+(int)(    300*conversionfactor);
+    }
+
 
     @Override
     public void hatch(Boolean b) {
