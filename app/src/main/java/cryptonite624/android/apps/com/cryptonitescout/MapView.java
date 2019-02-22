@@ -422,8 +422,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         y = (int)event.getY();
         cancel.setVisibility(View.VISIBLE);
 
-        cargoDisplay.setText("" + y);
-        hatchDisplay.setText("" + x);
+        //cargoDisplay.setText("" + y);
+        //hatchDisplay.setText("" + x);
 
         cancel.setOnClickListener(
                 new View.OnClickListener() {
@@ -1067,6 +1067,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         }
         cancel.setVisibility(View.GONE);
         currentAction.setMatchStatus( matchStatus);
+        currentAction.setHatch(b);
         actionMap.getActions().add(currentAction);
         currentAction = new RobotAction();
         if(left){
@@ -1081,8 +1082,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateScreen() {
-        //cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActions()));
-        //hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActions()));
+        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActions()));
+        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActions()));
         habDisplay.setText("" + habLevel);
         System.out.println(actionMap.getActions());
         //updateFilled();
