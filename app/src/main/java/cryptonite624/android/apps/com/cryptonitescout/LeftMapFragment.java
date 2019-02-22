@@ -89,7 +89,7 @@ public class LeftMapFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_left_map, container, false);
 
-/*
+        /*
         cargobutton1 = (Button)view.findViewById(R.id.cargobutton1_left);
         cargobutton2 = (Button)view.findViewById(R.id.cargobutton2_left);
         cargobutton3 = (Button)view.findViewById(R.id.cargobutton3_left);
@@ -139,58 +139,58 @@ public class LeftMapFragment extends Fragment{
     }
 
     public void individualButton(RobotAction action){
-        if (action.actionCode.equals("C1")) {
-            if(action.hatch){
+        if (action.getActionCode().equals("C1")) {
+            if(action.isHatch()){
                 cargobutton1.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton1.setBackgroundColor(Color.RED);
             }
 
-        } else if (action.actionCode.equals("C2")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C2")) {
+            if(action.isHatch()){
                 cargobutton2.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton2.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C3")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C3")) {
+            if(action.isHatch()){
                 cargobutton3.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton3.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C4")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C4")) {
+            if(action.isHatch()){
                 cargobutton4.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton4.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C5")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C5")) {
+            if(action.isHatch()){
                 cargobutton5.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton5.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C6")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C6")) {
+            if(action.isHatch()){
                 cargobutton6.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton6.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C7")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C7")) {
+            if(action.isHatch()){
                 cargobutton7.setBackgroundColor(Color.YELLOW);
             }
             else{
                 cargobutton7.setBackgroundColor(Color.RED);
             }
-        } else if (action.actionCode.equals("C8")) {
-            if(action.hatch){
+        } else if (action.getActionCode().equals("C8")) {
+            if(action.isHatch()){
                 cargobutton8.setBackgroundColor(Color.YELLOW);
             }
             else{
@@ -198,7 +198,8 @@ public class LeftMapFragment extends Fragment{
             }
         }
     }
-/*
+
+    /*
     public void updateButtons() {
         //Activity tempActivity = (MapView) getActivity();
         //((MapView) tempActivity).updateFilled();
@@ -209,58 +210,58 @@ public class LeftMapFragment extends Fragment{
         if (actionMap != null) {
             for (int i = 0; i < actionMap.actions.size(); i++) {
                 System.out.println(actionMap.actions.get(i));
-                if (actionMap.actions.get(i).actionCode.equals("C1")) {
-                    if(actionMap.actions.get(i).hatch){
+                if (actionMap.actions.get(i).getActionCode().equals("C1")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton1.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton1.setBackgroundColor(Color.RED);
                     }
 
-                } else if (actionMap.actions.get(i).actionCode.equals("C2")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C2")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton2.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton2.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C3")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C3")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton3.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton3.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C4")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C4")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton4.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton4.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C5")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C5")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton5.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton5.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C6")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C6")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton6.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton6.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C7")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C7")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton7.setBackgroundColor(Color.YELLOW);
                     }
                     else{
                         cargobutton7.setBackgroundColor(Color.RED);
                     }
-                } else if (actionMap.actions.get(i).actionCode.equals("C8")) {
-                    if(actionMap.actions.get(i).hatch){
+                } else if (actionMap.actions.get(i).getActionCode().equals("C8")) {
+                    if(actionMap.actions.get(i).isHatch()){
                         cargobutton8.setBackgroundColor(Color.YELLOW);
                     }
                     else{

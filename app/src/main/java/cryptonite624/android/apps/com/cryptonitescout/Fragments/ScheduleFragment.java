@@ -5,12 +5,22 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.R;
+import cryptonite624.android.apps.com.cryptonitescout.RankingFragment;
 
 
 /**
@@ -41,13 +51,14 @@ public class ScheduleFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Button matchnum;
+    private TextView matchnum;
     private Button red1;
     private Button red2;
     private Button red3;
     private Button blue1;
     private Button blue2;
     private Button blue3;
+
 
     public String message;
 
@@ -80,6 +91,20 @@ public class ScheduleFragment extends Fragment {
         public void OnScheduleRead(String message);
     }
 
+    public FragmentManager fragmentManager;
+    public View view2;
+
+
+    public void setArgument(Schedule data ){
+        matchnum.setText(data.getMatchnum());
+        red1.setText(data.getR1());
+        red2.setText(data.getR2());
+        red3.setText(data.getR3());
+        blue1.setText(data.getB1());
+        blue2.setText(data.getB2());
+        blue3.setText(data.getB3());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,70 +123,63 @@ public class ScheduleFragment extends Fragment {
 
 
 
-        matchnum = (Button)(view.findViewById(R.id.matchnum));
-        matchnum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
+        matchnum = (TextView)(view.findViewById(R.id.Match_num_schedule));
 
-        red1 = (Button)(view.findViewById(R.id.red1));
+        red1 = (Button)(view.findViewById(R.id.Red1_schedule));
         red1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-        red2 = (Button)(view.findViewById(R.id.red2));
+        red2 = (Button)(view.findViewById(R.id.Red2_schedule));
         red2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-        red3 = (Button)(view.findViewById(R.id.red3));
+        red3 = (Button)(view.findViewById(R.id.Red3_schedule));
         red3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-        blue1 = (Button)(view.findViewById(R.id.blue1));
+        blue1 = (Button)(view.findViewById(R.id.Blue1_schedule));
         blue1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-        blue2 = (Button)(view.findViewById(R.id.blue2));
+        blue2 = (Button)(view.findViewById(R.id.Blue2_schedule));
         blue2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-        blue3 = (Button)(view.findViewById(R.id.blue3));
+        blue3 = (Button)(view.findViewById(R.id.Blue3_schedule));
         blue3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message = "toAuton";
+                message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
         });
 
-
+        view2 = view;
         return view;
 
 

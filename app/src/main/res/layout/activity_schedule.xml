@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScheduleActivty">
+    tools:context=".ScheduleActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,15 +73,15 @@
         </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="vertical"
                 android:id="@+id/rowframe">
 
-            </LinearLayout>
+            </FrameLayout>
         </ScrollView>
     </LinearLayout>
 

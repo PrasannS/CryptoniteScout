@@ -1,6 +1,7 @@
 package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
@@ -27,14 +28,14 @@ public class ActionMapUtils {
         }
     }
 
-    public static int numScored(String [] basecodes, int [] matchStatus, boolean hatch, ArrayList<RobotAction> actions){
+    public static int numScored(String [] basecodes, int [] matchStatus, boolean hatch, List<RobotAction> actions){
         int total = 0;
 
         for(String c : basecodes) {
             for(int m : matchStatus) {
                 for (RobotAction i : actions) {
-                    if (i.actionCode.equals(c+i.matchStatus)) {
-                        if(i.hatch==hatch)
+                    if (i.getActionCode().equals(c+i.getMatchStatus())) {
+                        if(i.isHatch()==hatch)
                             total++;
                     }
                 }
@@ -43,10 +44,10 @@ public class ActionMapUtils {
         return total;
     }
 
-    public static int totalhatches(boolean b, ArrayList<RobotAction> actions){
+    public static int totalhatches(boolean b, List<RobotAction> actions){
         int count =0;
         for(RobotAction r : actions){
-            if(r.hatch==b){
+            if(r.isHatch()==b){
                 count++;
             }
         }
@@ -61,7 +62,7 @@ public class ActionMapUtils {
     public ActionMap getMiniMap(int code, int ms, ArrayList<RobotAction> actions){
         ArrayList<RobotAction> acts = new ArrayList<>();
         for(RobotAction i : actions){
-            if(i.actionCode.equals(code) && i.matchStatus == ms){
+            if(i.getActionCode().equals(code) && i.matchStatus == ms){
                 acts.add(i);
             }
         }
@@ -72,13 +73,13 @@ public class ActionMapUtils {
     public static ActionMap parseActionMap(String s){
         ActionMap am = new ActionMap();
         StringTokenizer st = new StringTokenizer(s, ";");
-        am.endclimb = Integer.parseInt(st.nextToken());
-        am.matchnum = Integer.parseInt(st.nextToken());
-        am.pos = Integer.parseInt(st.nextToken());
+        am.setEndclimb( Integer.parseInt(st.nextToken()));
+        am.setMatchnum( Integer.parseInt(st.nextToken()));
+        am.setPos( Integer.parseInt(st.nextToken()));
 
         StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
         while(st1.hasMoreTokens()){
-            am.actions.add(new RobotAction(st1.nextToken()));
+            am.getActions().add(new RobotAction(st1.nextToken()));
         }
 
         return am;

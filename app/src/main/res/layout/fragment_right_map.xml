@@ -14,13 +14,12 @@
             android:id="@+id/mapview"
             android:layout_width="690dp"
             android:layout_height="460dp"
-            android:background="@drawable/redright"
+            android:background="@drawable/jankredright"
             android:descendantFocusability="blocksDescendants">
-
-
 <!--
             <Button
                 android:enabled="false"
+                android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton1_right"
                 android:layout_width="wrap_content"
@@ -33,6 +32,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton2_right"
                 android:layout_width="wrap_content"
@@ -45,6 +45,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton3_right"
                 android:layout_width="wrap_content"
@@ -56,6 +57,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton4_right"
                 android:layout_width="wrap_content"
@@ -68,6 +70,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton5_right"
                 android:layout_width="wrap_content"
@@ -80,6 +83,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton6_right"
                 android:layout_width="wrap_content"
@@ -90,6 +94,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton7_right"
                 android:layout_width="wrap_content"
@@ -101,6 +106,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/cargobutton8_right"
                 android:layout_width="wrap_content"
@@ -112,6 +118,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/button9_right"
                 android:layout_width="wrap_content"
@@ -124,6 +131,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/button10_right"
                 android:layout_width="wrap_content"
@@ -134,6 +142,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/button11"
                 android:layout_width="wrap_content"
@@ -146,6 +155,7 @@
 
             <Button
                 android:enabled="false"
+android:focusable="false"
                 android:clickable="false"
                 android:id="@+id/button12_right"
                 android:layout_width="wrap_content"
@@ -155,9 +165,9 @@
                 android:layout_marginEnd="104dp"
                 android:text="Button"
                 android:visibility="invisible" />
+
+
 -->
-
-
 
         </RelativeLayout>
     </LinearLayout>

@@ -68,10 +68,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public Comment comm;
 
-
-
-    public int recordeddevices = 0;
-
     public BluetoothHandler bluetoothHandler;
 
 
@@ -99,7 +95,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         cargoefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.cargoefficiency = (int)rightValue;
+                comm.setCargoefficiency ((int)rightValue);
             }
 
             @Override
@@ -115,7 +111,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         hatchefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.hatchefficiency = (int)rightValue;
+                comm.setHatchefficiency( (int)rightValue);
             }
 
             @Override
@@ -131,7 +127,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         defenseratingSeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.defense = (int)rightValue;
+                comm.setDefense((int)rightValue);
             }
 
             @Override
@@ -149,9 +145,9 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
             public void onClick(View view) {
                 bluetoothHandler.startlooking();
 
-                comm.comment = commentget.getText().toString();
-                comm.whybroken = WhyBroken.getText().toString();
-                comm.broken = brokenswitch.isChecked();
+                comm.setComment( commentget.getText().toString());
+                comm.setWhybroken( WhyBroken.getText().toString());
+                comm.setBroken(brokenswitch.isChecked());
 
                 comm.save();
             }

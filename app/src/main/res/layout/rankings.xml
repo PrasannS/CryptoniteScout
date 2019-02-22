@@ -88,385 +88,71 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_marginLeft="40dp">
+                    android:gravity="center">
                     <TextView
                         android:layout_width="130dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="Ranks"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                     <TextView
                         android:layout_width="130dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="Team"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                     <TextView
                         android:layout_width="170dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="Win Rate"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                     <TextView
                         android:layout_width="170dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="Rank Points"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                     <TextView
                         android:layout_width="170dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="PlaceHolder"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                     <TextView
                         android:layout_width="150dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="70dp"
                         android:text="Phases"
                         android:textSize="30dp"
                         android:textColor="@color/textColor"
                         android:gravity="center" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:layout_marginLeft="40dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="624"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="100%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="2"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:layout_marginLeft="40dp"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="118"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="99%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:layout_marginLeft="40dp"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="303"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="98%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
+                        </FrameLayout>
+                    </ScrollView>
 
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="4"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:layout_marginLeft="40dp"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="404"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="97%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="5"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:layout_marginLeft="40dp"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="505"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="96%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp">
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="6"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:layout_marginLeft="40dp"
-                        android:background="@color/colorPrimary"/>
-                    <Button
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:text="606"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="95%"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="3"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:text="PlaceHolder"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:text="1"
-                        android:textSize="30dp"
-                        android:textColor="@color/textColor"
-                        android:gravity="center"
-                        android:background="@color/colorPrimary"/>
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
