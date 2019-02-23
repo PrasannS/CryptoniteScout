@@ -154,7 +154,7 @@ public class DataEntryActivity extends AppCompatActivity implements EndgameFragm
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.settings_menu, menu);
+        //inflater.inflate(R.menu.settings_menu, menu);
 
         return true;
     }

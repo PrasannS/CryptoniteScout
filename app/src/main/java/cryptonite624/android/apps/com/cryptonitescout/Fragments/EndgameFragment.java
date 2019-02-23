@@ -25,7 +25,7 @@ public class EndgameFragment extends Fragment {
     public int temp;
 
     private OnFragmentInteractionListener mListener;
-    public Button toTeleop;
+
     public Button submit;
     public String message;
 
@@ -53,14 +53,6 @@ public class EndgameFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_endgame, container, false);
 
-        toTeleop = (Button)view.findViewById(R.id.endgame_teleop);
-        toTeleop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toTeleop";
-                endgameReadListener.OnEndgameRead(message);
-            }
-        });
 
 
         submit = (Button)view.findViewById(R.id.endgame_submit);
