@@ -34,6 +34,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.BitmapUtils;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
@@ -57,6 +58,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public String currentClimbLevel = "Level 1";
     public String currentIntake = "Floor";
     public String currentLayout = "4WD";
+    public String image = "";
 
 
     public EditText matchNumber;
@@ -245,9 +247,10 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 currentLayout = layoutSpinner.getTransitionName();
 
                 data = new PitnoteData(data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
-                        numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage);
+                        numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage,image);
                 data.save();
                 bluetoothHandler.sendMessage('p',data.toString());
+                openDashboard();
 
             }
         });
@@ -292,84 +295,14 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private Bitmap mImageBitmap;
-    private String mCurrentPhotoPath;
-    private ImageView mImageView;
-    public String pathToFile;
-
-
-
-    //function that captures the picture
-    private void dispatchCameraIntent() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getPackageManager()) != null){
-            File photoFile = null;
-            photoFile = createImageFile();
-
-            if(photoFile != null){
-                pathToFile = photoFile.getAbsolutePath();
-                Uri photoUri = FileProvider.getUriForFile(pitNote.this,"asdfasdf",photoFile);
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                startActivityForResult(cameraIntent, 1);
-            }
-        }
-    }
-
-    //Create an image file name (saving the image to gallery)
-    private File createImageFile() {
-        String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss").format(new Date());
-        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image = null;
-        try{
-            image = File.createTempFile(timeStamp, ".jpg",storageDir);
-        } catch (Exception e){
-           Log.d("myLog","Excep : "+e.toString());
-        }
-        return image;
-
-
-    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
 
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        image = BitmapUtils.BitMapToString(bitmap);
         imageview.setImageBitmap(bitmap);
-    }
 
-    //adding the picture to the gallery
-    private void addPictoGallery() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mCurrentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
-
-    //reducing the scale of image to save memory
-    //Converting bitmap into
-    private void setPic(){
-        //get the dimension of the picture
-        int targetW = mImageView.getWidth();
-        int targetH = mImageView.getHeight();
-
-        //get the dimension of bitmap
-        BitmapFactory.Options bmOPtions = new BitmapFactory.Options();
-        bmOPtions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOPtions);
-        int photoW = bmOPtions.outWidth;
-        int photoH = bmOPtions.outHeight;
-
-        //Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        //Decode the image file into a Bitmap sized to fill the view
-        bmOPtions.inJustDecodeBounds = false;
-        bmOPtions.inSampleSize = scaleFactor;
-        bmOPtions.inPurgeable = true;
-
-        Bitmap bitmap = new BitmapFactory().decodeFile(mCurrentPhotoPath, bmOPtions);
-        mImageView.setImageBitmap(bitmap);
     }
 
     //Opening the camera app

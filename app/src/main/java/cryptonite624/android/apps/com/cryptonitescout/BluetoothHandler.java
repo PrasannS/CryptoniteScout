@@ -56,7 +56,7 @@ public class BluetoothHandler {
         updated.put('p',true);
         updated.put('f',true);
         updated.put('c',true);
-        updated.put('n',true);
+        updated.put('l',true);
     }
 
     public void openreceiver(){
@@ -92,18 +92,13 @@ public class BluetoothHandler {
             case 'c':
                 bluetoothListener.OnBluetoothRead("chatter"+s.substring(1));
                 break;
-            case 'n':
-                bluetoothListener.OnBluetoothRead("currentnum");
-                if(Integer.parseInt(s.substring(1))> configuration.getCurrentmatch()){
-                    updatePending('n');
-                    if(Integer.parseInt(s.substring(1))+1==configuration.getCurrentmatch()){
-                        sendMessage('w',s.substring(1));
-                    }
-                }
-                else if(Integer.parseInt(s.substring(1))< configuration.getCurrentmatch()){
-                    sendMessage('n', Schedule.findById(Schedule.class,Long.valueOf(Integer.parseInt(s.substring(1))+1))+"");
-                }
+            case 'l':
+                bluetoothListener.OnBluetoothRead("listupdate");
                 break;
+            case 'd':
+                bluetoothListener.OnBluetoothRead("drawing");
+                break;
+
             /*case 'w':
                 bluetoothListener.OnBluetoothRead("requestmade");
                 String temp = "";

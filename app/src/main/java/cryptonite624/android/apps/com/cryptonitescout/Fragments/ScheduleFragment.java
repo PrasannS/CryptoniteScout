@@ -122,7 +122,7 @@ public class ScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
 
-
+        /*
         matchnum = (TextView)(view.findViewById(R.id.Match_num_schedule));
 
         red1 = (Button)(view.findViewById(R.id.Red1_schedule));
@@ -177,7 +177,7 @@ public class ScheduleFragment extends Fragment {
                 message = "toTeamProfile";
                 onScheduleRead.OnScheduleRead(message);
             }
-        });
+        });*/
 
         view2 = view;
         return view;

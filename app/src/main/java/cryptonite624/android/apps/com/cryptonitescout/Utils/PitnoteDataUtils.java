@@ -23,7 +23,7 @@ public class PitnoteDataUtils {
     String Intake;
     String language;
 
-    public static String toSTring(PitnoteData data){
+    public static String toString(PitnoteData data){
         String temp = data.getTeamnum()+" "+data.getComment()+" "+data.isProgrammerOnSite()+" "+data.isLevelTwoStart()+" "+data.isCrossBase()+" "+data.isShifter()+
                 " "+data.getNumBatteries()+" "+data.getNumChargers()+" "+data.getNumCIMS()+" "+data.getNumMiniCIMS()+" "+data.getRobotDimension()+" "+data.getWheels()+
                 " "+data.getLayouts()+" "+data.getLevels()+" "+data.getIntake()+" "+data.getLanguage();

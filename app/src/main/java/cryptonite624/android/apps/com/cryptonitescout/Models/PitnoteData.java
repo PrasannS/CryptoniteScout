@@ -20,6 +20,7 @@ public class PitnoteData extends SugarRecord {
     String Levels;
     String Intake;
     String language;
+    String image;
 
     public PitnoteData(){
 
@@ -153,9 +154,17 @@ public class PitnoteData extends SugarRecord {
         this.language = language;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public PitnoteData(int num, String comm, boolean onSite, boolean lvTwoStart, boolean crossBase,
                        boolean shift, int numBar, int numCharge, int CIMS, int minCIMS, double Demension,
-                       String wheel, String layout, String leve, String intake, String languages ){
+                       String wheel, String layout, String leve, String intake, String languages, String image){
         num = teamnum;
         comm = Comment;
         onSite = ProgrammerOnSite;
