@@ -5,18 +5,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import de.codecrafters.tableview.SortableTableView;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+
+import static cryptonite624.android.apps.com.cryptonitescout.ScheduleActivity.fragmentManager;
 
 
 /**
@@ -35,12 +41,12 @@ public class ScheduleFragment extends Fragment {
 
     private static final String INPUTS = "inputs";
 
-    TableView<String []> TableView;
+    de.codecrafters.tableview.TableView<String []> TableView;
 
     public static String [] Schedule_headers = {"Match #","teams","placeholder","test"};
 
     public static String [][] Schedule_datas = {{"Team#","test","data","placeholder"},
-                                                   {"Another","testdata","goes","here"}};
+            {"Another","testdata","goes","here"}};
 
 
 
@@ -185,6 +191,26 @@ public class ScheduleFragment extends Fragment {
 
 
     }
+    public View view;
+
+    public void addAllRows(ArrayList<Schedule> data) {
+        ScheduleFragment temp;
+        for(Schedule r:data){
+            temp = new ScheduleFragment();
+            temp.setArguments(r);
+            if (view.findViewById(R.id.infoframe) != null) {
+                cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.infoframe, pregameFragment, null);
+                fragmentTransaction.commit();
+            }
+        }
+    }
+
+    public void putDatasinTable() {
+        String [] data = new String[]
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
