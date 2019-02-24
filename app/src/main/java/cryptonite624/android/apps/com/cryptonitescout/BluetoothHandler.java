@@ -29,17 +29,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
 public class BluetoothHandler {
 
-    BluetoothListener bluetoothListener = new BluetoothListener() {
-        @Override
-        public void OnBluetoothRead(String message) {
-
-        }
-
-        @Override
-        public void start(Intent intent) {
-
-        }
-    };
+    BluetoothListener bluetoothListener;
 
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
@@ -50,7 +40,8 @@ public class BluetoothHandler {
 
     private BluetoothAdapter bluetoothAdapter = null;
 
-    public BluetoothHandler(Context context){
+    public BluetoothHandler(Context context, BluetoothListener bl){
+        bluetoothListener = bl;
         if(Config.listAll(Config.class).size()==0)
             configuration = new Config();
         else
