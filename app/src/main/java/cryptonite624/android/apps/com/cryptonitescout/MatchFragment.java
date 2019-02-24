@@ -110,6 +110,11 @@ public class MatchFragment extends Fragment {
         public void OnMatchRead(String message);
     }
 
+    public void setArguments(int matchnum){
+        List<ActionMap> teams = ActionMap.find(ActionMap.class, "matchnum = ?", ""+matchnum);
+        loadData(teams);
+    }
+
     private void initRecyclerView(){
         comms.add("This is a test commentsss");
         comms.add("Test comment 2");
@@ -281,7 +286,7 @@ public class MatchFragment extends Fragment {
         }
     }
     
-    public void loadData(ArrayList<ActionMap> mapList){
+    public void loadData(List<ActionMap> mapList){
         redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).getActions()));
         redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).getActions()));
         redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).getActions()));
