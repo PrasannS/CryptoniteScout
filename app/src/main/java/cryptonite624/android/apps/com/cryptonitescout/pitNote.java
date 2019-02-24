@@ -37,7 +37,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, BluetoothHandler.BluetoothListener{
 
     //Class variables that'll help(?) Prasann with the database
 
@@ -162,7 +162,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.activity_pit_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        bluetoothHandler = new BluetoothHandler(this);
+        bluetoothHandler = new BluetoothHandler(this,this);
         bluetoothHandler.startlooking();
         setSupportActionBar(toolbar);
         List<PitnoteData> temp = PitnoteData.find(PitnoteData.class, "Teamnum = ?",getTeamNum()+"" );
@@ -433,5 +433,15 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         super.onDestroy();
         // Don't forget to unregister the ACTION_FOUND receiver.
         bluetoothHandler.endstuff();
+    }
+
+    @Override
+    public void OnBluetoothRead(String message) {
+
+    }
+
+    @Override
+    public void start(Intent intent) {
+
     }
 }

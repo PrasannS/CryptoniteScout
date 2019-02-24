@@ -27,7 +27,16 @@ public class RankingData extends SugarRecord{
      int TeleopHatchTwo      ;
      int TeleopHatchThree    ;
      double ClimbOne         ;
-     double ClimbTwo         ;
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    double ClimbTwo         ;
      double ClimbThree       ;
      double CxHatchCargoShip ;
      double CxCargoCargoShip ;
@@ -35,6 +44,7 @@ public class RankingData extends SugarRecord{
      double  CxCargoRocket   ;
      double  CxHatchRocket   ;
      double  CxComboRocket   ;
+     int rank;
 
      public String getPlaceHolder() {
           return placeHolder;
@@ -295,7 +305,7 @@ public class RankingData extends SugarRecord{
      public String teamkey;
 
     public RankingData(){
-
+        rank = 0;
     }
 
 }

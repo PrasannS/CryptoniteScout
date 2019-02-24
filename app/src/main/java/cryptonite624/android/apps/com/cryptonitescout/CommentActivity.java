@@ -82,7 +82,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        bluetoothHandler = new BluetoothHandler(this);
+        bluetoothHandler = new BluetoothHandler(this,this);
 
         comm = new Comment();
 
