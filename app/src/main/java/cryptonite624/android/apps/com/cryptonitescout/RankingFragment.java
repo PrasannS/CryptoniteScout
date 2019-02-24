@@ -12,12 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.anychart.enums.Sort;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
+import de.codecrafters.tableview.SortableTableView;
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.listeners.TableDataClickListener;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +66,17 @@ public class RankingFragment extends Fragment {
 
     public String message;
 
+    TableView<String[]> tableView;
+
     private OnFragmentInteractionListener mListener;
 
     OnRankingRead onRankingRead;
+
+    private static final String[] TABLE_HEADERS = { "This", "is", "a", "test" };
+
+    private static final String[][] DATA_TO_SHOW = {{ "This", "is", "a", "test" },
+            { "and", "a", "second", "test" }};
+
 
     public RankingFragment() {
         // Required empty public constructor
@@ -106,6 +122,17 @@ public class RankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rankings, container, false);
+        tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), DATA_TO_SHOW));
+        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS));
+        tableView.addDataClickListener(new TableDataClickListener<String[]>() {
+            @Override
+            public void onDataClicked(int rowIndex, String[] clickedData) {
+                Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*
 
         Rankings_ranking = (TextView) (view.findViewById(R.id.Rankings_rankings));
 
@@ -117,7 +144,7 @@ public class RankingFragment extends Fragment {
 
         PlaceHolder_rankings = (TextView) (view.findViewById(R.id.PlaceHolder_rankings));
 
-        Phasese_rankings = (TextView) (view.findViewById(R.id.Phases_rankings));
+        Phasese_rankings = (TextView) (view.findViewById(R.id.Phases_rankings));*/
 
 
 
@@ -151,13 +178,15 @@ public class RankingFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        /*
         Activity activity = (Activity)context;
         try{
             onRankingRead = (RankingFragment.OnRankingRead) activity;
         }catch(ClassCastException e){
             throw new ClassCastException(activity.toString() + "must override onkeyboardoneread");
-        }
+        }*/
     }
+
 
     @Override
     public void onDetach() {

@@ -48,5 +48,6 @@ dependencies {
     android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     implementation files('libs/TBA-API-V3.jar')
     //implementation files('libs/json-simple-1.1.1.jar')
+    compile 'de.codecrafters.tableview:tableview:2.8.0'
 }
 

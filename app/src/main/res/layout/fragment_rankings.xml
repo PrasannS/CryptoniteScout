@@ -5,41 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".RankingActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <de.codecrafters.tableview.TableView
+        xmlns:table="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tableView"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/Rankings_rankings"
-            android:layout_width="130dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/Teams_rankings"
-            android:layout_width="130dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/Winrate_rankings"
-            android:layout_width="170dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/RankPoints_rankings"
-            android:layout_width="170dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/PlaceHolder_rankings"
-            android:layout_width="170dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/Phases_rankings"
-            android:layout_width="150dp"
-            android:layout_height="match_parent" />
-
-
-
-
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        table:tableView_columnCount="4" />
 
 
 </FrameLayout>

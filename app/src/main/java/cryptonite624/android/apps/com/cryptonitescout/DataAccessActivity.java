@@ -91,6 +91,12 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                 }
                 if (id == R.id.nav_rankings) {
                     Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        RankingFragment rankingFragment = new RankingFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, rankingFragment,null);
+                        fragmentTransaction.commit();
+                    }
                     return true;
                 }
                 if (id == R.id.nav_sketchmap) {
