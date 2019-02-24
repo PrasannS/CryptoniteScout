@@ -452,6 +452,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                             }
                         }
                         currentAction = new RobotAction();
+                        cancel.setVisibility(View.INVISIBLE);
                     }
                 }
         );
@@ -505,20 +506,27 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             if (getCode(x, y).equals("H2")) {
                 System.out.println("hab level 2");
                 habLevel = 2;
+                actionMap.setEndclimb(habLevel);
                 updateScreen();
             } else if (getCode(x, y).equals("H3")) {
                 System.out.println("hab level 3");
                 habLevel = 3;
+                actionMap.setEndclimb(habLevel);
                 updateScreen();
             } else if(getCode(x, y).equals("H1")){
                 System.out.println("hab level 1");
                 habLevel = 1;
+                actionMap.setEndclimb(habLevel);
                 updateScreen();
             }
 
-        if (getCode(x, y).equals("A") || getCode(x, y).equals("B")) {
-            openRocket();
-        } else if (findViewById(R.id.inputcontainer) != null && !("" + getCode(x, y).charAt(0)).equals("H")) {
+        if (getCode(x, y).equals("A")) {
+            openRocket(true);
+
+        }else if(getCode(x, y).equals("B")){
+            openRocket(false);
+        }
+        else if (findViewById(R.id.inputcontainer) != null && !("" + getCode(x, y).charAt(0)).equals("H")) {
             InputFragment inputFragment = new InputFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.inputcontainer, inputFragment, null);
@@ -674,10 +682,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
 
 
-    public void openRocket() {
+    public void openRocket(boolean b) {
         if (findViewById(R.id.infoframe) != null) {
             RocketFragment rocketFragment = new RocketFragment();
-            rocketFragment.setArguments(actionMap);
+            rocketFragment.setArguments(actionMap, b);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.infoframe, rocketFragment, null);
             fragmentTransaction.commit();
@@ -892,8 +900,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[0] = 360;
             HAB3MIN[0] = 260;
             HAB3MAX[0] = 360;
-            HAB4MIN[0] = 750;
-            HAB4MAX[0] = 845;
+
 
             ROCKET1MIN[1] = 100;
             ROCKET1MAX[1] = 160;
@@ -915,6 +922,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             CARGO7MAX[1] = 405;
             CARGO8MIN[1] = 335;
             CARGO8MAX[1] = 380;
+
+            HAB4MIN[0] =370;
+            HAB4MAX[0] = 455;
+            /*
             HAB1MIN[1] = 200;
             HAB1MAX[1] = 300;
             HAB2MIN[1] = 300;
@@ -922,7 +933,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB3MIN[1] = 360;
             HAB3MAX[1] = 460;
             HAB4MIN[1] = 225;
-            HAB4MAX[1] = 430;
+            HAB4MAX[1] = 430;*/
 
         }
         else{
@@ -1005,8 +1016,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB2MAX[0] = 940;
             HAB3MIN[0] = 850;
             HAB3MAX[0] = 940;
-            HAB4MIN[0] =370;
-            HAB4MAX[0] = 455;
+
             ROCKET1MIN[1] = 90;
             ROCKET1MAX[1] = 150;
             ROCKET2MIN[1] = 500;
@@ -1027,6 +1037,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             CARGO7MAX[1] = 390;
             CARGO8MIN[1] = 335;
             CARGO8MAX[1] = 380;
+
+            HAB4MIN[0] = 750;
+            HAB4MAX[0] = 845;
+            /*
             HAB1MIN[1] = 200;
             HAB1MAX[1] = 300;
             HAB2MIN[1] = 300;
@@ -1034,7 +1048,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             HAB3MIN[1] = 360;
             HAB3MAX[1] = 460;
             HAB4MIN[1] = 230;
-            HAB4MAX[1] = 450;
+            HAB4MAX[1] = 450;*/
         }
         left = !left;
 

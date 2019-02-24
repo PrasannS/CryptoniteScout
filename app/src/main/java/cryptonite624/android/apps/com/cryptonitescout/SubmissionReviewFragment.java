@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
@@ -38,6 +40,8 @@ public class SubmissionReviewFragment extends Fragment {
 
     private TextView totalHatches;
     private TextView totalCargos;
+    private TextView climbLevel;
+    private Button submissionButton;
     private ActionMap map;
 
     public SubmissionReviewFragment() {
@@ -87,9 +91,24 @@ public class SubmissionReviewFragment extends Fragment {
 
         totalHatches = view.findViewById(R.id.submission_hatchnum);
         totalCargos = view.findViewById(R.id.submission_cargonum);
+        climbLevel = view.findViewById(R.id.submission_hablevel);
+        submissionButton = view.findViewById(R.id.submission_submit);
+
 
         totalHatches.setText("" + ActionMapUtils.totalhatches(false, map.getActions()));
         totalCargos.setText("" + ActionMapUtils.totalhatches(true, map.getActions()));
+        climbLevel.setText("" + map.getEndclimb());
+        submissionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Congrats on submitting!",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+
 
         // Inflate the layout for this fragment
         return view;
