@@ -9,6 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import de.codecrafters.tableview.SortableTableView;
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.listeners.TableDataClickListener;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 
 /**
@@ -27,7 +35,12 @@ public class ScheduleFragment extends Fragment {
 
     private static final String INPUTS = "inputs";
 
+    TableView<String []> TableView;
 
+    public static String [] Schedule_headers = {"Match #","teams","placeholder","test"};
+
+    public static String [][] Schedule_datas = {{"Team#","test","data","placeholder"},
+                                                   {"Another","testdata","goes","here"}};
 
 
 
@@ -93,7 +106,15 @@ public class ScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
-
+        TableView = (TableView<String[]>)view.findViewById(R.id.tableView_schedule);
+        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), Schedule_datas));
+        TableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));
+        TableView.addDataClickListener(new TableDataClickListener<String[]>() {
+            @Override
+            public void onDataClicked(int rowIndex, String[] clickedData) {
+                Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         matchnum = (Button)(view.findViewById(R.id.matchnum));
