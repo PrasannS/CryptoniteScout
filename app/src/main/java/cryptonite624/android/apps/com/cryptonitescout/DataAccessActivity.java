@@ -25,7 +25,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
-public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener{
+public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead{
 
     public static FragmentManager fragmentManager;
 
@@ -85,7 +85,12 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                 }*/
                 if (id == R.id.nav_matches) {
                     Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(DataAccessActivity.this, ScheduleActivity.class));
+                    if(findViewById(R.id.fragmentcontainer)!=null){
+                        ScheduleFragment rankingFragment = new ScheduleFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontainer, rankingFragment,null);
+                        fragmentTransaction.commit();
+                    }
                     return true;
                 }
                 if (id == R.id.nav_newentry) {
@@ -376,6 +381,11 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void onServerLoad() {
+
+    }
+
+    @Override
+    public void OnScheduleRead(String message) {
 
     }
 }
