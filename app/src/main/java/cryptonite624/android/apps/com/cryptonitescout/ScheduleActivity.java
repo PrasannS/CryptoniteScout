@@ -46,22 +46,7 @@ public class ScheduleActivity extends AppCompatActivity implements ServerLoader.
         return view2;
     }
 
-    public void addAllRows(List<Schedule> data) {
-        cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment temp;
-        for(Schedule s:data){
-            temp = new cryptonite624.android.apps.com.cryptonitescout.Fragments.ScheduleFragment();
-            if (findViewById(R.id.rowframe) != null) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.rowframe, temp, null);
-                fragmentTransaction.commit();
-                temp.setArgument(s);
-            }
-        }
-    }
-
     @Override
     public void onServerLoad() {
-
-        addAllRows(Schedule.listAll(Schedule.class));
     }
 }

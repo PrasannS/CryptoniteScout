@@ -25,7 +25,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
-public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener{
+public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener{
 
     public static FragmentManager fragmentManager;
 
@@ -34,6 +34,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     private NavigationView nv;
 
     private Toolbar toolbar;
+    public ServerLoader serverLoader;
 
 
     @Override
@@ -41,6 +42,9 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_access);
+
+        serverLoader = new ServerLoader(this);
+        serverLoader.loadFromTBA();
 
         dl = (DrawerLayout)findViewById(R.id.drawer_layout);
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
@@ -367,6 +371,11 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onServerLoad() {
 
     }
 }
