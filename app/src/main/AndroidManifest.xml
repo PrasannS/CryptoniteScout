@@ -51,7 +51,7 @@
         </activity>
         <activity
             android:name=".pitNote"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".pitNotePageTwo"
             android:screenOrientation="landscape" />
@@ -76,7 +76,7 @@
             android:screenOrientation="landscape" />
         <activity android:name=".ReplayViewPage" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".PickListActivity"></activity>
+        <activity android:name=".PickListActivity" />
     </application>
 
 </manifest>
