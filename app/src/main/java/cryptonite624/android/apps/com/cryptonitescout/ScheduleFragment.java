@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
@@ -43,10 +44,7 @@ public class ScheduleFragment extends Fragment {
 
     de.codecrafters.tableview.TableView<String []> TableView;
 
-    public static String [] Schedule_headers = {"Match #","teams","placeholder","test"};
-
-    public static String [][] Schedule_datas = {{"Team#","test","data","placeholder"},
-            {"Another","testdata","goes","here"}};
+    public static String [] Schedule_headers = {"Match #","B1","B2","B3","R1","R2","R3"};
 
 
 
@@ -112,8 +110,9 @@ public class ScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
-        TableView = (TableView<String[]>)view.findViewById(R.id.tableView_schedule);
-        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), Schedule_datas));
+        List<Schedule>schedules= Schedule.listAll(Schedule.class);
+        TableView = (TableView<String[]>)view.findViewById(R.id.scheduletable);
+        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
         TableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));
         TableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
@@ -123,69 +122,6 @@ public class ScheduleFragment extends Fragment {
         });
 
 
-        matchnum = (Button)(view.findViewById(R.id.matchnum));
-        matchnum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        red1 = (Button)(view.findViewById(R.id.red1));
-        red1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        red2 = (Button)(view.findViewById(R.id.red2));
-        red2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        red3 = (Button)(view.findViewById(R.id.red3));
-        red3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        blue1 = (Button)(view.findViewById(R.id.blue1));
-        blue1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        blue2 = (Button)(view.findViewById(R.id.blue2));
-        blue2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
-        blue3 = (Button)(view.findViewById(R.id.blue3));
-        blue3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onScheduleRead.OnScheduleRead(message);
-            }
-        });
-
 
         return view;
 
@@ -193,23 +129,22 @@ public class ScheduleFragment extends Fragment {
     }
     public View view;
 
-    public void addAllRows(ArrayList<Schedule> data) {
-        ScheduleFragment temp;
-        for(Schedule r:data){
-            temp = new ScheduleFragment();
-            temp.setArguments(r);
-            if (view.findViewById(R.id.infoframe) != null) {
-                cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.infoframe, pregameFragment, null);
-                fragmentTransaction.commit();
-            }
+    public String[][] getArrFromSchedules(List<Schedule>allmatches) {
+        String [][] data = new String[allmatches.size()][7];
+        int cur = 0;
+        for(Schedule s:allmatches){
+            data[cur]= scheduletoString(s);
+            cur++;
         }
+        return data;
     }
 
-    public void putDatasinTable() {
-        String [] data = new String[]
+    public String[] scheduletoString(Schedule s){
+        String[] ans = {s.getMatchnum()+"",s.getB1(),s.getB2(),s.getB3(),s.getR1(),s.getR2(),s.getR3()};
+        return ans;
     }
+
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
