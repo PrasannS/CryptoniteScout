@@ -1,5 +1,6 @@
 package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -84,6 +85,44 @@ public class ActionMapUtils {
 
         return am;
     }
+
+    public static int tournamentTotalHatches(ArrayList<ActionMap> maps){
+        int count = 0;
+        for(ActionMap m : maps){
+            count += totalhatches(true, m.getActions());
+        }
+        return count;
+    }
+
+    public static int tournamentTotalCargos(ArrayList<ActionMap> maps){
+        int count = 0;
+        for(ActionMap m : maps){
+            count += totalhatches(false, m.getActions());
+        }
+        return count;
+    }
+
+    public static double tournamentAverageHatch(ArrayList<ActionMap> maps){
+        double average = tournamentTotalHatches(maps) / maps.size();
+        return average;
+    }
+
+    public static double tournamentAverageCargo(ArrayList<ActionMap> maps){
+        double average = tournamentTotalCargos(maps) / maps.size();
+        return average;
+    }
+
+    public static int tournamentHighestClimbLv(ArrayList<ActionMap> maps){
+        int lv = 0;
+        for(ActionMap m : maps){
+            if(m.getEndclimb() > lv){
+                lv = m.getEndclimb();
+            }
+        }
+        return lv;
+    }
+
+
 
 
 
