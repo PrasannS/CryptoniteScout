@@ -249,7 +249,11 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 data = new PitnoteData(data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage,image);
                 data.save();
-                bluetoothHandler.sendMessage('p',data.toString());
+                try {
+                    bluetoothHandler.sendMessage('p',data.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 openDashboard();
 
             }

@@ -26,6 +26,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.EncyptionUtils;
 
 public class BluetoothHandler {
 
@@ -57,6 +58,7 @@ public class BluetoothHandler {
         updated.put('f',true);
         updated.put('c',true);
         updated.put('l',true);
+        updated.put('u',true);
     }
 
     public void openreceiver(){
@@ -74,7 +76,12 @@ public class BluetoothHandler {
         }
     }
 
-    public void handleMessage(String s){
+    public void handleMessage(String s) {
+        try {
+            s = EncyptionUtils.decrypt(s,"0624");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         char i = s.charAt(0);
         switch (i){
             case 'm':
@@ -97,6 +104,9 @@ public class BluetoothHandler {
                 break;
             case 'd':
                 bluetoothListener.OnBluetoothRead("drawing");
+                break;
+            case 'u':
+                bluetoothListener.OnBluetoothRead("user");
                 break;
 
             /*case 'w':
@@ -137,8 +147,8 @@ public class BluetoothHandler {
     }
 
 
-    public void sendMessage(char type, String message) {
-        final String sNewName = regex+type+message;
+    public void sendMessage(char type, String message) throws Exception{
+        final String sNewName = EncyptionUtils.encrypt(regex+type+message,"0624");
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
@@ -278,7 +288,11 @@ public class BluetoothHandler {
 
     public void updatePending(char type){
         //TODO Place Pending Logic over here
-        sendMessage(type,configuration.getCurrentmatch()+"");
+        try {
+            sendMessage(type,configuration.getCurrentmatch()+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         updated.put(type,false);
     }
 

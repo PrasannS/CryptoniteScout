@@ -77,7 +77,7 @@
         <activity android:name=".ReplayViewPage" />
         <activity android:name=".MainActivity" />
         <activity android:name=".PickListActivity" />
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
     </application>
 
 </manifest>
