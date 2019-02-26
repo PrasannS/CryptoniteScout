@@ -36,6 +36,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -389,6 +391,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean loggedIn(User u){
+        List<User> user = User.find(User.class,"email=? and password = ?",u.getEmail(),u.getPassword());
+        if(user.size()>0) {
+            user.get(0).setLoggedin(true);
+            return true;
+        }
+        return false;
     }
 }
 

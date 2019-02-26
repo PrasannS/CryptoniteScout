@@ -63,6 +63,18 @@ public class User extends SugarRecord {
         return currency;
     }
 
+    public boolean isLoggedin() {
+        return loggedin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setCurrency(int currency) {
         this.currency = currency;
     }
