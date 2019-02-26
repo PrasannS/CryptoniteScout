@@ -24,9 +24,11 @@ import java.util.TimerTask;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.EncyptionUtils;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
 
 public class BluetoothHandler {
 
@@ -106,6 +108,8 @@ public class BluetoothHandler {
                 bluetoothListener.OnBluetoothRead("drawing");
                 break;
             case 'u':
+                User u = UserUtils.parseUser(s.substring(1));
+                u.save();
                 bluetoothListener.OnBluetoothRead("user");
                 break;
 

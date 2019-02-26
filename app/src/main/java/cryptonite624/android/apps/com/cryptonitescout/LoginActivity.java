@@ -43,7 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, BluetoothHandler.BluetoothListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -208,9 +208,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
         */
-        Intent intent1 = new Intent(this, DataAccessActivity.class);
-        startActivity(intent1);
+        User temp = new User();
+        temp.setEmail(mEmailView.getText().toString());
+        temp.setEmail(mPasswordView.getText().toString());
 
+        if(loggedIn(temp)) {
+            Intent intent1 = new Intent(this, DataAccessActivity.class);
+            startActivity(intent1);
+        }
+        else{
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Invalid login, recheck credentials or register if you haven't already",
+                    Toast.LENGTH_LONG);
+
+            toast.show();
+        }
 
 
     }
@@ -306,6 +318,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    public void OnBluetoothRead(String message) {
+
+    }
+
+    @Override
+    public void start(Intent intent) {
+
+    }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -397,6 +419,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         List<User> user = User.find(User.class,"email=? and password = ?",u.getEmail(),u.getPassword());
         if(user.size()>0) {
             user.get(0).setLoggedin(true);
+            user.get(0).save();
             return true;
         }
         return false;

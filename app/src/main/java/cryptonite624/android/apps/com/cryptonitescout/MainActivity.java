@@ -31,13 +31,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements BluetoothHandler.BluetoothListener{
 
-    public Map<String,String> lastmessages  = new HashMap<>();
-
-    public static String regex = "0624";
-    private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
-    private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
-    private static final int REQUEST_ENABLE_BT = 3;
-
     private ListView lvMainChat;
     private EditText etMain;
     private ImageView btnSend;
@@ -70,7 +63,11 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
             @Override
             public void onClick(View arg0) {
                 writeMessage = etMain.getText().toString();
-                bluetoothHandler.sendMessage('c',writeMessage);
+                try {
+                    bluetoothHandler.sendMessage('c',writeMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 ChatMessage m = new ChatMessage(false,writeMessage);
                 chatArrayAdapter.add(m);
                 etMain.setText("");
@@ -109,38 +106,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent serverIntent = null;
-        switch (item.getItemId()) {
-            case R.id.secure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-                return true;
-            case R.id.insecure_connect_scan:
-                serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent,
-                        REQUEST_CONNECT_DEVICE_INSECURE);
-                return true;
-            case R.id.discoverable:
-                return true;
-        }
-        return false;
-    }
-
-
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-        }
-    }
 
     @Override
     public synchronized void onPause() {
@@ -161,7 +126,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        ChatMessage cm = new ChatMessage(true,message);
+        chatArrayAdapter.add(cm);
     }
 
     @Override

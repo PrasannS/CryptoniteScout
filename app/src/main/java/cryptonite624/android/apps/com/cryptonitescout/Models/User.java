@@ -59,10 +59,6 @@ public class User extends SugarRecord {
         this.email = email;
     }
 
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { this.password = password; }
-
     public int getCurrency() {
         return currency;
     }
