@@ -26,8 +26,4 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    public String userDatatoString(User data){
-        String datas = "hi";
-        return datas;
-    }
 }
