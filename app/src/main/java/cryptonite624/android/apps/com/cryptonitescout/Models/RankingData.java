@@ -4,7 +4,7 @@ import com.orm.SugarRecord;
 
 public class RankingData extends SugarRecord{
 
-     String placeHolder         ;
+     String placeHolder      ;
      String phase            ;
      int RankPoint           ;
      int Ranking             ;

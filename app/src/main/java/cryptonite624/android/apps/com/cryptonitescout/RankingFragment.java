@@ -19,7 +19,9 @@ import com.anychart.enums.Sort;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import de.codecrafters.tableview.SortableTableView;
 import de.codecrafters.tableview.TableView;
@@ -166,6 +168,26 @@ public class RankingFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         }
+    }
+    public String[][] getArrfromRanking(List<RankingData> datas) {
+        String [][] data = new String[datas.size()][31];
+        int cur = 0;
+        for(RankingData s:datas){
+            data[cur]= rankingtoString(s);
+            cur++;
+        }
+        return data;
+    }
+
+    public String [] rankingtoString(RankingData data){
+        String [] datas = {data.getRank()+"",data.getPlaceHolder(),data.getPhase(),data.getRankPoint()+"",data.getRanking()+"",data.getWinRate()+"",
+                           data.getTeamnum()+"",data.getStatus()+"",data.getMatchesPlayed()+"",data.getCargoAvg()+"",data.getHatchAvg()+"",
+                            data.getSandstormCargoOne()+"",data.getSandstormCargoTwo()+"",data.getSandstormCargoThree()+"",data.getSandstormHatchOne()+"",
+                            data.getSandstormHatchTwo()+"",data.getSandstormHatchThree()+"",data.getTeleopCargoOne()+"",data.getTeleopCargoTwo()+"",
+                            data.getTeleopCargoThree()+"",data.getTeleopHatchOne()+"",data.getTeleopHatchTwo()+"",data.getTeleopHatchThree()+"",
+                            data.getClimbOne()+"",data.getClimbTwo()+"",+data.getClimbThree()+"",data.getCxHatchCargoShip()+"",data.getCxCargoCargoShip()+"",
+                            data.getCxCargoRocket()+"",data.getCxHatchRocket()+"",data.getTeamkey()}               ;
+        return datas;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

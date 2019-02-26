@@ -1,0 +1,68 @@
+package cryptonite624.android.apps.com.cryptonitescout;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
+
+public class Register extends AppCompatActivity implements BluetoothHandler.BluetoothListener{
+
+    private Button toLoging;
+    private AutoCompleteTextView fn;
+    private AutoCompleteTextView ln;
+    private EditText ps;
+    private AutoCompleteTextView em;
+    BluetoothHandler bluetoothHandler;
+    
+    
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        
+        em = findViewById(R.id.register_email);
+        fn = findViewById(R.id.last_name_register);
+        ln = findViewById(R.id.first_name_register);
+        ps = findViewById(R.id.register_password);
+        bluetoothHandler = new BluetoothHandler(this,this);
+
+
+
+        toLoging = findViewById(R.id.toLogin_register);
+        toLoging.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User u = new User();
+                u.setUserFirstname(fn.getText().toString());
+                u.setUserLastname(ln.getText().toString());
+                u.setEmail(em.getText().toString());
+                u.setPassword(ps.getText().toString());
+                u.save();
+                try {
+                    bluetoothHandler.sendMessage('u', UserUtils.toString(u));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(Register.this, LoginActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void OnBluetoothRead(String message) {
+
+    }
+
+    @Override
+    public void start(Intent intent) {
+
+    }
+}

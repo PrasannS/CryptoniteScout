@@ -3,29 +3,43 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import com.orm.SugarRecord;
 
 public class User extends SugarRecord {
-    String username;
-    int loggedin;
+    String userLastname;
+    String userFirstname;
+    boolean loggedin;
     String type;
     String email;
+    String password;
     int currency;
+
+    public User(String userLastname, String userFirstname, boolean loggedin, String type, String email, String password, int currency){
+
+    }
 
     public User(){
 
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserLastname() {
+        return userLastname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserLastname(String userLastname) {
+        this.userLastname = userLastname;
     }
 
-    public int getLoggedin() {
+    public String getUserFirstname() {
+        return userFirstname;
+    }
+
+    public void setUserFirstname(String userFirstname) {
+        this.userLastname = userFirstname;
+    }
+
+    public boolean getLoggedin() {
         return loggedin;
     }
 
-    public void setLoggedin(int loggedin) {
+    public void setLoggedin(boolean loggedin) {
         this.loggedin = loggedin;
     }
 
@@ -47,6 +61,18 @@ public class User extends SugarRecord {
 
     public int getCurrency() {
         return currency;
+    }
+
+    public boolean isLoggedin() {
+        return loggedin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setCurrency(int currency) {
