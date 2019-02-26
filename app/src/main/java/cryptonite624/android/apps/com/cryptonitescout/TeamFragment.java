@@ -192,6 +192,10 @@ public class TeamFragment extends Fragment {
         }
     }
 
+    public void setArguments(){
+
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

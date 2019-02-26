@@ -23,8 +23,6 @@ import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-import static cryptonite624.android.apps.com.cryptonitescout.ScheduleActivity.fragmentManager;
-
 
 /**
  * A simple {@link Fragment} subclass.
