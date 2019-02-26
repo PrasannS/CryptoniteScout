@@ -34,7 +34,7 @@
             android:value="cryptonitescout.db" />
         <meta-data
             android:name="VERSION"
-            android:value="4" />
+            android:value="3" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -57,9 +57,6 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".DataEntryActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".ScheduleActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".SettingsActivity"

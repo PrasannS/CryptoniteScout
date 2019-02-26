@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
 public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead{
@@ -135,6 +136,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     return true;
                 }
                 if (id == R.id.nav_pitnote) {
+                    startActivity(new Intent(DataAccessActivity.this, PitnoteData.class));
                     Toast.makeText(DataAccessActivity.this, "pitnotes", Toast.LENGTH_LONG).show();
                 }
 
