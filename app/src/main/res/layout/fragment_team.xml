@@ -30,6 +30,7 @@
                     android:gravity="left"
                     android:textSize="25sp"
                     android:text="Team Name"
+                    android:id="@+id/team_teamname"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                     android:gravity="right"
                     android:textSize="25sp"
                     android:text="#3"
+                    android:id="@+id/team_teamrank"
                     android:layout_weight="1"/>
             </LinearLayout>
 
@@ -51,6 +53,7 @@
                     android:textSize="25sp"
                     android:gravity="left"
                     android:text="Team Number"
+                    android:id="@+id/team_teamnum"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -58,6 +61,7 @@
                     android:textSize="25sp"
                     android:gravity="right"
                     android:text="6 RP"
+                    android:id="@+id/team_teamrp"
                     android:layout_weight="1"/>
             </LinearLayout>
 
@@ -68,6 +72,21 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Cargo Total"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="Hatch Total"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -88,14 +107,57 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="25sp"
-                android:text="Average Contribution"
+                android:text="Climb Level"
+                android:gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="0"
+                android:id="@+id/team_totalcargo"
                 android:gravity="center_horizontal" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="25sp"
-                android:text="Climb Level"
+                android:text="0"
+                android:id="@+id/team_totalhatch"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="0"
+                android:id="@+id/team_averagecargo"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="0"
+                android:id="@+id/team_averagehatch"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:text="0"
+                android:id="@+id/team_hablevel"
                 android:gravity="center_horizontal" />
 
         </LinearLayout>
