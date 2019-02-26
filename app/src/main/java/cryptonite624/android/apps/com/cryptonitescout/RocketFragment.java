@@ -18,9 +18,9 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RocketFragment.OnFragmentInteractionListener} interface
+ * {@link RocketFragment} interface
  * to handle interaction events.
- * Use the {@link RocketFragment#newInstance} factory method to
+ * Use the {@link RocketFragment#} factory method to
  * create an instance of this fragment.
  */
 public class RocketFragment extends Fragment {
@@ -34,6 +34,8 @@ public class RocketFragment extends Fragment {
     public Button ml;
     public Button tr;
     public Button tl;
+    
+    public boolean top;
 
     public boolean brcf;
     public boolean blcf;
@@ -62,46 +64,90 @@ public class RocketFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    public void setArguments(ActionMap actionMap) {
+    public void setArguments(ActionMap actionMap, boolean b) {
         map = actionMap;
-        for(int i = 0; i < actionMap.getActions().size(); i++){
-            if(actionMap.getActions().get(i).getActionCode().equals("A1") && actionMap.getActions().get(i).isHatch()){
-                brhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& actionMap.getActions().get(i).isHatch()){
-                blhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& actionMap.getActions().get(i).isHatch()){
-                mrhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& actionMap.getActions().get(i).isHatch()){
-                mlhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& actionMap.getActions().get(i).isHatch()){
-                trhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& actionMap.getActions().get(i).isHatch()){
-                tlhf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A1")&& actionMap.getActions().get(i).isHatch()){
-                brcf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& !actionMap.getActions().get(i).isHatch()){
-                blcf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& !actionMap.getActions().get(i).isHatch()){
-                mrcf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& !actionMap.getActions().get(i).isHatch()){
-                mlcf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& !actionMap.getActions().get(i).isHatch()){
-                trcf = true;
-            }
-            else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& !actionMap.getActions().get(i).isHatch()){
-                tlcf = true;
+        top = b;
+        if(top){
+            for(int i = 0; i < actionMap.getActions().size(); i++){
+                if(actionMap.getActions().get(i).getActionCode().equals("A1") && actionMap.getActions().get(i).isHatch()){
+                    brhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& actionMap.getActions().get(i).isHatch()){
+                    blhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& actionMap.getActions().get(i).isHatch()){
+                    mrhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& actionMap.getActions().get(i).isHatch()){
+                    mlhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& actionMap.getActions().get(i).isHatch()){
+                    trhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& actionMap.getActions().get(i).isHatch()){
+                    tlhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A1")&& !actionMap.getActions().get(i).isHatch()){
+                    brcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& !actionMap.getActions().get(i).isHatch()){
+                    blcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& !actionMap.getActions().get(i).isHatch()){
+                    mrcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& !actionMap.getActions().get(i).isHatch()){
+                    mlcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& !actionMap.getActions().get(i).isHatch()){
+                    trcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& !actionMap.getActions().get(i).isHatch()){
+                    tlcf = true;
+                }
             }
         }
+        else{
+            for(int i = 0; i < actionMap.getActions().size(); i++){
+                if(actionMap.getActions().get(i).getActionCode().equals("B1") && actionMap.getActions().get(i).isHatch()){
+                    brhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B2")&& actionMap.getActions().get(i).isHatch()){
+                    blhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B3")&& actionMap.getActions().get(i).isHatch()){
+                    mrhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B4")&& actionMap.getActions().get(i).isHatch()){
+                    mlhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B5")&& actionMap.getActions().get(i).isHatch()){
+                    trhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B6")&& actionMap.getActions().get(i).isHatch()){
+                    tlhf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B1")&& !actionMap.getActions().get(i).isHatch()){
+                    brcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B2")&& !actionMap.getActions().get(i).isHatch()){
+                    blcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B3")&& !actionMap.getActions().get(i).isHatch()){
+                    mrcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B4")&& !actionMap.getActions().get(i).isHatch()){
+                    mlcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B5")&& !actionMap.getActions().get(i).isHatch()){
+                    trcf = true;
+                }
+                else if(actionMap.getActions().get(i).getActionCode().equals("B6")&& !actionMap.getActions().get(i).isHatch()){
+                    tlcf = true;
+                }
+            }
+        }
+       
     }
 
     /**
@@ -259,6 +305,25 @@ public class RocketFragment extends Fragment {
         }
         if(tlcf){
             tl.setBackgroundColor(Color.YELLOW);
+        }
+
+        if(brcf && brhf){
+            br.setBackgroundColor(Color.GREEN);
+        }
+        if(blcf && brhf){
+            bl.setBackgroundColor(Color.GREEN);
+        }
+        if(mrcf && mrhf){
+            mr.setBackgroundColor(Color.GREEN);
+        }
+        if(mlcf && mlhf){
+            ml.setBackgroundColor(Color.GREEN);
+        }
+        if(trcf && trhf){
+            tr.setBackgroundColor(Color.GREEN);
+        }
+        if(tlcf && tlhf){
+            tl.setBackgroundColor(Color.GREEN);
         }
 
         return view;
