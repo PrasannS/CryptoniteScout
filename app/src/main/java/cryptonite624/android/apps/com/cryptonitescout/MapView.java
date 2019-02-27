@@ -1044,7 +1044,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void hatch(Boolean b) {
-        ActionMapUtils.totalhatches (true, actionMap.getActionsList());
 
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
@@ -1237,7 +1236,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(MapView.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

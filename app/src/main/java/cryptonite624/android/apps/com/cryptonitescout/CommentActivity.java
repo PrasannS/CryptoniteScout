@@ -225,7 +225,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(CommentActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

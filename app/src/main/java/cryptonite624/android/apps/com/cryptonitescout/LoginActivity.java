@@ -76,12 +76,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private Button toRegister;
     public DaoSession daoSession;
+    public BluetoothHandler bluetoothHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler.startlooking();
 
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -329,7 +333,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

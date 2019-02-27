@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bluetoothHandler = new BluetoothHandler(this,this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
 
         /*getWidgetReferences*/

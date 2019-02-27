@@ -170,13 +170,14 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pit_note);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
 
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+        data = new PitnoteData();
 
-        bluetoothHandler = new BluetoothHandler(this,this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
         qb.where(PitnoteDataDao.Properties.Teamnum.eq(getTeamNum()));
         List<PitnoteData>temp = qb.list();
@@ -386,7 +387,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(pitNote.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

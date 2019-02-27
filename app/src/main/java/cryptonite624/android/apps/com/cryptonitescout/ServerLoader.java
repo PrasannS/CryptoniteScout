@@ -39,13 +39,19 @@ public class ServerLoader {
         protected Void doInBackground(String... strings) {
             //if(Schedule.listAll(Schedule.class).size() > 0)
             //Schedule.deleteAll(Schedule.class);
-            Match[] matches = tba.getMatches("2019week0");
-            TBA.sort(matches, SortingType.DATE);
-            int cur = 0;
-            for(Match m:matches){
-                addScheduleFromAPI(m,cur);
-                cur++;
+            try {
+                Match[] matches = tba.getMatches("2019week0");
+                TBA.sort(matches, SortingType.DATE);
+                int cur = 0;
+                for(Match m:matches){
+                    addScheduleFromAPI(m,cur);
+                    cur++;
+                }
             }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
             return null;
         }
 

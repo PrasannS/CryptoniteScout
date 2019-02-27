@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cpjd.models.matches.MatchAlliance;
 
@@ -62,7 +63,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

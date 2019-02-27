@@ -11,11 +11,25 @@
         android:orientation="vertical"
         android:background="@color/colorPrimaryDark">
 
-        <SearchView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:backgroundTint="@android:color/white"
-            android:id="@+id/schedulesearch"></SearchView>
+            android:layout_height="75dp"
+            android:orientation="horizontal">
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:backgroundTint="@android:color/white"
+                android:id="@+id/schedulesearch"></SearchView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="LOAD ITEMS"
+                android:id ="@+id/loaditems"/>
+        </LinearLayout>
 
         <de.codecrafters.tableview.TableView
             android:layout_width="match_parent"
