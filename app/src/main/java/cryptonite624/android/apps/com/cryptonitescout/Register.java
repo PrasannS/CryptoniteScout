@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
 
@@ -20,6 +21,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
     private EditText ps;
     private AutoCompleteTextView em;
     BluetoothHandler bluetoothHandler;
+    public DaoSession daoSession;
     
     
 
@@ -33,7 +35,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
         ln = findViewById(R.id.first_name_register);
         ps = findViewById(R.id.register_password);
         bluetoothHandler = new BluetoothHandler(this,this);
-
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
 
         toLoging = findViewById(R.id.toLogin_register);
@@ -45,7 +47,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
                 u.setUserLastname(ln.getText().toString());
                 u.setEmail(em.getText().toString());
                 u.setPassword(ps.getText().toString());
-                u.save();
+                daoSession.getUserDao().save(u);
                 try {
                     bluetoothHandler.sendMessage('u', UserUtils.toString(u));
                 } catch (Exception e) {

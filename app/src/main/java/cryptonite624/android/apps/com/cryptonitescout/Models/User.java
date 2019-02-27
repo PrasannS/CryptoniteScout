@@ -1,22 +1,44 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-import com.orm.SugarRecord;
 
-public class User extends SugarRecord {
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity(nameInDb = "user")
+
+public class User  {
+
+    @Property(nameInDb = "userlastname")
     String userLastname;
+    @Property(nameInDb = "userfirstname")
     String userFirstname;
+    @Property(nameInDb = "loggedin")
     boolean loggedin;
+    @Property(nameInDb = "type")
     String type;
+    @Property(nameInDb = "email")
     String email;
+    @Property(nameInDb = "password")
     String password;
+    @Property(nameInDb = "currency")
     int currency;
-
-    public User(String userLastname, String userFirstname, boolean loggedin, String type, String email, String password, int currency){
-
-    }
+    
 
     public User(){
 
+    }
+
+    @Generated(hash = 240337981)
+    public User(String userLastname, String userFirstname, boolean loggedin,
+            String type, String email, String password, int currency) {
+        this.userLastname = userLastname;
+        this.userFirstname = userFirstname;
+        this.loggedin = loggedin;
+        this.type = type;
+        this.email = email;
+        this.password = password;
+        this.currency = currency;
     }
 
     public String getUserLastname() {

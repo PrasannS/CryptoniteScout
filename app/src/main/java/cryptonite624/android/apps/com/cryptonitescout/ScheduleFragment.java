@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import de.codecrafters.tableview.SortableTableView;
@@ -41,6 +42,8 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
     private static final String INPUTS = "inputs";
 
     de.codecrafters.tableview.TableView<String []> TableView;
+
+    public DaoSession daoSession;
 
     public static String [] Schedule_headers = {"Match #","B1","B2","B3","R1","R2","R3"};
 
@@ -96,6 +99,11 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
 
     }
 
+    @Override
+    public void addSchedule(Schedule s) {
+        daoSession.getScheduleDao().save(s);
+    }
+
     public interface OnScheduleRead{
         public void OnScheduleRead(String message);
     }
@@ -114,8 +122,9 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
-        List<Schedule>schedules= Schedule.listAll(Schedule.class);
+        List<Schedule>schedules= daoSession.getScheduleDao().loadAll();
         TableView = (TableView<String[]>)view.findViewById(R.id.scheduletable);
         TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
         TableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));

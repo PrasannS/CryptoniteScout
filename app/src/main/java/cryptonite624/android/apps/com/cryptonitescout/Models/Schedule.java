@@ -1,33 +1,46 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 import com.cpjd.models.matches.Match;
-import com.cpjd.models.matches.MatchAlliance;
-import com.orm.SugarDb;
-import com.orm.SugarRecord;
 
-import java.util.List;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
-public class Schedule extends SugarRecord {
+@Entity(nameInDb = "schedule")
+
+public class Schedule  {
 
     public Schedule(){
 
     }
 
-    public static void addScheduleFromAPI(Match m,int num){
-        Schedule schedule = new Schedule();
-        schedule.matchnum = num;
-        String[] red = m.getRed().getTeamKeys();
-        String[] blue = m.getBlue().getTeamKeys();
-        schedule.r1 = red[0];
-        schedule.r2 = red[1];
-        schedule.r3 = red[2];
-        schedule.b1 = blue[0];
-        schedule.b2 = blue[1];
-        schedule.b3 = blue[2];
-        schedule.save();
+    @Generated(hash = 940805172)
+    public Schedule(String r1, String r2, String r3, String b1, String b2,
+            String b3, int matchnum) {
+        this.r1 = r1;
+        this.r2 = r2;
+        this.r3 = r3;
+        this.b1 = b1;
+        this.b2 = b2;
+        this.b3 = b3;
+        this.matchnum = matchnum;
     }
 
-    String r1,r2,r3,b1,b2,b3;
+
+
+    @Property(nameInDb = "r1")
+    String r1;
+    @Property(nameInDb = "r2")
+    String r2;
+    @Property(nameInDb = "r3")
+    String r3;
+    @Property(nameInDb = "b1")
+    String b1;
+    @Property(nameInDb = "b2")
+    String b2;
+    @Property(nameInDb = "b3")
+    String b3;
+    @Property(nameInDb = "matchnum")
     int matchnum;
 
     public String getR1() {

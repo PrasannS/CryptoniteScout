@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
@@ -36,6 +37,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     private Toolbar toolbar;
     public ServerLoader serverLoader;
+    public DaoSession daoSession;
 
 
     @Override
@@ -53,6 +55,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         dl.addDrawerListener(t);
         t.syncState();
 
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -384,6 +387,11 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     @Override
     public void onServerLoad() {
 
+    }
+
+    @Override
+    public void addSchedule(Schedule s) {
+        daoSession.getScheduleDao().save(s);
     }
 
     @Override

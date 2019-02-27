@@ -33,10 +33,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import cryptonite624.android.apps.com.cryptonitescout.Models.UserDao;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -69,12 +75,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
 
     private Button toRegister;
+    public DaoSession daoSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
@@ -416,10 +425,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public boolean loggedIn(User u){
-        List<User> user = User.find(User.class,"email=? and password = ?",u.getEmail(),u.getPassword());
+        QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
+        qb.and(UserDao.Properties.Email.eq(u.getEmail()),UserDao.Properties.Password.eq(u.getPassword()));
+        List<User>user = qb.list();
         if(user.size()>0) {
             user.get(0).setLoggedin(true);
-            user.get(0).save();
+            daoSession.getUserDao().save(user.get(0));
             return true;
         }
         return false;

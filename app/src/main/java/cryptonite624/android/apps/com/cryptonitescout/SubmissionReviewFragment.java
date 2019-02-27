@@ -95,8 +95,8 @@ public class SubmissionReviewFragment extends Fragment {
         submissionButton = view.findViewById(R.id.submission_submit);
 
 
-        totalHatches.setText("" + ActionMapUtils.totalhatches(false, map.getActions()));
-        totalCargos.setText("" + ActionMapUtils.totalhatches(true, map.getActions()));
+        totalHatches.setText("" + ActionMapUtils.totalhatches(false, map.getActionsList()));
+        totalCargos.setText("" + ActionMapUtils.totalhatches(true, map.getActionsList()));
         climbLevel.setText("" + map.getEndclimb());
         submissionButton.setOnClickListener(new View.OnClickListener() {
             @Override

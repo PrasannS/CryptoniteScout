@@ -68,81 +68,81 @@ public class RocketFragment extends Fragment {
         map = actionMap;
         top = b;
         if(top){
-            for(int i = 0; i < actionMap.getActions().size(); i++){
-                if(actionMap.getActions().get(i).getActionCode().equals("A1") && actionMap.getActions().get(i).isHatch()){
+            for(int i = 0; i < actionMap.getActionsList().size(); i++){
+                if(actionMap.getActionsList().get(i).getActionCode().equals("A1") && actionMap.getActionsList().get(i).isHatch()){
                     brhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A2")&& actionMap.getActionsList().get(i).isHatch()){
                     blhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A3")&& actionMap.getActionsList().get(i).isHatch()){
                     mrhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A4")&& actionMap.getActionsList().get(i).isHatch()){
                     mlhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A5")&& actionMap.getActionsList().get(i).isHatch()){
                     trhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A6")&& actionMap.getActionsList().get(i).isHatch()){
                     tlhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A1")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A1")&& !actionMap.getActionsList().get(i).isHatch()){
                     brcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A2")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A2")&& !actionMap.getActionsList().get(i).isHatch()){
                     blcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A3")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A3")&& !actionMap.getActionsList().get(i).isHatch()){
                     mrcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A4")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A4")&& !actionMap.getActionsList().get(i).isHatch()){
                     mlcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A5")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A5")&& !actionMap.getActionsList().get(i).isHatch()){
                     trcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("A6")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("A6")&& !actionMap.getActionsList().get(i).isHatch()){
                     tlcf = true;
                 }
             }
         }
         else{
-            for(int i = 0; i < actionMap.getActions().size(); i++){
-                if(actionMap.getActions().get(i).getActionCode().equals("B1") && actionMap.getActions().get(i).isHatch()){
+            for(int i = 0; i < actionMap.getActionsList().size(); i++){
+                if(actionMap.getActionsList().get(i).getActionCode().equals("B1") && actionMap.getActionsList().get(i).isHatch()){
                     brhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B2")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B2")&& actionMap.getActionsList().get(i).isHatch()){
                     blhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B3")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B3")&& actionMap.getActionsList().get(i).isHatch()){
                     mrhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B4")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B4")&& actionMap.getActionsList().get(i).isHatch()){
                     mlhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B5")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B5")&& actionMap.getActionsList().get(i).isHatch()){
                     trhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B6")&& actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B6")&& actionMap.getActionsList().get(i).isHatch()){
                     tlhf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B1")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B1")&& !actionMap.getActionsList().get(i).isHatch()){
                     brcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B2")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B2")&& !actionMap.getActionsList().get(i).isHatch()){
                     blcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B3")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B3")&& !actionMap.getActionsList().get(i).isHatch()){
                     mrcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B4")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B4")&& !actionMap.getActionsList().get(i).isHatch()){
                     mlcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B5")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B5")&& !actionMap.getActionsList().get(i).isHatch()){
                     trcf = true;
                 }
-                else if(actionMap.getActions().get(i).getActionCode().equals("B6")&& !actionMap.getActions().get(i).isHatch()){
+                else if(actionMap.getActionsList().get(i).getActionCode().equals("B6")&& !actionMap.getActionsList().get(i).isHatch()){
                     tlcf = true;
                 }
             }

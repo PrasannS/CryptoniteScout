@@ -33,7 +33,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
+import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteDataDao;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.BitmapUtils;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -106,6 +112,8 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public String language;
     public static String [] languages = {"Java","C++","LabView","Python","Other(List Comments)"};
 
+    public DaoSession daoSession;
+
     /**TODO
      * all the stuff from the discord should be on there
      * Go for Everything
@@ -164,10 +172,14 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.activity_pit_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+
         bluetoothHandler = new BluetoothHandler(this,this);
         bluetoothHandler.startlooking();
         setSupportActionBar(toolbar);
-        List<PitnoteData> temp = PitnoteData.find(PitnoteData.class, "Teamnum = ?",getTeamNum()+"" );
+        QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
+        qb.where(PitnoteDataDao.Properties.Teamnum.eq(getTeamNum()));
+        List<PitnoteData>temp = qb.list();
         if(temp.size()!=0){
             data = temp.get(0);
         }
@@ -248,7 +260,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
                 data = new PitnoteData(data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage,image);
-                data.save();
+                daoSession.getPitnoteDataDao().save(data);
                 try {
                     bluetoothHandler.sendMessage('p',data.toString());
                 } catch (Exception e) {

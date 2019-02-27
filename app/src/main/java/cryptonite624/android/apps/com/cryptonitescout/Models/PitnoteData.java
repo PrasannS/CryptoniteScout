@@ -1,29 +1,75 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-import com.orm.SugarRecord;
 
-public class PitnoteData extends SugarRecord {
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
+@Entity(nameInDb = "pitnote")
+public class PitnoteData  {
+
+    @Property(nameInDb = "teamnum")
     int teamnum;
+    @Property(nameInDb = "comment")
     String Comment;
+    @Property(nameInDb = "programmeronsite")
     boolean ProgrammerOnSite;
+    @Property(nameInDb = "leveltwostart")
     boolean LevelTwoStart;
+    @Property(nameInDb = "crossbase")
     boolean CrossBase;
+    @Property(nameInDb = "shifter")
     boolean shifter;
+    @Property(nameInDb = "numbatteries")
     int numBatteries;
+    @Property(nameInDb = "numchargers")
     int numChargers;
+    @Property(nameInDb = "numcims")
     int numCIMS;
+    @Property(nameInDb = "numminicims")
     int numMiniCIMS;
+    @Property(nameInDb = "robotdimensions")
     double robotDimension;
+    @Property(nameInDb = "wheels")
     String wheels;
+    @Property(nameInDb = "layouts")
     String layouts;
+    @Property(nameInDb = "levels")
     String Levels;
+    @Property(nameInDb = "intake")
     String Intake;
+    @Property(nameInDb = "language")
     String language;
+    @Property(nameInDb = "image")
     String image;
+
 
     public PitnoteData(){
 
+    }
+
+    @Generated(hash = 1556317177)
+    public PitnoteData(int teamnum, String Comment, boolean ProgrammerOnSite, boolean LevelTwoStart,
+            boolean CrossBase, boolean shifter, int numBatteries, int numChargers, int numCIMS, int numMiniCIMS,
+            double robotDimension, String wheels, String layouts, String Levels, String Intake, String language,
+            String image) {
+        this.teamnum = teamnum;
+        this.Comment = Comment;
+        this.ProgrammerOnSite = ProgrammerOnSite;
+        this.LevelTwoStart = LevelTwoStart;
+        this.CrossBase = CrossBase;
+        this.shifter = shifter;
+        this.numBatteries = numBatteries;
+        this.numChargers = numChargers;
+        this.numCIMS = numCIMS;
+        this.numMiniCIMS = numMiniCIMS;
+        this.robotDimension = robotDimension;
+        this.wheels = wheels;
+        this.layouts = layouts;
+        this.Levels = Levels;
+        this.Intake = Intake;
+        this.language = language;
+        this.image = image;
     }
 
     public int getTeamnum() {
@@ -162,6 +208,23 @@ public class PitnoteData extends SugarRecord {
         this.image = image;
     }
 
+    public boolean getProgrammerOnSite() {
+        return this.ProgrammerOnSite;
+    }
+
+    public boolean getLevelTwoStart() {
+        return this.LevelTwoStart;
+    }
+
+    public boolean getCrossBase() {
+        return this.CrossBase;
+    }
+
+    public boolean getShifter() {
+        return this.shifter;
+    }
+
+    /*
     public PitnoteData(int num, String comm, boolean onSite, boolean lvTwoStart, boolean crossBase,
                        boolean shift, int numBar, int numCharge, int CIMS, int minCIMS, double Demension,
                        String wheel, String layout, String leve, String intake, String languages, String image){
@@ -181,6 +244,6 @@ public class PitnoteData extends SugarRecord {
         leve = Levels;
         intake = Intake;
         languages = language;
-    }
+    }*/
 
 }

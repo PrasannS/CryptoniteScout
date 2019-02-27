@@ -42,19 +42,19 @@ public class RankingDataAdapter extends TableDataAdapter<RankingData> {
     }
 
     private View renderRank(final RankingData data){
-        return renderString("" + data.getRanking());
+        return renderString("" );
     }
 
     private View renderCargoAverage(final RankingData data){
-        return renderString("" + data.getCargoAvg());
+        return renderString("" + (data.getTotalcargo()/data.getMatchesplayed()));
     }
 
     private View renderHatchAverage(final RankingData data){
-        return renderString("" + data.getHatchAvg());
+        return renderString("" + data.getTotalhatches()/data.getMatchesplayed());
     }
 
     private View renderWinrate(final RankingData data){
-        return renderString("" + data.getWinRate());
+        return renderString("" + data.getTotalwins()/data.getMatchesplayed());
     }
 
     private View renderString(final String value) {
