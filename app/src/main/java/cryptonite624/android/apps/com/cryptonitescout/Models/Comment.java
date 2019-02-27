@@ -2,11 +2,15 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(nameInDb = "comment")
 public class Comment  {
+
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "comment")
      String comment;
     @Property(nameInDb = "teamnum")
@@ -110,6 +114,14 @@ public class Comment  {
         return this.broken;
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
      boolean excessivefouls;
      boolean broken;
      String whybroken;
@@ -117,10 +129,11 @@ public class Comment  {
     public Comment(){
     }
 
-    @Generated(hash = 1127973256)
-    public Comment(String comment, int teamnum, int matchnum, int pos,
+    @Generated(hash = 964391118)
+    public Comment(Long id, String comment, int teamnum, int matchnum, int pos,
             int hatchefficiency, int cargoefficiency, int defense,
             boolean excessivefouls, boolean broken, String whybroken) {
+        this.id = id;
         this.comment = comment;
         this.teamnum = teamnum;
         this.matchnum = matchnum;

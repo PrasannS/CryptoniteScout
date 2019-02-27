@@ -154,6 +154,11 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                 comm.setBroken(brokenswitch.isChecked());
 
                 daoSession.getCommentDao().save(comm);
+                try {
+                    bluetoothHandler.sendMessage('f',CommentUtils.toString(comm));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         /*Rating = findViewById(R.id.Rating);

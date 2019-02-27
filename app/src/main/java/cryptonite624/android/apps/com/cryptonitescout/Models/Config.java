@@ -2,11 +2,15 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(nameInDb = "config")
 public class Config {
+
+    @Id(autoincrement = true)
+    Long id;
 
     public String getCurrentuser() {
         return currentuser;
@@ -32,12 +36,21 @@ public class Config {
         this.eventkey = eventkey;
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Config(){
 
     }
 
-    @Generated(hash = 93525242)
-    public Config(String currentuser, int currentmatch, String eventkey) {
+    @Generated(hash = 74496333)
+    public Config(Long id, String currentuser, int currentmatch, String eventkey) {
+        this.id = id;
         this.currentuser = currentuser;
         this.currentmatch = currentmatch;
         this.eventkey = eventkey;

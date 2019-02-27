@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,6 +45,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
@@ -51,31 +53,8 @@ import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 import java.util.Date;
 
-public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener {
+public class MapView extends AppCompatActivity implements EmptyFragment.OnFragmentInteractionListener,View.OnTouchListener, InputFragment.OnInputReadListener, EndgameFragment.OnEndgameReadListener, cryptonite624.android.apps.com.cryptonitescout.PregameFragment.OnPregameReadListener,AutonFragment.OnAutonReadListener,TeleopFragment.OnTeleopReadListener,RocketFragment.OnrocketReadListener, LeftMapFragment.OnLeftMapReadListener, RightMapFragment.OnRightMapReadListener, SubmissionReviewFragment.OnSubmissionListener ,BluetoothHandler.BluetoothListener{
 
-
-    /**
-     *
-     * TODO
-     * popup on click for hatch, cargo, successful\
-     * rocket, 12 buttons?
-     * total hatches, total cargo
-     * forward cycle?
-     *
-     * PICTURE!!!
-     * already done display
-     * - make button slightly different
-     * - show preinstalled as different
-     *
-     * two color versions, make map look nice
-     * calibration
-     *
-     * dylan - superscout
-     *record preloads
-     * easy touch targets
-     *
-     *
-     */
     public int x, y;
     TextView xDisplay, yDisplay, CodeDisplay;
     /*public static int[] REDSWITCH1MIN = {530, 530};
@@ -191,6 +170,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private TextView timerDisplay;
     private Button timerButton;
 
+    public BluetoothHandler bluetoothHandler;
+    public DaoSession daoSession;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //RelativeLayout layout = (RelativeLayout)findViewById(R.id.mapview);
@@ -201,6 +184,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         setContentView(R.layout.activity_map_view);
         //setContentView(view);
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
 
         /*cargobutton1 = (Button)findViewById(R.id.cargobutton1);
         cargobutton2 = (Button)findViewById(R.id.cargobutton2);
@@ -1241,6 +1227,21 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void OnSubmissionRead(String message) {
+        daoSession.getActionMapDao().save(actionMap);
+        try {
+            bluetoothHandler.sendMessage('m',ActionMapUtils.toString(actionMap));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void OnBluetoothRead(String message) {
+
+    }
+
+    @Override
+    public void start(Intent intent) {
 
     }
 }

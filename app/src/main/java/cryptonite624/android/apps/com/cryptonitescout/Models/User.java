@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -9,6 +10,8 @@ import org.greenrobot.greendao.annotation.Generated;
 
 public class User  {
 
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "userlastname")
     String userLastname;
     @Property(nameInDb = "userfirstname")
@@ -29,9 +32,11 @@ public class User  {
 
     }
 
-    @Generated(hash = 240337981)
-    public User(String userLastname, String userFirstname, boolean loggedin,
-            String type, String email, String password, int currency) {
+    @Generated(hash = 1721409726)
+    public User(Long id, String userLastname, String userFirstname,
+            boolean loggedin, String type, String email, String password,
+            int currency) {
+        this.id = id;
         this.userLastname = userLastname;
         this.userFirstname = userFirstname;
         this.loggedin = loggedin;
@@ -99,5 +104,13 @@ public class User  {
 
     public void setCurrency(int currency) {
         this.currency = currency;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

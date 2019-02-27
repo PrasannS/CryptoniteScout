@@ -258,7 +258,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 currentIntake = cargoIntake.getTransitionName();
                 currentLayout = layoutSpinner.getTransitionName();
 
-                data = new PitnoteData(data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
+                data = new PitnoteData(Long.valueOf(1),data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
                         numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage,image);
                 daoSession.getPitnoteDataDao().save(data);
                 try {

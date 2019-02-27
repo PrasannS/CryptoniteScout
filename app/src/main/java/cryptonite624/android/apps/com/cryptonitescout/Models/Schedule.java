@@ -3,6 +3,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 import com.cpjd.models.matches.Match;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -14,9 +15,10 @@ public class Schedule  {
 
     }
 
-    @Generated(hash = 940805172)
-    public Schedule(String r1, String r2, String r3, String b1, String b2,
+    @Generated(hash = 1158362946)
+    public Schedule(Long id, String r1, String r2, String r3, String b1, String b2,
             String b3, int matchnum) {
+        this.id = id;
         this.r1 = r1;
         this.r2 = r2;
         this.r3 = r3;
@@ -27,7 +29,8 @@ public class Schedule  {
     }
 
 
-
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "r1")
     String r1;
     @Property(nameInDb = "r2")
@@ -98,5 +101,13 @@ public class Schedule  {
     public String getR2() {
 
         return r2;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

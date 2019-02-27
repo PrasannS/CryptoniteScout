@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
@@ -48,13 +49,23 @@ public class BluetoothHandler {
     private BluetoothAdapter bluetoothAdapter = null;
 
     public BluetoothHandler(Context context, BluetoothListener bl){
+        updated = new TreeMap<>();
         daoSession = ((CRyptoniteApplication)context).getDaoSession();
         bluetoothListener = bl;
-        if(daoSession.getConfigDao().loadAll().size()==0)
+        if(daoSession.getConfigDao().loadAll().size()==0){
             configuration = new Config();
-        else
+            configuration.setId(Long.valueOf(1));
+            configuration.setCurrentmatch(0);;
+            configuration.setCurrentuser("lol");
+            configuration.setEventkey("2019week0");
+            daoSession.getConfigDao().save(configuration);
+        }
+
+        else{
             configuration = daoSession.getConfigDao().loadAll().get(0);
-        daoSession.getConfigDao().update(configuration);
+            daoSession.getConfigDao().update(configuration);
+        }
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         startDiscovery();
         bluetoothAdapter.setName("Cryptonite");
