@@ -43,7 +43,7 @@ public class ServerLoader {
             TBA.sort(matches, SortingType.DATE);
             int cur = 0;
             for(Match m:matches){
-                Schedule.addScheduleFromAPI(m,cur);
+                addScheduleFromAPI(m,cur);
                 cur++;
             }
             return null;
@@ -56,8 +56,23 @@ public class ServerLoader {
         }
     }
 
+    public void addScheduleFromAPI(Match m,int num){
+        Schedule schedule = new Schedule();
+        schedule.setMatchnum( num);
+        String[] red = m.getRed().getTeamKeys();
+        String[] blue = m.getBlue().getTeamKeys();
+        schedule.setR1(red[0]);
+        schedule.setR2(red[1]);
+        schedule.setR3(red[2]);
+        schedule.setB1(blue[0]);
+        schedule.setB2(blue[1]);
+        schedule.setB3(blue[2]);
+        serverLoadListener.addSchedule(schedule);
+    }
+
     public interface ServerLoadListener{
         void onServerLoad();
+        void addSchedule(Schedule s);
     }
 
 

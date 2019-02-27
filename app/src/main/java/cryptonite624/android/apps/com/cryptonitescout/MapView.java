@@ -463,7 +463,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         /*if (actionReady) {
             actionReady = false;
-            actionMap.getActions().add(new RobotAction(getCode(x, y), matchStatus));
+            actionMap.getActionsList().add(new RobotAction(getCode(x, y), matchStatus));
         }*/
 
         /*if(actionReady == false){
@@ -1056,7 +1056,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void hatch(Boolean b) {
-        ActionMapUtils.totalhatches (true, actionMap.getActions());
+        ActionMapUtils.totalhatches (true, actionMap.getActionsList());
 
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
@@ -1082,7 +1082,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cancel.setVisibility(View.GONE);
         currentAction.setMatchStatus( matchStatus);
         currentAction.setHatch(b);
-        actionMap.getActions().add(currentAction);
+        actionMap.getActionsList().add(currentAction);
         currentAction = new RobotAction();
         if(left){
 
@@ -1096,10 +1096,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateScreen() {
-        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActions()));
-        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActions()));
+        cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActionsList()));
+        hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActionsList()));
         habDisplay.setText("" + habLevel);
-        System.out.println(actionMap.getActions());
+        System.out.println(actionMap.getActionsList());
         //updateFilled();
     }
 
@@ -1110,30 +1110,30 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 /*
     public void updateFilled(){
         //cargobutton5.setBackgroundColor(Color.BLUE);
-        for(int i = 0; i < actionMap.getActions().size(); i++){
-            System.out.println(actionMap.getActions().get(i));
-            if(actionMap.getActions().get(i).getActionCode().equals("C1")){
+        for(int i = 0; i < actionMap.getActionsList().size(); i++){
+            System.out.println(actionMap.getActionsList().get(i));
+            if(actionMap.getActionsList().get(i).getActionCode().equals("C1")){
                 cargobutton1.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C2")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C2")){
                 cargobutton2.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C3")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C3")){
                 cargobutton3.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C4")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C4")){
                 cargobutton4.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C5")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C5")){
                 cargobutton5.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C6")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C6")){
                 cargobutton6.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C7")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C7")){
                 cargobutton7.setBackgroundColor(Color.YELLOW);
             }
-            else if(actionMap.getActions().get(i).getActionCode().equals("C8")){
+            else if(actionMap.getActionsList().get(i).getActionCode().equals("C8")){
                 cargobutton8.setBackgroundColor(Color.YELLOW);
             }
         }

@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
 
-import com.orm.SugarRecord;
+
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,11 +23,13 @@ import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.EncyptionUtils;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.PitnoteDataUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
 
 public class BluetoothHandler {
@@ -41,15 +43,18 @@ public class BluetoothHandler {
     public Config configuration;
     public Map<Character,Boolean> updated;
 
+    public DaoSession daoSession;
+
     private BluetoothAdapter bluetoothAdapter = null;
 
     public BluetoothHandler(Context context, BluetoothListener bl){
+        daoSession = ((CRyptoniteApplication)context).getDaoSession();
         bluetoothListener = bl;
-        if(Config.listAll(Config.class).size()==0)
+        if(daoSession.getConfigDao().loadAll().size()==0)
             configuration = new Config();
         else
-            configuration = Config.findById(Config.class,Long.valueOf(1));
-        configuration.save();
+            configuration = daoSession.getConfigDao().loadAll().get(0);
+        daoSession.getConfigDao().update(configuration);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         startDiscovery();
         bluetoothAdapter.setName("Cryptonite");
@@ -87,15 +92,15 @@ public class BluetoothHandler {
         char i = s.charAt(0);
         switch (i){
             case 'm':
-                ActionMapUtils.parseActionMap(s.substring(1)).save();
+                daoSession.getActionMapDao().save(ActionMapUtils.parseActionMap(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("datasaved");
                 break;
             case 'p':
-                ActionMapUtils.parseActionMap(s.substring(1)).save();
+                daoSession.getPitnoteDataDao().save(PitnoteDataUtils.parsePitnoteData(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("pitnotesaved");
                 break;
             case 'f':
-                CommentUtils.parseComment(s.substring(1)).save();
+                daoSession.getCommentDao().save(CommentUtils.parseComment(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("commentsaved");
                 break;
             case 'c':
@@ -108,8 +113,7 @@ public class BluetoothHandler {
                 bluetoothListener.OnBluetoothRead("drawing");
                 break;
             case 'u':
-                User u = UserUtils.parseUser(s.substring(1));
-                u.save();
+                daoSession.getUserDao().save(UserUtils.parseUser(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("user");
                 break;
 

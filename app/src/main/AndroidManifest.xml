@@ -29,15 +29,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <meta-data
-            android:name="DATABASE"
-            android:value="cryptonitescout.db" />
-        <meta-data
-            android:name="VERSION"
-            android:value="4" />
-        <meta-data
-            android:name="QUERY_LOG"
-            android:value="true" />
 
         <activity
             android:name=".LoginActivity"
@@ -57,9 +48,6 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".DataEntryActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".ScheduleActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".SettingsActivity"

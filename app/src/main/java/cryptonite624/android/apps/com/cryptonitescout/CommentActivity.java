@@ -33,6 +33,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
@@ -70,6 +71,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public BluetoothHandler bluetoothHandler;
 
+    public DaoSession daoSession;
+
 
 
 
@@ -83,6 +86,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_comment);
 
         bluetoothHandler = new BluetoothHandler(this,this);
+        daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         comm = new Comment();
 
@@ -149,7 +153,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                 comm.setWhybroken( WhyBroken.getText().toString());
                 comm.setBroken(brokenswitch.isChecked());
 
-                comm.save();
+                daoSession.getCommentDao().save(comm);
             }
         });
         /*Rating = findViewById(R.id.Rating);

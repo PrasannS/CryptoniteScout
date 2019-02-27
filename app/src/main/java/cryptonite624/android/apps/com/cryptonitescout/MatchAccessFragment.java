@@ -92,7 +92,7 @@ public class MatchAccessFragment extends Fragment implements LeftMapFragment.OnL
     }
 
     public void updateParams(){
-        totalactions = map.getActions().size();
+        totalactions = map.getActionsList().size();
         rangeSeekBar.setRange(0,totalactions,1);
     }
 
@@ -159,7 +159,7 @@ public class MatchAccessFragment extends Fragment implements LeftMapFragment.OnL
                 currentaction++;
                 rangeSeekBar.setValue(currentaction);
                 //put all layout changing code here
-                leftMapFragment.individualButton(map.getActions().get(currentaction));
+                leftMapFragment.individualButton(map.getActionsList().get(currentaction));
             }
         };
 

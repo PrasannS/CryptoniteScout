@@ -14,7 +14,7 @@
             android:id="@+id/mapview"
             android:layout_width="690dp"
             android:layout_height="460dp"
-            android:background="@drawable/jankredright"
+            android:background="@drawable/jankredright1"
             android:descendantFocusability="blocksDescendants">
 <!--
             <Button

@@ -56,7 +56,7 @@ public class ActionMapUtils {
     }
 
 
-    public static int totalPoints(ArrayList<RobotAction> actions){
+    public static int totalPoints(List<RobotAction> actions){
         return actions.size();
     }
     /*
@@ -80,7 +80,7 @@ public class ActionMapUtils {
 
         StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
         while(st1.hasMoreTokens()){
-            am.getActions().add(new RobotAction(st1.nextToken()));
+            am.getActionsList().add(new RobotAction(st1.nextToken()));
         }
 
         return am;
@@ -89,7 +89,7 @@ public class ActionMapUtils {
     public static int tournamentTotalHatches(ArrayList<ActionMap> maps){
         int count = 0;
         for(ActionMap m : maps){
-            count += totalhatches(true, m.getActions());
+            count += totalhatches(true, m.getActionsList());
         }
         return count;
     }
@@ -97,7 +97,7 @@ public class ActionMapUtils {
     public static int tournamentTotalCargos(ArrayList<ActionMap> maps){
         int count = 0;
         for(ActionMap m : maps){
-            count += totalhatches(false, m.getActions());
+            count += totalhatches(false, m.getActionsList());
         }
         return count;
     }
@@ -120,6 +120,15 @@ public class ActionMapUtils {
             }
         }
         return lv;
+    }
+
+    public String toString(ActionMap m){
+        String temp = "";
+        temp += m.getEndclimb() + ";" + m.getMatchnum() + ";" + m.getPos() + ";";
+        for(RobotAction r:m.getActionsList()){
+            temp+=r+",";
+        }
+        return temp;
     }
 
 

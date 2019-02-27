@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 
 /**
@@ -49,6 +52,16 @@ public class TeamFragment extends Fragment {
     public Button toMatch;
     public Button toDashboard;
     private String message;
+
+    private TextView teamName;
+    private TextView teamNum;
+    private TextView teamRank;
+    private TextView teamRP;
+    private TextView cargoTotal;
+    private TextView hatchTotal;
+    private TextView cargoAverage;
+    private TextView hatchAverage;
+    private TextView climbLevel;
 
     OnTeamReadListener teamReadListener;
 
@@ -81,6 +94,13 @@ public class TeamFragment extends Fragment {
         public void OnTeamRead(String message);
     }
 
+    public void loadData(ArrayList<ActionMap> maps){
+        cargoTotal.setText("" + ActionMapUtils.tournamentTotalCargos(maps));
+        hatchTotal.setText("" + ActionMapUtils.tournamentTotalHatches(maps));
+        cargoAverage.setText("" + ActionMapUtils.tournamentAverageCargo(maps));
+        hatchAverage.setText("" + ActionMapUtils.tournamentAverageHatch(maps));
+    }
+
     private class CustomDataEntry extends ValueDataEntry {
 
         CustomDataEntry(String x, Number value, Number value2, Number value3) {
@@ -94,6 +114,15 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_team, container, false);
+
+        teamName = view.findViewById(R.id.team_teamname);
+        teamNum = view.findViewById(R.id.team_teamnum);
+        teamRank = view.findViewById(R.id.team_teamrank);
+        teamRP = view.findViewById(R.id.team_teamrp);
+        cargoTotal = view.findViewById(R.id.team_totalcargo);
+        hatchTotal = view.findViewById(R.id.team_totalhatch);
+        cargoAverage = view.findViewById(R.id.team_averagecargo);
+        hatchAverage = view.findViewById(R.id.team_averagehatch);
     /*
 
         AnyChartView lineGraphView = view.findViewById(R.id.team_line_graph);

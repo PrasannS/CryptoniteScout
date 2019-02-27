@@ -1,6 +1,5 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,20 +9,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.anychart.enums.Sort;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
-import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
-import de.codecrafters.tableview.SortableTableView;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
@@ -46,26 +38,6 @@ public class RankingFragment extends Fragment {
     private static final String INPUTS = "inputs";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private int[] inputs;
-
-
-    private TextView Rankings_ranking;
-    private TextView Teamnum_rankings;
-    private TextView Winrate_rankings;
-    private TextView RankPoints_rankings;
-    private TextView PlaceHolder_rankings;
-    private TextView Phasese_rankings;
-
-    private double Winrate;
-    private int Rankpoints;
-    private String Teamnum;
-    private String Rankings;
-    private String Placeholder;
-    private String Phases;
-
     public String message;
 
     TableView<String[]> tableView;
@@ -102,22 +74,9 @@ public class RankingFragment extends Fragment {
         return fragment;
     }
 
-    public void setArguments(RankingData rankdata){
-        Rankings_ranking.setText(rankdata.getRanking());
-        Teamnum_rankings.setText(rankdata.getTeamnum());
-        Winrate_rankings.setText(rankdata.getWinRate());
-        RankPoints_rankings.setText(rankdata.getRankPoint());
-        Phasese_rankings.setText(rankdata.getPhase());
-        PlaceHolder_rankings.setText(rankdata.getPlaceHolder());
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -155,20 +114,7 @@ public class RankingFragment extends Fragment {
     }
     public FragmentManager fragmentManager;
     public View view2;
-
-    public void addAllRows(ArrayList<RankingData> data) {
-        RankingFragment temp;
-        for(RankingData r:data){
-            temp = new RankingFragment();
-            temp.setArguments(r);
-            if (view2.findViewById(R.id.infoframe) != null) {
-                cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.infoframe, pregameFragment, null);
-                fragmentTransaction.commit();
-            }
-        }
-    }
+    
     public String[][] getArrfromRanking(List<RankingData> datas) {
         String [][] data = new String[datas.size()][31];
         int cur = 0;

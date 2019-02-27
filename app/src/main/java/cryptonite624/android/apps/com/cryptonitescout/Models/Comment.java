@@ -1,16 +1,25 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-import com.orm.SugarRecord;
 
-public class Comment extends SugarRecord {
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
+@Entity(nameInDb = "comment")
+public class Comment  {
+    @Property(nameInDb = "comment")
      String comment;
+    @Property(nameInDb = "teamnum")
      int teamnum;
+    @Property(nameInDb = "matchnum")
      int matchnum;
+    @Property(nameInDb = "pos")
      int pos;
+    @Property(nameInDb = "hatchefficiency")
      int hatchefficiency;
+    @Property(nameInDb = "cargoefficiency")
      int cargoefficiency;
-    //ic int climbefficiency;
+    @Property(nameInDb = "defense")
      int defense;
 
     public String getComment() {
@@ -93,10 +102,34 @@ public class Comment extends SugarRecord {
         this.whybroken = whybroken;
     }
 
+    public boolean getExcessivefouls() {
+        return this.excessivefouls;
+    }
+
+    public boolean getBroken() {
+        return this.broken;
+    }
+
      boolean excessivefouls;
      boolean broken;
      String whybroken;
 
     public Comment(){
+    }
+
+    @Generated(hash = 1127973256)
+    public Comment(String comment, int teamnum, int matchnum, int pos,
+            int hatchefficiency, int cargoefficiency, int defense,
+            boolean excessivefouls, boolean broken, String whybroken) {
+        this.comment = comment;
+        this.teamnum = teamnum;
+        this.matchnum = matchnum;
+        this.pos = pos;
+        this.hatchefficiency = hatchefficiency;
+        this.cargoefficiency = cargoefficiency;
+        this.defense = defense;
+        this.excessivefouls = excessivefouls;
+        this.broken = broken;
+        this.whybroken = whybroken;
     }
 }

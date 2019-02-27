@@ -1,14 +1,18 @@
 package cryptonite624.android.apps.com.cryptonitescout.Models;
 
-import com.orm.SugarRecord;
 
-public class Config extends SugarRecord{
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
-    public User getCurrentuser() {
+@Entity(nameInDb = "config")
+public class Config {
+
+    public String getCurrentuser() {
         return currentuser;
     }
 
-    public void setCurrentuser(User currentuser) {
+    public void setCurrentuser(String currentuser) {
         this.currentuser = currentuser;
     }
 
@@ -31,8 +35,20 @@ public class Config extends SugarRecord{
     public Config(){
 
     }
-    User currentuser;
+
+    @Generated(hash = 93525242)
+    public Config(String currentuser, int currentmatch, String eventkey) {
+        this.currentuser = currentuser;
+        this.currentmatch = currentmatch;
+        this.eventkey = eventkey;
+    }
+
+    //email
+    @Property(nameInDb = "currentuser")
+    String currentuser;
+    @Property(nameInDb = "currentmatch")
     int currentmatch;
+    @Property(nameInDb = "eventkey")
     String eventkey;
 
 }
