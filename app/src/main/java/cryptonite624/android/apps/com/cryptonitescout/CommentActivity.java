@@ -85,7 +85,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        bluetoothHandler = new BluetoothHandler(this,this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
         daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         comm = new Comment();

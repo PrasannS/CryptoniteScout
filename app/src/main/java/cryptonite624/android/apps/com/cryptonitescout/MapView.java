@@ -31,6 +31,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -1082,7 +1084,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cancel.setVisibility(View.GONE);
         currentAction.setMatchStatus( matchStatus);
         currentAction.setHatch(b);
-        actionMap.getActionsList().add(currentAction);
+        List<RobotAction> temp = actionMap.getActionsList();
+        temp.add(currentAction);
+        actionMap.setActionsList((ArrayList<RobotAction>)temp);
+
         currentAction = new RobotAction();
         if(left){
 

@@ -55,7 +55,7 @@ public class ActionMap{
         return actions;
     }
 
-    public void setActions(ArrayList<RobotAction> actions) {
+    public void setActionsList(ArrayList<RobotAction> actions) {
         String arrayString = new Gson().toJson(actions);
         this.actions = arrayString;
     }
