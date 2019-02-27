@@ -122,7 +122,7 @@ public class ActionMapUtils {
         return lv;
     }
 
-    public String toString(ActionMap m){
+    public static String toString(ActionMap m){
         String temp = "";
         temp += m.getEndclimb() + ";" + m.getMatchnum() + ";" + m.getPos() + ";";
         for(RobotAction r:m.getActionsList()){

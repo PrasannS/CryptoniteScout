@@ -76,12 +76,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private Button toRegister;
     public DaoSession daoSession;
+    public BluetoothHandler bluetoothHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler.startlooking();
 
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -219,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         */
         User temp = new User();
         temp.setEmail(mEmailView.getText().toString());
-        temp.setEmail(mPasswordView.getText().toString());
+        temp.setPassword(mPasswordView.getText().toString());
 
         if(loggedIn(temp)) {
             Intent intent1 = new Intent(this, DataAccessActivity.class);
@@ -329,7 +333,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -424,14 +428,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    public boolean isloginvalid(List<User >us, User u){
+        for(User user:us){
+            if(u.getPassword().equals(user.getPassword())&&u.getEmail().equals(user.getEmail())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean loggedIn(User u){
+        if(u.getEmail().equals("")||u.getPassword().equals(""))
+            return false;
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
         qb.and(UserDao.Properties.Email.eq(u.getEmail()),UserDao.Properties.Password.eq(u.getPassword()));
         List<User>user = qb.list();
         if(user.size()>0) {
-            user.get(0).setLoggedin(true);
-            daoSession.getUserDao().save(user.get(0));
-            return true;
+            if(isloginvalid(user,u)) {
+                user.get(0).setLoggedin(true);
+                daoSession.getUserDao().save(user.get(0));
+                return true;
+            }
         }
         return false;
     }

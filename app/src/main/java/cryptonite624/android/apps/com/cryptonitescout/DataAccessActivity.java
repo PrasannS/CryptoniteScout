@@ -139,8 +139,11 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     return true;
                 }
                 if (id == R.id.nav_pitnote) {
-                    startActivity(new Intent(DataAccessActivity.this, PitnoteData.class));
+                    startActivity(new Intent(DataAccessActivity.this, pitNote.class));
                     Toast.makeText(DataAccessActivity.this, "pitnotes", Toast.LENGTH_LONG).show();
+                }
+                if (id == R.id.nav_groupchat) {
+                    startActivity(new Intent(DataAccessActivity.this, MainActivity.class));
                 }
 
                 return true;
@@ -386,7 +389,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void onServerLoad() {
-
+        Toast.makeText(DataAccessActivity.this, "load unsuccessful", Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -85,7 +85,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        bluetoothHandler = new BluetoothHandler(this,this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
         daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         comm = new Comment();
@@ -154,6 +154,11 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                 comm.setBroken(brokenswitch.isChecked());
 
                 daoSession.getCommentDao().save(comm);
+                try {
+                    bluetoothHandler.sendMessage('f',CommentUtils.toString(comm));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         /*Rating = findViewById(R.id.Rating);
@@ -220,7 +225,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(CommentActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

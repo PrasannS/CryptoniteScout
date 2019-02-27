@@ -65,6 +65,8 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
     private Button blue2;
     private Button blue3;
 
+    public Button load;
+
     public String message;
 
     OnScheduleRead onScheduleRead;
@@ -80,9 +82,6 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ScheduleFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -96,7 +95,9 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
 
     @Override
     public void onServerLoad() {
-
+        Toast.makeText(getActivity(), "load successful", Toast.LENGTH_LONG).show();
+        List<Schedule>schedules= daoSession.getScheduleDao().loadAll();
+        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
     }
 
     @Override
@@ -115,6 +116,8 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        serverLoader = new ServerLoader(this);
+        serverLoader.loadFromTBA();
 
     }
 
@@ -132,6 +135,14 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
                 Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        load =view.findViewById(R.id.loaditems);
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                serverLoader.loadFromTBA();
             }
         });
 

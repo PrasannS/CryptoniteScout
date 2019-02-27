@@ -2,12 +2,15 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(nameInDb = "drawmap")
 public class DrawMap {
 
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "image")
     String image;
     @Property(nameInDb = "name")
@@ -16,8 +19,9 @@ public class DrawMap {
     public DrawMap(){
     }
 
-    @Generated(hash = 411438013)
-    public DrawMap(String image, String name) {
+    @Generated(hash = 1574861921)
+    public DrawMap(Long id, String image, String name) {
+        this.id = id;
         this.image = image;
         this.name = name;
     }
@@ -36,5 +40,14 @@ public class DrawMap {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -2,12 +2,15 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(nameInDb = "pitnote")
 public class PitnoteData  {
 
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "teamnum")
     int teamnum;
     @Property(nameInDb = "comment")
@@ -48,11 +51,12 @@ public class PitnoteData  {
 
     }
 
-    @Generated(hash = 1556317177)
-    public PitnoteData(int teamnum, String Comment, boolean ProgrammerOnSite, boolean LevelTwoStart,
+    @Generated(hash = 1934040361)
+    public PitnoteData(Long id, int teamnum, String Comment, boolean ProgrammerOnSite, boolean LevelTwoStart,
             boolean CrossBase, boolean shifter, int numBatteries, int numChargers, int numCIMS, int numMiniCIMS,
             double robotDimension, String wheels, String layouts, String Levels, String Intake, String language,
             String image) {
+        this.id = id;
         this.teamnum = teamnum;
         this.Comment = Comment;
         this.ProgrammerOnSite = ProgrammerOnSite;
@@ -222,6 +226,14 @@ public class PitnoteData  {
 
     public boolean getShifter() {
         return this.shifter;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /*

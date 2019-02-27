@@ -3,6 +3,7 @@ package cryptonite624.android.apps.com.cryptonitescout.Models;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -13,8 +14,9 @@ public class RankingData {
 
     }
 
-    @Generated(hash = 1532567132)
-    public RankingData(int rankpoint, int totalwins, int teamnum, int matchesplayed, double totalcargo, double totalhatches, double climbone, double climbtwo, double climbthree, double climbfailed, String teamkey) {
+    @Generated(hash = 22484713)
+    public RankingData(Long id, int rankpoint, int totalwins, int teamnum, int matchesplayed, double totalcargo, double totalhatches, double climbone, double climbtwo, double climbthree, double climbfailed, String teamkey) {
+        this.id = id;
         this.rankpoint = rankpoint;
         this.totalwins = totalwins;
         this.teamnum = teamnum;
@@ -28,6 +30,8 @@ public class RankingData {
         this.teamkey = teamkey;
     }
 
+    @Id(autoincrement = true)
+    Long id;
 
     @Property(nameInDb = "rankpoint")
      int rankpoint           ;
@@ -154,4 +158,13 @@ public class RankingData {
     public void setTeamkey(String teamkey) {
         this.teamkey = teamkey;
     }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

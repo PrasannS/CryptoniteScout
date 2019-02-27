@@ -8,6 +8,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cpjd.models.matches.MatchAlliance;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
@@ -34,7 +37,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
         fn = findViewById(R.id.last_name_register);
         ln = findViewById(R.id.first_name_register);
         ps = findViewById(R.id.register_password);
-        bluetoothHandler = new BluetoothHandler(this,this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
 
@@ -60,7 +63,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

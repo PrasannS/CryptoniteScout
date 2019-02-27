@@ -13,12 +13,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
 
 
 @Entity(nameInDb = "actionmap")
 public class ActionMap{
+
+    @Id(autoincrement = true)
+    Long id;
 
     @Property(nameInDb = "actions")
     String actions;
@@ -35,9 +39,10 @@ public class ActionMap{
     public ActionMap(){
     }
 
-    @Generated(hash = 1301682623)
-    public ActionMap(String actions, int endclimb, int matchnum, int pos,
+    @Generated(hash = 1314651232)
+    public ActionMap(Long id, String actions, int endclimb, int matchnum, int pos,
             int climbTime) {
+        this.id = id;
         this.actions = actions;
         this.endclimb = endclimb;
         this.matchnum = matchnum;
@@ -55,7 +60,7 @@ public class ActionMap{
         return actions;
     }
 
-    public void setActions(ArrayList<RobotAction> actions) {
+    public void setActionsList(ArrayList<RobotAction> actions) {
         String arrayString = new Gson().toJson(actions);
         this.actions = arrayString;
     }
@@ -94,5 +99,13 @@ public class ActionMap{
 
     public void setActions(String actions) {
         this.actions = actions;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

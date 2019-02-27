@@ -114,7 +114,7 @@ public class RankingFragment extends Fragment {
     }
     public FragmentManager fragmentManager;
     public View view2;
-    
+
     public String[][] getArrfromRanking(List<RankingData> datas) {
         String [][] data = new String[datas.size()][31];
         int cur = 0;
@@ -126,10 +126,13 @@ public class RankingFragment extends Fragment {
     }
 
     public String [] rankingtoString(RankingData data){
-        String [] datas = {data.getRankpoint()+"",data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
-                            data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                            data.getTeamkey()}
-                            ;
+        String [] datas =null/* {data.getRank()+"",data.getPlaceHolder(),data.getPhase(),data.getRankPoint()+"",data.getRanking()+"",data.getWinRate()+"",
+                           data.getTeamnum()+"",data.getStatus()+"",data.getMatchesPlayed()+"",data.getCargoAvg()+"",data.getHatchAvg()+"",
+                            data.getSandstormCargoOne()+"",data.getSandstormCargoTwo()+"",data.getSandstormCargoThree()+"",data.getSandstormHatchOne()+"",
+                            data.getSandstormHatchTwo()+"",data.getSandstormHatchThree()+"",data.getTeleopCargoOne()+"",data.getTeleopCargoTwo()+"",
+                            data.getTeleopCargoThree()+"",data.getTeleopHatchOne()+"",data.getTeleopHatchTwo()+"",data.getTeleopHatchThree()+"",
+                            data.getClimbOne()+"",data.getClimbTwo()+"",+data.getClimbThree()+"",data.getCxHatchCargoShip()+"",data.getCxCargoCargoShip()+"",
+                            data.getCxCargoRocket()+"",data.getCxHatchRocket()+"",data.getTeamkey()}          */     ;
         return datas;
     }
 

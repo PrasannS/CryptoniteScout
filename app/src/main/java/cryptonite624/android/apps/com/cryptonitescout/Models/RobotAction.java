@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 
 import java.util.StringTokenizer;
@@ -14,6 +15,8 @@ import org.greenrobot.greendao.annotation.Generated;
 public class RobotAction {
     //matchstatus, 0 = pregame, 1 = auton, 2 = teleop, 3 = endgame
     //actionCode 0 = not on switch, 1 = jankredleft switch 1, 2 = jankblueleft switch1, 3 = jankblueleft scale, 4 = jankredleft scale, 5 = jankredleft switch2, 6 = jankblueleft switch, 7 = invalid click
+    @Id(autoincrement = true)
+    Long id;
     @Property(nameInDb = "matchstatus")
     int matchStatus;
     @Property(nameInDb = "actioncode")
@@ -72,8 +75,9 @@ public class RobotAction {
 
     }
 
-    @Generated(hash = 1457547104)
-    public RobotAction(int matchStatus, String actionCode, boolean hatch, int habLevel, int time) {
+    @Generated(hash = 621957603)
+    public RobotAction(Long id, int matchStatus, String actionCode, boolean hatch, int habLevel, int time) {
+        this.id = id;
         this.matchStatus = matchStatus;
         this.actionCode = actionCode;
         this.hatch = hatch;
@@ -100,6 +104,14 @@ public class RobotAction {
 
     public boolean getHatch() {
         return this.hatch;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
