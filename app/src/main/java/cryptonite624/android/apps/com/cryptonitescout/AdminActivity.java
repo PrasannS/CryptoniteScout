@@ -1,14 +1,12 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-
-import java.util.List;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
-import de.codecrafters.tableview.TableView;
 
-//Dylan
+public class AdminActivity extends AppCompatActivity {
 
-public class AdminActivity {
     public String[][] table;
     int row = 0;
     User user;
@@ -36,12 +34,17 @@ public class AdminActivity {
         }
         //loads in next row
         String[] info = usertoString(user);
-            for(int j=0;j<7;j++) {
-                arr[row][j]= info[track];
-                track++;
-            }
+        for(int j=0;j<7;j++) {
+            arr[row][j]= info[track];
+            track++;
+        }
         table = arr;
         return table;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin);
+    }
 }

@@ -29,7 +29,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
@@ -66,6 +65,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".PickListActivity" />
         <activity android:name=".Register" />
+        <activity android:name=".AdminActivity"></activity>
     </application>
 
 </manifest>
