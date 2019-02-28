@@ -84,62 +84,6 @@ public class RankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ranking, container, false);
 
-        teamnum_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
-        teamnum_ranking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-        teamname_ranking = (Button)(view.findViewById(R.id.teamname_ranking));
-        teamname_ranking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-        scoring1 = (Button)(view.findViewById(R.id.scoring1));
-        scoring1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-        scoring2 = (Button)(view.findViewById(R.id.scoring2));
-        scoring2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-        scoring3 = (Button)(view.findViewById(R.id.scoring3));
-        scoring3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-        scoring4 = (Button)(view.findViewById(R.id.scoring4));
-        scoring4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                message = "toAuton";
-                onRankingRead.OnRankingRead(message);
-            }
-        });
-
-
-
         return view;
     }
 

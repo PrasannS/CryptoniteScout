@@ -23,6 +23,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
     private AutoCompleteTextView ln;
     private EditText ps;
     private AutoCompleteTextView em;
+    private EditText position;
     BluetoothHandler bluetoothHandler;
     public DaoSession daoSession;
     
@@ -37,6 +38,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
         fn = findViewById(R.id.last_name_register);
         ln = findViewById(R.id.first_name_register);
         ps = findViewById(R.id.register_password);
+        position = findViewById(R.id.register_color);
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
@@ -68,6 +70,11 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }

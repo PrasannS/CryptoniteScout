@@ -392,6 +392,11 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }

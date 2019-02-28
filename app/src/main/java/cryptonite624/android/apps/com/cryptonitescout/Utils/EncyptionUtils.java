@@ -1,41 +1,28 @@
 package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
+import java.util.Base64;
+
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EncyptionUtils {
 
-    public static String encrypt(String strClearText,String strKey) throws Exception{
-        String strData="";
-
-        try {
-            SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
-            Cipher cipher= Cipher.getInstance("Blowfish");
-            cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
-            byte[] encrypted=cipher.doFinal(strClearText.getBytes());
-            strData=new String(encrypted);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
-        }
-        return strData;
+    public static String encrypt(String s,String strKey){
+        return reverse(s);
     }
 
-    public static String decrypt(String strEncrypted,String strKey) throws Exception{
-        String strData="";
-
-        try {
-            SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
-            Cipher cipher=Cipher.getInstance("Blowfish");
-            cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-            byte[] decrypted=cipher.doFinal(strEncrypted.getBytes());
-            strData=new String(decrypted);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception(e);
+    public static String reverse(String s){
+        String temp = "";
+        for(int i = s.length()-1;i>=0;i--){
+            temp+=s.charAt(i);
         }
-        return strData;
+        return temp;
+    }
+
+    public static String decrypt(String s,String strKey){
+        return  reverse(s);
     }
 }

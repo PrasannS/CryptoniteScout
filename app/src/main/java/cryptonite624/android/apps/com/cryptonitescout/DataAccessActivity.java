@@ -27,7 +27,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
-public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead{
+public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead,BluetoothHandler.BluetoothListener{
 
     public static FragmentManager fragmentManager;
 
@@ -39,15 +39,14 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     public ServerLoader serverLoader;
     public DaoSession daoSession;
 
+    public BluetoothHandler bluetoothHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_access);
-
-        serverLoader = new ServerLoader(this);
-        serverLoader.loadFromTBA();
 
         dl = (DrawerLayout)findViewById(R.id.drawer_layout);
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
@@ -58,6 +57,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
 
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -88,6 +89,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     return true;
                 }*/
                 if (id == R.id.nav_matches) {
+                    bluetoothHandler.endstuff();
                     Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
                     if(findViewById(R.id.fragmentcontainer)!=null){
                         ScheduleFragment rankingFragment = new ScheduleFragment();
@@ -143,7 +145,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     Toast.makeText(DataAccessActivity.this, "pitnotes", Toast.LENGTH_LONG).show();
                 }
                 if (id == R.id.nav_groupchat) {
-                    startActivity(new Intent(DataAccessActivity.this, MainActivity.class));
+                    Intent intent1 = new Intent(DataAccessActivity.this, MainActivity.class);
+                    startActivity(intent1);
                 }
 
                 return true;
@@ -399,6 +402,21 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void OnScheduleRead(String message) {
+
+    }
+
+    @Override
+    public void OnBluetoothRead(String message) {
+
+    }
+
+    @Override
+    public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }

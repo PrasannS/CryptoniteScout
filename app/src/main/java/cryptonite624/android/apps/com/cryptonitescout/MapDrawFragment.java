@@ -208,6 +208,11 @@ public class MapDrawFragment extends Fragment implements BluetoothHandler.Blueto
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 

@@ -77,6 +77,7 @@ public class BluetoothHandler {
         updated.put('c',true);
         updated.put('l',true);
         updated.put('u',true);
+        ensureDiscoverable();
     }
 
     public void openreceiver(){
@@ -84,7 +85,7 @@ public class BluetoothHandler {
         curcontext.registerReceiver(mReceiver, filter);
     }
 
-    private void ensureDiscoverable() {
+    public void ensureDiscoverable() {
         if (bluetoothAdapter.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             Intent discoverableIntent = new Intent(
                     BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
@@ -95,6 +96,7 @@ public class BluetoothHandler {
     }
 
     public void handleMessage(String s) {
+
         try {
             s = EncyptionUtils.decrypt(s,"0624");
         } catch (Exception e) {
@@ -115,7 +117,7 @@ public class BluetoothHandler {
                 bluetoothListener.OnBluetoothRead("commentsaved");
                 break;
             case 'c':
-                bluetoothListener.OnBluetoothRead("chatter"+s.substring(1));
+                bluetoothListener.OnBluetoothRead(s.substring(1));
                 break;
             case 'l':
                 bluetoothListener.OnBluetoothRead("listupdate");
@@ -148,6 +150,7 @@ public class BluetoothHandler {
         public void OnBluetoothRead(String message);
         //TODO get this setup too
         public void start(Intent intent);
+        public void makediscoverable();
     }
 
     public void startlooking(){
@@ -167,7 +170,7 @@ public class BluetoothHandler {
 
 
     public void sendMessage(char type, String message) throws Exception{
-        final String sNewName = EncyptionUtils.encrypt(regex+type+message,"0624");
+        final String sNewName = regex+EncyptionUtils.encrypt(type+message,"0624");
         final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
         final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
         if (myBTAdapter != null)
