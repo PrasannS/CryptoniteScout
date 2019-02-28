@@ -60,6 +60,7 @@
                         <EditText
                             android:id="@+id/teamNum_pitnote"
                             android:layout_width="500dp"
+                            android:inputType="number"
                             android:layout_height="match_parent" />
                     </LinearLayout>
 
@@ -143,6 +144,7 @@
                             android:id="@+id/numBatteries_pitnote"
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
+                            android:inputType="number"
                             android:text="" />
                     </LinearLayout>
 
@@ -162,6 +164,7 @@
                             android:id="@+id/numChargers_pitnote"
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
+                            android:inputType="number"
                             android:text=""/>
 
                     </LinearLayout>
@@ -203,6 +206,7 @@
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
                             android:text=""
+                            android:inputType="number"
                             android:background="@color/colorPrimary"/>
                     </LinearLayout>
                     <LinearLayout
@@ -296,6 +300,7 @@
                             android:id="@+id/numMiniCIMS_pitnote"
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
+                            android:inputType="number"
                             android:text="" />
                     </LinearLayout>
 
@@ -314,6 +319,7 @@
                             android:id="@+id/numCIMS_pitnote"
                             android:layout_width="380dp"
                             android:layout_height="match_parent"
+                            android:inputType="number"
                             android:text="" />
                     </LinearLayout>
 
