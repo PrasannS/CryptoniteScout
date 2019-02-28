@@ -15,18 +15,18 @@
             android:layout_width="690dp"
             android:layout_height="460dp"
             android:background="@drawable/jankredleft1">
-<!--
-            <Button
-                android:id="@+id/cargobutton1_left"
+
+            <ImageView
+                android:id="@+id/cargoimage1_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/cargobutton5_left"
+                android:layout_alignStart="@+id/cargoimage5_left"
                 android:layout_marginTop="175dp"
                 android:text="1" />
 
-            <Button
-                android:id="@+id/cargobutton2_left"
+            <ImageView
+                android:id="@+id/cargoimage2_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
@@ -35,58 +35,58 @@
                 android:layout_marginTop="158dp"
                 android:text="2" />
 
-            <Button
-                android:id="@+id/cargobutton3_left"
+            <ImageView
+                android:id="@+id/cargoimage3_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton2_left"
+                android:layout_alignTop="@+id/cargoimage2_left"
                 android:layout_marginEnd="102dp"
                 android:text="3" />
 
-            <Button
-                android:id="@+id/cargobutton4_left"
+            <ImageView
+                android:id="@+id/cargoimage4_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton2_left"
+                android:layout_alignTop="@+id/cargoimage2_left"
                 android:text="4" />
 
-            <Button
-                android:id="@+id/cargobutton5_left"
+            <ImageView
+                android:id="@+id/cargoimage5_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/cargobutton8_left"
+                android:layout_alignTop="@+id/cargoimage8_left"
                 android:layout_marginStart="284dp"
                 android:text="5" />
 
-            <Button
-                android:id="@+id/cargobutton6_left"
+            <ImageView
+                android:id="@+id/cargoimage6_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/cargobutton2_left"
+                android:layout_alignStart="@+id/cargoimage2_left"
                 android:layout_marginBottom="153dp"
                 android:text="6" />
 
-            <Button
-                android:id="@+id/cargobutton7_left"
+            <ImageView
+                android:id="@+id/cargoimage7_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignStart="@+id/cargobutton3_left"
-                android:layout_alignTop="@+id/cargobutton6_left"
-                android:text="Button" />
+                android:layout_alignStart="@+id/cargoimage3_left"
+                android:layout_alignTop="@+id/cargoimage6_left"
+                android:text="ImageView" />
 
-            <Button
-                android:id="@+id/cargobutton8_left"
+            <ImageView
+                android:id="@+id/cargoimage8_left"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/cargobutton6_left"
-                android:text="Button" />
+                android:layout_alignTop="@+id/cargoimage6_left"
+                android:text="ImageView" />
 
-            <Button
+            <ImageView
                 android:id="@+id/button9_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,38 +94,38 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="144dp"
-                android:text="Button"
+                android:text="ImageView"
                 android:visibility="visible" />
 
-            <Button
+            <ImageView
                 android:id="@+id/button11_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/button9_left"
                 android:layout_marginBottom="141dp"
-                android:text="Button"
+                android:text="ImageView"
                 android:visibility="visible" />
 
-            <Button
+            <ImageView
                 android:id="@+id/button12_left"
                 android:layout_width="wrap_content"
                 android:layout_height="212dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="109dp"
-                android:text="Button"
+                android:text="ImageView"
                 android:visibility="visible" />
 
-            <Button
+            <ImageView
                 android:id="@+id/button10_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/button9_left"
                 android:layout_centerVertical="true"
-                android:text="Button" />
+                android:text="ImageView" />
 
--->
+
         </RelativeLayout>
     </LinearLayout>
 

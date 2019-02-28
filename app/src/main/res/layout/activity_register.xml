@@ -99,6 +99,29 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp">
+
+                <EditText
+                    android:id="@+id/register_color"
+                    android:layout_width="600dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:autofillHints=""
+                    android:hint="@string/color"
+                    android:textColorHint="@color/TextColor"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+
+
+            </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/toLogin_register"
                 style="?android:textAppearanceSmall"

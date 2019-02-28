@@ -25,6 +25,7 @@
         completions."
     </string>
     <!-- Strings related to register -->
+    <string name="color">Enter your position (color blue or red)</string>
     <string name="first_name">Enter your first name</string>
     <string name="last_name">Enter your last name</string>
     <string name="register">Register</string>

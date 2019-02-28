@@ -59,6 +59,13 @@ public class ActionMap{
         return arrayList;
     }
 
+    public void removeLast(){
+        Type listType = new TypeToken<ArrayList<RobotAction>>(){}.getType();
+        List<RobotAction> arrayList = new Gson().fromJson(actions, listType);
+        arrayList.remove(arrayList.size()-1);
+        setActionsList((ArrayList<RobotAction>) arrayList);
+    }
+
     public String getActions(){
         return actions;
     }
