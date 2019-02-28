@@ -236,26 +236,5 @@ public class PitnoteData  {
         this.id = id;
     }
 
-    /*
-    public PitnoteData(int num, String comm, boolean onSite, boolean lvTwoStart, boolean crossBase,
-                       boolean shift, int numBar, int numCharge, int CIMS, int minCIMS, double Demension,
-                       String wheel, String layout, String leve, String intake, String languages, String image){
-        num = teamnum;
-        comm = Comment;
-        onSite = ProgrammerOnSite;
-        lvTwoStart = LevelTwoStart;
-        crossBase = CrossBase;
-        shift = shifter;
-        numBar = numBatteries;
-        numCharge = numChargers;
-        CIMS = numCIMS;
-        minCIMS = numMiniCIMS;
-        Demension = robotDimension;
-        wheel = wheels;
-        layout = layouts;
-        leve = Levels;
-        intake = Intake;
-        languages = language;
-    }*/
 
 }

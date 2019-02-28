@@ -73,6 +73,8 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
 
     public ServerLoader serverLoader;
 
+    public TableView<String[]> tableView;
+
 
 
     public ScheduleFragment() {
@@ -128,10 +130,10 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
         daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         List<Schedule>schedules= daoSession.getScheduleDao().loadAll();
-        TableView = (TableView<String[]>)view.findViewById(R.id.scheduletable);
-        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
-        TableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));
-        TableView.addDataClickListener(new TableDataClickListener<String[]>() {
+        tableView = (TableView<String[]>)view.findViewById(R.id.scheduletable);
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
+        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));
+        tableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
                 Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
@@ -143,6 +145,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
             @Override
             public void onClick(View v) {
                 serverLoader.loadFromTBA();
+
             }
         });
 
