@@ -7,8 +7,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private EditText matchNum;
+    private EditText eventKey;
+    private Button logout;
 
     SwitchCompat nightmode, switch1, switch2;
 
@@ -16,20 +24,20 @@ public class SettingsActivity extends AppCompatActivity {
 
     public SharedPreferences preferences;
 
+    public void updateLayouts(Config c){
+        matchNum.setText(c.getCurrentmatch());
+        eventKey.setText(c.getEventkey());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        preferences = getSharedPreferences("PREFS", 0);
-        night = preferences.getBoolean("nightmode", false);
-        stateSwitch1 = preferences.getBoolean("switch1", false);
-        stateSwitch2 = preferences.getBoolean("switch2", false);
-
-        nightmode = (SwitchCompat) findViewById(R.id.nightmode);
-        switch1 = (SwitchCompat) findViewById(R.id.switch1);
-        switch2 = (SwitchCompat) findViewById(R.id.switch2);
+        matchNum = findViewById(R.id.matchnum_settings);
+        eventKey = findViewById(R.id.evenKey_settings);
+        logout = findViewById(R.id.logout);
 
         nightmode.setChecked(night);
         switch1.setChecked(stateSwitch1);

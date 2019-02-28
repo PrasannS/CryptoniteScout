@@ -5,9 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.listeners.TableDataClickListener;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class AdminActivity extends AppCompatActivity implements BluetoothHandler.BluetoothListener{
+
+    public TableView<String[]> tableView;
+    public DaoSession daoSession;
+    public static String [] userHeaders = {"Logged in","Currency","Type","Password","Email","Last name","First name"};
 
     public String[][] table;
     int row = 0;
@@ -15,32 +28,21 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
     public BluetoothHandler bluetoothHandler;
     public String[] usertoString(User user){
-        String[] userArray = {user.getLoggedin()+"",user.getCurrency()+"",user.getType(),user.getPassword(),
+        String[] userArray = {user.getLoggedin()+"",user.getCurrency()+"",user.getType(),
                 user.getEmail(),user.getUserLastname(),user.getUserFirstname()};
         return userArray;
     }
 
-    public String[][] getArrFromUsers() {
-        row+=1;
-        int track =0;
-        String[][] arr = new String[row][7];
-        //load previous
-        for(int i=0;i<table.length;i++)
-        {
-            for(int j=0;j<table[i].length;j++)
-            {
-                arr[i][j] = table[i][j];
-            }
+    public String[][] getArrFromUsers(List<User> users) {
+        String[][] arr = new String[users.size()][6];
+        int curr = 0;
+        for(User r : users){
+            arr[curr] = usertoString(r);
         }
-        //loads in next row
-        String[] info = usertoString(user);
-        for(int j=0;j<7;j++) {
-            arr[row][j]= info[track];
-            track++;
-        }
-        table = arr;
-        return table;
+        return arr;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,17 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
         setContentView(R.layout.activity_admin);
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
+
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+        List<User> users = daoSession.getUserDao().loadAll();
+        tableView = (TableView<String[]>) findViewById(R.id.tableView);
+        tableView.setDataAdapter(new SimpleTableDataAdapter(this, getArrFromUsers(users)));
+        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, userHeaders));
+        tableView.addDataClickListener(new TableDataClickListener<String[]>() {
+            @Override
+            public void onDataClicked(int rowIndex, String[] clickedData) {
+            }
+        });
     }
 
     @Override

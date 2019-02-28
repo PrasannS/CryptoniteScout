@@ -7,22 +7,19 @@
     android:orientation="vertical"
     tools:context=".SettingsActivity">
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/nightmode"
+    <EditText
+        android:id="@+id/matchnum_settings"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Night Mode"/>
+        android:layout_height="wrap_content"
+        android:inputType="number" />
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch1"
+    <EditText
+        android:id="@+id/evenKey_settings"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Option 1"/>
+        android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch2"
+    <Button
+        android:id="@+id/logout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Option 2"/>
-
+        android:layout_height="wrap_content" />
 </LinearLayout>
