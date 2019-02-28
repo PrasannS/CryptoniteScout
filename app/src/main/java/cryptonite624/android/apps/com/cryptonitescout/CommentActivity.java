@@ -230,6 +230,11 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 

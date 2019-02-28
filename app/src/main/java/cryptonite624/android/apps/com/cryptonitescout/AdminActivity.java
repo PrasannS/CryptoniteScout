@@ -57,6 +57,11 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }

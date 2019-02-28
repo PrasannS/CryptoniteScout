@@ -68,6 +68,11 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }

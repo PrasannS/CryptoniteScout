@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
 
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
+        bluetoothHandler.ensureDiscoverable();
 
         /*getWidgetReferences*/
         lvMainChat = (ListView) findViewById(R.id.lvMainChat);
@@ -90,13 +91,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         // Register for broadcasts when a device is discovered.
         //IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         //registerReceiver(mReceiver, filter);
-
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not available",
-                    Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
     }
 
     @Override
@@ -132,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
 
     @Override
     public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void makediscoverable() {
 
     }
 }
