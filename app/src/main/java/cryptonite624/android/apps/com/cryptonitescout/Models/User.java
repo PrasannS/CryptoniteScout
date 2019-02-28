@@ -12,7 +12,7 @@ public class User  {
 
     //Never touch unless Prasann tells me to !!!
     //Don't mess with Models folder!!
-    
+
     @Id(autoincrement = true)
     Long id;
     @Property(nameInDb = "userlastname")
