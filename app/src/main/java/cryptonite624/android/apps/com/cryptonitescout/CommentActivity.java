@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.jaygoo.widget.OnRangeChangedListener;
 import com.jaygoo.widget.RangeSeekBar;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import cryptonite624.android.apps.com.cryptonitescout.Models.Comment;
 
 import java.lang.reflect.Method;
@@ -33,7 +35,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import cryptonite624.android.apps.com.cryptonitescout.Models.UserDao;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CommentUtils;
 
@@ -73,12 +79,56 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public DaoSession daoSession;
 
+    public Schedule curschedule;
+    public Config config;
+
+    public String getTeam(User u, Schedule s){
+        if(u.getType().charAt(0)=='B')
+            switch (u.getType().charAt(1)){
+                case '1':
+                    return s.getB1();
+                case '2':
+                    return s.getB2();
+                case '3':
+                    return s.getB3();
+
+            }
+        switch (u.getType().charAt(1)){
+            case '1':
+                return s.getR1();
+            case '2':
+                return s.getR2();
+            case '3':
+                return s.getR3();
+
+        }
+        return "0";
+    }
+
+    public User curuser;
 
 
 
     public Map<String,String> lastmessages  = new HashMap<>();
     public static String regex = "0624";
 
+    public void setvars(){
+        curschedule = daoSession.getScheduleDao().loadAll().get(getCurrentMatch());
+        config = daoSession.getConfigDao().loadAll().get(0);
+        QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
+        qb.where(UserDao.Properties.Email.eq(config.getCurrentuser()));
+        List<User> users = qb.list();
+        String team = getTeam(users.get(0), curschedule);
+        curuser = users.get(0);
+        int teamnum = Integer.parseInt(team.substring(3));
+        comm.setTeamnum(teamnum);
+        comm.setMatchnum(getCurrentMatch());
+    }
+
+
+    public int getCurrentMatch(){
+        return daoSession.getConfigDao().loadAll().get(0).getCurrentmatch();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

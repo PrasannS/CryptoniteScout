@@ -189,5 +189,6 @@ public class RankingFragment extends Fragment {
 
     public interface OnRankingRead{
         public void OnRankingRead(String message);
+        public void openTeam(String key);
     }
 }

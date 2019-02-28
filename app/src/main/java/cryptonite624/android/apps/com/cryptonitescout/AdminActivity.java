@@ -47,6 +47,8 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_admin);
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();

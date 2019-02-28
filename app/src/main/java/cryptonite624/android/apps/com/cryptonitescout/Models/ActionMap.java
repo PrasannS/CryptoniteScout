@@ -33,7 +33,7 @@ public class ActionMap{
     @Property(nameInDb = "teamnum")
     int teamnum;
     @Property(nameInDb = "pos")
-    int pos;
+    String pos;
     @Property(nameInDb = "climbtime")
     int climbTime;
 
@@ -41,9 +41,9 @@ public class ActionMap{
     public ActionMap(){
     }
 
-    @Generated(hash = 571859292)
+    @Generated(hash = 1592144978)
     public ActionMap(Long id, String actions, int endclimb, int matchnum,
-            int teamnum, int pos, int climbTime) {
+            int teamnum, String pos, int climbTime) {
         this.id = id;
         this.actions = actions;
         this.endclimb = endclimb;
@@ -91,11 +91,11 @@ public class ActionMap{
         this.matchnum = matchnum;
     }
 
-    public int getPos() {
+    public String getPos() {
         return pos;
     }
 
-    public void setPos(int pos) {
+    public void setPos(String pos) {
         this.pos = pos;
     }
 

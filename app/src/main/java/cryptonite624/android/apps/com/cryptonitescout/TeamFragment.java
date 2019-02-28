@@ -2,6 +2,7 @@ package cryptonite624.android.apps.com.cryptonitescout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.drm.DrmStore;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
 
 
@@ -94,7 +96,8 @@ public class TeamFragment extends Fragment {
         public void OnTeamRead(String message);
     }
 
-    public void loadData(ArrayList<ActionMap> maps){
+
+    public void loadData(List<ActionMap> maps){
         cargoTotal.setText("" + ActionMapUtils.tournamentTotalCargos(maps));
         hatchTotal.setText("" + ActionMapUtils.tournamentTotalHatches(maps));
         cargoAverage.setText("" + ActionMapUtils.tournamentAverageCargo(maps));
@@ -221,8 +224,8 @@ public class TeamFragment extends Fragment {
         }
     }
 
-    public void setArguments(){
-
+    public void setArguments(List<ActionMap>r){
+        loadData(r);
     }
 
     @Override
