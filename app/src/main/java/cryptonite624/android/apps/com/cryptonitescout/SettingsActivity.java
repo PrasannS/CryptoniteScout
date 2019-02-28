@@ -16,6 +16,7 @@ import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -23,10 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText matchNum;
     private EditText eventKey;
     private Button logout;
-
-    SwitchCompat nightmode, switch1, switch2;
-
-    boolean night, stateSwitch1, stateSwitch2;
+    private Button save;
+    public Config cur;
 
     public SharedPreferences preferences;
 
@@ -42,9 +41,25 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         List<Config> c = daoSession.getConfigDao().loadAll();
+        cur = c.get(0);
         matchNum = findViewById(R.id.matchnum_settings);
         eventKey = findViewById(R.id.evenKey_settings);
         logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+
+        save = findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
 
         /*if(preferences.getBoolean("night", false)){
@@ -57,16 +72,18 @@ public class SettingsActivity extends AppCompatActivity {
         }*/
     }
 
-    public void logout(){
-
-        Intent i = new Intent(SettingsActivity.this, LoginActivity.class);
+    public void save(){
+        cur.setCurrentmatch(Integer.parseInt(matchNum.getText().toString()));
+        cur.setEventkey(eventKey.getText().toString());
+        daoSession.getConfigDao().update(cur);
+        Intent i = new Intent(SettingsActivity.this, DataAccessActivity.class);
         startActivity(i);
     }
 
-
-    public void restartApp() {
-        Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+    public void logout(){
+        cur.setCurrentuser("default@default.com");
+        daoSession.getConfigDao().update(cur);
+        Intent i = new Intent(SettingsActivity.this, LoginActivity.class);
         startActivity(i);
-        finish();
     }
 }
