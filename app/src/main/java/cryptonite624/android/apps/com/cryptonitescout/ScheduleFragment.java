@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.CSVUtils;
 import de.codecrafters.tableview.SortableTableView;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
@@ -75,10 +77,21 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
 
     public TableView<String[]> tableView;
 
+    public Button csvload;
+
 
 
     public ScheduleFragment() {
         // Required empty public constructor
+    }
+
+    public void loadCSV(){
+        CSVUtils csvUtils = new CSVUtils(getActivity().getApplication(),getContext());
+        try {
+            csvUtils.loadSchedule();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -99,7 +112,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
     public void onServerLoad() {
         Toast.makeText(getActivity(), "load successful", Toast.LENGTH_LONG).show();
         List<Schedule>schedules= daoSession.getScheduleDao().loadAll();
-        TableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
     }
 
     @Override
@@ -139,6 +152,16 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
                 Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
             }
         });
+
+        csvload = view.findViewById(R.id.loadschedulecsv);
+        csvload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCSV();
+            }
+        });
+
+
 
         load =view.findViewById(R.id.loaditems);
         load.setOnClickListener(new View.OnClickListener() {

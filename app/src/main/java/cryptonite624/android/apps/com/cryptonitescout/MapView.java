@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.greenrobot.greendao.query.QueryBuilder;
 import org.w3c.dom.Text;
 
 import java.util.Arrays;
@@ -45,7 +46,11 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.AutonFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.EndgameFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.InputFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import cryptonite624.android.apps.com.cryptonitescout.Models.UserDao;
 import cryptonite624.android.apps.com.cryptonitescout.RocketFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
@@ -174,6 +179,37 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public DaoSession daoSession;
 
 
+
+    public int getCurrentMatch(){
+        return daoSession.getConfigDao().loadAll().get(0).getCurrentmatch();
+    }
+
+    public Config config;
+
+    public String getTeam(User u, Schedule s){
+        if(u.getType().charAt(0)=='B')
+        switch (u.getType().charAt(1)){
+            case '1':
+                return s.getB1();
+            case '2':
+                return s.getB2();
+            case '3':
+                return s.getB3();
+
+        }
+        switch (u.getType().charAt(1)){
+            case '1':
+                return s.getR1();
+            case '2':
+                return s.getR2();
+            case '3':
+                return s.getR3();
+
+        }
+        return "0";
+    }
+
+    public Schedule curschedule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //RelativeLayout layout = (RelativeLayout)findViewById(R.id.mapview);
@@ -221,6 +257,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.add(R.id.mapcontainer, rightMapFragment, null);
             fragmentTransaction.commit();
         }
+
+        curschedule = daoSession.getScheduleDao().loadAll().get(getCurrentMatch());
+        config = daoSession.getConfigDao().loadAll().get(0);
+        QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
+        qb.where(UserDao.Properties.Email.eq(config.getCurrentuser()));
+        List<User> users = qb.list();
+        String team = getTeam(users.get(0), curschedule);
+        int teamnum = Integer.parseInt(team.substring(3));
+        actionMap.setTeamnum(teamnum);
+        actionMap.setMatchnum(getCurrentMatch());
 
         switchbounds();
         //setBounds();
