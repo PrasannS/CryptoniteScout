@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
@@ -46,10 +47,9 @@ public class RankingFragment extends Fragment {
 
     OnRankingRead onRankingRead;
 
-    private static final String[] TABLE_HEADERS = { "This", "is", "a", "test" };
+    public DaoSession daoSession;
 
-    private static final String[][] DATA_TO_SHOW = {{ "This", "is", "a", "test" },
-            { "and", "a", "second", "test" }};
+    private static final String[] TABLE_HEADERS = { "This", "is", "a", "test" };
 
 
     public RankingFragment() {
@@ -83,8 +83,10 @@ public class RankingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rankings, container, false);
+        daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
+        List<RankingData> rankings = daoSession.getRankingDataDao().loadAll();
         tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
-        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), DATA_TO_SHOW));
+        tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS));
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
