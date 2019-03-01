@@ -154,6 +154,14 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     Intent intent1 = new Intent(DataAccessActivity.this, MainActivity.class);
                     startActivity(intent1);
                 }
+                if (id == R.id.picklist) {
+                    startActivity(new Intent(DataAccessActivity.this, PickListActivity.class));
+                    Toast.makeText(DataAccessActivity.this, "picklist", Toast.LENGTH_LONG).show();
+                }
+                if (id == R.id.admin) {
+                    Intent intent1 = new Intent(DataAccessActivity.this, AdminActivity.class);
+                    startActivity(intent1);
+                }
 
                 return true;
             }

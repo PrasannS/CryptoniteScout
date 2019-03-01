@@ -130,7 +130,7 @@ public class RankingFragment extends Fragment {
     public View view2;
 
     public String[][] getArrfromRanking(List<RankingData> datas) {
-        String [][] data = new String[datas.size()][31];
+        String [][] data = new String[datas.size()][10];
         int cur = 0;
         for(RankingData s:datas){
             data[cur]= rankingtoString(s);
@@ -140,9 +140,9 @@ public class RankingFragment extends Fragment {
     }
 
     public String [] rankingtoString(RankingData data){
-        String [] datas = {data.getRankpoint()+"",data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
+        String [] datas = {data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
                             data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                            data.getTeamkey(),data.getId()+""};
+                            data.getTeamkey()};
         return datas;
     }
 

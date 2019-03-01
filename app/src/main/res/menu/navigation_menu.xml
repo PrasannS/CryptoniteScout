@@ -30,4 +30,11 @@
     <item android:id="@+id/nav_groupchat"
         android:title="GroupChat"/>
 
+    <item android:id="@+id/admin"
+        android:title="Admin"/>
+
+    <item android:id="@+id/picklist"
+        android:title="Picklist"/>
+
+
 </menu>
