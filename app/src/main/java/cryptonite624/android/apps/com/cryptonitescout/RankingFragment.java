@@ -51,7 +51,7 @@ public class RankingFragment extends Fragment {
 
     public DaoSession daoSession;
 
-    private static final String[] TABLE_HEADERS = { "This", "is", "a", "test" };
+    private static final String[] TABLE_HEADERS = { "Ranking Points", "Total Wins", "Team Number", "Matches Played", "Total Cargo", "Total Hatches", "Climb 1", "Climb 2", "Climb 3"};
 
 
     public RankingFragment() {
@@ -87,7 +87,7 @@ public class RankingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rankings, container, false);
         daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
         List<RankingData> rankings = daoSession.getRankingDataDao().loadAll();
-        tableView.setColumnCount(10);
+        tableView.setColumnCount(9);
         tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS));
@@ -143,7 +143,7 @@ public class RankingFragment extends Fragment {
     public String [] rankingtoString(RankingData data){
         String [] datas = {data.getRankpoint()+"",data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
                             data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                            data.getTeamkey(),data.getId()+""};
+                            data.getTeamkey()};
         return datas;
     }
 
