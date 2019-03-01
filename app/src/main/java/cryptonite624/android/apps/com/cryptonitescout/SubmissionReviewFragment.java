@@ -94,7 +94,7 @@ public class SubmissionReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_submission_review, container, false);
 
-        replayButton = view.findViewById(R.id.openreplay);
+        //replayButton = view.findViewById(R.id.openreplay);
         totalHatches = view.findViewById(R.id.submission_hatchnum);
         totalCargos = view.findViewById(R.id.submission_cargonum);
         climbLevel = view.findViewById(R.id.submission_hablevel);
@@ -117,12 +117,12 @@ public class SubmissionReviewFragment extends Fragment {
             }
         });
 
-        replayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submissionReadListener.OnSubmissionRead("replay");
-            }
-        });
+//        replayButton.setOnClickListener(new View.OnClickListener() {
+  //          @Override
+  //          public void onClick(View v) {
+  //              submissionReadListener.OnSubmissionRead("replay");
+  //          }
+  //      });
 
 
 
