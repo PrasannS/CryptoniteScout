@@ -87,6 +87,7 @@ public class RankingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rankings, container, false);
         daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
         List<RankingData> rankings = daoSession.getRankingDataDao().loadAll();
+        tableView.setColumnCount(10);
         tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS));

@@ -28,8 +28,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -146,6 +148,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public BluetoothHandler bluetoothHandler;
     public DaoSession daoSession;
 
+
+    boolean matchWon = false;
+
     public User curuser;
 
 
@@ -219,13 +224,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.commit();
         }
 
-
-
         switchbounds();
         //setBounds();
-
-
-
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
@@ -297,6 +297,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 }
                 if (matchStatus == 3) {
                     statusButton.setText("Endgame");
+
                     sandstorm = false;
                     changeFragment(matchStatus);
                 }
@@ -333,6 +334,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
         });
     }
+
+
+
 
     public void startStop(){
         if(timerRunning){
@@ -586,12 +590,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             case "toReview":
                 if(findViewById(R.id.mapcontainer)!=null){
                     SubmissionReviewFragment submissionReviewFragment= new SubmissionReviewFragment();
-                    submissionReviewFragment.setArguments(actionMap);
+                    submissionReviewFragment.setArguments(actionMap, matchWon);
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.mapcontainer,submissionReviewFragment,null);
                     fragmentTransaction.commit();
                 }
                 break;
+            case "change":
+                matchWon = !matchWon;
+                System.out.println("match won:" + matchWon);
 
             default:
         }
@@ -935,6 +942,16 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         r.setMatchesplayed(r.getMatchesplayed()+1);
         r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
         r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
+        r.setTotalwins(r.getTotalwins() + 1);
+        if(habLevel == 1){
+            r.setClimbone(r.getClimbone() + 1);
+        }
+        else if(habLevel == 2){
+            r.setClimbtwo(r.getClimbtwo() + 1);
+        }
+        else if(habLevel == 3){
+            r.setClimbthree(r.getClimbthree() + 1);
+        }
     }
 
     @Override

@@ -56,6 +56,7 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         List<User> users = daoSession.getUserDao().loadAll();
         tableView = (TableView<String[]>) findViewById(R.id.tableView);
+        tableView.setColumnCount(6);
         tableView.setDataAdapter(new SimpleTableDataAdapter(this, getArrFromUsers(users)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, userHeaders));
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {

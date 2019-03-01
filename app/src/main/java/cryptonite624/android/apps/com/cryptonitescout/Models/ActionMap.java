@@ -75,6 +75,7 @@ public class ActionMap{
         this.actions = arrayString;
     }
 
+
     public int getEndclimb() {
         return endclimb;
     }

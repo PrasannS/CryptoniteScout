@@ -34,11 +34,11 @@ public class RankingData {
     Long id;
 
     @Property(nameInDb = "rankpoint")
-     int rankpoint           ;
+     int rankpoint;
     @Property(nameInDb = "totalwins")
-     int totalwins             ;
+     int totalwins;
     @Property(nameInDb = "teamnum")
-     int teamnum             ;
+     int teamnum;
     @Property(nameInDb = "matchesplayed")
      int matchesplayed       ;
     @Property(nameInDb = "totalcargo")
