@@ -916,6 +916,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         Intent intent;
         switch(message){
             case "submit":
+                actionMap.setClimbTime(habLevel);
                 daoSession.getActionMapDao().save(actionMap);
                 try {
                     bluetoothHandler.sendMessage('m',ActionMapUtils.toString(actionMap));
