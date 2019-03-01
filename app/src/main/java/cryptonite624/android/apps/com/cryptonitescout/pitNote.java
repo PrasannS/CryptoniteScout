@@ -245,7 +245,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 else{
                     data.setTeamnum(getTeamNum());
                 }
-
             }
         });
 
