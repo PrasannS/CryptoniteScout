@@ -52,6 +52,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
                 u.setUserLastname(ln.getText().toString());
                 u.setEmail(em.getText().toString());
                 u.setPassword(ps.getText().toString());
+                u.setType(position.getText().toString());
                 daoSession.getUserDao().save(u);
                 try {
                     bluetoothHandler.sendMessage('u', UserUtils.toString(u));

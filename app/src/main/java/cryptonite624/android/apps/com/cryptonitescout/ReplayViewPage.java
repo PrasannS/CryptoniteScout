@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
+
 public class ReplayViewPage extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener, LeftMapFragment.OnLeftMapReadListener{
 
     public static FragmentManager fragmentManager;
@@ -16,12 +19,13 @@ public class ReplayViewPage extends AppCompatActivity implements MatchAccessFrag
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.replayview_page);
+        ActionMap actionMap= ActionMapUtils.parseActionMap(getIntent().getStringExtra("teamnum"));
 
         fragmentManager = getSupportFragmentManager();
 
         if (findViewById(R.id.replayview_map) != null) {
             MatchAccessFragment matchAccessFragment = new MatchAccessFragment();
+            matchAccessFragment.setArguments(actionMap);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.replayview_map, matchAccessFragment, null);
             fragmentTransaction.commit();

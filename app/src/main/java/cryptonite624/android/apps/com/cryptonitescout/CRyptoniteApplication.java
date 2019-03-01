@@ -19,10 +19,13 @@ public class CRyptoniteApplication extends Application {
         mDaoSession = new DaoMaster(
                 new DbOpenHelper(this, "greendao_demo.db").getWritableDb()).newSession();
         Config def = new Config();
-        def.setEventkey("2019week0");
-        def.setCurrentmatch(0);
-        def.setCurrentuser("default@default.com");
-        mDaoSession.getConfigDao().save(def);
+        mDaoSession.getConfigDao().deleteAll();
+        if(mDaoSession.getConfigDao().loadAll().size()==0) {
+            def.setEventkey("2019week0");
+            def.setCurrentmatch(0);
+            def.setCurrentuser("a");
+            mDaoSession.getConfigDao().save(def);
+        }
 
     }
 

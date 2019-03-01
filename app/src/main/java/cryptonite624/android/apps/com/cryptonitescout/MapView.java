@@ -193,12 +193,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
 
 
+        setvars();
+
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
             if (savedInstanceState != null) {
                 return;
             }
             cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
+            pregameFragment.setArguments(actionMap.getMatchnum(),actionMap.getTeamnum());
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe, pregameFragment, null);
             fragmentTransaction.commit();
@@ -219,7 +222,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         switchbounds();
         //setBounds();
-        setvars();
+
+
+
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
@@ -334,6 +339,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void setvars(){
         curschedule = daoSession.getScheduleDao().loadAll().get(getCurrentMatch());
         config = daoSession.getConfigDao().loadAll().get(0);
+        String user = config.getCurrentuser();
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
         qb.where(UserDao.Properties.Email.eq(config.getCurrentuser()));
         List<User> users = qb.list();
@@ -904,8 +910,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 break;
             case "replay":
                 Intent intent = new Intent(getBaseContext(), ReplayViewPage.class);
-                intent.putExtra("matchnum", actionMap.getMatchnum());
-                intent.putExtra("teamnum",actionMap.getTeamnum());
+                intent.putExtra("match", ActionMapUtils.toString(actionMap));
                 startActivity(intent);
                 break;
             default:
@@ -930,6 +935,5 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void makediscoverable() {
-
     }
 }
