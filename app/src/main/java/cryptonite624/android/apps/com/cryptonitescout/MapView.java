@@ -191,8 +191,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
 
-
-
+        actionMap = new ActionMap();
         setvars();
 
         fragmentManager = getSupportFragmentManager();
@@ -201,10 +200,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 return;
             }
             cryptonite624.android.apps.com.cryptonitescout.PregameFragment pregameFragment = new cryptonite624.android.apps.com.cryptonitescout.PregameFragment();
-            pregameFragment.setArguments(actionMap.getMatchnum(),actionMap.getTeamnum());
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe, pregameFragment, null);
             fragmentTransaction.commit();
+            pregameFragment.setArguments(actionMap.getMatchnum(),actionMap.getTeamnum());
         }
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
@@ -219,6 +218,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.add(R.id.mapcontainer, rightMapFragment, null);
             fragmentTransaction.commit();
         }
+
+
 
         switchbounds();
         //setBounds();
@@ -263,7 +264,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         hatchDisplay = (TextView) findViewById(R.id.hatchdisplay);
         habDisplay = (TextView) findViewById(R.id.hableveldisplay);
 
-        actionMap = new ActionMap();
+
 
 
         statusButton = (Button) findViewById(R.id.statuschanger);
