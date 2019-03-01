@@ -47,9 +47,11 @@ public class ActionMapUtils {
 
     public static int totalhatches(boolean b, List<RobotAction> actions){
         int count =0;
-        for(RobotAction r : actions){
-            if(r.isHatch()==b){
-                count++;
+        if(actions != null) {
+            for (RobotAction r : actions) {
+                if (r.isHatch() == b) {
+                    count++;
+                }
             }
         }
         return count;

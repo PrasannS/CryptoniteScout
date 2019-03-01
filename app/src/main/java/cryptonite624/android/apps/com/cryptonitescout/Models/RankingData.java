@@ -14,9 +14,10 @@ public class RankingData {
 
     }
 
-    @Generated(hash = 1376694586)
-    public RankingData(Long id, int totalwins, int teamnum, int matchesplayed, double totalcargo, double totalhatches, double climbone, double climbtwo, double climbthree, double climbfailed, String teamkey) {
+    @Generated(hash = 22484713)
+    public RankingData(Long id, int rankpoint, int totalwins, int teamnum, int matchesplayed, double totalcargo, double totalhatches, double climbone, double climbtwo, double climbthree, double climbfailed, String teamkey) {
         this.id = id;
+        this.rankpoint = rankpoint;
         this.totalwins = totalwins;
         this.teamnum = teamnum;
         this.matchesplayed = matchesplayed;
@@ -32,10 +33,12 @@ public class RankingData {
     @Id(autoincrement = true)
     Long id;
 
+    @Property(nameInDb = "rankpoint")
+     int rankpoint;
     @Property(nameInDb = "totalwins")
-     int totalwins             ;
+     int totalwins;
     @Property(nameInDb = "teamnum")
-     int teamnum             ;
+     int teamnum;
     @Property(nameInDb = "matchesplayed")
      int matchesplayed       ;
     @Property(nameInDb = "totalcargo")
@@ -66,6 +69,15 @@ public class RankingData {
         this.climbfailed = climbfailed;
         this.teamkey = teamkey;
     }*/
+
+    public int getRankpoint() {
+
+        return rankpoint;
+    }
+
+    public void setRankpoint(int rankpoint) {
+        this.rankpoint = rankpoint;
+    }
 
     public int getTotalwins() {
         return totalwins;
