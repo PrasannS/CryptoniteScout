@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,8 +53,9 @@ public class RankingFragment extends Fragment {
     OnRankingRead onRankingRead;
 
     public DaoSession daoSession;
+    private Button load;
 
-    private static final String[] TABLE_HEADERS = { "RP", "Wins", "Team Num", "Matches", "Cargo", "Hatch", "Climb1", "Climb2", "Climb3"};
+    private static final String[] TABLE_HEADERS = { "Wins", "TeamNum", "Matches", "Cargo", "Hatch", "Climb1", "Climb2", "Climb3"};
 
 
     public RankingFragment() {
@@ -109,6 +111,13 @@ public class RankingFragment extends Fragment {
         SimpleTableDataAdapter tableDataAdapter = new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings));
         SimpleTableHeaderAdapter tableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS);
         tableHeaderAdapter.setTextSize(13);
+        load = view.findViewById(R.id.loadrankingcsv);
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCSV();
+            }
+        });
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings)));
         tableView.setHeaderAdapter(tableHeaderAdapter);
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {
@@ -162,8 +171,7 @@ public class RankingFragment extends Fragment {
 
     public String [] rankingtoString(RankingData data){
         String [] datas = {data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
-                            data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                            data.getTeamkey()};
+                            data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+""};
         return datas;
     }
 

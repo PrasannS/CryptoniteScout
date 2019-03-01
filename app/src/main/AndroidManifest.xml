@@ -54,6 +54,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".MapView"
+            android:theme="@style/ModernTheme"
             android:screenOrientation="landscape"
              />
         <activity
