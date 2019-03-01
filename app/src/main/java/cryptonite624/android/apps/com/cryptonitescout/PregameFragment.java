@@ -30,6 +30,8 @@ public class PregameFragment extends Fragment {
     public TextView matchNum;
     public String message;
     public TextView teamNum;
+    public int teamnum;
+    public int matchnum;
 
     public TextView hatchDisplay;
 
@@ -39,9 +41,9 @@ public class PregameFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void setArguments(int matchnum, int teamnum){
-        teamNum.setText(teamnum+"");
-        matchNum.setText(matchnum+"");
+    public void setArguments(int mn, int tn){
+        teamnum = tn;
+        matchnum = mn;
     }
 
 
@@ -76,6 +78,9 @@ public class PregameFragment extends Fragment {
 
         matchNum = view.findViewById(R.id.pregame_matchnum);
         teamNum = view.findViewById(R.id.pregame_teamnum);
+
+        matchNum.setText(matchnum+"");
+        teamNum.setText(teamnum+"");
 
         /*toAuton = (Button)view.findViewById(R.id.pregame_auton);
         toAuton.setOnClickListener(new View.OnClickListener() {
