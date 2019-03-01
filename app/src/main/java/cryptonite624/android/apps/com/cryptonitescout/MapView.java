@@ -322,6 +322,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 if(actionMap.getActionsList().size() > 0){
                     actionMap.removeLast();
                     updateScreen();
+                    if(left){
+                        rightMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
+                    }
+                    else{
+                        leftMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
+                    }
                     System.out.println("You undid an action");
                 }
             }
@@ -750,12 +756,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             ROCKET2MAX[1] = 560;
             CARGO1MIN[1] = 260;
             CARGO1MAX[1] = 300;
+            /*
             CARGO2MIN[1] = 255;
-            CARGO2MAX[1] = 300;
+            CARGO2MAX[1] = 300;*/
             CARGO3MIN[1] = 260;
             CARGO3MAX[1] = 300;
+            /*
             CARGO4MIN[1] = 260;
-            CARGO4MAX[1] = 330;
+            CARGO4MAX[1] = 330;*/
             CARGO5MIN[1] = 355;
             CARGO5MAX[1] = 390;
             CARGO6MIN[1] = 340;
@@ -826,7 +834,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActionsList()));
         hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActionsList()));
         habDisplay.setText("" + habLevel);
-        System.out.println(actionMap.getActionsList());
+        System.out.println("actions: " + actionMap.getActionsList());
         //updateFilled();
     }
 
