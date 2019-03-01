@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.cpjd.models.matches.MatchAlliance;
 
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
@@ -21,6 +22,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
     private Button toLoging;
     private AutoCompleteTextView fn;
     private AutoCompleteTextView ln;
+    private EditText tn;
     private EditText ps;
     private AutoCompleteTextView em;
     private EditText position;
@@ -33,7 +35,8 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        
+
+        tn = findViewById(R.id.tabletnum);
         em = findViewById(R.id.register_email);
         fn = findViewById(R.id.last_name_register);
         ln = findViewById(R.id.first_name_register);
@@ -60,6 +63,10 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
                     e.printStackTrace();
                 }
                 startActivity(new Intent(Register.this, LoginActivity.class));
+
+                Config config = daoSession.getConfigDao().loadAll().get(0);
+                config.setTabletnumber(Integer.parseInt(tn.getText().toString()));
+                daoSession.getConfigDao().update(config);
             }
         });
     }

@@ -102,13 +102,14 @@ public class MatchAccessFragment extends Fragment implements LeftMapFragment.OnL
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_match_access, container, false);
 
-        fragmentManager = getChildFragmentManager();
+        fragmentManager = getFragmentManager();
         if(view.findViewById(R.id.videomnapcontainer)!=null){
-            leftMapFragment= new LeftMapFragment();
+            leftMapFragment = new LeftMapFragment();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.videomnapcontainer,leftMapFragment,null);
             fragmentTransaction.commit();
         }
+
         rangeSeekBar=view.findViewById(R.id.matchscrubber);
         playbutton=view.findViewById(R.id.playbutton);
         intervalbar = view.findViewById(R.id.shiftspeed);

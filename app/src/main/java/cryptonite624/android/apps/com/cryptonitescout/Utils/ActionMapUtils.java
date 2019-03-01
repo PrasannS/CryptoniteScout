@@ -1,6 +1,9 @@
 package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
+import com.cpjd.models.teams.Robot;
+
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -47,9 +50,11 @@ public class ActionMapUtils {
 
     public static int totalhatches(boolean b, List<RobotAction> actions){
         int count =0;
-        for(RobotAction r : actions){
-            if(r.isHatch()==b){
-                count++;
+        if(actions != null) {
+            for (RobotAction r : actions) {
+                if (r.isHatch() == b) {
+                    count++;
+                }
             }
         }
         return count;
@@ -71,20 +76,7 @@ public class ActionMapUtils {
         return new ActionMap(acts);
     }*/
 
-    public static ActionMap parseActionMap(String s){
-        ActionMap am = new ActionMap();
-        StringTokenizer st = new StringTokenizer(s, ";");
-        am.setEndclimb( Integer.parseInt(st.nextToken()));
-        am.setMatchnum( Integer.parseInt(st.nextToken()));
-        am.setPos(st.nextToken());
 
-        StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
-        while(st1.hasMoreTokens()){
-            am.getActionsList().add(new RobotAction(st1.nextToken()));
-        }
-
-        return am;
-    }
 
     public static int tournamentTotalHatches(List<ActionMap> maps){
         int count = 0;
@@ -122,10 +114,34 @@ public class ActionMapUtils {
         return lv;
     }
 
+    public static ActionMap parseActionMap(String s){
+        ActionMap am = new ActionMap();
+        StringTokenizer st = new StringTokenizer(s, ";");
+        am.setEndclimb(Integer.parseInt(st.nextToken()));
+        am.setMatchnum(Integer.parseInt(st.nextToken()));
+        am.setPos(st.nextToken());
+
+        StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
+        while(st1.hasMoreTokens()){
+            String actionString = st1.nextToken();
+            System.out.println(actionString);
+            ArrayList<RobotAction> temp = (ArrayList<RobotAction>) am.getActionsList();
+            RobotAction tempr = new RobotAction(actionString);
+
+            if(tempr != null && temp != null)
+                temp.add(tempr);
+            if(temp!=null){
+                am.setActionsList(temp);
+            }
+        }
+
+        return am;
+    }
+
     public static String toString(ActionMap m){
         String temp = "";
         temp += m.getEndclimb() + ";" + m.getMatchnum() + ";" + m.getPos() + ";";
-        for(RobotAction r:m.getActionsList()){
+        for(RobotAction r : m.getActionsList()){
             temp+=r+",";
         }
         return temp;

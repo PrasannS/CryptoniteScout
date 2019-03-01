@@ -21,6 +21,8 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.CSVUtils;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
+import de.codecrafters.tableview.model.TableColumnDpWidthModel;
+import de.codecrafters.tableview.toolkit.EndlessOnScrollListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
@@ -51,7 +53,7 @@ public class RankingFragment extends Fragment {
 
     public DaoSession daoSession;
 
-    private static final String[] TABLE_HEADERS = { "This", "is", "a", "test" };
+    private static final String[] TABLE_HEADERS = { "RP", "Wins", "Team Num", "Matches", "Cargo", "Hatch", "Climb1", "Climb2", "Climb3"};
 
 
     public RankingFragment() {
@@ -81,6 +83,17 @@ public class RankingFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private class MyEndlessOnScrollListener extends EndlessOnScrollListener {
+
+        @Override
+        public void onReloadingTriggered(final int firstRowItem, final int visibleRowCount, final int totalRowCount) {
+            // show a loading view to the user
+            // reload some data
+            // add the loaded data to the adapter
+            // hide the loading view
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,8 +101,16 @@ public class RankingFragment extends Fragment {
         daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
         List<RankingData> rankings = daoSession.getRankingDataDao().loadAll();
         tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
+        tableView.setColumnCount(9);
+        TableColumnDpWidthModel columnModel= new TableColumnDpWidthModel(getContext(), 9, 100);
+        MyEndlessOnScrollListener endlessscrolllistener = new MyEndlessOnScrollListener();
+        tableView.addOnScrollListener(endlessscrolllistener);
+        tableView.setColumnModel(columnModel);
+        SimpleTableDataAdapter tableDataAdapter = new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings));
+        SimpleTableHeaderAdapter tableHeaderAdapter = new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS);
+        tableHeaderAdapter.setTextSize(13);
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrfromRanking(rankings)));
-        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), TABLE_HEADERS));
+        tableView.setHeaderAdapter(tableHeaderAdapter);
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
@@ -130,7 +151,7 @@ public class RankingFragment extends Fragment {
     public View view2;
 
     public String[][] getArrfromRanking(List<RankingData> datas) {
-        String [][] data = new String[datas.size()][31];
+        String [][] data = new String[datas.size()][10];
         int cur = 0;
         for(RankingData s:datas){
             data[cur]= rankingtoString(s);
@@ -140,9 +161,9 @@ public class RankingFragment extends Fragment {
     }
 
     public String [] rankingtoString(RankingData data){
-        String [] datas = {data.getRankpoint()+"",data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
+        String [] datas = {data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
                             data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                            data.getTeamkey(),data.getId()+""};
+                            data.getTeamkey()};
         return datas;
     }
 

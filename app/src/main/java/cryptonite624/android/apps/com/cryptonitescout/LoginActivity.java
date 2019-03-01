@@ -40,6 +40,7 @@ import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Models.UserDao;
@@ -446,12 +447,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if(u.getEmail().equals("")||u.getPassword().equals(""))
             return false;
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
+        Config config = daoSession.getConfigDao().loadAll().get(0);
         qb.and(UserDao.Properties.Email.eq(u.getEmail()),UserDao.Properties.Password.eq(u.getPassword()));
         List<User>user = qb.list();
         if(user.size()>0) {
             if(isloginvalid(user,u)) {
                 user.get(0).setLoggedin(true);
-                daoSession.getUserDao().save(user.get(0));
+                daoSession.getUserDao().update(user.get(0));
+                config.setCurrentuser(user.get(0).getEmail());
+                daoSession.getConfigDao().update(config);
                 return true;
             }
         }

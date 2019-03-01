@@ -145,12 +145,14 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         List<Schedule>schedules= daoSession.getScheduleDao().loadAll();
         tableView = (TableView<String[]>)view.findViewById(R.id.scheduletable);
+        tableView.setColumnCount(7);
         tableView.setDataAdapter(new SimpleTableDataAdapter(getContext(), getArrFromSchedules(schedules)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(getContext(), Schedule_headers));
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
                 Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
+                onScheduleRead.openMatch(rowIndex);
             }
         });
 

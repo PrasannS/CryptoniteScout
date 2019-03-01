@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import cryptonite624.android.apps.com.cryptonitescout.R;
 
@@ -27,6 +29,7 @@ public class EndgameFragment extends Fragment {
 
     public Button submit;
     public String message;
+    public Switch winSwitch;
 
 
 
@@ -61,6 +64,15 @@ public class EndgameFragment extends Fragment {
                 message = "toReview";
                 endgameReadListener.OnEndgameRead(message);
                 System.out.println("Sent Submission");
+            }
+        });
+
+        winSwitch = (Switch) view.findViewById(R.id.winSwitch);
+        winSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                message = "change";
+                endgameReadListener.OnEndgameRead(message);
             }
         });
 

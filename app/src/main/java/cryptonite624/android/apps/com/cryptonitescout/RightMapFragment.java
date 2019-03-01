@@ -103,14 +103,14 @@ public class RightMapFragment extends Fragment{
         cargoimage8 = (ImageView)view.findViewById(R.id.cargoimage8_right);
 
 
-        /*cargoimage1.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage2.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage3.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage4.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage5.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage6.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage7.setBackgroundResource(R.drawable.cargoandhatchimage);
-        cargoimage8.setBackgroundResource(R.drawable.cargoandhatchimage);*/
+        /*cargoimage1.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage2.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage3.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage4.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage5.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage6.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage7.setImageResource(R.drawable.cargoandhatchimage);
+        cargoimage8.setImageResource(R.drawable.cargoandhatchimage);*/
 
         return view;
     }
@@ -223,170 +223,205 @@ public class RightMapFragment extends Fragment{
         }
         //reset
         if(C1 == 0){
-            cargoimage8.setBackgroundResource(0);
+
+            //cargoimage8.setImageResource(0);
+            cargoimage8.setVisibility(View.INVISIBLE);
         }
         if(C2 == 0){
-            cargoimage7.setBackgroundResource(0);
+            //cargoimage7.setImageResource(0);
+            cargoimage7.setVisibility(View.INVISIBLE);
         }
         if(C3 == 0){
-            cargoimage6.setBackgroundResource(0);
+            //cargoimage6.setImageResource(0);
+            cargoimage6.setVisibility(View.INVISIBLE);
         }
         if(C4 == 0){
-            cargoimage5.setBackgroundResource(0);
+            //cargoimage5.setImageResource(0);
+            cargoimage5.setVisibility(View.INVISIBLE);
         }
         if(C5 == 0){
-            cargoimage4.setBackgroundResource(0);
+            //cargoimage4.setImageResource(0);
+            cargoimage4.setVisibility(View.INVISIBLE);
         }
         if(C6 == 0){
-            cargoimage3.setBackgroundResource(0);
+            //cargoimage3.setImageResource(0);
+            cargoimage3.setVisibility(View.INVISIBLE);
         }
         if(C7 == 0){
-            cargoimage2.setBackgroundResource(0);
+            //cargoimage2.setImageResource(0);
+            cargoimage2.setVisibility(View.INVISIBLE);
         }
         if(C8 == 0){
-            cargoimage1.setBackgroundResource(0);
+            //cargoimage1.setImageResource(0);
+            cargoimage1.setVisibility(View.INVISIBLE);
         }
         
         
         //hatches
         
         if(C1 == 1){
-            cargoimage8.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage8.setImageResource(R.drawable.hatchimage);
+            cargoimage8.setVisibility(View.VISIBLE);
+
         }
         if(C2 == 1){
-            cargoimage7.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage7.setImageResource(R.drawable.hatchimage);
+            cargoimage7.setVisibility(View.VISIBLE);
+
         }
         if(C3 == 1){
-            cargoimage6.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage6.setImageResource(R.drawable.hatchimage);
+            cargoimage6.setVisibility(View.VISIBLE);
         }
         if(C4 == 1){
-            cargoimage5.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage5.setImageResource(R.drawable.hatchimage);
+            cargoimage5.setVisibility(View.VISIBLE);
         }
         if(C5 == 1){
-            cargoimage4.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage4.setImageResource(R.drawable.hatchimage);
+            cargoimage4.setVisibility(View.VISIBLE);
         }
         if(C6 == 1){
-            cargoimage3.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage3.setImageResource(R.drawable.hatchimage);
+            cargoimage3.setVisibility(View.VISIBLE);
         }
         if(C7 == 1){
-            cargoimage2.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage2.setImageResource(R.drawable.hatchimage);
+            cargoimage2.setVisibility(View.VISIBLE);
         }
         if(C8 == 1){
-            cargoimage1.setBackgroundResource(R.drawable.hatchimage);
+            cargoimage1.setImageResource(R.drawable.hatchimage);
+            cargoimage1.setVisibility(View.VISIBLE);
         }
 
 
         //cargos
         if(C1 == 2){
-            cargoimage8.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage8.setVisibility(View.VISIBLE);
+            cargoimage8.setImageResource(R.drawable.cargoimage);
         }
         if(C2 == 2){
-            cargoimage7.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage7.setVisibility(View.VISIBLE);
+            cargoimage7.setImageResource(R.drawable.cargoimage);
         }
         if(C3 == 2){
-            cargoimage6.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage6.setVisibility(View.VISIBLE);
+            cargoimage6.setImageResource(R.drawable.cargoimage);
         }
         if(C4 == 2){
-            cargoimage5.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage5.setVisibility(View.VISIBLE);
+            cargoimage5.setImageResource(R.drawable.cargoimage);
         }
         if(C5 == 2){
-            cargoimage4.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage4.setVisibility(View.VISIBLE);
+            cargoimage4.setImageResource(R.drawable.cargoimage);
         }
         if(C6 == 2){
-            cargoimage3.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage3.setVisibility(View.VISIBLE);
+            cargoimage3.setImageResource(R.drawable.cargoimage);
         }
         if(C7 == 2){
-            cargoimage2.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage2.setVisibility(View.VISIBLE);
+            cargoimage2.setImageResource(R.drawable.cargoimage);
         }
         if(C8 == 2){
-            cargoimage1.setBackgroundResource(R.drawable.cargoimage);
+            cargoimage1.setVisibility(View.VISIBLE);
+            cargoimage1.setImageResource(R.drawable.cargoimage);
         }
 
         //both
 
         if(C1 == 3){
-            cargoimage8.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage8.setVisibility(View.VISIBLE);
+            cargoimage8.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C2 == 3){
-            cargoimage7.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage7.setVisibility(View.VISIBLE);
+            cargoimage7.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C3 == 3){
-            cargoimage6.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage6.setVisibility(View.VISIBLE);
+            cargoimage6.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C4 == 3){
-            cargoimage5.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage5.setVisibility(View.VISIBLE);
+            cargoimage5.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C5 == 3){
-            cargoimage4.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage4.setVisibility(View.VISIBLE);
+            cargoimage4.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C6 == 3){
-            cargoimage3.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage3.setVisibility(View.VISIBLE);
+            cargoimage3.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C7 == 3){
-            cargoimage2.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage2.setVisibility(View.VISIBLE);
+            cargoimage2.setImageResource(R.drawable.cargoandhatchimage);
         }
         if(C8 == 3){
-            cargoimage1.setBackgroundResource(R.drawable.cargoandhatchimage);
+            cargoimage1.setVisibility(View.VISIBLE);
+            cargoimage1.setImageResource(R.drawable.cargoandhatchimage);
         }
     }
 
     public void individualButton(RobotAction action){
         if (action.getActionCode().equals("C1")) {
             if(action.isHatch()){
-                cargoimage1.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage1.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage1.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage1.setImageResource(R.drawable.hatchimage);
             }
 
         } else if (action.getActionCode().equals("C2")) {
             if(action.isHatch()){
-                cargoimage2.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage2.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage2.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage2.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C3")) {
             if(action.isHatch()){
-                cargoimage3.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage3.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage3.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage3.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C4")) {
             if(action.isHatch()){
-                cargoimage4.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage4.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage4.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage4.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C5")) {
             if(action.isHatch()){
-                cargoimage5.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage5.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage5.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage5.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C6")) {
             if(action.isHatch()){
-                cargoimage6.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage6.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage6.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage6.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C7")) {
             if(action.isHatch()){
-                cargoimage7.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage7.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage7.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage7.setImageResource(R.drawable.hatchimage);
             }
         } else if (action.getActionCode().equals("C8")) {
             if(action.isHatch()){
-                cargoimage8.setBackgroundResource(R.drawable.cargoimage);
+                cargoimage8.setImageResource(R.drawable.cargoimage);
             }
             else if(!action.isHatch()){
-                cargoimage8.setBackgroundResource(R.drawable.hatchimage);
+                cargoimage8.setImageResource(R.drawable.hatchimage);
             }
         }
     }

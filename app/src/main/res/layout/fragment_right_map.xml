@@ -18,8 +18,10 @@
             android:descendantFocusability="blocksDescendants">
 
             <ImageView
+android:visibility="invisible"
                 android:id="@+id/cargoimage1_right"
                 android:layout_width="wrap_content"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_height="60dp"
                 android:layout_alignStart="@+id/cargoimage5_right"
                 android:layout_alignTop="@+id/cargoimage2_right"
@@ -28,31 +30,38 @@
                 android:text="1" />
 
             <ImageView
+android:visibility="invisible"
 
                 android:id="@+id/cargoimage2_right"
                 android:layout_width="wrap_content"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargoimage3_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="201dp"
                 android:layout_marginTop="0dp"
+                
                 android:text="2" />
 
             <ImageView
+android:visibility="invisible"
 
                 android:id="@+id/cargoimage3_right"
                 android:layout_width="wrap_content"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargoimage4_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="106dp"
+
                 android:text="3" />
 
             <ImageView
-                
+android:visibility="invisible"
 
-                
+
                 android:id="@+id/cargoimage4_right"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
@@ -62,46 +71,51 @@
                 android:text="4" />
 
             <ImageView
-                
+android:visibility="invisible"
 
-                
+
                 android:id="@+id/cargoimage5_right"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="169dp"
                 android:layout_marginEnd="280dp"
+
                 android:text="5" />
 
             <ImageView
-                
+android:visibility="invisible"
 
-                
+
                 android:id="@+id/cargoimage6_right"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargoimage8_right"
-                android:layout_toEndOf="@+id/cargoimage3_right"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="4dp"
+               android:layout_toEndOf="@+id/cargoimage3_right"
+
                 android:text="6" />
 
             <ImageView
-                
-
-                
+                android:visibility="invisible"
                 android:id="@+id/cargoimage7_right"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignTop="@+id/cargoimage6_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="98dp"
+                
                 android:text="7" />
 
             <ImageView
-                
-
-                
+                android:visibility="invisible"
                 android:id="@+id/cargoimage8_right"
+                android:src="@drawable/cargoandhatchimage"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
@@ -110,9 +124,9 @@
                 android:text="8" />
 
             <ImageView
-                
 
-                
+
+
                 android:id="@+id/image9_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,9 +137,8 @@
                 android:visibility="invisible" />
 
             <ImageView
-                
+android:visibility="invisible"
 
-                
                 android:id="@+id/image10_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,9 +147,9 @@
                 android:text="Button" />
 
             <ImageView
-                
 
-                
+
+
                 android:id="@+id/image11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,9 +160,7 @@
                 android:visibility="invisible" />
 
             <ImageView
-                
 
-                
                 android:id="@+id/image12_right"
                 android:layout_width="wrap_content"
                 android:layout_height="212dp"
@@ -158,8 +169,6 @@
                 android:layout_marginEnd="104dp"
                 android:text="Button"
                 android:visibility="invisible" />
-
-
 
 
         </RelativeLayout>

@@ -72,7 +72,7 @@ public class RobotAction {
     }
 
     public RobotAction(String s){
-
+        parseRobotAction(s);
     }
 
     @Generated(hash = 621957603)

@@ -44,16 +44,26 @@ public class Config {
         this.id = id;
     }
 
+    public int getTabletnumber() {
+        return this.tabletnumber;
+    }
+
+    public void setTabletnumber(int tabletnumber) {
+        this.tabletnumber = tabletnumber;
+    }
+
     public Config(){
 
     }
 
-    @Generated(hash = 74496333)
-    public Config(Long id, String currentuser, int currentmatch, String eventkey) {
+    @Generated(hash = 26492953)
+    public Config(Long id, String currentuser, int currentmatch, String eventkey,
+            int tabletnumber) {
         this.id = id;
         this.currentuser = currentuser;
         this.currentmatch = currentmatch;
         this.eventkey = eventkey;
+        this.tabletnumber = tabletnumber;
     }
 
     //email
@@ -63,5 +73,7 @@ public class Config {
     int currentmatch;
     @Property(nameInDb = "eventkey")
     String eventkey;
+    @Property(nameInDb = "tabletnumber")
+    int tabletnumber;
 
 }

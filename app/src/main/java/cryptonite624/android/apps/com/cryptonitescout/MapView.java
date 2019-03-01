@@ -28,8 +28,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -146,6 +148,9 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public BluetoothHandler bluetoothHandler;
     public DaoSession daoSession;
 
+
+    boolean matchWon = false;
+
     public User curuser;
 
 
@@ -219,13 +224,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.commit();
         }
 
-
-
         switchbounds();
         //setBounds();
-
-
-
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
@@ -297,6 +297,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 }
                 if (matchStatus == 3) {
                     statusButton.setText("Endgame");
+
                     sandstorm = false;
                     changeFragment(matchStatus);
                 }
@@ -322,11 +323,20 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 if(actionMap.getActionsList().size() > 0){
                     actionMap.removeLast();
                     updateScreen();
+                    if(left){
+                        rightMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
+                    }
+                    else{
+                        leftMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
+                    }
                     System.out.println("You undid an action");
                 }
             }
         });
     }
+
+
+
 
     public void startStop(){
         if(timerRunning){
@@ -580,12 +590,15 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             case "toReview":
                 if(findViewById(R.id.mapcontainer)!=null){
                     SubmissionReviewFragment submissionReviewFragment= new SubmissionReviewFragment();
-                    submissionReviewFragment.setArguments(actionMap);
+                    submissionReviewFragment.setArguments(actionMap, matchWon);
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.mapcontainer,submissionReviewFragment,null);
                     fragmentTransaction.commit();
                 }
                 break;
+            case "change":
+                matchWon = !matchWon;
+                System.out.println("match won:" + matchWon);
 
             default:
         }
@@ -750,12 +763,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             ROCKET2MAX[1] = 560;
             CARGO1MIN[1] = 260;
             CARGO1MAX[1] = 300;
+            /*
             CARGO2MIN[1] = 255;
-            CARGO2MAX[1] = 300;
+            CARGO2MAX[1] = 300;*/
             CARGO3MIN[1] = 260;
             CARGO3MAX[1] = 300;
+            /*
             CARGO4MIN[1] = 260;
-            CARGO4MAX[1] = 330;
+            CARGO4MAX[1] = 330;*/
             CARGO5MIN[1] = 355;
             CARGO5MAX[1] = 390;
             CARGO6MIN[1] = 340;
@@ -826,7 +841,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActionsList()));
         hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActionsList()));
         habDisplay.setText("" + habLevel);
-        System.out.println(actionMap.getActionsList());
+        System.out.println("actions: " + actionMap.getActionsList());
         //updateFilled();
     }
 
@@ -898,8 +913,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void OnSubmissionRead(String message) {
+        Intent intent;
         switch(message){
             case "submit":
+                actionMap.setClimbTime(habLevel);
                 daoSession.getActionMapDao().save(actionMap);
                 try {
                     bluetoothHandler.sendMessage('m',ActionMapUtils.toString(actionMap));
@@ -908,9 +925,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 }
                 config.setCurrentmatch((config.getCurrentmatch())+1);
                 updateRD(actionMap);
+                intent = new Intent(getBaseContext(), DataAccessActivity.class);
+                startActivity(intent);
                 break;
             case "replay":
-                Intent intent = new Intent(getBaseContext(), ReplayViewPage.class);
+                intent = new Intent(getBaseContext(), ReplayViewPage.class);
                 intent.putExtra("match", ActionMapUtils.toString(actionMap));
                 startActivity(intent);
                 break;
@@ -922,6 +941,22 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void updateRD(ActionMap m){
         RankingData r = new RankingData();
         //TODO add something for climb and other variables
+        List<ActionMap>temp = new ArrayList<>();
+        temp.add(m);
+        r.setMatchesplayed(r.getMatchesplayed()+1);
+        r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
+        r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
+        r.setTotalwins(r.getTotalwins() + 1);
+        if(habLevel == 1){
+            r.setClimbone(r.getClimbone() + 1);
+        }
+        else if(habLevel == 2){
+            r.setClimbtwo(r.getClimbtwo() + 1);
+        }
+        else if(habLevel == 3){
+            r.setClimbthree(r.getClimbthree() + 1);
+        }
+        daoSession.getRankingDataDao().save(r);
     }
 
     @Override
