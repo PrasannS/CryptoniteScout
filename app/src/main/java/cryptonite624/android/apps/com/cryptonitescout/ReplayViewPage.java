@@ -19,6 +19,8 @@ public class ReplayViewPage extends AppCompatActivity implements MatchAccessFrag
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.replayview_page);
+
         ActionMap actionMap= ActionMapUtils.parseActionMap(getIntent().getStringExtra("match"));
 
         fragmentManager = getSupportFragmentManager();

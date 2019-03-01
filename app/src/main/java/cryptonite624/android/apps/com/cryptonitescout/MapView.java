@@ -925,7 +925,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 updateRD(actionMap);
                 break;
             case "replay":
-                Intent intent = new Intent(getBaseContext(), ReplayViewPage.class);
+                Intent intent = new Intent(getApplicationContext(), ReplayViewPage.class);
+                ActionMapUtils.toString(actionMap);
                 intent.putExtra("match", ActionMapUtils.toString(actionMap));
                 startActivity(intent);
                 break;
