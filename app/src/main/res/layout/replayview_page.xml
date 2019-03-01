@@ -17,10 +17,19 @@
             android:background="@color/colorPrimary"
             android:orientation="vertical">
 
-            <TextView
+            //left scroll view
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Replay View Controls"/>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Replay View Controls"
+                    android:textSize="20dp"
+                    android:textColor="@color/TextColor"/>
+            </ScrollView>
+
 
         </LinearLayout>
 
@@ -29,7 +38,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/replayview_map"
-            android:background="@color/colorPrimary"></FrameLayout>
+            android:background="@color/colorPrimary">
+        </FrameLayout>
     </LinearLayout>
 
 </FrameLayout>

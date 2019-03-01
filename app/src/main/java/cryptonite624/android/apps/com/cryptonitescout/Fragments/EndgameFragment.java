@@ -22,7 +22,6 @@ import cryptonite624.android.apps.com.cryptonitescout.R;
  * create an instance of this fragment.
  */
 public class EndgameFragment extends Fragment {
-    public int temp;
 
     private OnFragmentInteractionListener mListener;
 
