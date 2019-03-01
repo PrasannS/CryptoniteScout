@@ -51,6 +51,15 @@ public class MatchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public Button teamB1;
+    public Button teamB2;
+    public Button teamB3;
+    public Button teamR1;
+    public Button teamR2;
+    public Button teamR3;
+
+
+
     public Button toMatches;
     public Button redteam1;
     public Button toDashboard;
@@ -136,6 +145,50 @@ public class MatchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
+
+        //onClick listeners for team Buttons
+        teamB1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        teamB2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        teamB3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        teamR1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        teamR2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        teamR3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         /*
         if (view.findViewById(R.id.match_access_layout) != null) {
             MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
