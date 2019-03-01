@@ -109,6 +109,7 @@ public class MatchAccessFragment extends Fragment implements LeftMapFragment.OnL
             fragmentTransaction.add(R.id.videomnapcontainer,leftMapFragment,null);
             fragmentTransaction.commit();
         }
+
         rangeSeekBar=view.findViewById(R.id.matchscrubber);
         playbutton=view.findViewById(R.id.playbutton);
         intervalbar = view.findViewById(R.id.shiftspeed);
