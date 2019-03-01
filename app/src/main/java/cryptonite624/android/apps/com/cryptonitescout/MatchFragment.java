@@ -123,6 +123,7 @@ public class MatchFragment extends Fragment {
 
     public interface OnMatchReadListener{
         public void OnMatchRead(String message);
+        public void OpenTeam(String key);
     }
 
     public void setArguments(int matchnum){
@@ -405,4 +406,7 @@ public class MatchFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
 }

@@ -1,7 +1,7 @@
 package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -13,14 +13,14 @@ public class ActionMapUtils {
 
     /*public static ActionMap parseString(String s){
         String [] parsed = s.split(" ");
-        ArrayList<RobotAction> robotActions = new ArrayList<RobotAction>();
+        List<RobotAction> robotActions = new List<RobotAction>();
         for(int i = 0; i < parsed.length; i++){
             RobotAction robotAction = new RobotAction(parsed[i]);
         }
         ActionMap tempMap = new ActionMap(parsed);
     }*/
 
-    public static boolean isFilled(String code, ActionMap actionMap, ArrayList<RobotAction> actions){
+    public static boolean isFilled(String code, ActionMap actionMap, List<RobotAction> actions){
         if(actions.contains(code)){
             return true;
         }
@@ -60,8 +60,8 @@ public class ActionMapUtils {
         return actions.size();
     }
     /*
-    public ActionMap getMiniMap(int code, int ms, ArrayList<RobotAction> actions){
-        ArrayList<RobotAction> acts = new ArrayList<>();
+    public ActionMap getMiniMap(int code, int ms, List<RobotAction> actions){
+        List<RobotAction> acts = new List<>();
         for(RobotAction i : actions){
             if(i.getActionCode().equals(code) && i.matchStatus == ms){
                 acts.add(i);
@@ -76,7 +76,7 @@ public class ActionMapUtils {
         StringTokenizer st = new StringTokenizer(s, ";");
         am.setEndclimb( Integer.parseInt(st.nextToken()));
         am.setMatchnum( Integer.parseInt(st.nextToken()));
-        am.setPos( Integer.parseInt(st.nextToken()));
+        am.setPos(st.nextToken());
 
         StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
         while(st1.hasMoreTokens()){
@@ -86,7 +86,7 @@ public class ActionMapUtils {
         return am;
     }
 
-    public static int tournamentTotalHatches(ArrayList<ActionMap> maps){
+    public static int tournamentTotalHatches(List<ActionMap> maps){
         int count = 0;
         for(ActionMap m : maps){
             count += totalhatches(true, m.getActionsList());
@@ -94,7 +94,7 @@ public class ActionMapUtils {
         return count;
     }
 
-    public static int tournamentTotalCargos(ArrayList<ActionMap> maps){
+    public static int tournamentTotalCargos(List<ActionMap> maps){
         int count = 0;
         for(ActionMap m : maps){
             count += totalhatches(false, m.getActionsList());
@@ -102,17 +102,17 @@ public class ActionMapUtils {
         return count;
     }
 
-    public static double tournamentAverageHatch(ArrayList<ActionMap> maps){
+    public static double tournamentAverageHatch(List<ActionMap> maps){
         double average = tournamentTotalHatches(maps) / maps.size();
         return average;
     }
 
-    public static double tournamentAverageCargo(ArrayList<ActionMap> maps){
+    public static double tournamentAverageCargo(List<ActionMap> maps){
         double average = tournamentTotalCargos(maps) / maps.size();
         return average;
     }
 
-    public static int tournamentHighestClimbLv(ArrayList<ActionMap> maps){
+    public static int tournamentHighestClimbLv(List<ActionMap> maps){
         int lv = 0;
         for(ActionMap m : maps){
             if(m.getEndclimb() > lv){

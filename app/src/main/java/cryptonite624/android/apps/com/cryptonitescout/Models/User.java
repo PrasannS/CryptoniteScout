@@ -29,6 +29,7 @@ public class User  {
     String password;
     @Property(nameInDb = "currency")
     int currency;
+
     
 
     public User(){

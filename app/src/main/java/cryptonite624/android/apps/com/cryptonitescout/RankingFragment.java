@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.CSVUtils;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
@@ -114,6 +116,16 @@ public class RankingFragment extends Fragment {
         view2 = view;
         return view;
     }
+
+    public void loadCSV(){
+        CSVUtils csvUtils = new CSVUtils(getActivity().getApplication(),getContext());
+        try {
+            csvUtils.loadRankingstoFile();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public FragmentManager fragmentManager;
     public View view2;
 
@@ -177,5 +189,6 @@ public class RankingFragment extends Fragment {
 
     public interface OnRankingRead{
         public void OnRankingRead(String message);
+        public void openTeam(String key);
     }
 }

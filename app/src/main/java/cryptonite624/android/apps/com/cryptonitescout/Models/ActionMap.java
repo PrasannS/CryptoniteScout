@@ -30,8 +30,10 @@ public class ActionMap{
     int endclimb;
     @Property(nameInDb = "matchnum")
     int matchnum;
+    @Property(nameInDb = "teamnum")
+    int teamnum;
     @Property(nameInDb = "pos")
-    int pos;
+    String pos;
     @Property(nameInDb = "climbtime")
     int climbTime;
 
@@ -39,13 +41,14 @@ public class ActionMap{
     public ActionMap(){
     }
 
-    @Generated(hash = 1314651232)
-    public ActionMap(Long id, String actions, int endclimb, int matchnum, int pos,
-            int climbTime) {
+    @Generated(hash = 1592144978)
+    public ActionMap(Long id, String actions, int endclimb, int matchnum,
+            int teamnum, String pos, int climbTime) {
         this.id = id;
         this.actions = actions;
         this.endclimb = endclimb;
         this.matchnum = matchnum;
+        this.teamnum = teamnum;
         this.pos = pos;
         this.climbTime = climbTime;
     }
@@ -54,6 +57,13 @@ public class ActionMap{
         Type listType = new TypeToken<ArrayList<RobotAction>>(){}.getType();
         List<RobotAction> arrayList = new Gson().fromJson(actions, listType);
         return arrayList;
+    }
+
+    public void removeLast(){
+        Type listType = new TypeToken<ArrayList<RobotAction>>(){}.getType();
+        List<RobotAction> arrayList = new Gson().fromJson(actions, listType);
+        arrayList.remove(arrayList.size()-1);
+        setActionsList((ArrayList<RobotAction>) arrayList);
     }
 
     public String getActions(){
@@ -81,11 +91,11 @@ public class ActionMap{
         this.matchnum = matchnum;
     }
 
-    public int getPos() {
+    public String getPos() {
         return pos;
     }
 
-    public void setPos(int pos) {
+    public void setPos(String pos) {
         this.pos = pos;
     }
 
@@ -107,5 +117,13 @@ public class ActionMap{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getTeamnum() {
+        return this.teamnum;
+    }
+
+    public void setTeamnum(int teamnum) {
+        this.teamnum = teamnum;
     }
 }

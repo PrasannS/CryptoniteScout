@@ -23,11 +23,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
+import java.util.List;
+
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 
-public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead,BluetoothHandler.BluetoothListener{
+public class DataAccessActivity extends AppCompatActivity implements MatchAccessFragment.OnFragmentInteractionListener,LeftMapFragment.OnLeftMapReadListener,DashboardFragment.OnDashboardReadListener, MatchFragment.OnMatchReadListener, TeamFragment.OnTeamReadListener,ServerLoader.ServerLoadListener,ScheduleFragment.OnScheduleRead,BluetoothHandler.BluetoothListener, RankingFragment.OnRankingRead{
 
     public static FragmentManager fragmentManager;
 
@@ -77,7 +84,6 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     }
                     return true;
                 }
-                /*
                 if (id == R.id.nav_home) {
                     Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
                     if(findViewById(R.id.fragmentcontainer)!=null){
@@ -87,7 +93,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                         fragmentTransaction.commit();
                     }
                     return true;
-                }*/
+                }
                 if (id == R.id.nav_matches) {
                     bluetoothHandler.endstuff();
                     Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
@@ -191,121 +197,12 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
             return true;
         }
 
-        /*
-        if (id == R.id.nav_home) {
-            Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                DashboardFragment dashboardFragment = new DashboardFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, dashboardFragment,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-        if (id == R.id.nav_matches) {
-            Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                MatchFragment matchFragment= new MatchFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-        if (id == R.id.nav_newentry) {
-            Toast.makeText(DataAccessActivity.this, "new entry", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(DataAccessActivity.this, MapView.class));
-            return true;
-        }
-        if (id == R.id.nav_rankings) {
-            Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        if (id == R.id.nav_sketchmap) {
-            Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                MapDrawFragment mapDrawFragment = new MapDrawFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-        if (id == R.id.nav_settings) {
-            Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
-        //noinspection SimplifiableIfStatement
-        /*
-        if (id == R.id.pitnote_menu) {
-            Toast.makeText(DataAccessActivity.this, "pitnote", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(DataAccessActivity.this, pitNote.class));
-            return true;
-        }
-
-        if (id == R.id.matches_menu) {
-            Toast.makeText(DataAccessActivity.this, "matches", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                MatchFragment matchFragment= new MatchFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, matchFragment,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-        if (id == R.id.newEntry_menu) {
-            Toast.makeText(DataAccessActivity.this, "new entry", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(DataAccessActivity.this, MapView.class));
-            return true;
-        }
-        if (id == R.id.rankings_menu) {
-            Toast.makeText(DataAccessActivity.this, "rankings", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        if (id == R.id.stratboard) {
-            Toast.makeText(DataAccessActivity.this, "strategy board", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                StrategyBoard strategyBoard= new StrategyBoard();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, strategyBoard,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-
-        if (id == R.id.mapdraw) {
-            Toast.makeText(DataAccessActivity.this, "map draw", Toast.LENGTH_LONG).show();
-            if(findViewById(R.id.fragmentcontainer)!=null){
-                MapDrawFragment mapDrawFragment = new MapDrawFragment();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontainer, mapDrawFragment,null);
-                fragmentTransaction.commit();
-            }
-            return true;
-        }
-        if (id == R.id.settings) {
-            Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
-            return true;
-        }*/
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void OnDashboardRead(String message) {
         switch(message){
-            /*case "toMatches":
-                if(findViewById(R.id.fragmentcontainer)!=null){
-                    MatchFragment matchFragment = new MatchFragment();
-                    PregameFragment pregameFragment= new PregameFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentcontainer,MatchFragment,null);
-                    fragmentTransaction.commit();
-                }*/
-            /*case "toPitnotes":
-
-                }*/
             case "toMatch":
                 if(findViewById(R.id.fragmentcontainer)!=null){
                     MatchFragment matchFragment= new MatchFragment();
@@ -341,18 +238,14 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     fragmentTransaction.replace(R.id.fragmentcontainer,teamFragment,null);
                     fragmentTransaction.commit();
                 }
-
-            /*case "toMatches":
-                if(findViewById(R.id.fragmentcontainer)!=null){
-                    TeleopFragment teleopFragment= new TeleopFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentcontainer,teleopFragment,null);
-                    fragmentTransaction.commit();
-                }
-                break;*/
-
             default:
         }
+    }
+
+    //this is for matches
+    @Override
+    public void OpenTeam(String key) {
+        openTeamFromKey(key);
     }
 
     @Override
@@ -418,5 +311,44 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     @Override
     public void makediscoverable() {
 
+    }
+
+    @Override
+    public void OnRankingRead(String message) {
+
+    }
+
+    public void openTeamFromKey(String key){
+        int tn = Integer.parseInt(key.substring(4));
+        QueryBuilder<ActionMap> qb = daoSession.getActionMapDao().queryBuilder();
+        qb.where(ActionMapDao.Properties.Teamnum.eq(tn));
+        List<ActionMap> actionMaps = qb.list();
+        if(findViewById(R.id.fragmentcontainer)!=null){
+            TeamFragment teamFragment= new TeamFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontainer,teamFragment,null);
+            fragmentTransaction.commit();
+            teamFragment.setArguments(actionMaps);
+        }
+    }
+
+    public void openMatchFromNumber(int num){
+        QueryBuilder<ActionMap> qb = daoSession.getActionMapDao().queryBuilder();
+        qb.where(ActionMapDao.Properties.Matchnum.eq(num));
+        List<ActionMap> actionMaps = qb.list();
+        if(findViewById(R.id.fragmentcontainer)!=null){
+            MatchFragment teamFragment= new MatchFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontainer,teamFragment,null);
+            fragmentTransaction.commit();
+            //teamFragment.setArguments(actionMaps);
+        }
+    }
+
+
+    //this is for rankings
+    @Override
+    public void openTeam(String key) {
+        openTeamFromKey(key);
     }
 }

@@ -16,63 +16,56 @@
             android:layout_height="460dp"
             android:background="@drawable/jankredright1"
             android:descendantFocusability="blocksDescendants">
-<!--
-            <Button
-                android:enabled="false"
-                android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton1_right"
+
+            <ImageView
+                android:id="@+id/cargoimage1_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignStart="@+id/cargobutton5_right"
-                android:layout_alignTop="@+id/cargobutton2_right"
+                android:layout_alignStart="@+id/cargoimage5_right"
+                android:layout_alignTop="@+id/cargoimage2_right"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="-12dp"
                 android:text="1" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton2_right"
+            <ImageView
+
+                android:id="@+id/cargoimage2_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignTop="@+id/cargobutton3_right"
+                android:layout_alignTop="@+id/cargoimage3_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="201dp"
                 android:layout_marginTop="0dp"
                 android:text="2" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton3_right"
+            <ImageView
+
+                android:id="@+id/cargoimage3_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignTop="@+id/cargobutton4_right"
+                android:layout_alignTop="@+id/cargoimage4_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="106dp"
                 android:text="3" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton4_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/cargoimage4_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="-99dp"
                 android:layout_marginBottom="152dp"
-                android:layout_toStartOf="@+id/cargobutton7_right"
+                android:layout_toStartOf="@+id/cargoimage7_right"
                 android:text="4" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton5_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/cargoimage5_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
@@ -81,34 +74,34 @@ android:focusable="false"
                 android:layout_marginEnd="280dp"
                 android:text="5" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton6_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/cargoimage6_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignTop="@+id/cargobutton8_right"
-                android:layout_toEndOf="@+id/cargobutton3_right"
+                android:layout_alignTop="@+id/cargoimage8_right"
+                android:layout_toEndOf="@+id/cargoimage3_right"
                 android:text="6" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton7_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/cargoimage7_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_alignTop="@+id/cargobutton6_right"
+                android:layout_alignTop="@+id/cargoimage6_right"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="98dp"
                 android:text="7" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/cargobutton8_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/cargoimage8_right"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
@@ -116,11 +109,11 @@ android:focusable="false"
                 android:layout_marginTop="154dp"
                 android:text="8" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/button9_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/image9_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -129,22 +122,22 @@ android:focusable="false"
                 android:text="Button"
                 android:visibility="invisible" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/button10_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/image10_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="Button" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/button11"
+            <ImageView
+                
+
+                
+                android:id="@+id/image11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -153,11 +146,11 @@ android:focusable="false"
                 android:text="Button"
                 android:visibility="invisible" />
 
-            <Button
-                android:enabled="false"
-android:focusable="false"
-                android:clickable="false"
-                android:id="@+id/button12_right"
+            <ImageView
+                
+
+                
+                android:id="@+id/image12_right"
                 android:layout_width="wrap_content"
                 android:layout_height="212dp"
                 android:layout_alignParentEnd="true"
@@ -167,7 +160,7 @@ android:focusable="false"
                 android:visibility="invisible" />
 
 
--->
+
 
         </RelativeLayout>
     </LinearLayout>
