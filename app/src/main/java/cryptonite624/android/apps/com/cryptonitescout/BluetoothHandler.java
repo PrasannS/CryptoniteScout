@@ -25,6 +25,7 @@ import java.util.TreeMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
@@ -95,6 +96,27 @@ public class BluetoothHandler {
         }
     }
 
+    public void updateRD(ActionMap m){
+        RankingData r = new RankingData();
+        //TODO add something for climb and other variables
+        List<ActionMap>temp = new ArrayList<>();
+        temp.add(m);
+        r.setMatchesplayed(r.getMatchesplayed()+1);
+        r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
+        r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
+        r.setTotalwins(r.getTotalwins() + 1);
+        if(m.getClimbTime() == 1){
+            r.setClimbone(r.getClimbone() + 1);
+        }
+        else if(m.getClimbTime() == 2){
+            r.setClimbtwo(r.getClimbtwo() + 1);
+        }
+        else if(m.getClimbTime() == 3){
+            r.setClimbthree(r.getClimbthree() + 1);
+        }
+        daoSession.getRankingDataDao().save(r);
+    }
+
     public void handleMessage(String s) {
 
         try {
@@ -106,6 +128,7 @@ public class BluetoothHandler {
         switch (i){
             case 'm':
                 daoSession.getActionMapDao().save(ActionMapUtils.parseActionMap(s.substring(1)));
+                updateRD(ActionMapUtils.parseActionMap(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("datasaved");
                 break;
             case 'p':
