@@ -50,6 +50,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Fragments.TeleopFragment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingDataDao;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Models.UserDao;
@@ -322,12 +323,6 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 if(actionMap.getActionsList().size() > 0){
                     actionMap.removeLast();
                     updateScreen();
-                    if(left){
-                        rightMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
-                    }
-                    else{
-                        leftMapFragment.lightUpButtons((ArrayList<RobotAction>) actionMap.getActionsList());
-                    }
                     System.out.println("You undid an action");
                 }
             }
@@ -756,14 +751,12 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             ROCKET2MAX[1] = 560;
             CARGO1MIN[1] = 260;
             CARGO1MAX[1] = 300;
-            /*
             CARGO2MIN[1] = 255;
-            CARGO2MAX[1] = 300;*/
+            CARGO2MAX[1] = 300;
             CARGO3MIN[1] = 260;
             CARGO3MAX[1] = 300;
-            /*
             CARGO4MIN[1] = 260;
-            CARGO4MAX[1] = 330;*/
+            CARGO4MAX[1] = 330;
             CARGO5MIN[1] = 355;
             CARGO5MAX[1] = 390;
             CARGO6MIN[1] = 340;
@@ -834,7 +827,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         cargoDisplay.setText("" + ActionMapUtils.totalhatches(false, actionMap.getActionsList()));
         hatchDisplay.setText("" + ActionMapUtils.totalhatches(true, actionMap.getActionsList()));
         habDisplay.setText("" + habLevel);
-        System.out.println("actions: " + actionMap.getActionsList());
+        System.out.println(actionMap.getActionsList());
         //updateFilled();
     }
 
@@ -928,13 +921,25 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateRD(ActionMap m){
-        RankingData r = new RankingData();
+        RankingData r = getRankingFromKey("frc"+m.getTeamnum());
         //TODO add something for climb and other variables
         List<ActionMap>temp = new ArrayList<>();
         temp.add(m);
+        r.setTeamkey("frc"+m.getTeamnum());
+        r.setTeamnum(m.getTeamnum());
         r.setMatchesplayed(r.getMatchesplayed()+1);
         r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
         r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
+
+    }
+
+    public RankingData getRankingFromKey(String key){
+        List<RankingData> ranking = daoSession.getRankingDataDao().queryBuilder()
+                .where(RankingDataDao.Properties.Teamkey.eq(key))
+                .list();
+        if(ranking.size()==0)
+            return new RankingData();
+        return ranking.get(0);
     }
 
     @Override
