@@ -148,42 +148,42 @@ public class MatchFragment extends Fragment {
         teamB1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamB1.getText().toString());
             }
         });
 
         teamB2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamB2.getText().toString());
             }
         });
 
         teamB3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamB3.getText().toString());
             }
         });
 
         teamR1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamR1.getText().toString());
             }
         });
 
         teamR2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamR2.getText().toString());
             }
         });
 
         teamR3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                matchReadListener.OpenTeam(teamR3.getText().toString());
             }
         });
 
