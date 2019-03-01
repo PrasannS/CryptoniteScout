@@ -23,7 +23,7 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
     public TableView<String[]> tableView;
     public DaoSession daoSession;
-    public static String [] userHeaders = {"Logged in","Currency","Type","Password","Email","Last name","First name"};
+    public static String [] userHeaders = {"Logged in","Currency","Type","Password","Email","Name","Tablet#"};
 
     public String[][] table;
     int row = 0;
@@ -56,37 +56,6 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        setContentView(R.layout.activity_admin);
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Verification Code");
-        alert.setMessage("Enter in code");
-// Create TextView
-        final EditText input = new EditText(this);
-        alert.setView(input);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                if(checkpassword(input.getText().toString())){
-                    //TODO handle logged in
-                }
-
-
-                // Do something with value!
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-            }
-        });
-        alert.show();
-
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
-        bluetoothHandler.startlooking();
-
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         List<User> users = daoSession.getUserDao().loadAll();
         tableView = (TableView<String[]>) findViewById(R.id.tableView);
@@ -96,8 +65,16 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
         tableView.addDataClickListener(new TableDataClickListener<String[]>() {
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
+
             }
         });
+
+        setContentView(R.layout.activity_admin);
+
+        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler.startlooking();
+
+
     }
 
     @Override

@@ -913,6 +913,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void OnSubmissionRead(String message) {
+        Intent intent;
         switch(message){
             case "submit":
                 daoSession.getActionMapDao().save(actionMap);
@@ -923,9 +924,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 }
                 config.setCurrentmatch((config.getCurrentmatch())+1);
                 updateRD(actionMap);
+                intent = new Intent(getBaseContext(), DataAccessActivity.class);
+                startActivity(intent);
                 break;
             case "replay":
-                Intent intent = new Intent(getBaseContext(), ReplayViewPage.class);
+                intent = new Intent(getBaseContext(), ReplayViewPage.class);
                 intent.putExtra("match", ActionMapUtils.toString(actionMap));
                 startActivity(intent);
                 break;
