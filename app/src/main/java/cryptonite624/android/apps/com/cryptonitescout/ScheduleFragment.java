@@ -152,6 +152,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
             @Override
             public void onDataClicked(int rowIndex, String[] clickedData) {
                 Toast.makeText(getContext(), clickedData[0], Toast.LENGTH_SHORT).show();
+                onScheduleRead.openMatch(rowIndex);
             }
         });
 

@@ -84,7 +84,7 @@ public class CSVUtils {
     }
 
     public String [] rankingtoString(RankingData data){
-        String [] datas = {data.getRankpoint()+"",data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
+        String [] datas = {data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
                 data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
                 data.getTeamkey(),data.getId()+""};
         return datas;

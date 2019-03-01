@@ -1,8 +1,11 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +45,11 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
         return arr;
     }
 
+    public static String password = "scoutsrock";
+
+    public boolean checkpassword(String attempt){
+        return attempt.equals(password);
+    }
 
 
     @Override
@@ -50,6 +58,32 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
 
         setContentView(R.layout.activity_admin);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Verification Code");
+        alert.setMessage("Enter in code");
+// Create TextView
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                if(checkpassword(input.getText().toString())){
+                    //TODO handle logged in
+                }
+
+
+                // Do something with value!
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+        alert.show();
+
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
 
