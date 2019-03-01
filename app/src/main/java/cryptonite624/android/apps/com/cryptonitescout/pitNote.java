@@ -47,7 +47,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, BluetoothHandler.BluetoothListener{
 
     //Class variables that'll help(?) Prasann with the database
-
+    
     public int teamnum = 0;
     public String Comment = "";
     public boolean ProgrammerOnSite = false;

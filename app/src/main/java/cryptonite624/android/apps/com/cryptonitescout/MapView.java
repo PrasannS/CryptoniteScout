@@ -930,6 +930,11 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void updateRD(ActionMap m){
         RankingData r = new RankingData();
         //TODO add something for climb and other variables
+        List<ActionMap>temp = new ArrayList<>();
+        temp.add(m);
+        r.setMatchesplayed(r.getMatchesplayed()+1);
+        r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
+        r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
     }
 
     @Override
