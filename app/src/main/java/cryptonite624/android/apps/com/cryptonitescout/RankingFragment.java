@@ -53,7 +53,7 @@ public class RankingFragment extends Fragment {
 
     public DaoSession daoSession;
 
-    private static final String[] TABLE_HEADERS = { "Ranking Points", "Total Wins", "Team Number", "Matches Played", "Total Cargo", "Total Hatches", "Climb 1", "Climb 2", "Climb 3"};
+    private static final String[] TABLE_HEADERS = { "RP", "Wins", "Team Num", "Matches", "Cargo", "Hatch", "Climb1", "Climb2", "Climb3"};
 
 
     public RankingFragment() {
@@ -102,7 +102,7 @@ public class RankingFragment extends Fragment {
         List<RankingData> rankings = daoSession.getRankingDataDao().loadAll();
         tableView = (TableView<String[]>) view.findViewById(R.id.tableView);
         tableView.setColumnCount(9);
-        TableColumnDpWidthModel columnModel= new TableColumnDpWidthModel(getContext(), 9, 125);
+        TableColumnDpWidthModel columnModel= new TableColumnDpWidthModel(getContext(), 9, 100);
         MyEndlessOnScrollListener endlessscrolllistener = new MyEndlessOnScrollListener();
         tableView.addOnScrollListener(endlessscrolllistener);
         tableView.setColumnModel(columnModel);
