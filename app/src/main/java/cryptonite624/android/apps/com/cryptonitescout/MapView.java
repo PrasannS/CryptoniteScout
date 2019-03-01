@@ -955,6 +955,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         else if(habLevel == 3){
             r.setClimbthree(r.getClimbthree() + 1);
         }
+        daoSession.getRankingDataDao().save(r);
     }
 
     @Override
