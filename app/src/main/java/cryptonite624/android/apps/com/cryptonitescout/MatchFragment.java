@@ -126,11 +126,8 @@ public class MatchFragment extends Fragment {
         public void OpenTeam(String key);
     }
 
-    public void setArguments(int matchnum){
-        QueryBuilder<ActionMap> qb = daoSession.getActionMapDao().queryBuilder();
-        qb.where(ActionMapDao.Properties.Matchnum.eq(matchnum));
-        List<ActionMap>teams = qb.list();
-        loadData(teams);
+    public void setArguments(List<ActionMap> as){
+        loadData(as);
     }
 
     private void initRecyclerView(){

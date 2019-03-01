@@ -122,6 +122,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
 
     public interface OnScheduleRead{
         public void OnScheduleRead(String message);
+        public void openMatch(int matchnum);
     }
 
     @Override

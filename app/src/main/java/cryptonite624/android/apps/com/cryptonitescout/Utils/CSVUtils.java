@@ -8,6 +8,7 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +36,20 @@ public class CSVUtils {
     }
 
     public void loadSchedule() throws IOException{
+        /*
+        String filename = "myfile";
+        String fileContents = "Hello world!";
+        FileOutputStream outputStream;
+
+        try {
+            //outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream = new FileOutputStream(filename);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
         File file = new File(c.getExternalFilesDir(null), "schedule.csv");
         PrintWriter printWriter = new PrintWriter(file);
 
@@ -60,6 +75,7 @@ public class CSVUtils {
         for(RankingData r:teams){
             csvPrinter.printRecord(rankingtoString(r));
         }
+
     }
 
     public String[] scheduletoString(Schedule s){

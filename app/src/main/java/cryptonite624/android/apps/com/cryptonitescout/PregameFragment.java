@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 
@@ -26,9 +27,11 @@ public class PregameFragment extends Fragment {
     //setup all of your buttons and class variables here
     public Button toAuton;
     public Button toMapView;
-    public EditText matchNum;
+    public TextView matchNum;
     public String message;
-    public EditText teamNum;
+    public TextView teamNum;
+    public int teamnum;
+    public int matchnum;
 
     public TextView hatchDisplay;
 
@@ -37,6 +40,12 @@ public class PregameFragment extends Fragment {
     public PregameFragment() {
         // Required empty public constructor
     }
+
+    public void setArguments(int mn, int tn){
+        teamnum = tn;
+        matchnum = mn;
+    }
+
 
 
     @Override
@@ -66,6 +75,12 @@ public class PregameFragment extends Fragment {
         // Inflate the layout for this fragment
         //The variable view is not default
         View view = inflater.inflate(R.layout.fragment_pregame, container, false);
+
+        matchNum = view.findViewById(R.id.pregame_matchnum);
+        teamNum = view.findViewById(R.id.pregame_teamnum);
+
+        matchNum.setText(matchnum+"");
+        teamNum.setText(teamnum+"");
 
         /*toAuton = (Button)view.findViewById(R.id.pregame_auton);
         toAuton.setOnClickListener(new View.OnClickListener() {

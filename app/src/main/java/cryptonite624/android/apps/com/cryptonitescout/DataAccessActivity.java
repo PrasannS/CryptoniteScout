@@ -84,7 +84,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     }
                     return true;
                 }
-                if (id == R.id.nav_home) {
+                /*if (id == R.id.nav_home) {
                     Toast.makeText(DataAccessActivity.this, "home", Toast.LENGTH_LONG).show();
                     if(findViewById(R.id.fragmentcontainer)!=null){
                         DashboardFragment dashboardFragment = new DashboardFragment();
@@ -93,7 +93,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                         fragmentTransaction.commit();
                     }
                     return true;
-                }
+                }*/
                 if (id == R.id.nav_matches) {
                     bluetoothHandler.endstuff();
                     Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
@@ -296,6 +296,11 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     @Override
     public void OnScheduleRead(String message) {
 
+    }
+
+    @Override
+    public void openMatch(int matchnum) {
+        openMatchFromNumber(matchnum);
     }
 
     @Override

@@ -191,7 +191,8 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
 
-
+        actionMap = new ActionMap();
+        setvars();
 
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.infoframe) != null) {
@@ -202,6 +203,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.infoframe, pregameFragment, null);
             fragmentTransaction.commit();
+            pregameFragment.setArguments(actionMap.getMatchnum(),actionMap.getTeamnum());
         }
         if (findViewById(R.id.inputcontainer) != null) {
             EmptyFragment emptyFragment = new EmptyFragment();
@@ -217,9 +219,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             fragmentTransaction.commit();
         }
 
+
+
         switchbounds();
         //setBounds();
-        setvars();
+
+
+
 
         mapview = (RelativeLayout)findViewById(R.id.mapview);
         imageswitch = (Button) findViewById(R.id.mapswitch);
@@ -258,7 +264,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         hatchDisplay = (TextView) findViewById(R.id.hatchdisplay);
         habDisplay = (TextView) findViewById(R.id.hableveldisplay);
 
-        actionMap = new ActionMap();
+
 
 
         statusButton = (Button) findViewById(R.id.statuschanger);
@@ -334,6 +340,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     public void setvars(){
         curschedule = daoSession.getScheduleDao().loadAll().get(getCurrentMatch());
         config = daoSession.getConfigDao().loadAll().get(0);
+        String user = config.getCurrentuser();
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
         qb.where(UserDao.Properties.Email.eq(config.getCurrentuser()));
         List<User> users = qb.list();
@@ -904,8 +911,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 break;
             case "replay":
                 Intent intent = new Intent(getBaseContext(), ReplayViewPage.class);
-                intent.putExtra("matchnum", actionMap.getMatchnum());
-                intent.putExtra("teamnum",actionMap.getTeamnum());
+                intent.putExtra("match", ActionMapUtils.toString(actionMap));
                 startActivity(intent);
                 break;
             default:
@@ -930,6 +936,5 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
 
     @Override
     public void makediscoverable() {
-
     }
 }
