@@ -17,7 +17,7 @@ public class ServerLoader {
     ServerLoadListener serverLoadListener;
 
     public TBA tba;
-    public static String event = "2019week0";
+    public static String event = "2019txaus";
 
     public ServerLoader(ServerLoadListener sl){
         // Set TBA auth token
@@ -40,7 +40,7 @@ public class ServerLoader {
             //if(Schedule.listAll(Schedule.class).size() > 0)
             //Schedule.deleteAll(Schedule.class);
             try {
-                Match[] matches = tba.getMatches("2019week0");
+                Match[] matches = tba.getMatches("2019txaus");
                 TBA.sort(matches, SortingType.DATE);
                 int cur = 0;
                 for(Match m:matches){

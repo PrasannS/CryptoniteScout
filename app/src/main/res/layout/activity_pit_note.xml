@@ -88,8 +88,7 @@
                             android:layout_width="250dp"
                             android:layout_height="match_parent"
                             android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown">
-                        </Spinner>
+                            android:spinnerMode="dropdown"></Spinner>
                     </LinearLayout>
 
                     <LinearLayout
@@ -321,7 +320,7 @@
                             android:layout_width="380dp"
                             android:layout_height="match_parent"
                             android:inputType="number"
-                            android:text="" />
+                            android:text="0" />
                     </LinearLayout>
 
                     <LinearLayout

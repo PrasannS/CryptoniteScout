@@ -62,7 +62,7 @@ public class BluetoothHandler {
             configuration.setId(Long.valueOf(1));
             configuration.setCurrentmatch(0);;
             configuration.setCurrentuser("lol");
-            configuration.setEventkey("2019week0");
+            configuration.setEventkey("2019tx");
             daoSession.getConfigDao().save(configuration);
         }
 

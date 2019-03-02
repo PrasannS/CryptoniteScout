@@ -22,7 +22,7 @@ public class CRyptoniteApplication extends Application {
         Config def = new Config();
         User u = new User();
         if(mDaoSession.getConfigDao().loadAll().size()==0) {
-            def.setEventkey("2019week0");
+            def.setEventkey("2019tx");
             def.setCurrentmatch(0);
             def.setCurrentuser("c");
             mDaoSession.getConfigDao().save(def);

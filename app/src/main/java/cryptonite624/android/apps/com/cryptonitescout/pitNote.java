@@ -106,11 +106,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public PitnoteData data;
     FloatingActionButton fab ;
 
-    public int getTeamNum(){
-        //TODO
-        return 624;
-    }
-
     public static int getIndexOfArray(String [] s, String target){
         for(int i=0;i<s.length;i++){
             if(s[i].equalsIgnoreCase(target)){
@@ -133,14 +128,22 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         CIMS.setText(data.getNumCIMS()+"");
         miniCIMS.setText(data.getNumMiniCIMS()+"");
         robotDimensions.setText(data.getRobotDimension()+"");
-        pgLanguage.setSelection(getIndexOfArray(languages, data.getLanguage()));
-        hatchIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
-        wheelSpinner.setSelection(getIndexOfArray(wheelArr, data.getWheels()));
-        cargoIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
-        ClimbLevels.setSelection(getIndexOfArray(levels, data.getLevels()));
-        layoutSpinner.setSelection(getIndexOfArray(layoutArr, data.getLayouts()));
+        pgLanguage.setSelection(adapter.getPosition(data.getLanguage()));
+        hatchIntake.setSelection(adapter1.getPosition(data.getIntake()));
+        wheelSpinner.setSelection(adapter5.getPosition(data.getWheels()));
+        cargoIntake.setSelection(adapter2.getPosition(data.getIntake()));
+        ClimbLevels.setSelection(adapter3.getPosition(data.getLevels()));
+        layoutSpinner.setSelection(adapter4.getPosition(data.getLayouts()));
         imageview.setImageBitmap(BitmapUtils.StringToBitMap(data.getImage()));
+        
     }
+
+    public ArrayAdapter<String> adapter;
+    public ArrayAdapter<String> adapter1;
+    public ArrayAdapter<String> adapter2;
+    public ArrayAdapter<String> adapter3;
+    public ArrayAdapter<String> adapter4;
+    public ArrayAdapter<String> adapter5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,16 +214,17 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             public void onClick(View v) {
                 QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
                 qb.where(PitnoteDataDao.Properties.Teamnum.eq(Integer.parseInt(matchNumber.getText().toString())));
-                List<PitnoteData>temp = daoSession.getPitnoteDataDao().loadAll();
-                if(temp.size()!=0){
-                    data = temp.get(0);
+                List<PitnoteData>temp = qb.list();
+                if(temp.size()!=0){ data = temp.get(0);
                     updateDatasToPrev();
                 }
                 else{
-                    data.setTeamnum(getTeamNum());
+                    data.setTeamnum(Integer.parseInt(matchNumber.getText().toString()));
                 }
             }
         });
+
+
 
         Submit = findViewById(R.id.submit_pitnote);
         Submit.setOnClickListener(new View.OnClickListener() {
@@ -236,11 +240,11 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
                 data.setNumCIMS( Integer.parseInt(CIMS.getText().toString()));
                 data.setNumMiniCIMS( Integer.parseInt(miniCIMS.getText().toString()));
                 data.setRobotDimension( Double.parseDouble(robotDimensions.getText().toString()));
-                data.setLanguage( language);
-                data.setWheels( wheels);
-                data.setLevels(String.valueOf(levels));
-                data.setIntake( cargoIntake+"");
-                data.setLayouts( layouts);
+                data.setLanguage( pgLanguage.getSelectedItem().toString());
+                data.setWheels( wheelSpinner.getSelectedItem().toString());
+                data.setLevels("N/A");
+                data.setIntake( cargoIntake.getSelectedItem().toString());
+                data.setLayouts( layoutSpinner.getSelectedItem().toString());
                 data.setImage(image);
 
                 daoSession.getPitnoteDataDao().save(data);
@@ -255,27 +259,27 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         });
 
         pgLanguage = findViewById(R.id.Programming_Language);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,languages);
+         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,languages);
         pgLanguage.setAdapter(adapter);
 
         hatchIntake = findViewById(R.id.HatchIntake);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
+         adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
         hatchIntake.setAdapter(adapter1);
 
         cargoIntake = findViewById(R.id.CargoIntake);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
+         adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,Intakes);
         cargoIntake.setAdapter(adapter2);
 
         ClimbLevels = findViewById(R.id.ClimbLevel);
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
+         adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
         ClimbLevels.setAdapter(adapter3);
 
         layoutSpinner = findViewById(R.id.LayoutSpinner);
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, layoutArr);
+         adapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, layoutArr);
         layoutSpinner.setAdapter(adapter4);
 
         wheelSpinner = findViewById(R.id.Wheels);
-        ArrayAdapter<String> adapter5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, wheelArr);
+         adapter5 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, wheelArr);
         wheelSpinner.setAdapter(adapter5);
 
         numBatterie = findViewById(R.id.numBatteries_pitnote);
