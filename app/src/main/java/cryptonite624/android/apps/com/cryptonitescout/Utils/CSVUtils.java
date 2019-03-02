@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -51,30 +52,36 @@ public class CSVUtils {
         }*/
 
         File file = new File(c.getExternalFilesDir(null), "schedule.csv");
-        PrintWriter printWriter = new PrintWriter(file);
+        FileWriter fileWriter = new FileWriter(file);
 
         Collection<String[]> data;
         List<Schedule> teams = daoSession.getScheduleDao().loadAll();
 
-        CSVPrinter csvPrinter = new CSVPrinter(printWriter, CSVFormat.DEFAULT);
+        CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT);
 
         for(Schedule r:teams){
             csvPrinter.printRecord(scheduletoString(r));
         }
+        fileWriter.flush();
+        fileWriter.close();
+        csvPrinter.close();
     }
 
     public void loadRankingstoFile() throws IOException {
         File file = new File(c.getExternalFilesDir(null), "rankings.csv");
-        PrintWriter printWriter = new PrintWriter(file);
+        FileWriter fileWriter = new FileWriter(file);
 
         Collection<String[]> data;
         List<RankingData> teams = daoSession.getRankingDataDao().loadAll();
 
-        CSVPrinter csvPrinter = new CSVPrinter(printWriter, CSVFormat.DEFAULT);
+        CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT);
 
         for(RankingData r:teams){
             csvPrinter.printRecord(rankingtoString(r));
         }
+        fileWriter.flush();
+        fileWriter.close();
+        csvPrinter.close();
 
     }
 
