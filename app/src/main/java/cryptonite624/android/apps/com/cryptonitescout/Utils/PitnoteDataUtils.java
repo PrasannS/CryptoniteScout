@@ -6,23 +6,6 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.PitnoteData;
 
 public class PitnoteDataUtils {
 
-    int teamnum;
-    String Comment;
-    boolean ProgrammerOnSite;
-    boolean LevelTwoStart;
-    boolean CrossBase;
-    boolean shifter;
-    int numBatteries;
-    int numChargers;
-    int numCIMS;
-    int numMiniCIMS;
-    double robotDimension;
-    String wheels;
-    String layouts;
-    String Levels;
-    String Intake;
-    String language;
-
     public static String toString(PitnoteData data){
         String temp = data.getTeamnum()+" "+data.getComment()+" "+data.isProgrammerOnSite()+" "+data.isLevelTwoStart()+" "+data.isCrossBase()+" "+data.isShifter()+
                 " "+data.getNumBatteries()+" "+data.getNumChargers()+" "+data.getNumCIMS()+" "+data.getNumMiniCIMS()+" "+data.getRobotDimension()+" "+data.getWheels()+

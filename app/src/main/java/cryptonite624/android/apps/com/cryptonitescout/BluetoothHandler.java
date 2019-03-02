@@ -152,18 +152,6 @@ public class BluetoothHandler {
                 daoSession.getUserDao().save(UserUtils.parseUser(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("user");
                 break;
-
-            /*case 'w':
-                bluetoothListener.OnBluetoothRead("requestmade");
-                String temp = "";
-                List<ActionMap> maplist = ActionMap.find(ActionMap.class,"Teamnum = ?",Integer.parseInt(s.substring(1))+"");
-                for(ActionMap a :maplist){
-                    temp+=a.toString()+',';
-                }
-                sendMessage('u',temp);
-                break;
-            case 'u':
-                if()*/
             default:
                 break;
         }
@@ -173,7 +161,6 @@ public class BluetoothHandler {
         public void OnBluetoothRead(String message);
         //TODO get this setup too
         public void start(Intent intent);
-        public void makediscoverable();
     }
 
     public void startlooking(){

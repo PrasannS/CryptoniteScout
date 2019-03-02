@@ -342,10 +342,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 
 
     private interface ProfileQuery {

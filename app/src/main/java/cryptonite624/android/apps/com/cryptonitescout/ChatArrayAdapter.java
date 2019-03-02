@@ -41,14 +41,14 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ChatMessage chatMessageObj = getItem(position);
-        View row = convertView;
+        View row;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (chatMessageObj.left) {
             row = inflater.inflate(R.layout.message2, parent, false);
         }else{
             row = inflater.inflate(R.layout.message, parent, false);
         }
-        chatText = (TextView) row.findViewById(R.id.message_text);
+        chatText = row.findViewById(R.id.message_text);
         chatText.setText(chatMessageObj.message);
         return row;
     }

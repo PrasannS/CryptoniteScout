@@ -969,7 +969,4 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
-    }
 }

@@ -53,7 +53,7 @@ public class CSVUtils {
         File file = new File(c.getExternalFilesDir(null), "schedule.csv");
         PrintWriter printWriter = new PrintWriter(file);
 
-        Collection<String[]> data = new ArrayList<>();
+        Collection<String[]> data;
         List<Schedule> teams = daoSession.getScheduleDao().loadAll();
 
         CSVPrinter csvPrinter = new CSVPrinter(printWriter, CSVFormat.DEFAULT);
@@ -67,7 +67,7 @@ public class CSVUtils {
         File file = new File(c.getExternalFilesDir(null), "rankings.csv");
         PrintWriter printWriter = new PrintWriter(file);
 
-        Collection<String[]> data = new ArrayList<>();
+        Collection<String[]> data;
         List<RankingData> teams = daoSession.getRankingDataDao().loadAll();
 
         CSVPrinter csvPrinter = new CSVPrinter(printWriter, CSVFormat.DEFAULT);

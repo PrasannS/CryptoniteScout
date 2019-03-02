@@ -114,19 +114,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public DaoSession daoSession;
 
-    /**TODO
-     * all the stuff from the discord should be on there
-     * Go for Everything
-     * comments section call (other notes
-     * scouting map
-     *  reminder to add
-     *  green-scouted
-     *  yellow-partial
-     *  jankredleft-no data
-     *  server updates
-     *  excel
-     */
-
     public BluetoothHandler bluetoothHandler;
 
     public PitnoteData data;
@@ -395,8 +382,5 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 }

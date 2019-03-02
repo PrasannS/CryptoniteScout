@@ -114,10 +114,7 @@ public class MatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
         daoSession = ((CRyptoniteApplication)getActivity().getApplication()).getDaoSession();
     }
 
@@ -128,14 +125,6 @@ public class MatchFragment extends Fragment {
 
     public void setArguments(List<ActionMap> as){
         loadData(as);
-    }
-
-    private void initRecyclerView(){
-        comms.add("This is a test commentsss");
-        comms.add("Test comment 2");
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), comms);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -186,20 +175,6 @@ public class MatchFragment extends Fragment {
                 matchReadListener.OpenTeam(teamR3.getText().toString());
             }
         });
-
-        /*
-        if (view.findViewById(R.id.match_access_layout) != null) {
-            MatchAccessFragment matchAccessFragment= new MatchAccessFragment();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.match_access_layout, matchAccessFragment , null);
-            fragmentTransaction.commit();
-        }*/
-
-        //mRecyclerView = view.findViewById(R.id.recyclerview_comments);
-        initRecyclerView();
-
-
-        //pie chart
 
         Pie pie = AnyChart.pie();
 

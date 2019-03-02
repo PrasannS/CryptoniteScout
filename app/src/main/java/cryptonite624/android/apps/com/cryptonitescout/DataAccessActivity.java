@@ -321,10 +321,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 
     @Override
     public void OnRankingRead(String message) {

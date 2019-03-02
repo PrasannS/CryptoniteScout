@@ -129,8 +129,5 @@ public class MainActivity extends AppCompatActivity implements BluetoothHandler.
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 }

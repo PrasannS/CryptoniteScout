@@ -70,16 +70,6 @@ public class CameraActivity extends AppCompatActivity {
         );
     }
 
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
-    }
-
     /** A safe way to get an instance of the CameraActivity object. */
     public static Camera getCameraInstance(){
         Camera c = null;

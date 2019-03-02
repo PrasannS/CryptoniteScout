@@ -1,19 +1,15 @@
 package cryptonite624.android.apps.com.cryptonitescout;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
+import cryptonite624.android.apps.com.cryptonitescout.Utils.UserUtils;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
@@ -47,10 +43,6 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
     public static String password = "scoutsrock";
 
-    public boolean checkpassword(String attempt){
-        return attempt.equals(password);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +65,11 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
+        try {
+            bluetoothHandler.sendMessage('u', UserUtils.toString(users.get(0)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -87,8 +84,5 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 }

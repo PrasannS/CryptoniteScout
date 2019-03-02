@@ -93,10 +93,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
 
 
 
@@ -191,19 +188,6 @@ public class DashboardFragment extends Fragment {
         cartesian.background().fill("#292B3A");
 
         anyChartView.setChart(cartesian);
-
-        //matchlist recylcer view
-        ArrayList<String> names = new ArrayList<String>();
-        names.add("524");
-        names.add("624");
-        names.add("118");
-        names.add("254");
-
-        RecyclerView recyclerView = view.findViewById(R.id.matchlist_recylcerview);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), names);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
 
         
 

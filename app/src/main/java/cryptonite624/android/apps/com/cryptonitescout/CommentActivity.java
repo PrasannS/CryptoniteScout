@@ -107,11 +107,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public User curuser;
 
-
-
-    public Map<String,String> lastmessages  = new HashMap<>();
-    public static String regex = "0624";
-
     public void setvars(){
         curschedule = daoSession.getScheduleDao().loadAll().get(getCurrentMatch());
         config = daoSession.getConfigDao().loadAll().get(0);
@@ -139,6 +134,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         comm = new Comment();
+        setvars();
 
         submit= (Button)findViewById(R.id.Submitcomments);
         commentget= (EditText)findViewById(R.id.commentsave);
@@ -268,11 +264,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
-    //TODO do this method done, updates to current match based on matches db
-    public void getCurrentMatch(boolean useless){
-
-    }
-
     @Override
     public void OnBluetoothRead(String message) {
         Toast.makeText(CommentActivity.this, message, Toast.LENGTH_LONG).show();
@@ -283,10 +274,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         startActivity(intent);
     }
 
-    @Override
-    public void makediscoverable() {
 
-    }
 
     @Override
     public void onDestroy() {
