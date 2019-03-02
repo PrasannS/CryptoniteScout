@@ -85,7 +85,7 @@ public class RobotAction {
         this.time = time;
     }
 
-    public RobotAction parseRobotAction(String s){
+    public static RobotAction parseRobotAction(String s){
         RobotAction r = new RobotAction();
 
         StringTokenizer st = new StringTokenizer(s, " ");

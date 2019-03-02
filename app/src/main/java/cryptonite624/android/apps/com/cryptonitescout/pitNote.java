@@ -150,7 +150,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         data = new PitnoteData();
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"PitNotes");
         bluetoothHandler.startlooking();
         //setSupportActionBar(toolbar);
 

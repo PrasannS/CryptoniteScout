@@ -65,7 +65,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"dataview");
+        bluetoothHandler.startlooking();
 
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -129,14 +130,15 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                         fragmentTransaction.commit();
                     }
                     return true;
-                }
+                }/*
                 if (id == R.id.nav_replayview) {
                     Toast.makeText(DataAccessActivity.this, "replayview", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(DataAccessActivity.this, ReplayViewPage.class));
 
                     return true;
-                }
+                }*/
                 if (id == R.id.nav_settings) {
+                    startActivity(new Intent(DataAccessActivity.this, SettingsActivity.class));
                     Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
                     return true;
                 }
@@ -148,14 +150,14 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     Intent intent1 = new Intent(DataAccessActivity.this, MainActivity.class);
                     startActivity(intent1);
                 }
-                if (id == R.id.picklist) {
+                /*if (id == R.id.picklist) {
                     startActivity(new Intent(DataAccessActivity.this, PickListActivity.class));
                     Toast.makeText(DataAccessActivity.this, "picklist", Toast.LENGTH_LONG).show();
                 }
                 if (id == R.id.admin) {
                     Intent intent1 = new Intent(DataAccessActivity.this, AdminActivity.class);
                     startActivity(intent1);
-                }
+                }*/
 
                 return true;
             }
@@ -342,10 +344,12 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         List<ActionMap> actionMaps = qb.list();
         if(findViewById(R.id.fragmentcontainer)!=null){
             MatchFragment teamFragment= new MatchFragment();
-            teamFragment.setArguments(actionMaps);
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentcontainer,teamFragment,null);
-            fragmentTransaction.commit();
+            if(actionMaps.size()>=6) {
+                teamFragment.setArguments(actionMaps);
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontainer, teamFragment, null);
+                fragmentTransaction.commit();
+            }
             //teamFragment.setArguments(actionMaps);
         }
     }

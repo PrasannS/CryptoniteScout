@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.CRyptoniteApplication;
+import cryptonite624.android.apps.com.cryptonitescout.Models.Comment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
@@ -51,7 +52,7 @@ public class CSVUtils {
             e.printStackTrace();
         }*/
 
-        File file = new File(c.getExternalFilesDir(null), "schedule.csv");
+        File file = new File(c.getExternalFilesDir(null)+"", "schedule.csv");
         FileWriter fileWriter = new FileWriter(file);
 
         Collection<String[]> data;
@@ -68,7 +69,7 @@ public class CSVUtils {
     }
 
     public void loadRankingstoFile() throws IOException {
-        File file = new File(c.getExternalFilesDir(null), "rankings.csv");
+        File file = new File(c.getExternalFilesDir(null)+"", "rankings.csv");
         FileWriter fileWriter = new FileWriter(file);
 
         Collection<String[]> data;
@@ -85,15 +86,38 @@ public class CSVUtils {
 
     }
 
+    public void loadCommentstoFile() throws IOException {
+        File file = new File(c.getExternalFilesDir(null)+"", "comments.csv");
+        FileWriter fileWriter = new FileWriter(file);
+
+        List<Comment> teams = daoSession.getCommentDao().loadAll();
+
+        CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT);
+
+        for(Comment r:teams){
+            csvPrinter.printRecord(commenttoString(r));
+        }
+        fileWriter.flush();
+        fileWriter.close();
+        csvPrinter.close();
+
+    }
+
+    public String[] commenttoString(Comment s){
+        String[] ans = {s.getMatchnum()+"",s.getTeamnum()+"",s.getBroken()+"",s.getWhybroken()+"",s.getDefense()+"",s.getCargoefficiency()+"",s.getHatchefficiency()+"",""+s.getComment()};
+        return ans;
+    }
+    
+
     public String[] scheduletoString(Schedule s){
-        String[] ans = {s.getMatchnum()+"",s.getB1(),s.getB2(),s.getB3(),s.getR1(),s.getR2(),s.getR3()};
+        String[] ans = {s.getMatchnum()+"",s.getB1()+"",s.getB2()+"",s.getB3()+"",s.getR1()+"",s.getR2()+"",s.getR3()};
         return ans;
     }
 
     public String [] rankingtoString(RankingData data){
         String [] datas = {data.getTotalwins()+"",data.getTeamnum()+"",data.getMatchesplayed()+"",data.getTotalcargo()+"",
                 data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
-                data.getTeamkey(),data.getId()+""};
+                data.getTeamkey()+"",data.getId()+""};
         return datas;
     }
 

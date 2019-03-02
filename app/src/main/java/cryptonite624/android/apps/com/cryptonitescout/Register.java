@@ -42,7 +42,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
         ln = findViewById(R.id.first_name_register);
         ps = findViewById(R.id.register_password);
         position = findViewById(R.id.register_color);
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"Register");
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
 

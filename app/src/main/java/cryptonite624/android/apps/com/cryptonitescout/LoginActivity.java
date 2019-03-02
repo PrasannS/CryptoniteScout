@@ -85,8 +85,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
-        bluetoothHandler.startlooking();
+        //bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        //bluetoothHandler.startlooking();
 
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -458,5 +458,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         return false;
     }
+
+    @Override
+    public void onDestroy(){
+        bluetoothHandler.endstuff();
+        super.onDestroy();
+    }
+
+
+
+
 }
 

@@ -46,15 +46,17 @@ public class BluetoothHandler {
     public Context curcontext;
     public Config configuration;
     public Map<Character,Boolean> updated;
+    public String curactivity;
 
     public DaoSession daoSession;
 
     private BluetoothAdapter bluetoothAdapter = null;
 
-    public BluetoothHandler(Context context, BluetoothListener bl){
+    public BluetoothHandler(Context context, BluetoothListener bl, String cs){
         updated = new TreeMap<>();
         daoSession = ((CRyptoniteApplication)context).getDaoSession();
         bluetoothListener = bl;
+        curactivity = cs;
         if(daoSession.getConfigDao().loadAll().size()==0){
             configuration = new Config();
             configuration.setId(Long.valueOf(1));
@@ -70,7 +72,7 @@ public class BluetoothHandler {
         }
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        startDiscovery();
+        //startDiscovery();
         bluetoothAdapter.setName("Cryptonite");
         curcontext = context;
         openreceiver();
@@ -123,18 +125,17 @@ public class BluetoothHandler {
         List<ActionMap>temp = new ArrayList<>();
         temp.add(m);
 
-        //Climbtime is actually hab level
         r.setMatchesplayed(r.getMatchesplayed()+1);
         r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
         r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
         r.setTotalwins(r.getTotalwins() + 1);
-        if(m.getClimbTime() == 1){
+        if(m.getEndclimb() == 1){
             r.setClimbone(r.getClimbone() + 1);
         }
-        else if(m.getClimbTime() == 2){
+        else if(m.getEndclimb() == 2){
             r.setClimbtwo(r.getClimbtwo() + 1);
         }
-        else if(m.getClimbTime() == 3){
+        else if(m.getEndclimb() == 3){
             r.setClimbthree(r.getClimbthree() + 1);
         }
         daoSession.getRankingDataDao().save(r);
@@ -150,6 +151,8 @@ public class BluetoothHandler {
         char i = s.charAt(0);
         switch (i){
             case 'm':
+                if(!curactivity.equals("dataview"))
+                    return;
                 daoSession.getActionMapDao().save(ActionMapUtils.parseActionMap(s.substring(1)));
                 updateRD(ActionMapUtils.parseActionMap(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("datasaved");
@@ -159,6 +162,8 @@ public class BluetoothHandler {
                 bluetoothListener.OnBluetoothRead("pitnotesaved");
                 break;
             case 'f':
+                if(!curactivity.equals("dataview"))
+                    return;
                 daoSession.getCommentDao().save(CommentUtils.parseComment(s.substring(1)));
                 bluetoothListener.OnBluetoothRead("commentsaved");
                 break;

@@ -89,6 +89,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
         CSVUtils csvUtils = new CSVUtils(getActivity().getApplication(),getContext());
         try {
             csvUtils.loadSchedule();
+            csvUtils.loadCommentstoFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,6 +159,7 @@ public class ScheduleFragment extends Fragment implements ServerLoader.ServerLoa
             @Override
             public void onClick(View v) {
                 loadCSV();
+
             }
         });
 

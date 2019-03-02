@@ -213,29 +213,30 @@ public class MatchFragment extends Fragment {
         
         
 
-        redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).getActionsList()));
-        redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).getActionsList()));
-        redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).getActionsList()));
+        redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).getActionsList())+"");
+        redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).getActionsList())+"");
+        redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).getActionsList())+"");
 
-        redtotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(1).getActionsList()));
-        redtotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(1).getActionsList()));
-        redtotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(1).getActionsList()));
 
-        redtotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(2).getActionsList()));
-        redtotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(2).getActionsList()));
-        redtotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(2).getActionsList()));
+        redtotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(1).getActionsList())+"");
+        redtotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(1).getActionsList())+"");
+        redtotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(1).getActionsList())+"");
 
-        bluetotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(3).getActionsList()));
-        bluetotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(3).getActionsList()));
-        bluetotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(3).getActionsList()));
+        redtotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(2).getActionsList())+"");
+        redtotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(2).getActionsList())+"");
+        redtotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(2).getActionsList())+"");
 
-        bluetotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(4).getActionsList()));
-        bluetotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(4).getActionsList()));
-        bluetotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(4).getActionsList()));
+        bluetotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(3).getActionsList())+"");
+        bluetotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(3).getActionsList())+"");
+        bluetotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(3).getActionsList())+"");
 
-        bluetotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(5).getActionsList()));
-        bluetotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(5).getActionsList()));
-        bluetotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(5).getActionsList()));
+        bluetotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(4).getActionsList())+"");
+        bluetotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(4).getActionsList())+"");
+        bluetotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(4).getActionsList())+"");
+
+        bluetotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(5).getActionsList())+"");
+        bluetotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(5).getActionsList())+"");
+        bluetotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(5).getActionsList())+"");
 
         /*List<DataEntry> data = new ArrayList<>();
         data.add(new ValueDataEntry("624", 10000));

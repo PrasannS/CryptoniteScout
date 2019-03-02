@@ -62,7 +62,18 @@ public class ActionMapUtils {
 
 
     public static int totalPoints(List<RobotAction> actions){
-        return actions.size();
+        int total =0;
+        if(actions==null)
+            return 0;
+        for(RobotAction r: actions){
+            if(r.getHatch()){
+                total+=2;
+            }
+            else{
+                total+=3;
+            }
+        }
+        return total;
     }
     /*
     public ActionMap getMiniMap(int code, int ms, List<RobotAction> actions){
@@ -121,20 +132,16 @@ public class ActionMapUtils {
         am.setEndclimb(Integer.parseInt(st.nextToken()));
         am.setMatchnum(Integer.parseInt(st.nextToken()));
         am.setPos(st.nextToken());
-
+        List<RobotAction>actions = new ArrayList<>();
         StringTokenizer st1 = new StringTokenizer(st.nextToken(), ",");
         while(st1.hasMoreTokens()){
             String actionString = st1.nextToken();
-            System.out.println(actionString);
             ArrayList<RobotAction> temp = (ArrayList<RobotAction>) am.getActionsList();
-            RobotAction tempr = new RobotAction(actionString);
-
-            if(tempr != null && temp != null)
-                temp.add(tempr);
-            if(temp!=null){
-                am.setActionsList(temp);
-            }
+            RobotAction tempr = RobotAction.parseRobotAction(actionString);
+            if(tempr!=null)
+            actions.add(tempr);
         }
+        am.setActionsList((ArrayList)actions);
 
         return am;
     }

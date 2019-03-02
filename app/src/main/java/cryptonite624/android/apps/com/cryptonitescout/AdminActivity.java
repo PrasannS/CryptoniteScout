@@ -64,7 +64,7 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
 
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"admin");
         bluetoothHandler.startlooking();
         try {
             bluetoothHandler.sendMessage('u', UserUtils.toString(users.get(0)));

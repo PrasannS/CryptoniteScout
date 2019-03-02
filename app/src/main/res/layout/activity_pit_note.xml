@@ -108,29 +108,25 @@
                         <EditText
                             android:id="@+id/Other_pitnote"
                             android:layout_width="500dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text = "0"/>
                     </LinearLayout>
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            android:text="Cross Baseline"
-                            android:textColor="@color/textColor"
-                            android:textSize="40sp" />
-
-                        <Switch
-                            android:id="@+id/CrossBaseline"
-                            android:layout_width="250dp"
-                            android:layout_height="match_parent"
-                            android:checked="false" />
-                    </LinearLayout>
+                    <Switch
+                        android:id="@+id/CrossBaseline"
+                        android:layout_width="250dp"
+                        android:textColor="@color/textColor"
+                        android:text="Cross Baseline"
+                        android:textSize="40dp"
+                        android:layout_height="match_parent"
+                        android:checked="false" />
+                </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -150,7 +146,7 @@
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
                             android:inputType="number"
-                            android:text="" />
+                            android:text="0" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -170,7 +166,7 @@
                             android:layout_width="330dp"
                             android:layout_height="match_parent"
                             android:inputType="number"
-                            android:text=""/>
+                            android:text = "0"/>
 
                     </LinearLayout>
 
@@ -210,7 +206,7 @@
                             android:id="@+id/RobotDimension_pitnote"
                             android:layout_width="200dp"
                             android:layout_height="match_parent"
-                            android:text=""
+                            android:text="0"
                             android:inputType="number"
                             android:background="@color/colorPrimary"/>
                     </LinearLayout>
@@ -242,17 +238,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            android:text="Programmer On Site "
-                            android:textColor="@color/textColor"
-                            android:textSize="40sp" />
-
                         <Switch
                             android:id="@+id/Programmer_On_Site"
-                            android:layout_width="140dp"
+                            android:layout_width="match_parent"
+                            android:text="Programmer on Site"
+                            android:textSize="40sp"
+                            android:textColor="@color/textColor"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:background="@color/colorPrimary"
@@ -280,22 +271,19 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="270dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary"
-                            android:text="Level 2 start"
-                            android:textColor="@color/textColor"
-                            android:textSize="40sp" />
 
                         <Switch
                             android:id="@+id/LevTwoStart"
-                            android:layout_width="240dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:checked="false" />
+                            android:checked="false"
+                            android:text = "Level 2 Start"
+                            android:textColor="@color/textColor"
+                            android:textSize="40dp"
+                            />
                     </LinearLayout>
 
                     <LinearLayout
@@ -314,7 +302,7 @@
                             android:layout_width="260dp"
                             android:layout_height="match_parent"
                             android:inputType="number"
-                            android:text="" />
+                            android:text="0" />
                     </LinearLayout>
 
                     <LinearLayout

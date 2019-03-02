@@ -195,7 +195,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         setContentView(R.layout.activity_map_view);
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"DataEntry");
 
         actionMap = new ActionMap();
         setvars();
@@ -917,7 +917,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         Intent intent;
         switch(message){
             case "submit":
-                actionMap.setClimbTime(habLevel);
+                //actionMap.setClimbTime(habLevel);
                 actionMap.setPos(curuser.getType());
                 daoSession.getActionMapDao().save(actionMap);
                 config.setCurrentmatch((config.getCurrentmatch())+1);
@@ -927,6 +927,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                     e.printStackTrace();
                 }
                 updateRD(actionMap);
+                daoSession.getConfigDao().update(config);
                 intent = new Intent(getBaseContext(), DataAccessActivity.class);
                 startActivity(intent);
                 break;
@@ -941,6 +942,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     }
 
     public void updateRD(ActionMap m){
+        m = ActionMapUtils.parseActionMap(ActionMapUtils.toString(m));
         QueryBuilder<RankingData> qb = daoSession.getRankingDataDao().queryBuilder();
         //RankingData rankingData = daoSession.getRankingDataDao().loadAll().get(0);
         qb.where(RankingDataDao.Properties.Teamkey.eq("frc"+m.getTeamnum()));
@@ -969,13 +971,13 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
         r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));
         r.setTotalwins(r.getTotalwins() + 1);
-        if(habLevel == 1){
+        if(m.getEndclimb() == 1){
             r.setClimbone(r.getClimbone() + 1);
         }
-        else if(habLevel == 2){
+        else if(m.getEndclimb() == 2){
             r.setClimbtwo(r.getClimbtwo() + 1);
         }
-        else if(habLevel == 3){
+        else if(m.getEndclimb() == 3){
             r.setClimbthree(r.getClimbthree() + 1);
         }
         daoSession.getRankingDataDao().save(r);

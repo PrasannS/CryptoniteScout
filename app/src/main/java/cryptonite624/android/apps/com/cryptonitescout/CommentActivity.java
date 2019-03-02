@@ -123,7 +123,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         comm.setTeamnum(teamnum);
         comm.setMatchnum(getCurrentMatch());
         cteamnum.setText(teamnum+"");
-        cteamnum.setText(getCurrentMatch()+"");
+        cmatchnum.setText(getCurrentMatch()+"");
     }
 
 
@@ -136,8 +136,11 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this);
+        bluetoothHandler = new BluetoothHandler(getApplication(),this,"Comments");
         daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+
+        cteamnum = findViewById(R.id.comment_teamnum);
+        cmatchnum = findViewById(R.id.comment_matchnum);
 
         comm = new Comment();
         setvars();
@@ -157,7 +160,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         cargoefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.setCargoefficiency ((int)rightValue);
+                if(isFromUser)
+                comm.setCargoefficiency ((int)leftValue);
             }
 
             @Override
@@ -173,7 +177,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         hatchefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.setHatchefficiency( (int)rightValue);
+                if(isFromUser)
+                comm.setHatchefficiency( (int)leftValue);
             }
 
             @Override
@@ -189,7 +194,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         defenseratingSeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
             @Override
             public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                comm.setDefense((int)rightValue);
+                if(isFromUser)
+                comm.setDefense((int)leftValue);
             }
 
             @Override
@@ -210,6 +216,10 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                 comm.setComment( commentget.getText().toString());
                 comm.setWhybroken( WhyBroken.getText().toString());
                 comm.setBroken(brokenswitch.isChecked());
+
+                Config config = daoSession.getConfigDao().loadAll().get(0);
+                config.setCurrentmatch(config.getCurrentmatch()+1);
+                daoSession.update(config);
 
                 daoSession.getCommentDao().save(comm);
                 try {

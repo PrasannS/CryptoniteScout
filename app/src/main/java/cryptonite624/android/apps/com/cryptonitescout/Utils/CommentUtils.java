@@ -18,13 +18,14 @@ public class CommentUtils {
         c.setExcessivefouls(Boolean.parseBoolean(st.nextToken()));
         c.setBroken(Boolean.parseBoolean(st.nextToken()));
         c.setWhybroken( st.nextToken());
+        c.setMatchnum(Integer.parseInt(st.nextToken()));
 
         return c;
     }
 
     public static String toString(Comment c){
         String temp = "";
-        temp += c.getComment() + ";~" + c.getTeamnum() + ";~" + c.getPos() + ";~" + c.getHatchefficiency() + ";~" + c.getCargoefficiency() + ";~" + c.getDefense() + ";~" + c.isExcessivefouls() + ";~" + c.isBroken() + ";~" + c.getWhybroken() + ";~";
+        temp += c.getComment() + ";~" + c.getTeamnum() + ";~" + c.getPos() + ";~" + c.getHatchefficiency() + ";~" + c.getCargoefficiency() + ";~" + c.getDefense() + ";~" + c.isExcessivefouls() + ";~" + c.isBroken() + ";~" + c.getWhybroken() + ";~"+c.getMatchnum()+ ";~";
         return temp;
     }
 }

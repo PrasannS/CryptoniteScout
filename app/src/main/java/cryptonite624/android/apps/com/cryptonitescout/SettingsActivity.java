@@ -36,9 +36,9 @@ public class SettingsActivity extends AppCompatActivity {
     public SharedPreferences preferences;
 
     public void updateLayouts(Config c){
-        matchNum.setText(c.getCurrentmatch());
-        eventKey.setText(c.getEventkey());
-        tabletnumber.setText(c.getTabletnumber());
+        matchNum.setText(c.getCurrentmatch()+"");
+        eventKey.setText(c.getEventkey()+"");
+        tabletnumber.setText(c.getTabletnumber()+"");
     }
 
     @Override
@@ -51,6 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         cur = c.get(0);
         matchNum = findViewById(R.id.matchnum_settings);
         eventKey = findViewById(R.id.evenKey_settings);
+        tabletnumber = findViewById(R.id.tabletnum);
         logout = findViewById(R.id.logout);
         updateLayouts(cur);
         logout.setOnClickListener(new View.OnClickListener() {
