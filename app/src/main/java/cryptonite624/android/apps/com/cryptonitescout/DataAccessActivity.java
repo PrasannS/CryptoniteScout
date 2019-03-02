@@ -136,12 +136,6 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
                     return true;
                 }
-                if (id == R.id.nav_commentscout) {
-                    Toast.makeText(DataAccessActivity.this, "comm scout", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(DataAccessActivity.this, CommentActivity.class));
-
-                    return true;
-                }
                 if (id == R.id.nav_settings) {
                     Toast.makeText(DataAccessActivity.this, "settings", Toast.LENGTH_LONG).show();
                     return true;
@@ -313,7 +307,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
     @Override
     public void OnBluetoothRead(String message) {
-
+        Toast.makeText(DataAccessActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -348,6 +342,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
         List<ActionMap> actionMaps = qb.list();
         if(findViewById(R.id.fragmentcontainer)!=null){
             MatchFragment teamFragment= new MatchFragment();
+            teamFragment.setArguments(actionMaps);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragmentcontainer,teamFragment,null);
             fragmentTransaction.commit();

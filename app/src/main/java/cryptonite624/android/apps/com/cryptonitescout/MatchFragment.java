@@ -51,12 +51,13 @@ public class MatchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Button teamB1;
-    public Button teamB2;
-    public Button teamB3;
-    public Button teamR1;
-    public Button teamR2;
-    public Button teamR3;
+    public TextView teamB1;
+    public TextView teamB2;
+    public TextView teamB3;
+    public TextView teamR1;
+    public TextView teamR2;
+    public TextView teamR3;
+    public List<ActionMap>mapList;
 
 
 
@@ -133,6 +134,14 @@ public class MatchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
+        teamB1 = view.findViewById(R.id.bone);
+        teamB2 = view.findViewById(R.id.btwo);
+        teamB3 = view.findViewById(R.id.bthree);
+        teamR1 = view.findViewById(R.id.rone);
+        teamR2 = view.findViewById(R.id.rtwo);
+        teamR3 = view.findViewById(R.id.rthree);
+
+
         //onClick listeners for team Buttons
         teamB1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,8 +186,58 @@ public class MatchFragment extends Fragment {
         });
 
         Pie pie = AnyChart.pie();
+        
+        redtotalcargo1 = view.findViewById(R.id.matchfragmentred_matchfragmentred_cargonum);
+        redtotalhatch1 = view.findViewById(R.id.matchfragmentred_hatchnum);
+        redtotalpoints1 = view.findViewById(R.id.matchfragmentred_totalpoints1);
 
-        List<DataEntry> data = new ArrayList<>();
+        redtotalcargo2 = view.findViewById(R.id.matchfragmentred_matchfragmentred_cargonum2);
+        redtotalhatch2 = view.findViewById(R.id.matchfragmentred_hatchnum2);
+        redtotalpoints2 = view.findViewById(R.id.matchfragmentred_totalpoints2);
+
+        redtotalcargo3 = view.findViewById(R.id.matchfragmentred_matchfragmentred_cargonum2);
+        redtotalhatch3 = view.findViewById(R.id.matchfragmentred_hatchnum3);
+        redtotalpoints3 = view.findViewById(R.id.matchfragmentred_totalpoints3);
+
+        bluetotalcargo1 = view.findViewById(R.id.matchfragmentblue_cargonum1);
+        bluetotalhatch1 = view.findViewById(R.id.matchfragmentblue_hatchnum1);
+        bluetotalpoints1 = view.findViewById(R.id.matchfragmentblue_totalpoints1);
+
+        bluetotalcargo2 = view.findViewById(R.id.matchfragmentblue_cargonum2);
+        bluetotalhatch2 = view.findViewById(R.id.matchfragmentblue_hatchnum2);
+        bluetotalpoints2 = view.findViewById(R.id.matchfragmentblue_totalpoints2);
+
+        bluetotalcargo3 = view.findViewById(R.id.matchfragmentblue_cargonum3);
+        bluetotalhatch3 = view.findViewById(R.id.matchfragmentblue_hatchnum3);
+        bluetotalpoints3 = view.findViewById(R.id.matchfragmentblue_totalpoints3);
+        
+        
+
+        redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).getActionsList()));
+        redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).getActionsList()));
+        redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).getActionsList()));
+
+        redtotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(1).getActionsList()));
+        redtotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(1).getActionsList()));
+        redtotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(1).getActionsList()));
+
+        redtotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(2).getActionsList()));
+        redtotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(2).getActionsList()));
+        redtotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(2).getActionsList()));
+
+        bluetotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(3).getActionsList()));
+        bluetotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(3).getActionsList()));
+        bluetotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(3).getActionsList()));
+
+        bluetotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(4).getActionsList()));
+        bluetotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(4).getActionsList()));
+        bluetotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(4).getActionsList()));
+
+        bluetotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(5).getActionsList()));
+        bluetotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(5).getActionsList()));
+        bluetotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(5).getActionsList()));
+
+        /*List<DataEntry> data = new ArrayList<>();
         data.add(new ValueDataEntry("624", 10000));
         data.add(new ValueDataEntry("118", 12000));
         data.add(new ValueDataEntry("3310", 18000));
@@ -200,7 +259,7 @@ public class MatchFragment extends Fragment {
                 .position("center-bottom")
                 .itemsLayout(LegendLayout.HORIZONTAL)
                 .align(Align.CENTER);
-
+*/
         //anyChartView.setChart(pie);
 
 
@@ -320,30 +379,8 @@ public class MatchFragment extends Fragment {
         }
     }
     
-    public void loadData(List<ActionMap> mapList){
-        redtotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(0).getActionsList()));
-        redtotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(0).getActionsList()));
-        redtotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(0).getActionsList()));
-
-        redtotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(1).getActionsList()));
-        redtotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(1).getActionsList()));
-        redtotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(1).getActionsList()));
-
-        redtotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(2).getActionsList()));
-        redtotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(2).getActionsList()));
-        redtotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(2).getActionsList()));
-
-        bluetotalpoints1.setText(ActionMapUtils.totalPoints(mapList.get(3).getActionsList()));
-        bluetotalhatch1.setText(ActionMapUtils.totalhatches(true, mapList.get(3).getActionsList()));
-        bluetotalcargo1.setText(ActionMapUtils.totalhatches(false, mapList.get(3).getActionsList()));
-
-        bluetotalpoints2.setText(ActionMapUtils.totalPoints(mapList.get(4).getActionsList()));
-        bluetotalhatch2.setText(ActionMapUtils.totalhatches(true, mapList.get(4).getActionsList()));
-        bluetotalcargo2.setText(ActionMapUtils.totalhatches(false, mapList.get(4).getActionsList()));
-
-        bluetotalpoints3.setText(ActionMapUtils.totalPoints(mapList.get(5).getActionsList()));
-        bluetotalhatch3.setText(ActionMapUtils.totalhatches(true, mapList.get(5).getActionsList()));
-        bluetotalcargo3.setText(ActionMapUtils.totalhatches(false, mapList.get(5).getActionsList()));
+    public void loadData(List<ActionMap> mapListe){
+        mapList = mapListe;
     }
 
     @Override

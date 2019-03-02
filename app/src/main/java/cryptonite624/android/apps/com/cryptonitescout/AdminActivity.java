@@ -19,7 +19,7 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
 
     public TableView<String[]> tableView;
     public DaoSession daoSession;
-    public static String [] userHeaders = {"Logged in","Currency","Type","Password","Email","Name","Tablet#"};
+    public static String [] userHeaders = {"Logged in","Currency","Type","Email","Name","Tablet#"};
 
     public String[][] table;
     int row = 0;
@@ -47,10 +47,11 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin);
 
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         List<User> users = daoSession.getUserDao().loadAll();
-        tableView = (TableView<String[]>) findViewById(R.id.tableView);
+        tableView = findViewById(R.id.Userlist_admin);
         tableView.setColumnCount(6);
         tableView.setDataAdapter(new SimpleTableDataAdapter(this, getArrFromUsers(users)));
         tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, userHeaders));
@@ -61,7 +62,7 @@ public class AdminActivity extends AppCompatActivity implements BluetoothHandler
             }
         });
 
-        setContentView(R.layout.activity_admin);
+
 
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();

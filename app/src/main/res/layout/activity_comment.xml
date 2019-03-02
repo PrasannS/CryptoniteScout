@@ -28,6 +28,31 @@
                 android:text="Team# : "
                 android:textSize="40dp"
                 android:gravity="center"/>
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:text=""
+                android:textSize="40dp"
+                android:gravity="center"
+                android:id="@+id/comment_teamnum"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:text="Match# : "
+                android:textSize="40dp"
+                android:gravity="center"/>
+
+            <EditText
+                android:id="@+id/comment_matchnum"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text=""
+                android:textSize="40dp" />
         </LinearLayout>
 
         <LinearLayout

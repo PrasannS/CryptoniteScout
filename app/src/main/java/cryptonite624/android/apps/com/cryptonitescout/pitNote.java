@@ -50,20 +50,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public int teamnum = 0;
     public String Comment = "";
-    public boolean ProgrammerOnSite = false;
-    public boolean LevelTwoStart = false;
-    public boolean CrossBase = false;
-    public boolean shifter = false;
-    public int numBatteries = 0;
-    public int numChargers = 0;
-    public int numCIMS = 0;
-    public int numMiniCIMS = 0;
-    public double robotDimension = 0;
-    public String currentLanguage = "Java";
-    public String currentWheel = "Roughtop";
-    public String currentClimbLevel = "Level 1";
-    public String currentIntake = "Floor";
-    public String currentLayout = "4WD";
     public String image = "";
 
 
@@ -136,16 +122,16 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public void updateDatasToPrev(){
         //TODO this method will take the public pitnote data, and update all of the layout datas from that @Taemin
-        matchNumber.setText(data.getTeamnum());
+        matchNumber.setText(data.getTeamnum()+"");
         Comments.setText(data.getComment());
         Programmer_On_Site.setChecked(data.isProgrammerOnSite());
         LevTwoStart.setChecked(data.isLevelTwoStart());
         CrossBaseLine.setChecked(data.isCrossBase());
         Shifters.setChecked(data.isShifter());
-        numBatterie.setText(data.getNumBatteries());
-        numCharger.setText(data.getNumChargers());
-        CIMS.setText(data.getNumCIMS());
-        miniCIMS.setText(data.getNumMiniCIMS());
+        numBatterie.setText(data.getNumBatteries()+"");
+        numCharger.setText(data.getNumChargers()+"");
+        CIMS.setText(data.getNumCIMS()+"");
+        miniCIMS.setText(data.getNumMiniCIMS()+"");
         robotDimensions.setText(data.getRobotDimension()+"");
         pgLanguage.setSelection(getIndexOfArray(languages, data.getLanguage()));
         hatchIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
@@ -153,6 +139,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         cargoIntake.setSelection(getIndexOfArray(Intakes, data.getIntake()));
         ClimbLevels.setSelection(getIndexOfArray(levels, data.getLevels()));
         layoutSpinner.setSelection(getIndexOfArray(layoutArr, data.getLayouts()));
+        imageview.setImageBitmap(BitmapUtils.StringToBitMap(data.getImage()));
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,13 +205,13 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             }
         });
 
-        updatePitnote = findViewById(R.id.Update_pitnote);
+        updatePitnote = findViewById(R.id.noteupdate);
         updatePitnote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
-                qb.where(PitnoteDataDao.Properties.Teamnum.eq(getTeamNum()));
-                List<PitnoteData>temp = qb.list();
+                qb.where(PitnoteDataDao.Properties.Teamnum.eq(Integer.parseInt(matchNumber.getText().toString())));
+                List<PitnoteData>temp = daoSession.getPitnoteDataDao().loadAll();
                 if(temp.size()!=0){
                     data = temp.get(0);
                     updateDatasToPrev();
@@ -239,24 +226,23 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Comment = Comments.getText().toString();
-                ProgrammerOnSite = Programmer_On_Site.isChecked();
-                LevelTwoStart = LevTwoStart.isChecked();
-                CrossBase = CrossBaseLine.isChecked();
-                shifter = Shifters.isChecked();
-                numBatteries = Integer.parseInt(numBatterie.getText().toString());
-                numChargers = Integer.parseInt(numCharger.getText().toString());
-                numCIMS = Integer.parseInt(CIMS.getText().toString());
-                numMiniCIMS = Integer.parseInt(miniCIMS.getText().toString());
-                robotDimension = Double.parseDouble(robotDimensions.getText().toString());
-                currentLanguage = pgLanguage.getTransitionName();
-                currentWheel = wheelSpinner.getTransitionName();
-                currentClimbLevel = ClimbLevels.getTransitionName();
-                currentIntake = cargoIntake.getTransitionName();
-                currentLayout = layoutSpinner.getTransitionName();
+                data.setComment( Comments.getText().toString());
+                data.setProgrammerOnSite( Programmer_On_Site.isChecked());
+                data.setLevelTwoStart( LevTwoStart.isChecked());
+                data.setCrossBase( CrossBaseLine.isChecked());
+                data.setShifter( Shifters.isChecked());
+                data.setNumBatteries( Integer.parseInt(numBatterie.getText().toString()));
+                data.setNumChargers( Integer.parseInt(numCharger.getText().toString()));
+                data.setNumCIMS( Integer.parseInt(CIMS.getText().toString()));
+                data.setNumMiniCIMS( Integer.parseInt(miniCIMS.getText().toString()));
+                data.setRobotDimension( Double.parseDouble(robotDimensions.getText().toString()));
+                data.setLanguage( language);
+                data.setWheels( wheels);
+                data.setLevels(String.valueOf(levels));
+                data.setIntake( cargoIntake+"");
+                data.setLayouts( layouts);
+                data.setImage(image);
 
-                data = new PitnoteData(Long.valueOf(1),data.getTeamnum(), Comment, ProgrammerOnSite, LevelTwoStart, CrossBase, shifter, numBatteries, numChargers,
-                        numCIMS, numMiniCIMS, robotDimension, currentWheel, currentLayout, currentClimbLevel, currentIntake, currentLanguage,image);
                 daoSession.getPitnoteDataDao().save(data);
                 try {
                     bluetoothHandler.sendMessage('p',data.toString());
@@ -305,6 +291,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         Comments = findViewById(R.id.Comment_pitnote);
 
         matchNumber = findViewById(R.id.teamNum_pitnote);
+        LevTwoStart = findViewById(R.id.leveltwostart);
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;

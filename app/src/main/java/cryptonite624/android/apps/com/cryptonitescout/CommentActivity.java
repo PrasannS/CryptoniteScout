@@ -82,6 +82,10 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     public Schedule curschedule;
     public Config config;
 
+    private EditText cteamnum;
+    private EditText cmatchnum;
+
+
     public String getTeam(User u, Schedule s){
         if(u.getType().charAt(0)=='B')
             switch (u.getType().charAt(1)){
@@ -118,6 +122,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         int teamnum = Integer.parseInt(team.substring(3));
         comm.setTeamnum(teamnum);
         comm.setMatchnum(getCurrentMatch());
+        cteamnum.setText(teamnum+"");
+        cteamnum.setText(getCurrentMatch()+"");
     }
 
 
@@ -140,6 +146,12 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         commentget= (EditText)findViewById(R.id.commentsave);
         comment = commentget.getText().toString();
         brokenswitch = findViewById(R.id.brokenswitch);
+        hatchefficiencySeekbar = findViewById(R.id.hatchefficiency_seekbar);
+        cargoefficiencySeekbar = findViewById(R.id.cargoefficiency_seekbar);
+        defenseratingSeekbar = findViewById(R.id.defenseeffeciency_seekbar);
+        WhyBroken = findViewById(R.id.whybroken_edittext);
+
+
         //teamnameget = (EditText) findViewById(R.id.TeamName);
         //teamname = teamnameget.getText().toString();
         cargoefficiencySeekbar.setOnRangeChangedListener(new OnRangeChangedListener() {
@@ -205,6 +217,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Intent intent = new Intent(getBaseContext(), DataAccessActivity.class);
+                startActivity(intent);
             }
         });
         /*Rating = findViewById(R.id.Rating);
@@ -219,17 +233,17 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         //ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,DefenseRatingLevels);
         //Defense.setAdapter(adapter2);
 
-        hatchefficiencySeekbar = findViewById(R.id.hatchefficiency_seekbar);
+
         hatchefficiencySeekbar.setRange(1f, 10f);
         hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
-        cargoefficiencySeekbar = findViewById(R.id.cargoefficiency_seekbar);
-        hatchefficiencySeekbar.setRange(1f, 10f);
-        hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
 
-        defenseratingSeekbar = findViewById(R.id.defenseeffeciency_seekbar);
-        hatchefficiencySeekbar.setRange(1f, 10f);
-        hatchefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
+        cargoefficiencySeekbar.setRange(1f, 10f);
+        cargoefficiencySeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
+
+
+        defenseratingSeekbar.setRange(1f, 10f);
+        defenseratingSeekbar.setTickMarkMode(RangeSeekBar.TRICK_MARK_MODE_NUMBER);
     }
     /*public void goToDashboard()
     {

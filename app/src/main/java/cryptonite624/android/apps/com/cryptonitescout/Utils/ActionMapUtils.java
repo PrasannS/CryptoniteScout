@@ -117,6 +117,7 @@ public class ActionMapUtils {
     public static ActionMap parseActionMap(String s){
         ActionMap am = new ActionMap();
         StringTokenizer st = new StringTokenizer(s, ";");
+        am.setTeamnum(Integer.parseInt(st.nextToken()));
         am.setEndclimb(Integer.parseInt(st.nextToken()));
         am.setMatchnum(Integer.parseInt(st.nextToken()));
         am.setPos(st.nextToken());
@@ -140,7 +141,7 @@ public class ActionMapUtils {
 
     public static String toString(ActionMap m){
         String temp = "";
-        temp += m.getEndclimb() + ";" + m.getMatchnum() + ";" + m.getPos() + ";";
+        temp += m.getTeamnum()+";"+m.getEndclimb() + ";" + m.getMatchnum() + ";" + m.getPos() + ";";
         for(RobotAction r : m.getActionsList()){
             temp+=r+",";
         }

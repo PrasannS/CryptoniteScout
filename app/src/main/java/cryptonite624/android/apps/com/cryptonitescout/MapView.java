@@ -353,7 +353,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         config = daoSession.getConfigDao().loadAll().get(0);
         String user = config.getCurrentuser();
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
-        qb.where(UserDao.Properties.Email.eq(config.getCurrentuser()));
+        qb.where(UserDao.Properties.Email.eq(user));
         List<User> users = qb.list();
         String team = getTeam(users.get(0), curschedule);
         curuser = users.get(0);
@@ -918,13 +918,14 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         switch(message){
             case "submit":
                 actionMap.setClimbTime(habLevel);
+                actionMap.setPos(curuser.getType());
                 daoSession.getActionMapDao().save(actionMap);
+                config.setCurrentmatch((config.getCurrentmatch())+1);
                 try {
                     bluetoothHandler.sendMessage('m',ActionMapUtils.toString(actionMap));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                config.setCurrentmatch((config.getCurrentmatch())+1);
                 updateRD(actionMap);
                 intent = new Intent(getBaseContext(), DataAccessActivity.class);
                 startActivity(intent);

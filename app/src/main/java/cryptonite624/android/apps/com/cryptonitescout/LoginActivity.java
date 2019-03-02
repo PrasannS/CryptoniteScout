@@ -445,7 +445,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return false;
         QueryBuilder<User> qb = daoSession.getUserDao().queryBuilder();
         Config config = daoSession.getConfigDao().loadAll().get(0);
-        qb.and(UserDao.Properties.Email.eq(u.getEmail()),UserDao.Properties.Password.eq(u.getPassword()));
+        qb.where(qb.and(UserDao.Properties.Email.eq(u.getEmail()),UserDao.Properties.Password.eq(u.getPassword())));
         List<User>user = qb.list();
         if(user.size()>0) {
             if(isloginvalid(user,u)) {
