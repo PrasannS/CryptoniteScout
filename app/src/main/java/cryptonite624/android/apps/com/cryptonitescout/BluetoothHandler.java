@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 
 
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Config;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
+import cryptonite624.android.apps.com.cryptonitescout.Models.RankingDataDao;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
 import cryptonite624.android.apps.com.cryptonitescout.Models.User;
 import cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils;
@@ -97,10 +99,31 @@ public class BluetoothHandler {
     }
 
     public void updateRD(ActionMap m){
-        RankingData r = new RankingData();
+        QueryBuilder<RankingData> qb = daoSession.getRankingDataDao().queryBuilder();
+        //RankingData rankingData = daoSession.getRankingDataDao().loadAll().get(0);
+        qb.where(RankingDataDao.Properties.Teamkey.eq("frc"+m.getTeamnum()));
+        List<RankingData>rank = qb.list();
+        RankingData r;
+        if(rank.size()==0) {
+            r = new RankingData();
+            r.setTeamnum(m.getTeamnum());
+            r.setMatchesplayed(0);
+            r.setClimbfailed(0);
+            r.setClimbone(0);
+            r.setClimbtwo(0);
+            r.setRankpoint(0);
+            r.setTeamkey("frc"+r.getTeamnum());
+            r.setTotalcargo(0);
+            r.setTotalhatches(0);
+            r.setTotalwins(0);
+        }
+        else
+            r = rank.get(0);
         //TODO add something for climb and other variables
         List<ActionMap>temp = new ArrayList<>();
         temp.add(m);
+
+        //Climbtime is actually hab level
         r.setMatchesplayed(r.getMatchesplayed()+1);
         r.setTotalhatches(r.getTotalhatches()+ActionMapUtils.tournamentTotalHatches(temp));
         r.setTotalcargo(r.getTotalcargo()+ActionMapUtils.tournamentTotalCargos(temp));

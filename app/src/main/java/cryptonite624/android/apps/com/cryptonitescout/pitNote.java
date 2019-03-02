@@ -47,7 +47,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class pitNote extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener, BluetoothHandler.BluetoothListener{
 
     //Class variables that'll help(?) Prasann with the database
-    
+
     public int teamnum = 0;
     public String Comment = "";
     public boolean ProgrammerOnSite = false;
@@ -82,6 +82,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public EditText miniCIMS;
     public EditText Comments;
     public Button Submit;
+    public Button updatePitnote;
 
     //Spinner variables for the wheels
     public Spinner wheelSpinner;
@@ -165,15 +166,6 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         bluetoothHandler = new BluetoothHandler(getApplication(),this);
         bluetoothHandler.startlooking();
         //setSupportActionBar(toolbar);
-        QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
-        qb.where(PitnoteDataDao.Properties.Teamnum.eq(getTeamNum()));
-        List<PitnoteData>temp = qb.list();
-        if(temp.size()!=0){
-            data = temp.get(0);
-        }
-        else{
-            data.setTeamnum(getTeamNum());
-        }
 
 
         if(Build.VERSION.SDK_INT>=23){
@@ -223,6 +215,23 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.v("Cross Baseline : ",""+isChecked);
+            }
+        });
+
+        updatePitnote = findViewById(R.id.Update_pitnote);
+        updatePitnote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QueryBuilder<PitnoteData> qb = daoSession.getPitnoteDataDao().queryBuilder();
+                qb.where(PitnoteDataDao.Properties.Teamnum.eq(getTeamNum()));
+                List<PitnoteData>temp = qb.list();
+                if(temp.size()!=0){
+                    data = temp.get(0);
+                    updateDatasToPrev();
+                }
+                else{
+                    data.setTeamnum(getTeamNum());
+                }
             }
         });
 

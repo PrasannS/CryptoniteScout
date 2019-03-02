@@ -59,8 +59,13 @@
 
                         <EditText
                             android:id="@+id/teamNum_pitnote"
-                            android:layout_width="500dp"
+                            android:layout_width="300dp"
                             android:inputType="number"
+                            android:layout_height="match_parent" />
+
+                        <Button
+                            android:id="@+id/Update_pitnote"
+                            android:layout_width="70dp"
                             android:layout_height="match_parent" />
                     </LinearLayout>
 

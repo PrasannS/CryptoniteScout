@@ -54,8 +54,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".MapView"
+            android:theme="@style/ModernTheme"
             android:screenOrientation="landscape"
-            android:theme="@style/ModernTheme" />
+             />
         <activity
             android:name=".DataAccessActivity"
             android:screenOrientation="landscape" />

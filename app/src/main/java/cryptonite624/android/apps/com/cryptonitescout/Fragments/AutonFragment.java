@@ -28,11 +28,6 @@ public class AutonFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     //class variable that is transferred to dataentry class
 
-    public Button toPrematch;
-    public Button toTeleop;
-    private String message;
-
-
     //this is the object upon which data transfer is done
 
     OnAutonReadListener autonReadListener;
