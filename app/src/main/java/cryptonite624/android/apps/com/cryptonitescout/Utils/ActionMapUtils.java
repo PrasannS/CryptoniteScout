@@ -2,6 +2,8 @@ package cryptonite624.android.apps.com.cryptonitescout.Utils;
 
 import com.cpjd.models.teams.Robot;
 
+import org.greenrobot.greendao.query.WhereCondition;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
+import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RobotAction;
 
 public class ActionMapUtils {
@@ -125,6 +129,12 @@ public class ActionMapUtils {
         return lv;
     }
 
+
+
+
+
+
+
     public static ActionMap parseActionMap(String s){
         ActionMap am = new ActionMap();
         StringTokenizer st = new StringTokenizer(s, ";");
@@ -139,7 +149,7 @@ public class ActionMapUtils {
             ArrayList<RobotAction> temp = (ArrayList<RobotAction>) am.getActionsList();
             RobotAction tempr = RobotAction.parseRobotAction(actionString);
             if(tempr!=null)
-            actions.add(tempr);
+                actions.add(tempr);
         }
         am.setActionsList((ArrayList)actions);
 

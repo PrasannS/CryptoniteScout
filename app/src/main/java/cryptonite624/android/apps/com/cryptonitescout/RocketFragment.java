@@ -67,6 +67,7 @@ public class RocketFragment extends Fragment {
     public void setArguments(ActionMap actionMap, boolean b) {
         map = actionMap;
         top = b;
+        if(actionMap.getActionsList().size()!=0)
         if(top){
             for(int i = 0; i < actionMap.getActionsList().size(); i++){
                 if(actionMap.getActionsList().get(i).getActionCode().equals("A1") && actionMap.getActionsList().get(i).isHatch()){

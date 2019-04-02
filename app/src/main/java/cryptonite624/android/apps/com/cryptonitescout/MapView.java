@@ -146,7 +146,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
     private TextView timerDisplay;
     private Button timerButton;
 
-    public BluetoothHandler bluetoothHandler;
+    //public BluetoothHandler bluetoothHandler;
     public DaoSession daoSession;
 
 
@@ -195,9 +195,10 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
         setContentView(R.layout.activity_map_view);
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this,"DataEntry");
+       // bluetoothHandler = new BluetoothHandler(getApplication(),this,"DataEntry");
 
         actionMap = new ActionMap();
+        actionMap.setActions("");
         setvars();
 
         fragmentManager = getSupportFragmentManager();
@@ -497,7 +498,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
             }
 
         if (getCode(x, y).equals("A")) {
-            openRocket(true);
+             openRocket(true);
 
         }else if(getCode(x, y).equals("B")){
             openRocket(false);
@@ -922,7 +923,7 @@ public class MapView extends AppCompatActivity implements EmptyFragment.OnFragme
                 daoSession.getActionMapDao().save(actionMap);
                 config.setCurrentmatch((config.getCurrentmatch())+1);
                 try {
-                    bluetoothHandler.sendMessage('m',ActionMapUtils.toString(actionMap));
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

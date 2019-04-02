@@ -11,7 +11,7 @@ public class CommentUtils {
         StringTokenizer st = new StringTokenizer(s, ";~");
         c.setComment( st.nextToken());
         c.setTeamnum( Integer.parseInt(st.nextToken()));
-        c.setPos( Integer.parseInt(st.nextToken()));
+        c.setPos(Integer.parseInt(st.nextToken()));
         c.setHatchefficiency( Integer.parseInt(st.nextToken()));
         c.setCargoefficiency( Integer.parseInt(st.nextToken()));
         c.setDefense( Integer.parseInt(st.nextToken()));
@@ -26,6 +26,7 @@ public class CommentUtils {
     public static String toString(Comment c){
         String temp = "";
         temp += c.getComment() + ";~" + c.getTeamnum() + ";~" + c.getPos() + ";~" + c.getHatchefficiency() + ";~" + c.getCargoefficiency() + ";~" + c.getDefense() + ";~" + c.isExcessivefouls() + ";~" + c.isBroken() + ";~" + c.getWhybroken() + ";~"+c.getMatchnum()+ ";~";
+        parseComment(temp);
         return temp;
     }
 }

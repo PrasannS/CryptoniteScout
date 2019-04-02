@@ -46,7 +46,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
     public ServerLoader serverLoader;
     public DaoSession daoSession;
 
-    public BluetoothHandler bluetoothHandler;
+    //public BluetoothHandler bluetoothHandler;
 
 
     @Override
@@ -65,8 +65,8 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this,"dataview");
-        bluetoothHandler.startlooking();
+        //bluetoothHandler = new BluetoothHandler(getApplication(),this,"dataview");
+        //bluetoothHandler.startlooking();
 
         nv = (NavigationView)findViewById(R.id.nv);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -96,7 +96,7 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     return true;
                 }*/
                 if (id == R.id.nav_matches) {
-                    bluetoothHandler.endstuff();
+                    //bluetoothHandler.endstuff();
                     Toast.makeText(DataAccessActivity.this, "schedules", Toast.LENGTH_LONG).show();
                     if(findViewById(R.id.fragmentcontainer)!=null){
                         ScheduleFragment rankingFragment = new ScheduleFragment();
@@ -146,10 +146,10 @@ public class DataAccessActivity extends AppCompatActivity implements MatchAccess
                     startActivity(new Intent(DataAccessActivity.this, pitNote.class));
                     Toast.makeText(DataAccessActivity.this, "pitnotes", Toast.LENGTH_LONG).show();
                 }
-                if (id == R.id.nav_groupchat) {
+                /*if (id == R.id.nav_groupchat) {
                     Intent intent1 = new Intent(DataAccessActivity.this, MainActivity.class);
                     startActivity(intent1);
-                }
+                }*/
                 /*if (id == R.id.picklist) {
                     startActivity(new Intent(DataAccessActivity.this, PickListActivity.class));
                     Toast.makeText(DataAccessActivity.this, "picklist", Toast.LENGTH_LONG).show();

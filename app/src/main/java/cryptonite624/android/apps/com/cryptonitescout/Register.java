@@ -42,7 +42,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
         ln = findViewById(R.id.first_name_register);
         ps = findViewById(R.id.register_password);
         position = findViewById(R.id.register_color);
-        bluetoothHandler = new BluetoothHandler(getApplication(),this,"Register");
+        //bluetoothHandler = new BluetoothHandler(getApplication(),this,"Register");
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
 
@@ -58,7 +58,7 @@ public class Register extends AppCompatActivity implements BluetoothHandler.Blue
                 u.setType(position.getText().toString());
                 daoSession.getUserDao().save(u);
                 try {
-                    bluetoothHandler.sendMessage('u', UserUtils.toString(u));
+                    //bluetoothHandler.sendMessage('u', UserUtils.toString(u));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

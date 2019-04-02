@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.greenrobot.greendao.query.WhereCondition;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,10 +22,19 @@ import java.util.Collection;
 import java.util.List;
 
 import cryptonite624.android.apps.com.cryptonitescout.CRyptoniteApplication;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMap;
+import cryptonite624.android.apps.com.cryptonitescout.Models.ActionMapDao;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Comment;
 import cryptonite624.android.apps.com.cryptonitescout.Models.DaoSession;
 import cryptonite624.android.apps.com.cryptonitescout.Models.RankingData;
 import cryptonite624.android.apps.com.cryptonitescout.Models.Schedule;
+import cryptonite624.android.apps.com.cryptonitescout.SettingsActivity;
+
+import static cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils.tournamentAverageCargo;
+import static cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils.tournamentAverageHatch;
+import static cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils.tournamentHighestClimbLv;
+import static cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils.tournamentTotalCargos;
+import static cryptonite624.android.apps.com.cryptonitescout.Utils.ActionMapUtils.tournamentTotalHatches;
 
 public class CSVUtils {
 
@@ -68,17 +78,22 @@ public class CSVUtils {
         csvPrinter.close();
     }
 
+    public String[] maptotString(ActionMap map){
+        List<ActionMap> m  = new ArrayList<>();
+        m.add(map);
+        String[] ans = {map.getTeamnum()+"",map.getMatchnum()+"",map.getPos(),map.getEndclimb()+"",ActionMapUtils.tournamentTotalCargos(m)+"",ActionMapUtils.tournamentTotalHatches(m)+""};
+        return ans;
+    }
+
     public void loadRankingstoFile() throws IOException {
         File file = new File(c.getExternalFilesDir(null)+"", "rankings.csv");
         FileWriter fileWriter = new FileWriter(file);
-
-        Collection<String[]> data;
-        List<RankingData> teams = daoSession.getRankingDataDao().loadAll();
+        List<ActionMap>maps = daoSession.getActionMapDao().loadAll();
 
         CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT);
 
-        for(RankingData r:teams){
-            csvPrinter.printRecord(rankingtoString(r));
+        for(ActionMap r:maps){
+            csvPrinter.printRecord(maptotString(r));
         }
         fileWriter.flush();
         fileWriter.close();
@@ -119,6 +134,38 @@ public class CSVUtils {
                 data.getTotalhatches()+"",data.getClimbone()+"",data.getClimbtwo()+"",data.getClimbthree()+"",data.getClimbfailed()+"",
                 data.getTeamkey()+"",data.getId()+""};
         return datas;
+    }
+
+    public Double[] generateDatas(List<ActionMap>a){
+        Double [] row  = new Double[5];
+        row[0] = tournamentTotalHatches(a)*1.0;
+        row[1] = tournamentTotalCargos(a)*1.0;
+        row[2] = tournamentAverageHatch(a);
+        row[3] = tournamentAverageCargo(a);
+        row[4] = tournamentHighestClimbLv(a)*1.0;
+        return row;
+    }
+
+    public String[][]generaterankings(){
+        List<ActionMap> teamnums = daoSession.getActionMapDao().queryBuilder().where(
+                new WhereCondition.StringCondition("SELECT DISTINCT "+ ActionMapDao.Properties.Teamnum+" FROM  "+ActionMapDao.TABLENAME)).list();
+        Double[][] ans = new Double[teamnums.size()][5];
+        int cur = 0;
+        for(ActionMap a: teamnums){
+            ans[cur]=generateDatas(daoSession.getActionMapDao().queryBuilder().where(ActionMapDao.Properties.Teamnum.eq(a.getTeamnum())).list());
+        }
+        return generateStringrs(ans);
+    }
+
+    public String[][]generateStringrs(Double[][] d){
+        String[][]arr1=new String[d.length][d[0].length];
+        for(int i = 0;i<d.length;i++){
+            for(int j  =0 ;j<d[0].length;j++){
+                arr1[i][j] = d[i][j]+"";
+            }
+        }
+        return arr1;
+
     }
 
 }

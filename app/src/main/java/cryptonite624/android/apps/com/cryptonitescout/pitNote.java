@@ -101,7 +101,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
     public DaoSession daoSession;
 
-    public BluetoothHandler bluetoothHandler;
+    //public BluetoothHandler bluetoothHandler;
 
     public PitnoteData data;
     FloatingActionButton fab ;
@@ -153,8 +153,8 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
         daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
         data = new PitnoteData();
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this,"PitNotes");
-        bluetoothHandler.startlooking();
+        //bluetoothHandler = new BluetoothHandler(getApplication(),this,"PitNotes");
+        //bluetoothHandler.startlooking();
         //setSupportActionBar(toolbar);
 
 
@@ -249,7 +249,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
 
                 daoSession.getPitnoteDataDao().save(data);
                 try {
-                    bluetoothHandler.sendMessage('p',data.toString());
+                   // bluetoothHandler.sendMessage('p',data.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -369,7 +369,7 @@ public class pitNote extends AppCompatActivity implements AdapterView.OnItemSele
     public void onDestroy() {
         super.onDestroy();
         // Don't forget to unregister the ACTION_FOUND receiver.
-        bluetoothHandler.endstuff();
+        //bluetoothHandler.endstuff();
     }
 
     @Override

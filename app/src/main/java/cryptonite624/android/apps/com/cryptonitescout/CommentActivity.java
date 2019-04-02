@@ -75,7 +75,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
     public Comment comm;
 
-    public BluetoothHandler bluetoothHandler;
+    //public BluetoothHandler bluetoothHandler;
 
     public DaoSession daoSession;
 
@@ -136,8 +136,8 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        bluetoothHandler = new BluetoothHandler(getApplication(),this,"Comments");
-        daoSession = daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
+        //bluetoothHandler = new BluetoothHandler(getApplication(),this,"Comments");
+        daoSession = ((CRyptoniteApplication)getApplication()).getDaoSession();
 
         cteamnum = findViewById(R.id.comment_teamnum);
         cmatchnum = findViewById(R.id.comment_matchnum);
@@ -211,7 +211,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bluetoothHandler.startlooking();
+                //bluetoothHandler.startlooking();
 
                 comm.setComment( commentget.getText().toString());
                 comm.setWhybroken( WhyBroken.getText().toString());
@@ -223,7 +223,7 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
 
                 daoSession.getCommentDao().save(comm);
                 try {
-                    bluetoothHandler.sendMessage('f',CommentUtils.toString(comm));
+                   // bluetoothHandler.sendMessage('f',CommentUtils.toString(comm));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -304,6 +304,6 @@ public class CommentActivity extends AppCompatActivity implements AdapterView.On
     public void onDestroy() {
         super.onDestroy();
         // Don't forget to unregister the ACTION_FOUND receiver.
-        bluetoothHandler.endstuff();
+        //bluetoothHandler.endstuff();
     }
 }

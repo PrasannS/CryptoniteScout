@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private Button toRegister;
     public DaoSession daoSession;
-    public BluetoothHandler bluetoothHandler;
+    //public BluetoothHandler bluetoothHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -461,7 +461,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     public void onDestroy(){
-        bluetoothHandler.endstuff();
+        //bluetoothHandler.endstuff();
         super.onDestroy();
     }
 

@@ -56,6 +56,8 @@ public class ActionMap{
     public List<RobotAction> getActionsList() {
         Type listType = new TypeToken<ArrayList<RobotAction>>(){}.getType();
         List<RobotAction> arrayList = new Gson().fromJson(actions, listType);
+        if(actions.equals(""))
+            return new ArrayList<RobotAction>();
         return arrayList;
     }
 

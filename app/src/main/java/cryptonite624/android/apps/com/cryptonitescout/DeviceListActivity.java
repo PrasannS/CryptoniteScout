@@ -26,7 +26,7 @@ public class DeviceListActivity extends Activity {
 	private ListView lvDeviceListPairedDevice, lvDeviceListNewDevice;
 	private Button btnDeviceListScan;
 
-	private BluetoothAdapter bluetoothAdapter;
+	//private BluetoothAdapter bluetoothAdapter;
 	private ArrayAdapter<String> pairedDevicesArrayAdapter;
 	private ArrayAdapter<String> newDevicesArrayAdapter;
 
@@ -85,12 +85,12 @@ public class DeviceListActivity extends Activity {
 		filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 		registerReceiver(discoveryFinishReceiver, filter);
 
-		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		Set<BluetoothDevice> pairedDevices = bluetoothAdapter
-				.getBondedDevices();
+		//bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		//Set<BluetoothDevice> pairedDevices = bluetoothAdapter
+		//		.getBondedDevices();
 
 		// If there are paired devices, add each one to the ArrayAdapter
-		if (pairedDevices.size() > 0) {
+		/*if (pairedDevices.size() > 0) {
 			tvDeviceListPairedDeviceTitle.setVisibility(View.VISIBLE);
 			for (BluetoothDevice device : pairedDevices) {
 				pairedDevicesArrayAdapter.add(device.getName() + "\n"
@@ -100,7 +100,7 @@ public class DeviceListActivity extends Activity {
 			String noDevices = getResources().getText(R.string.none_paired)
 					.toString();
 			pairedDevicesArrayAdapter.add(noDevices);
-		}
+		}*/
 	}
 
 	private void startDiscovery() {
@@ -109,16 +109,16 @@ public class DeviceListActivity extends Activity {
 
 		tvDeviceListNewDeviceTitle.setVisibility(View.VISIBLE);
 
-		if (bluetoothAdapter.isDiscovering()) {
+	/*	if (bluetoothAdapter.isDiscovering()) {
 			bluetoothAdapter.cancelDiscovery();
 		}
 
-		bluetoothAdapter.startDiscovery();
+		bluetoothAdapter.startDiscovery();*/
 	}
 
 	private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-			bluetoothAdapter.cancelDiscovery();
+			//bluetoothAdapter.cancelDiscovery();
 
 			String info = ((TextView) v).getText().toString();
 			String address = info.substring(info.length() - 17);
@@ -160,9 +160,9 @@ public class DeviceListActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 
-		if (bluetoothAdapter != null) {
+		/*if (bluetoothAdapter != null) {
 			bluetoothAdapter.cancelDiscovery();
-		}
+		}*/
 		this.unregisterReceiver(discoveryFinishReceiver);
 	}
 

@@ -40,7 +40,7 @@ public class RankingData {
     @Property(nameInDb = "teamnum")
      int teamnum;
     @Property(nameInDb = "matchesplayed")
-     int matchesplayed       ;
+     int matchesplayed;
     @Property(nameInDb = "totalcargo")
      double totalcargo         ;
     @Property(nameInDb = "totalhatches")
